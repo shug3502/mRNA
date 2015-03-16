@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{url}
+
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-1.5in}
+\setlength{\textheight}{10.5in}
+
+% These force using more of the margins that is the default style
+
+\begin{document}
+
+\title{Modelling nMRNA dynamics}
+\author{Jonathan Harrison, Ruth Baker}
+\date{\today}
+
+
+\maketitle
+
+
+\section{Introduction}
+
+% An article style is separated into sections and subsections with 
+%   markup such as this.  Use \section*{Principles} for unnumbered sections.
+
+
+
+After transcription and transport out of the nucleus, many mRNAs are localized and translated in distinct cytoplasmic domains where they function  \cite{jansen2001mrna}. 
+This process is highly regulated and involves active transport by intricate molecular motors.
+It is crucial for the establishment of the basic animal body plan during development and may have importance for a wide range of functions involving memory and learning in the nervous system. 
+
+The aim of this project is to develop and simulate a range of models to capture the dynamics of this process of mRNA localization after transport out of the nucleus.
+This should allow us to test a range of experimental hypotheses. 
+The approach taken in this project will be to begin with simple models building from the ground up and to add layers of complexity gradually into the models to encapsulate more of the biologically important features of the system.
+Through collaboration with the Davis and Rittscher groups, we will ensure the models incorporate key details from biological observations including the nature of the intracellular environment.
+Using data from these groups, we will parameterise our models as we build them, enabling accurate description of the system from the models. 
+
+The early phase of the project will focus on a review of the relevant literature to extract a full understanding of how and why mRNAs are localized from a biological perspecetive \cite{parton2014subcellular, buxbaum2014right}.
+We will explore also models in the literature for similar biological systems \cite{isaacson2011influence} to evaluate whether aspects of these models my be appropriate for mRNA localization. 
+The next phase will involve development of simple models of mRNA localization, ensuring that these are not only descriptive biologically but are well defined mathematically.
+Examples of modelling paradigms that we may choose to use include Hidden Markov Models (HMMs), position or velcoity jump processes, and partial differential equations (PDEs).
+We will be particularly interested in the distribution of the length of time taken for mRNAs to move from a pore in the nucleus to a certain location in the cell, such as on the cell membrane. 
+
+The expected outcome of this project is a model built on sound mathematical foundations that is able to describe the dynamics of mRNA localization in the cell and can be parameterized by real data.
+
+%\begin{figure}
+%\begin{center}
+%\resizebox{6in}{!}{\includegraphics*{m42.jpg}}
+%\end{center}
+%\caption{}
+%\end{figure}
+ 
+\bibliographystyle{abbrv}  %use the plain bibliography style
+\bibliography{mRNA_localization}
+
+
+
+
+\end{document}
