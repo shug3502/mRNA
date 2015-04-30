@@ -1,2 +1,9 @@
 proposal/
 Latex/
+backward_euler_advection.m~
+example2.png
+example2_ic.png
+example2_profile.png
+run_and_calculate_mean_position.m~
+simple_numerical_fwd_euler.m~
+
