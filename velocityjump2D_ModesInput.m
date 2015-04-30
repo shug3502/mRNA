@@ -50,21 +50,25 @@ while time<endtime && ~is_anchored
     theta = ((rr(2)<=phi1/100)*rand(1)*pi + (rr(2)>phi1/100)*(pi+pi*rand(1)))*is_attached ... 
         + (1-is_attached)*(rand(1))*2*pi;
     
+    
+    %jumps
+    xpos = xpos + delx*sin(theta);
+    ypos = ypos + delx*cos(theta);
+    if xpos >=domain_size-absorb_in_region*2
+        xpos = (2*domain_size - xpos)*(with_anchoring<0.5)+(domain_size-absorb_in_region*2)*(with_anchoring>0.5);
+        is_anchored = 1*with_anchoring; %absorb at right hand boundary or reflect depending on whether we have anchoring
+    elseif xpos < 0
+        xpos = -xpos; %reflect at left hand boundary
+    end
+    if ypos >= b*sqrt(1-((xpos-domain_size/2)/a)^2)  %domain_size/2 %rectangle
+        ypos = 2*b*sqrt(1-((xpos-domain_size/2)/a)^2) - ypos;  %domain_size - ypos; %reflect at boundary
+    elseif ypos < -b*sqrt(1-((xpos-domain_size/2)/a)^2)   % -domain_size/2; %(rectangle)
+        ypos = -2*b*sqrt(1-((xpos-domain_size/2)/a)^2)-ypos; %-domain_size - ypos; %reflect at boundary
+    end
+    
     if rr(3)<T/alpha
-        %jumps
-        xpos = xpos + delx*sin(theta);
-        ypos = ypos + delx*cos(theta);
-        if xpos >=domain_size-absorb_in_region*2
-            xpos = (2*domain_size - xpos)*(with_anchoring<0.5)+(domain_size-absorb_in_region*2)*(with_anchoring>0.5); 
-            is_anchored = 1*with_anchoring; %absorb at right hand boundary or reflect depending on whether we have anchoring
-        elseif xpos < 0
-            xpos = -xpos; %reflect at left hand boundary
-        end
-        if ypos >= b*sqrt(1-((xpos-domain_size/2)/a)^2)  %domain_size/2 %rectangle
-            ypos = 2*b*sqrt(1-((xpos-domain_size/2)/a)^2) - ypos;  %domain_size - ypos; %reflect at boundary
-        elseif ypos < -b*sqrt(1-((xpos-domain_size/2)/a)^2)   % -domain_size/2; %(rectangle)
-            ypos = -2*b*sqrt(1-((xpos-domain_size/2)/a)^2)-ypos; %-domain_size - ypos; %reflect at boundary 
-        end
+        %takes a normal step and changes direction. This has been taken out
+        %of the if statement
     elseif rr(3)<(T+switching_rate)/alpha
         %rates switch as RNP falls off/reattaches onto microtubule
         if is_attached
