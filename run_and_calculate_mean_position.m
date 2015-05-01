@@ -1,4 +1,4 @@
-function run_and_calulate_mean_position(N)
+function run_and_calulate_mean_position(N,num_modes)
 tic;
 close all
 dt = 0.02;
@@ -15,7 +15,7 @@ for k = 1:length(time_vec)
     final_xpos = zeros(N,1);
     final_ypos = zeros(N,1);
     for j=1:N
-        [~, ~, final_xpos(j), final_ypos(j)] = velocityjump2D_ModesInput(time_vec(k), phi, 1, 0, 2, 0, 3*j);
+        [~, ~, final_xpos(j), final_ypos(j)] = velocityjump2D_ModesInput(time_vec(k), phi, 1, 0, num_modes, 0, 3*j);
     end
     
 %     figure(1);

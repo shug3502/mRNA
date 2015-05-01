@@ -48,16 +48,17 @@ timestamp();
 %
 %  Plot the solution U at a fixed point, with time varying.
 %
-  figure ( 3 )
-  mid = 1 + floor ( 55 * ( nx - 1 ) / 100 );
-  plot ( tspan, u(:,mid), 'LineWidth', 3 );
-  grid on
-  title ( 'Example 2: Time evolution of solution at X=5.0', 'Fontsize', 16 );
-  xlabel ( '<--- T --->' )
-  ylabel ( '<--- U(5.0,T) --->' );
-  filename = 'example2_profile.png';
-  print ( '-dpng', filename );
-  fprintf ( 1, '  Saved time evolution plot in file "%s"\n', filename );
+  
+%   figure ( 3 )
+%   mid = 1 + floor ( 55 * ( nx - 1 ) / 100 );
+%   plot ( tspan, u(:,mid), 'LineWidth', 3 );
+%   grid on
+%   title ( 'Example 2: Time evolution of solution at X=5.0', 'Fontsize', 16 );
+%   xlabel ( '<--- T --->' )
+%   ylabel ( '<--- U(5.0,T) --->' );
+%   filename = 'example2_profile.png';
+%   print ( '-dpng', filename );
+%   fprintf ( 1, '  Saved time evolution plot in file "%s"\n', filename );
 %
 %  Animate the profile.
 %  I wish I could also display the running value of time, but it
