@@ -16,7 +16,7 @@ for k = 1:length(time_vec)
     final_xpos = zeros(N,1);
     final_ypos = zeros(N,1);
     for j=1:N
-        [~, ~, final_xpos(j), final_ypos(j)] = velocityjump2D_ModesInput(time_vec(k), phi, 1, 0, num_modes, 0, 3*j);
+        [~, ~, final_xpos(j), final_ypos(j)] = velocityjump2D_ModesInput(time_vec(k), phi, 0.5, 0, 1, 0, num_modes, 0, 3*j);
     end
     
 %     figure(1);
@@ -29,12 +29,13 @@ for k = 1:length(time_vec)
     mean_position(k) = (delx/2:delx:(L-delx/2))*q_estimate(1:L,k)*delx+delx*L*q_estimate(L+1,k); %use centre of each bin 
     second_moment(k) = (delx/2:delx:(L-delx/2)).^2*q_estimate(1:L,k)*delx+delx*L^2*q_estimate(L+1,k); %use centre of each bin    
 end
-second_moment(1)
+
 speed_estimate = diff(mean_position)/dt
 %sum(speed_estimate(1:8))/8
 figure(2)
 subplot(2,1,1);
-plot(time_vec,mean_position,'r','linewidth',3)
+errorbar(time_vec,mean_position,sqrt(second_moment-mean_position.^2),'linewidth',3)
+%plot(time_vec,mean_position,'r','linewidth',3)
 grid on
 hold on
 
