@@ -1,4 +1,4 @@
-function [is_anchored, anchoring_time, final_position_x, final_position_y] = velocityjump2D_ModesInput(input_time, phi_input, with_anchoring, absorb_in_region, num_modes, with_plot, my_seed)
+function [is_anchored, anchoring_time, final_position_x, final_position_y] = velocityjump2D_ModesInput(input_time, phi_input, x_initial_input, theta_0_input, with_anchoring, absorb_in_region, num_modes, with_plot, my_seed)
 %Created 20 April 2015
 %Last edit 20 April 2015
 %2D velocity jump model for transport of an RNP along a MT by molecular motors
@@ -27,7 +27,7 @@ T=1/0.13; %transition rate =7.69 [zimyanin et al 2008]
 switching_rate=1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6 
 phi1 = phi_input; %58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
 
-x_0=dx/2;  %Initially in first compartment, ie. at NPC
+x_0=x_initial_input;  %dx/2;  %Initially in first compartment, ie. at NPC
 y_0 = 0;  %domain_size/4; %initially half way up y axis
 is_anchored=0; %has RNP reach destination and anchored yet?
 is_attached=1; %is molecular motor attached to the microtubule?
@@ -50,11 +50,14 @@ while time<endtime && ~is_anchored
     theta = ((rr(2)<=phi1/100)*rand(1)*pi + (rr(2)>phi1/100)*(pi+pi*rand(1)))*is_attached ... 
         + (1-is_attached)*(rand(1))*2*pi;
     
-    
+    if time == 0
+        theta = theta_0_input; %set an initial angle. Get rid of this to have T(theta) initially
+    end    
     %jumps
     xpos = xpos + delx*sin(theta);
     ypos = ypos + delx*cos(theta);
     if xpos >=domain_size-absorb_in_region*2
+        anchoring_time = (domain_size-(xpos-delx*sin(theta)))/(v*sin(theta))+ time;
         xpos = (2*domain_size - xpos)*(with_anchoring<0.5)+(domain_size-absorb_in_region*2)*(with_anchoring>0.5);
         is_anchored = 1*with_anchoring; %absorb at right hand boundary or reflect depending on whether we have anchoring
     elseif xpos < 0
@@ -94,11 +97,12 @@ while time<endtime && ~is_anchored
 end
 %final outputs for statistics
 if is_anchored
-    anchoring_time = time;
+    final_position_x = domain_size;
 else
+    final_position_x = xpos;
     anchoring_time = inf;
 end
-final_position_x = xpos;
+
 final_position_y = ypos;
 if with_plot
     %close all
