@@ -1,9 +1,11 @@
-function [is_anchored, anchoring_time, final_position_x, final_position_y] = velocityjump2D_ModesInput(input_time, phi_input, x_initial_input, theta_0_input, with_anchoring, absorb_in_region, num_modes, with_plot, my_seed)
+function [is_anchored, anchoring_time, final_position_x, final_position_y] = velocityjump2D_ModesInput(input_time, params, with_anchoring, absorb_in_region, num_modes, with_plot, my_seed)
 %Created 20 April 2015
-%Last edit 20 April 2015
+%Last edit 7 May 2015
 %2D velocity jump model for transport of an RNP along a MT by molecular motors
 %Assumes: 1 mode of motion, diffusion is neglected
 %Now try to use biologically motivated parameters
+
+%Edited so that parameter input is much nicer
 
 %input_time is length of stage 9 ie 6 to 10 in units of hours
 %with_anchoring is logical to include anhoring at site of localization or reflection there
@@ -11,7 +13,22 @@ function [is_anchored, anchoring_time, final_position_x, final_position_y] = vel
 %my_seed is the random seed to be used
 %num_modes is for the number of modes of motion ie only AT or with
 %diffusion also
-
+if nargin ~= 7
+    fprintf('default parameters used\n')
+    input_time = 1;
+    with_anchoring = 1;
+    absorb_in_region = 0;
+    num_modes = 2;
+    with_plot = 0;
+    my_seed = 32;
+    params.nu1 = 0.4; %speed of RNP complex under active transport [zimyanin et al 2008]
+    params.nu2 = 0.08; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
+    params.lambda=1/0.13; %transition rate =7.69 [zimyanin et al 2008]
+    params.omega=1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
+    params.phi = 0.58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
+    params.x_0=0.5;  %Initially in first compartment, ie. at NPC
+    params.theta_0 = 0; %initial angle is 0
+end
 rng(my_seed); % set random seed
 
 %tic;
@@ -20,39 +37,33 @@ domain_size = 30; %30 microns for a nurse cell (R Parton) %80 microns [zimyanin 
 a = domain_size/2;
 b=a/2;
 
-v = 0.4; %speed of RNP complex under active transport [zimyanin et al 2008]
-sigmaV = 5; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
-
-T=1/0.13; %transition rate =7.69 [zimyanin et al 2008]
-switching_rate=1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6 
-phi1 = phi_input; %58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
-
-x_0=x_initial_input;  %dx/2;  %Initially in first compartment, ie. at NPC
 y_0 = 0;  %domain_size/4; %initially half way up y axis
 is_anchored=0; %has RNP reach destination and anchored yet?
 is_attached=1; %is molecular motor attached to the microtubule?
+v = params.nu1*is_attached + params.nu2*(1-is_attached); %initialise the speed
+T = params.lambda; %store lambda
 
 time=0; %unit seconds
-xpos = x_0; %initialise x position
+xpos = params.x_0; %initialise x position
 ypos = y_0; %initialise y
-pathx = x_0; %add first point to path
+pathx = params.x_0; %add first point to path
 pathy = y_0;
 transitions = []; %falling off/reattaching events
-jump_times = 0; %jumps 
+jump_times = 0; %jumps
 endtime=3600*input_time; %one hour. Note that stage 9 of development lasts 6-10 hrs - or is this 6-10 since start? [zimyanin et al 2008]
 %loop through time
 while time<endtime && ~is_anchored
-    alpha = T+switching_rate;
+    alpha = params.lambda + params.omega;
     %find next jump
     rr=rand(3,1);
     tau = 1/alpha*log(1/rr(1));
     delx = tau*v;
-    theta = ((rr(2)<=phi1/100)*rand(1)*pi + (rr(2)>phi1/100)*(pi+pi*rand(1)))*is_attached ... 
+    theta = ((rr(2)<=params.phi)*rand(1)*pi + (rr(2)>params.phi)*(pi+pi*rand(1)))*is_attached ...
         + (1-is_attached)*(rand(1))*2*pi;
     
     if time == 0
-        theta = theta_0_input; %set an initial angle. Get rid of this to have T(theta) initially
-    end    
+        theta = params.theta_0; %set an initial angle. Get rid of this to have T(theta) initially
+    end
     %jumps
     xpos = xpos + delx*sin(theta);
     ypos = ypos + delx*cos(theta);
@@ -69,20 +80,22 @@ while time<endtime && ~is_anchored
         ypos = -2*b*sqrt(1-((xpos-domain_size/2)/a)^2)-ypos; %-domain_size - ypos; %reflect at boundary
     end
     
-    if rr(3)<T/alpha
+    if rr(3)<params.lambda/alpha
         %takes a normal step and changes direction. This has been taken out
         %of the if statement
-    elseif rr(3)<(T+switching_rate)/alpha
+    elseif rr(3)<(params.lambda + params.omega)/alpha
         %rates switch as RNP falls off/reattaches onto microtubule
         if is_attached
             % falls off
-            v = v/sigmaV;
+            v = params.nu2;
             is_attached = 0;
+            params.lambda = T; %switching within phase when in diffusion
             transitions = [transitions; xpos, ypos, time];
         else
             %reattaches
-            v = v*sigmaV;
+            v = params.nu1;
             is_attached = 1;
+            params.lambda = 0; % no switching within phase when in AT
             transitions = [transitions; xpos, ypos, time];
         end
     else
@@ -137,7 +150,7 @@ if with_plot
     grid on
     hold all
     if ~ isempty(transitions)
-    plot(transitions(:,3),transitions(:,1),'bo')
+        plot(transitions(:,3),transitions(:,1),'bo')
     end
 end
 
