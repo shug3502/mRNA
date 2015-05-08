@@ -7,7 +7,12 @@ function evaluate_mfpt(plot_option,vary_x)
 total=tic;
 close all
 
-phi = 58;
+params.nu1 = 0.4;
+params.nu2 = 0.1;
+params.lambda = 1/0.13;
+params.omega = 1/6;
+params.phi = 0.58;
+
 t_max = 1;
 x_0 = 18.5;
 x_0_vec = 0.5:4:20.5;
@@ -26,12 +31,16 @@ for k=1:my_length
     anchor_times = zeros(num_particles,1);
     final_positions = zeros(num_particles,2);
     if vary_x  %we vary the initial value of x_0
+        params.x_0 = x_0_vec(k);
+        params.theta_0 = theta_0;
         for j=1:num_particles
-            [anchored(j), anchor_times(j), final_positions(j,1),final_positions(j,2)] = velocityjump2D_ModesInput(t_max, phi, x_0_vec(k), theta_0, 1, 0, 1, plot_option, 4*j);
+            [anchored(j), anchor_times(j), final_positions(j,1),final_positions(j,2)] = velocityjump2D_ModesInput(t_max, params, 1, 0, 1, plot_option, 4*j);
         end
     else %we vary the initial angle theta_0
+        params.x_0 = x_0;
+        params.theta_0 = theta_0_vec(k);
         for j=1:num_particles
-            [anchored(j), anchor_times(j), final_positions(j,1),final_positions(j,2)] = velocityjump2D_ModesInput(t_max, phi, x_0, theta_0_vec(k), 1, 0, 1, plot_option, 4*j);
+            [anchored(j), anchor_times(j), final_positions(j,1),final_positions(j,2)] = velocityjump2D_ModesInput(t_max, params, 1, 0, 1, plot_option, 4*j);
         end
     end
     proportion_anchored = sum(anchored)/length(anchored)
