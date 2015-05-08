@@ -8,6 +8,7 @@ function [accepted_params, close_params] = ABC_rejection_sampling
 %see Beaumont et al 2002 for ABC
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic; 
+rng(12);
 
 %Fake parameters
 params.nu1 = 0.4;
@@ -20,7 +21,7 @@ params.theta_0 = 0;
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
-mfpt_fake_data = mfpt_calculator(params,1000,0)
+mfpt_fake_data = mfpt_calculator(params,100,0)
 
 %Choose tolerance
 delta = 100;

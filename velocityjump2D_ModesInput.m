@@ -42,6 +42,7 @@ is_anchored=0; %has RNP reach destination and anchored yet?
 is_attached=1; %is molecular motor attached to the microtubule?
 v = params.nu1*is_attached + params.nu2*(1-is_attached); %initialise the speed
 T = params.lambda; %store lambda
+params.lambda = (1-is_attached)*T; %initially is attached so 0 
 
 time=0; %unit seconds
 xpos = params.x_0; %initialise x position
@@ -53,7 +54,7 @@ jump_times = 0; %jumps
 endtime=3600*input_time; %one hour. Note that stage 9 of development lasts 6-10 hrs - or is this 6-10 since start? [zimyanin et al 2008]
 %loop through time
 while time<endtime && ~is_anchored
-    alpha = params.lambda + params.omega;
+    alpha = params.lambda + params.omega*(num_modes>1);
     %find next jump
     rr=rand(3,1);
     tau = 1/alpha*log(1/rr(1));
@@ -83,7 +84,7 @@ while time<endtime && ~is_anchored
     if rr(3)<params.lambda/alpha
         %takes a normal step and changes direction. This has been taken out
         %of the if statement
-    elseif rr(3)<(params.lambda + params.omega)/alpha
+    elseif rr(3)<(params.lambda + params.omega*(num_modes>1))/alpha
         %rates switch as RNP falls off/reattaches onto microtubule
         if is_attached
             % falls off
@@ -95,7 +96,7 @@ while time<endtime && ~is_anchored
             %reattaches
             v = params.nu1;
             is_attached = 1;
-            params.lambda = 0; % no switching within phase when in AT
+            params.lambda = T*(num_modes<2); % no switching within phase when in AT
             transitions = [transitions; xpos, ypos, time];
         end
     else
@@ -152,6 +153,16 @@ if with_plot
     if ~ isempty(transitions)
         plot(transitions(:,3),transitions(:,1),'bo')
     end
+    mu_initial = 0.5; %initial mean position
+    nu_1 = 0.4; %speed in active transport mode
+    F1 = (4*params.phi-2)/pi;
+    t = jump_times;
+    mu1 = min((nu_1*F1*t + mu_initial),domain_size); %note time scaled to seconds
+    if num_modes>1
+        mu1 = min((0.5*nu_1*F1*t + mu_initial),domain_size); %adjust for different analytical results for different numbers of modes
+    end
+    plot(t, mu1, 'b--', 'linewidth',3);
+    set(gca, 'fontsize',14)
 end
 
 %toc
