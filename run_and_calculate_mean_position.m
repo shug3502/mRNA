@@ -9,7 +9,7 @@ params.nu2 = 0.08;
 params.lambda = 1/0.13;
 params.omega = 1/6;
 params.x_0=0.5;
-params.theta_0 = 3*pi/2;
+params.theta_0 = 0;
 params.phi = 0.58 ; %bias in MTs
 
 L=30; %length of cell
@@ -23,7 +23,7 @@ for k = 1:length(time_vec)
     final_xpos = zeros(N,1);
     final_ypos = zeros(N,1);
     for j=1:N
-        [~, ~, final_xpos(j), final_ypos(j)] = velocityjump2D_ModesInput(time_vec(k), params, 1, 0, num_modes, 0, 3*j);
+        [~, ~, final_xpos(j), final_ypos(j), pathx, jump_times] = velocityjump2D_ModesInput(time_vec(k), params, 1, 0, num_modes, 0, 3*j);
     end
     
 %     figure(1);
@@ -55,10 +55,10 @@ mu1 = min((nu_1*F1*t + mu_initial),L); %note time scaled to seconds
 if num_modes>1
     mu1 = min((0.5*nu_1*F1*t + mu_initial),L); %adjust for different analytical results for different numbers of modes
     mud = min((nu_1*F1*t + mu_initial),L);
+    plot(t,mud,'m--','linewidth',3);
 end
-plot(t, mu1, 'g--', 'linewidth',3);
 hold on
-plot(t,mud,'m--','linewidth',3);
+plot(t, mu1, 'g--', 'linewidth',3);
 set(gca, 'fontsize',14)
 xlabel('t');
 ylabel('mean position');
@@ -84,7 +84,6 @@ mu_initial = params.x_0; %initial mean position
 nu_1 = params.nu1; %speed in active transport mode
 omega = params.omega; %switching rate
 F1 = (4*params.phi-2)/pi;
-t = time_vec*60^2;
 mu2 = min((nu_1*F1*t).^2 + 2*nu_1*F1*t*mu_initial+ mu_initial^2,L^2); %note time scaled to seconds
 if num_modes>1
    %adjust for different analytical results for different numbers of modes
