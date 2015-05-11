@@ -1,4 +1,4 @@
-function [is_anchored, anchoring_time, final_position_x, final_position_y] = velocityjump2D_ModesInput(input_time, params, with_anchoring, absorb_in_region, num_modes, with_plot, my_seed)
+function [is_anchored, anchoring_time, final_position_x, final_position_y, pathx, jump_times] = velocityjump2D_ModesInput(input_time, params, with_anchoring, absorb_in_region, num_modes, with_plot, my_seed)
 %Created 20 April 2015
 %Last edit 7 May 2015
 %2D velocity jump model for transport of an RNP along a MT by molecular motors
@@ -42,7 +42,7 @@ is_anchored=0; %has RNP reach destination and anchored yet?
 is_attached=1; %is molecular motor attached to the microtubule?
 v = params.nu1*is_attached + params.nu2*(1-is_attached); %initialise the speed
 T = params.lambda; %store lambda
-params.lambda = (1-is_attached)*T; %initially is attached so 0 
+params.lambda = (1-is_attached*(num_modes>1))*T; %initially is attached so 0 
 
 time=0; %unit seconds
 xpos = params.x_0; %initialise x position
