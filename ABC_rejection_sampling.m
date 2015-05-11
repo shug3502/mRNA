@@ -21,7 +21,7 @@ params.theta_0 = 0;
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
-mfpt_fake_data = mfpt_calculator(params,100,0)
+mfpt_fake_data = mfpt_calculator(params,100,0,65)
 
 %Choose tolerance
 delta = 100;
@@ -50,11 +50,11 @@ parfor j=1:iterations
 %     candidate.theta_0 = 0; %these are fixed
 %     candidate.x_0 = 0.5; %these are fixed
 
-par_params = [0.4+0.1*rr(j),0.08+0.02*rs(j),7.7,1/6,0.58,0,0.5];
+par_params = [0.4,0.08,7.7+1.0*rs(j),1/6+0.04*rr(j),0.58,0,0.5];
 
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
-    mfpt_candidate_data = mfpt_calculator(par_params,20,1);
+    mfpt_candidate_data = mfpt_calculator(par_params,20,1,4);
     
     %compare the summary statistic to that from original data
     if abs(mfpt_fake_data - mfpt_candidate_data) < delta
@@ -64,32 +64,32 @@ par_params = [0.4+0.1*rr(j),0.08+0.02*rs(j),7.7,1/6,0.58,0,0.5];
     %repeat until k acceptances have been made
 
 end
-any_accepted = sum(accepted_params);
+any_accepted = any_accepted + sum(accepted_params);
 any_accepted
 
-close_params = [0.4*ones(iterations,1)+0.1*rr,0.08*ones(iterations,1)+0.02*rs, ...
-    7.7*ones(iterations,1),1/6*ones(iterations,1), ...
+close_params = [0.4*ones(iterations,1),0.08*ones(iterations,1), ...
+    7.7*ones(iterations,1)+1.0*rs,1/6*ones(iterations,1) + 0.04*rr, ...
     0.58*ones(iterations,1),0*ones(iterations,1),0.5*ones(iterations,1)].*repmat(accepted_params,1,7);
     
     if n>100
-        fprintf('Thats more than enough parameters to look at for now.')
+        fprintf('Thats more than enough parameters to look at for now.\n')
         break
     end
 end
 
 close all
 figure;
-plot(close_params(:,1),close_params(:,2),'bo');
+plot(close_params(:,3),close_params(:,4),'bo');
 hold on
 grid on
-plot(params.nu1,params.nu2,'rx');
+plot(params.nu1,params.lambda,'rx');
 set(gca, 'fontsize',14);
 xlabel('\nu_1');
 ylabel('\nu_2');
 toc
 end
 
-function mean_fp_time = mfpt_calculator(par_params,num_particles,is_parallel)
+function mean_fp_time = mfpt_calculator(par_params,num_particles,is_parallel,r_random)
 %runs velocityjump2D_ModesInput which is a velocity jump process for a single particle
 %runs this many times for many particles and returns simulated estimates of
 %mfpt
@@ -110,7 +110,7 @@ t_max = 2;
 
 anchor_times = zeros(num_particles,1);
 for j=1:num_particles
-    [~, anchor_times(j), ~,~] = velocityjump2D_ModesInput(t_max, params, 1, 0, 2, 0, 4*j);
+    [~, anchor_times(j), ~,~] = velocityjump2D_ModesInput(t_max, params, 1, 0, 2, 0, r_random*j);
 end
 mean_fp_time = mean(anchor_times);
 %    sd_anchor_time = std(anchor_times);
