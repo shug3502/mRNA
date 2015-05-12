@@ -1,4 +1,4 @@
-function run_moments_simulations(N,num_modes)
+function run_moments_simulations(N,num_modes,L)
 tic;
 close all
 dt = 0.02;
@@ -10,24 +10,24 @@ params.nu1 = 0.4;
 params.nu2 = 0.08;
 params.lambda = 1/0.13;
 params.omega = 1/6;
-params.x_0=0.5;
+params.x_0=0.0005;
 params.theta_0 = 0;
 params.phi = 0.58 ; %bias in MTs
 
-L=30; %length of cell
-delx = 1; %bin size for integral
+%L=30; %length of cell
+delx = 0.1; %bin size for integral
 
 mean_position = zeros(1,l_t);
 second_moment = zeros(1,l_t);
 jumps = zeros(N,10^4);
-q_estimate = zeros(L+1,l_t);
+q_estimate = zeros(L/delx+1,l_t);
 xpos = zeros(N,10^4);
 xpos_discrete_time = zeros(N,10^4);
 
 %     final_xpos = zeros(N,1);
 %     final_ypos = zeros(N,1);
 for j=1:N
-    [~, ~, ~, ~, xpos_temp, jump_temp] = velocityjump2D_ModesInput(0.5, params, 1, 0, num_modes, 0, 13*j);
+    [~, ~, ~, ~, xpos_temp, jump_temp] = velocityjump2D_ModesInput(max(time_vec), params, 1, 0, num_modes, 0, 13*j);
     jumps(j,1:length(jump_temp)) = jump_temp;
     xpos(j,1:length(xpos_temp)) = xpos_temp;    
     for w=2:l_t
@@ -44,13 +44,13 @@ end
 for w=1:l_t
     %split into bins
     [Num_in_bins,edges] = histc(xpos_discrete_time(:,w),0:delx:L);
-    q_estimate(:,w) = Num_in_bins/N; %estimate of q at time T
+    q_estimate(:,w) = Num_in_bins/N/delx; %estimate of q at time T
 
-    mean_position(w) = (delx/2:delx:(L-delx/2))*q_estimate(1:L,w)*delx+delx*L*q_estimate(L+1,w); %use centre of each bin
-    second_moment(w) = (delx/2:delx:(L-delx/2)).^2*q_estimate(1:L,w)*delx+delx*L^2*q_estimate(L+1,w); %use centre of each bin
+    mean_position(w) = (delx/2:delx:(L-delx/2))*q_estimate(1:(end-1),w)*delx+delx*L*q_estimate(end,w); %use centre of each bin
+    second_moment(w) = (delx/2:delx:(L-delx/2)).^2*q_estimate(1:(end-1),w)*delx+delx*L^2*q_estimate(end,w); %use centre of each bin
 end
 
-proportion_absorbed = q_estimate(L+1,:); % this is q(L,t)
+proportion_absorbed = q_estimate(end,:)*delx; % this is q(L,t)
     
 speed_estimate = diff(mean_position)
 %sum(speed_estimate(1:8))/8
@@ -67,11 +67,12 @@ mu_initial = params.x_0; %initial mean position
 nu_1 = params.nu1; %speed in active transport mode
 F1 = (4*params.phi-2)/pi;
 mu1 = min((nu_1*F1*t + mu_initial),L); %note time scaled to seconds
+mud = -2*log(1+exp(0.5*(L-nu_1*F1*t)))+ mu_initial+2*log(1+exp(L/2)); %- 2*(1-L)*log(1+exp(-L/2)) +2*(1-L)*log(1+exp(-0.5*(L-nu_1*F1*t))) 
 if num_modes>1
     mu1 = min((0.5*nu_1*F1*t + mu_initial),L); %adjust for different analytical results for different numbers of modes
     mud = min((nu_1*F1*t + mu_initial),L);
-    plot(t,mud,'m--','linewidth',3);
 end
+    plot(t,mud,'m--','linewidth',3);
 hold on
 plot(t, mu1, 'g--', 'linewidth',3);
 set(gca, 'fontsize',14)
@@ -86,7 +87,7 @@ for s=1:length(time_vec)
     ylabel('q')
     grid on
     axis([0,35,0,1])
-    pause(0.1)
+    pause(0.4)
 end
 
 figure(3)
@@ -124,8 +125,13 @@ ylabel('second moment');
 figure(4);
 plot(t,proportion_absorbed,'b--','linewidth',3)
 grid on
+hold on
+set(gca,'fontsize',14)
 xlabel('t')
 ylabel('Proportion absorbed');
+a = L/2;
+b=-params.nu1*F1/2;
+plot(t, 1./(1+exp(a+b*t)),'m','linewidth',3)
 
 second_moment
 mu2
