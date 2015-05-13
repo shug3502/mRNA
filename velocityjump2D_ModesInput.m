@@ -29,10 +29,10 @@ if nargin ~= 7
     params.x_0=0.5;  %Initially in first compartment, ie. at NPC
     params.theta_0 = 0; %initial angle is 0
 end
-rng(my_seed); % set random seed
+%rng(my_seed); % set random seed
 
-%tic;
-dx=1; %compartment width for initial condition
+%dx=1; %compartment width for initial condition
+
 domain_size = 30; %30 microns for a nurse cell (R Parton) %80 microns [zimyanin et al 2008]
 a = domain_size/2;
 b=a/2;
@@ -42,7 +42,7 @@ is_anchored=0; %has RNP reach destination and anchored yet?
 is_attached=1; %is molecular motor attached to the microtubule?
 v = params.nu1*is_attached + params.nu2*(1-is_attached); %initialise the speed
 T = params.lambda; %store lambda
-params.lambda = (1-is_attached*(num_modes>1))*T; %initially is attached so 0 
+params.lambda = (1-is_attached*(num_modes>1))*T; %initially is attached so 0
 
 time=0; %unit seconds
 xpos = params.x_0; %initialise x position
@@ -91,23 +91,29 @@ while time<endtime && ~is_anchored
             v = params.nu2;
             is_attached = 0;
             params.lambda = T; %switching within phase when in diffusion
-            transitions = [transitions; xpos, ypos, time];
+            if with_plot
+                transitions = [transitions; xpos, ypos, time];
+            end
         else
             %reattaches
             v = params.nu1;
             is_attached = 1;
             params.lambda = T*(num_modes<2); % no switching within phase when in AT
-            transitions = [transitions; xpos, ypos, time];
+            if with_plot
+                transitions = [transitions; xpos, ypos, time];
+            end
         end
     else
         %oops
         error('something is wrong')
     end
     time = time+tau;
-    
-    pathx = [pathx, xpos];
-    pathy = [pathy, ypos];
-    jump_times = [jump_times, time];
+%If needing to plot thun uncomment these lines!!    
+%     if with_plot
+%         pathx = [pathx, xpos];
+%         pathy = [pathy, ypos];
+%         jump_times = [jump_times, time];
+%     end
 end
 %final outputs for statistics
 if is_anchored
