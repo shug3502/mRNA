@@ -13,7 +13,7 @@ rng(22);
 close all
 
 %Fake parameters
-params.nu1 = 0.4;
+params.nu1 = 1.0;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
@@ -23,31 +23,30 @@ params.theta_0 = 0;
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
-mfpt_fake_data = mfpt_calculator(params,100,0,65)
+mfpt_fake_data = mfpt_calculator(params,500,0,65)
 
 %Choose tolerance sequence
-num_generations = 4;
+num_generations = 3;
 delta = [400,200,100,50];
 
 %At t=1 for first generation
-N=10; %N particles at each generation
+N=100; %N particles at each generation
 %create while loop
 
 %set prior
-prior_params = [0.4,0,7.7,0,0.58,0,0.5];
-prior_sigma1 = 0.1;
-prior_sigma2 = 0.1;
-p_indices = [1,3];
+prior_params = [0.4, 0, 7.7, 0, 0.58, 0, 0.5];
+prior_sigma = [0.1, 0.1, 0.1];
+p_indices = [1, 3, 5];
 
 n=0;
-abc_theta = zeros(N,2);
+abc_theta = zeros(N,length(p_indices));
 abc_weights = zeros(N,1);
 fprintf('Generation 1 begins\n');
 for i=1:N
     mfpt_candidate_data = mfpt_fake_data+delta(1)+1; %initialise greater than tolerance
 while abs(mfpt_fake_data - mfpt_candidate_data)>delta(1)    %compare the summary statistic to that from original data
 n=n+1;
-rr = randn(1,2);
+rr = randn(1,3);
 
     %simulate parameters from the prior    
 %     candidate.nu1 = 0.4 + 0.1*rr(1,j);
@@ -58,7 +57,7 @@ rr = randn(1,2);
 %     candidate.theta_0 = 0; %these are fixed
 %     candidate.x_0 = 0.5; %these are fixed
 par_params = prior_params;
-par_params(p_indices) = prior_params(p_indices)+[prior_sigma1,prior_sigma2].*(rr);
+par_params(p_indices) = prior_params(p_indices)+prior_sigma.*(rr);
 
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
@@ -75,13 +74,31 @@ sigma = 2*var(abc_theta);
 
 
 figure(1);
+subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
 hold all
 grid on
 plot(prior_params(p_indices(1)),prior_params(p_indices(2)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
-xlabel('\nu_1');
-ylabel('\nu_2');
+xlabel('param1');
+ylabel('param2');
+subplot(3,1,2);
+plot(abc_theta(:,1),abc_theta(:,3),'o');
+hold all
+grid on
+plot(prior_params(p_indices(1)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param1');
+ylabel('param3');
+subplot(3,1,3);
+plot(abc_theta(:,2),abc_theta(:,3),'o');
+hold all
+grid on
+plot(prior_params(p_indices(2)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param2');
+ylabel('param3');
+
 
 %First generation for t=1 is done
 %Now loop over generations
@@ -116,7 +133,7 @@ end
 
 
 %peturb previous parameters
-par_params(my_index,p_indices) = par_params(my_index,p_indices) + sigma.*randn(1,2); 
+par_params(my_index,p_indices) = par_params(my_index,p_indices) + sigma.*randn(1,length(p_indices)); 
 
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
@@ -127,10 +144,12 @@ par_params(my_index,p_indices) = par_params(my_index,p_indices) + sigma.*randn(1
     end
 end    %repeat until N acceptances have been made
 abc_theta(i,:) = par_params(my_index,p_indices);
-prior = exp(-((abc_theta(i,1)-prior_params(p_indices(1))^2)/(2*prior_sigma1^2)))*...
-    exp(-((abc_theta(i,2)-prior_params(p_indices(2)))^2)/(2*prior_sigma2^2));
+prior = exp(-((abc_theta(i,1)-prior_params(p_indices(1))^2)/(2*prior_sigma(1)^2)))*...
+    exp(-((abc_theta(i,2)-prior_params(p_indices(2)))^2)/(2*prior_sigma(2)^2))*...
+    exp(-((abc_theta(i,3)-prior_params(p_indices(3)))^2)/(2*prior_sigma(3)^2));
 abc_weights(i) = prior/(sum(abc_weights.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
-    .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2)))/(sigma(1)*sigma(2))^2);
+    .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
+    .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2);
 end
   sigma = 2*var(abc_theta);  
     
@@ -139,23 +158,58 @@ end
 abc_theta
 
 figure(1);
+subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
 hold all
 grid on
 plot(prior_params(p_indices(1)),prior_params(p_indices(2)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
-xlabel('\nu_1');
-ylabel('\nu_2');
+xlabel('param1');
+ylabel('param2');
+subplot(3,1,2);
+plot(abc_theta(:,1),abc_theta(:,3),'o');
+hold all
+grid on
+plot(prior_params(p_indices(1)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param1');
+ylabel('param3');
+subplot(3,1,3);
+plot(abc_theta(:,2),abc_theta(:,3),'o');
+hold all
+grid on
+plot(prior_params(p_indices(2)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param2');
+ylabel('param3');
+
 end
 
 figure(2);
-plot(abc_theta(:,1),abc_theta(:,2),'bo');
+subplot(3,1,1);
+plot(abc_theta(:,1),abc_theta(:,2),'o');
 hold all
 grid on
 plot(prior_params(p_indices(1)),prior_params(p_indices(2)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
-xlabel('\nu_1');
-ylabel('\nu_2');
+xlabel('param1');
+ylabel('param2');
+subplot(3,1,2);
+plot(abc_theta(:,1),abc_theta(:,3),'o');
+hold all
+grid on
+plot(prior_params(p_indices(1)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param1');
+ylabel('param3');
+subplot(3,1,3);
+plot(abc_theta(:,2),abc_theta(:,3),'o');
+hold all
+grid on
+plot(prior_params(p_indices(2)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param2');
+ylabel('param3');
 
 toc
 end
