@@ -13,29 +13,31 @@ rng(22);
 close all
 
 %Fake parameters
-params.nu1 = 1.0;
+params.nu1 = 0.4;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
-params.phi = 0.58;
+params.phi = 0.55;
 params.x_0=0.5;  
 params.theta_0 = 0; 
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
-mfpt_fake_data = mfpt_calculator(params,500,0,65)
+[mfpt_fake_data,lambda_summary_fake,nu_summary_fake] = mfpt_calculator(params,500,0,1,65)
 
 %Choose tolerance sequence
 num_generations = 3;
-delta = [400,200,100,50];
+delta = [400,200,100,50;
+    200,100,50,25;
+    200,100,50,25];
 
 %At t=1 for first generation
-N=100; %N particles at each generation
+N=10; %N particles at each generation
 %create while loop
 
 %set prior
 prior_params = [0.4, 0, 7.7, 0, 0.58, 0, 0.5];
-prior_sigma = [0.1, 0.1, 0.1];
+prior_sigma = [0.2, 0.2, 0.2]; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 3, 5];
 
 n=0;
@@ -43,10 +45,14 @@ abc_theta = zeros(N,length(p_indices));
 abc_weights = zeros(N,1);
 fprintf('Generation 1 begins\n');
 for i=1:N
-    mfpt_candidate_data = mfpt_fake_data+delta(1)+1; %initialise greater than tolerance
-while abs(mfpt_fake_data - mfpt_candidate_data)>delta(1)    %compare the summary statistic to that from original data
+    mfpt_candidate_data = mfpt_fake_data+delta(:,1)+1; %initialise greater than tolerance
+while Summary_distance(mfpt_fake_data,mfpt_candidate_data, lambda_summary_fake, ...
+        lambda_summary_candidate, nu_summary_fake, nu_summary_candidate)>delta(:,1)    %compare the summary statistic to that from original data
 n=n+1;
-rr = randn(1,3);
+%Gaussian prior
+%rr = randn(1,3);
+%Uniform prior
+rr = rand(1,3);
 
     %simulate parameters from the prior    
 %     candidate.nu1 = 0.4 + 0.1*rr(1,j);
@@ -57,11 +63,11 @@ rr = randn(1,3);
 %     candidate.theta_0 = 0; %these are fixed
 %     candidate.x_0 = 0.5; %these are fixed
 par_params = prior_params;
-par_params(p_indices) = prior_params(p_indices)+prior_sigma.*(rr);
+par_params(p_indices) = prior_params(p_indices)+prior_sigma.*(rr-0.5);
 
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
-    mfpt_candidate_data = mfpt_calculator(par_params,20,1,4);
+    [mfpt_candidate_data,lambda_summary_candidate,nu_summary_candidate] = mfpt_calculator(par_params,20,1,0,4);
     if n>10^5
         fprintf('Thats more than enough parameters to look at for now.\n')
         break
@@ -110,8 +116,9 @@ for tau=2:num_generations
     n=0;
     tau
 for i=1:N
-    mfpt_candidate_data = mfpt_fake_data+delta(tau)+1; %initialise greater than tolerance
-while abs(mfpt_fake_data - mfpt_candidate_data)>delta(tau)    %compare the summary statistic to that from original data
+    mfpt_candidate_data = mfpt_fake_data+delta(:,tau)+1; %initialise greater than tolerance
+while Summary_distance(mfpt_fake_data,mfpt_candidate_data, lambda_summary_fake, ...
+        lambda_summary_candidate, nu_summary_fake, nu_summary_candidate)>delta(:,tau)    %compare the summary statistic to that from original data
 n=n+1;
 
     %simulate parameters from the prior    
@@ -137,16 +144,19 @@ par_params(my_index,p_indices) = par_params(my_index,p_indices) + sigma.*randn(1
 
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
-    mfpt_candidate_data = mfpt_calculator(par_params(my_index,:),20,1,4);
+    [mfpt_candidate_data,lambda_summary_candidate,nu_summary_candidate] = mfpt_calculator(par_params(my_index,:),20,1,0,4);
     if n>10^5
         fprintf('Thats more than enough parameters to look at for now.\n')
         break
     end
 end    %repeat until N acceptances have been made
 abc_theta(i,:) = par_params(my_index,p_indices);
-prior = exp(-((abc_theta(i,1)-prior_params(p_indices(1))^2)/(2*prior_sigma(1)^2)))*...
-    exp(-((abc_theta(i,2)-prior_params(p_indices(2)))^2)/(2*prior_sigma(2)^2))*...
-    exp(-((abc_theta(i,3)-prior_params(p_indices(3)))^2)/(2*prior_sigma(3)^2));
+%Gaussian prior
+% prior = exp(-((abc_theta(i,1)-prior_params(p_indices(1))^2)/(2*prior_sigma(1)^2)))*...
+%     exp(-((abc_theta(i,2)-prior_params(p_indices(2)))^2)/(2*prior_sigma(2)^2))*...
+%     exp(-((abc_theta(i,3)-prior_params(p_indices(3)))^2)/(2*prior_sigma(3)^2));
+%Uniform prior
+prior = 1/(prior_sigma(1)*prior_sigma(2)*prior_sigma(3));
 abc_weights(i) = prior/(sum(abc_weights.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
     .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
     .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2);
@@ -211,10 +221,15 @@ set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
 
+fname = sprintf('Simplest_ABC_output.txt');
+fileID = fopen(fname,'w');
+fprintf(fileID,'%f \n',abc_theta);
+fclose('all');
+
 toc
 end
 
-function mean_fp_time = mfpt_calculator(par_params,num_particles,is_parallel,r_random)
+function [mean_fp_time, mean_num_jumps, mean_jump_distances] = mfpt_calculator(par_params,num_particles,is_parallel, non_infinite, r_random)
 %runs velocityjump2D_ModesInput which is a velocity jump process for a single particle
 %runs this many times for many particles and returns simulated estimates of
 %mfpt
@@ -236,10 +251,32 @@ t_max = 1;  %if this is too small, some runs will not reach anchoring giving inf
 % which would be rejected. But can increase this. 
 
 anchor_times = zeros(num_particles,1);
+num_jumps = zeros(num_particles,1);
+jump_distances = zeros(num_particles,1);
 parfor j=1:num_particles
-    [~, anchor_times(j), ~,~] = velocityjump2D_ModesInput(t_max, params, 1, 0, 1, 0, r_random*j);
+    [~, anchor_times(j), ~, ~, pathx, ~] = velocityjump2D_ModesInput(t_max, params, 1, 0, 1, 0, r_random*j);
+num_jumps(j) = length(pathx);
+jump_distances(j) = median(diff(pathx));
 end
 mean_fp_time = mean(anchor_times);
+mean_num_jumps = mean(num_jumps);
+mean_jump_distances = mean(jump_distances);
+
+if non_infinite
+while isinf(mean_fp_time)
+    t_max = 2*t_max;
+    parfor j=1:num_particles
+    [~, anchor_times(j), ~, ~, pathx, ~] = velocityjump2D_ModesInput(t_max, params, 1, 0, 1, 0, r_random*j);
+    num_jumps(j) = length(pathx);
+    end
+    mean_fp_time = mean(anchor_times);
+    mean_num_jumps = mean(num_jumps);
+end
+end
 %    sd_anchor_time = std(anchor_times);
 
+end
+
+function dist = Summary_distance(mfpt_fake_data,mfpt_candidate_data, lambda_summary_fake, lambda_summary_candidate, nu_summary_fake, nu_summary_candidate)
+dist = [abs(mfpt_fake_data - mfpt_candidate_data); abs(lambda_summary_fake - lambda_summary_candidate); abs(nu_summary_fake - nu_summary_candidate)];
 end

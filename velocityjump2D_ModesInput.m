@@ -47,10 +47,14 @@ params.lambda = (1-is_attached*(num_modes>1))*T; %initially is attached so 0
 time=0; %unit seconds
 xpos = params.x_0; %initialise x position
 ypos = y_0; %initialise y
-pathx = params.x_0; %add first point to path
-pathy = y_0;
-transitions = []; %falling off/reattaching events
-jump_times = 0; %jumps
+
+pathx = [params.x_0, zeros(10^6,1)]; %add first point to path
+pathy = [y_0; zeros(10^6,1)];
+transitions = zeros(10^6,3); %falling off/reattaching events
+jump_times = zeros(1 + 10^6,1); %jumps
+n_transition = 0;
+n_jump = 1;
+
 endtime=3600*input_time; %one hour. Note that stage 9 of development lasts 6-10 hrs - or is this 6-10 since start? [zimyanin et al 2008]
 %loop through time
 while time<endtime && ~is_anchored
@@ -91,29 +95,32 @@ while time<endtime && ~is_anchored
             v = params.nu2;
             is_attached = 0;
             params.lambda = T; %switching within phase when in diffusion
-            if with_plot
-                transitions = [transitions; xpos, ypos, time];
-            end
+            %if with_plot
+            n_transition = n_transition+1;
+            transitions(n_transition,:) =  [xpos, ypos, time];
+            %end
         else
             %reattaches
             v = params.nu1;
             is_attached = 1;
             params.lambda = T*(num_modes<2); % no switching within phase when in AT
-            if with_plot
-                transitions = [transitions; xpos, ypos, time];
-            end
+            %if with_plot
+            n_transition = n_transition+1;
+            transitions(n_transition,:) =  [xpos, ypos, time];
+            %end
         end
     else
         %oops
         error('something is wrong')
     end
     time = time+tau;
-%If needing to plot thun uncomment these lines!!    
-%     if with_plot
-%         pathx = [pathx, xpos];
-%         pathy = [pathy, ypos];
-%         jump_times = [jump_times, time];
-%     end
+    %If needing to plot thun uncomment these lines!!
+    %    if with_plot
+    n_jump = n_jump+1;
+    pathx(n_jump) = xpos;
+    pathy(n_jump) = ypos;
+    jump_times(n_jump) = time;
+    %    end
 end
 %final outputs for statistics
 if is_anchored
@@ -123,6 +130,9 @@ else
     anchoring_time = inf;
 end
 
+pathx = pathx(1:n_jump);
+pathy = pathy(1:n_jump);
+jump_times = jump_times(1:n_jump);
 final_position_y = ypos;
 if with_plot
     %close all
