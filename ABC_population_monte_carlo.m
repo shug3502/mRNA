@@ -25,7 +25,7 @@ params.theta_0 = 0;
 mfpt_fake_data = mfpt_calculator(params,100,0,65)
 
 %Choose tolerance sequence
-num_generations = 6;
+num_generations = 3;
 delta = [400,200,100,50,25,12];
 
 %At t=1 for first generation

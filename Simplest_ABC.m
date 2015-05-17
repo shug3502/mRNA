@@ -1,7 +1,7 @@
 function [abc_theta,abc_weights] = Simplest_ABC
 
 %created 13/5/15
-%last edit 13/5/15
+%last edit 17/5/15
 %AS simple as ABC
 %implements a version of ABC via rejection sampling to fit parameters to
 %some 'data' which is first simulated from the model
@@ -17,19 +17,22 @@ params.nu1 = 0.4;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
-params.phi = 0.55;
-params.x_0=0.5;  
+params.phi = 0.58; 
 params.theta_0 = 0; 
+params.x_0=0.5;
+real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, params.theta_0, params.x_0];
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
-[mfpt_fake_data,lambda_summary_fake,nu_summary_fake] = mfpt_calculator(params,500,0,1,65)
+[mfpt_fake_data,lambda_summary_fake,nu_summary_fake] = mfpt_calculator(params,100,0,1,65)
 
 %Choose tolerance sequence
 num_generations = 3;
+%delta values chosen by looking at the standard deviations of the summary
+%statistics as parameters vary
 delta = [400,200,100,50;
-    200,100,50,25;
-    200,100,50,25];
+    1200,800,400,200;
+    0.005,0.001,0.0005,0.0002];
 
 %At t=1 for first generation
 N=10; %N particles at each generation
@@ -45,9 +48,11 @@ abc_theta = zeros(N,length(p_indices));
 abc_weights = zeros(N,1);
 fprintf('Generation 1 begins\n');
 for i=1:N
-    mfpt_candidate_data = mfpt_fake_data+delta(:,1)+1; %initialise greater than tolerance
+    mfpt_candidate_data = mfpt_fake_data + delta(1,1) + 1; %initialise greater than tolerance
+    lambda_summary_candidate = lambda_summary_fake + delta(2,1) + 1;
+    nu_summary_candidate = nu_summary_fake + delta(3,1) + 1;
 while Summary_distance(mfpt_fake_data,mfpt_candidate_data, lambda_summary_fake, ...
-        lambda_summary_candidate, nu_summary_fake, nu_summary_candidate)>delta(:,1)    %compare the summary statistic to that from original data
+        lambda_summary_candidate, nu_summary_fake, nu_summary_candidate) > delta(:,1)    %compare the summary statistic to that from original data
 n=n+1;
 %Gaussian prior
 %rr = randn(1,3);
@@ -84,7 +89,7 @@ subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
 hold all
 grid on
-plot(prior_params(p_indices(1)),prior_params(p_indices(2)),'rx','MarkerSize',12);
+plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param1');
 ylabel('param2');
@@ -92,7 +97,7 @@ subplot(3,1,2);
 plot(abc_theta(:,1),abc_theta(:,3),'o');
 hold all
 grid on
-plot(prior_params(p_indices(1)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param1');
 ylabel('param3');
@@ -100,7 +105,7 @@ subplot(3,1,3);
 plot(abc_theta(:,2),abc_theta(:,3),'o');
 hold all
 grid on
-plot(prior_params(p_indices(2)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
@@ -116,7 +121,9 @@ for tau=2:num_generations
     n=0;
     tau
 for i=1:N
-    mfpt_candidate_data = mfpt_fake_data+delta(:,tau)+1; %initialise greater than tolerance
+    mfpt_candidate_data = mfpt_fake_data+delta(1,tau)+1; %initialise greater than tolerance
+    lambda_summary_candidate = lambda_summary_fake + delta(2,tau) + 1;
+    nu_summary_candidate = nu_summary_fake + delta(3,tau) + 1;
 while Summary_distance(mfpt_fake_data,mfpt_candidate_data, lambda_summary_fake, ...
         lambda_summary_candidate, nu_summary_fake, nu_summary_candidate)>delta(:,tau)    %compare the summary statistic to that from original data
 n=n+1;
@@ -172,7 +179,7 @@ subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
 hold all
 grid on
-plot(prior_params(p_indices(1)),prior_params(p_indices(2)),'rx','MarkerSize',12);
+plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param1');
 ylabel('param2');
@@ -180,7 +187,7 @@ subplot(3,1,2);
 plot(abc_theta(:,1),abc_theta(:,3),'o');
 hold all
 grid on
-plot(prior_params(p_indices(1)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param1');
 ylabel('param3');
@@ -188,7 +195,7 @@ subplot(3,1,3);
 plot(abc_theta(:,2),abc_theta(:,3),'o');
 hold all
 grid on
-plot(prior_params(p_indices(2)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
@@ -200,7 +207,7 @@ subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
 hold all
 grid on
-plot(prior_params(p_indices(1)),prior_params(p_indices(2)),'rx','MarkerSize',12);
+plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param1');
 ylabel('param2');
@@ -208,7 +215,7 @@ subplot(3,1,2);
 plot(abc_theta(:,1),abc_theta(:,3),'o');
 hold all
 grid on
-plot(prior_params(p_indices(1)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param1');
 ylabel('param3');
@@ -216,7 +223,7 @@ subplot(3,1,3);
 plot(abc_theta(:,2),abc_theta(:,3),'o');
 hold all
 grid on
-plot(prior_params(p_indices(2)),prior_params(p_indices(3)),'rx','MarkerSize',12);
+plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
@@ -258,9 +265,9 @@ parfor j=1:num_particles
 num_jumps(j) = length(pathx);
 jump_distances(j) = median(diff(pathx));
 end
-mean_fp_time = mean(anchor_times);
-mean_num_jumps = mean(num_jumps);
-mean_jump_distances = mean(jump_distances);
+mean_fp_time = mean(anchor_times);  % use mean first passge time as one summary statistic
+mean_num_jumps = mean(num_jumps); %use mean number of jumps in a single passge as another
+mean_jump_distances = mean(jump_distances); %use mean jump distance as final summary statistic
 
 if non_infinite
 while isinf(mean_fp_time)

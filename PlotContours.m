@@ -18,6 +18,13 @@ Y=abc_theta(N+1:2*N)';
 D = [X' Y'];
 N = length(X);
 
+%Trying to work out how to get distribution to plot with contourf. ie
+%discretise into boxes
+% [Num_in_bins,edges] = histc(X);
+%     q_estimate = Num_in_bins; %estimate of q at time T
+% figure;
+% contourf
+
 
 Xrange = [min(X)-Border max(X)+Border];
 Yrange = [min(Y)-Border max(Y)+Border];
@@ -52,7 +59,7 @@ PPDF1 = PPDF1 / m1;
 
 %Set up visualization
 set(0,'defaulttextinterpreter','latex','DefaultAxesFontSize',20)
-fig = figure(1);
+figure;
 clf
 stem3(D(:,1),D(:,2),zeros(N,1),'b.');
 hold on;

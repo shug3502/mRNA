@@ -48,7 +48,7 @@ time=0; %unit seconds
 xpos = params.x_0; %initialise x position
 ypos = y_0; %initialise y
 
-pathx = [params.x_0, zeros(10^6,1)]; %add first point to path
+pathx = [params.x_0; zeros(10^6,1)]; %add first point to path
 pathy = [y_0; zeros(10^6,1)];
 transitions = zeros(10^6,3); %falling off/reattaching events
 jump_times = zeros(1 + 10^6,1); %jumps
