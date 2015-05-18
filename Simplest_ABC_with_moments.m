@@ -20,6 +20,9 @@ params.omega = 0;
 params.phi = 0.58; 
 params.theta_0 = 0; 
 params.x_0=0.5;
+
+L=30;
+delx=1;
 real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, params.theta_0, params.x_0];
 
 %Generate fake data
@@ -30,7 +33,7 @@ q_estimate_fake = summary_statistic_calculator(params,100,0,65)
 num_generations = 3;
 %delta values chosen by looking at the standard deviations of the summary
 %statistics as parameters vary
-delta = [400,200,100,50];
+delta = [40,20,10,5];
 
 %At t=1 for first generation
 N=10; %N particles at each generation
@@ -47,8 +50,9 @@ abc_weights = zeros(N,1);
 fprintf('Generation 1 begins\n');
 for i=1:N
     %initialise greater than tolerance
-    q_estimate_candidate = 1-q_estimate_fake;
-while kldiv(0:L,q_estimate_candidate,q_estimate_fake) > delta(1)    %compare the summary statistic to that from original data
+    q_estimate_candidate = ones(1+L/delx,3)/(1+L/delx); %[ones(1,3); zeros(L/delx,3)];
+    kldiv((0:delx:L)',q_estimate_candidate(:,1),q_estimate_fake(:,1))
+while kldiv((0:delx:L)',q_estimate_candidate(:,1),q_estimate_fake(:,1)) > delta(1)    %compare the summary statistic to that from original data
 n=n+1;
 %Gaussian prior
 %rr = randn(1,3);
@@ -119,7 +123,7 @@ for tau=2:num_generations
 for i=1:N
     %initialise greater than tolerance
 q_estimate_candidate = 1-q_estimate_fake;
-while kldiv(0:L,q_estimate_candidate,q_estimate_fake)>delta(tau)    %compare the summary statistic to that from original data
+while kldiv(0:L,q_estimate_candidate(:,1),q_estimate_fake(:,1))>delta(tau)    %compare the summary statistic to that from original data
 n=n+1;
 
     %simulate parameters from the prior    
@@ -157,10 +161,17 @@ abc_theta(i,:) = par_params(my_index,p_indices);
 %     exp(-((abc_theta(i,2)-prior_params(p_indices(2)))^2)/(2*prior_sigma(2)^2))*...
 %     exp(-((abc_theta(i,3)-prior_params(p_indices(3)))^2)/(2*prior_sigma(3)^2));
 %Uniform prior
-prior = 1/(prior_sigma(1)*prior_sigma(2)*prior_sigma(3));
-abc_weights(i) = prior/(sum(abc_weights.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
+prior = 1;
+for jj=1:3
+prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
+end
+abc_weights(i) = prior./(sum(abc_weights.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
     .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
     .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2);
+if isnan(abc_weights)
+    abc_weights
+    error('weights are NAN due to division by 0 in calculation of weights. Oops.');
+end
 end
   sigma = 2*var(abc_theta);  
     
@@ -222,7 +233,7 @@ set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
 
-fname = sprintf('Simplest_ABC_output.txt');
+fname = sprintf('Simplest_ABC_with_moments_output.txt');
 fileID = fopen(fname,'w');
 fprintf(fileID,'%f \n',abc_theta);
 fclose('all');
@@ -248,13 +259,13 @@ else
     params = par_params;
 end
 
+L=30;
 time_vec = (0.1:0.1:0.3);
 t=time_vec*60^2;
 t_max = 1;  %if this is too small, some runs will not reach anchoring giving infinite mfpt _> rejection.
 % these are probably not an issue as they would give large mfpt anyway,
 % which would be rejected. But can increase this. 
 l_t = length(time_vec);
-N=20;
 jumps = zeros(N,10^4);
 q_estimate = zeros(L/delx+1,l_t);
 xpos = zeros(N,10^4);
@@ -280,8 +291,4 @@ parfor w=1:l_t
 %     second_moment(w) = (delx/2:delx:(L-delx/2)).^2*q_estimate(1:(end-1),w)*delx+delx*L^2*q_estimate(end,w); %use centre of each bin
 end
 
-end
-
-function dist = kldiv(q_1, q_2)
-dist = kldiv(q_1,q_2);
 end
