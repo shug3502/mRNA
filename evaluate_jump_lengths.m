@@ -7,7 +7,7 @@ function evaluate_jump_lengths
 total=tic;
 close all
 
-params.nu1 = 0.6;
+params.nu1 = 0.5;
 params.nu2 = 0.1;
 params.lambda = 1/0.13;
 params.omega = 1/6;
@@ -24,7 +24,7 @@ mean_jump_distances = zeros(my_length,1);
 
 for k=1:my_length
     
-    num_particles = 20;
+    num_particles = 100;
     %parfor? perhaps if it took longer might be needed
     num_jumps = zeros(num_particles,1);
     jump_distances = zeros(num_particles,1);
@@ -33,7 +33,7 @@ for k=1:my_length
     for j=1:num_particles
         [~, ~, ~, ~, pathx, ~] = velocityjump2D_ModesInput(t_max, params, 1, 0, 1, 0, 4*j);
         num_jumps(j) = length(pathx);
-        jump_distances(j) = median(diff(pathx));
+        jump_distances(j) = median(abs(diff(pathx)));
     end
     mean_num_jumps(k) = mean(num_jumps); %use mean number of jumps in a single passge as another
     mean_jump_distances(k) = mean(jump_distances); %use mean jump distance as final summary statistic

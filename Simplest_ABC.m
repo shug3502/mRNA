@@ -13,11 +13,11 @@ rng(22);
 close all
 
 %Fake parameters
-params.nu1 = 0.4;
+params.nu1 = 1;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
-params.phi = 0.58; 
+params.phi = 0.62; 
 params.theta_0 = 0; 
 params.x_0=0.5;
 real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, params.theta_0, params.x_0];
@@ -31,16 +31,16 @@ num_generations = 3;
 %delta values chosen by looking at the standard deviations of the summary
 %statistics as parameters vary
 delta = [400,200,100,50;
-    1200,800,400,200;
-    0.005,0.001,0.0005,0.0002];
+    1000,500,250,125;
+    0.01,0.005,0.001,0.0005];
 
 %At t=1 for first generation
-N=10; %N particles at each generation
+N=50; %N particles at each generation
 %create while loop
 
 %set prior
-prior_params = [0.4, 0, 7.7, 0, 0.58, 0, 0.5];
-prior_sigma = [0.2, 0.2, 0.2]; %sd of gaussian or spread around mean of uniform
+prior_params = [0.9, 0, 7.7, 0, 0.58, 0, 0.5];
+prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 3, 5];
 
 n=0;
@@ -147,7 +147,7 @@ end
 
 
 %peturb previous parameters
-par_params(my_index,p_indices) = par_params(my_index,p_indices) + sigma.*randn(1,length(p_indices)); 
+par_params(my_index,p_indices) = max(par_params(my_index,p_indices) + sigma.*randn(1,length(p_indices)),0);  %if negative parameters are proposed, then just use zero
 
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
@@ -163,10 +163,17 @@ abc_theta(i,:) = par_params(my_index,p_indices);
 %     exp(-((abc_theta(i,2)-prior_params(p_indices(2)))^2)/(2*prior_sigma(2)^2))*...
 %     exp(-((abc_theta(i,3)-prior_params(p_indices(3)))^2)/(2*prior_sigma(3)^2));
 %Uniform prior
-prior = 1/(prior_sigma(1)*prior_sigma(2)*prior_sigma(3));
-abc_weights(i) = prior/(sum(abc_weights.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
+prior = 1;
+for jj=1:3
+prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
+end
+abc_weights(i) = prior./(sum(abc_weights.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
     .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
     .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2);
+if isnan(abc_weights)
+    abc_weights
+    error('weights are NAN due to division by 0 in calculation of weights. Oops.');
+end
 end
   sigma = 2*var(abc_theta);  
     
@@ -228,7 +235,7 @@ set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
 
-fname = sprintf('Simplest_ABC_output.txt');
+fname = sprintf('Simplest_ABC_output2.txt');
 fileID = fopen(fname,'w');
 fprintf(fileID,'%f \n',abc_theta);
 fclose('all');
@@ -263,7 +270,7 @@ jump_distances = zeros(num_particles,1);
 parfor j=1:num_particles
     [~, anchor_times(j), ~, ~, pathx, ~] = velocityjump2D_ModesInput(t_max, params, 1, 0, 1, 0, r_random*j);
 num_jumps(j) = length(pathx);
-jump_distances(j) = median(diff(pathx));
+jump_distances(j) = median(abs(diff(pathx)));
 end
 mean_fp_time = mean(anchor_times);  % use mean first passge time as one summary statistic
 mean_num_jumps = mean(num_jumps); %use mean number of jumps in a single passge as another
