@@ -13,7 +13,7 @@ rng(22);
 close all
 
 %Fake parameters
-params.nu1 = 0.4;
+params.nu1 = 1.0;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
@@ -33,15 +33,19 @@ q_estimate_fake = summary_statistic_calculator(params,100,0,65)
 num_generations = 3;
 %delta values chosen by looking at the standard deviations of the summary
 %statistics as parameters vary
-delta = [40,20,10,5];
+delta = [10,5,1,0.5,0.1]; %[40,20,10,5];
 
 %At t=1 for first generation
-N=10; %N particles at each generation
+N=100; 
+%N is # particles at each generation
+%Note that algorithm does not perform well when N is small. Needs to pick
+%sensible parameters, or acceptance rate is very very low. 
+
 %create while loop
 
 %set prior
-prior_params = [0.4, 0, 7.7, 0, 0.58, 0, 0.5];
-prior_sigma = [0.2, 0.2, 0.2]; %sd of gaussian or spread around mean of uniform
+prior_params = [0.9, 0, 7.7, 0, 0.58, 0, 0.5];
+prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 3, 5];
 
 n=0;
@@ -50,10 +54,12 @@ abc_weights = zeros(N,1);
 fprintf('Generation 1 begins\n');
 for i=1:N
     %initialise greater than tolerance
-    q_estimate_candidate = ones(1+L/delx,3)/(1+L/delx); %[ones(1,3); zeros(L/delx,3)];
-    kldiv((0:delx:L)',q_estimate_candidate(:,1),q_estimate_fake(:,1))
-while kldiv((0:delx:L)',q_estimate_candidate(:,1),q_estimate_fake(:,1)) > delta(1)    %compare the summary statistic to that from original data
-n=n+1;
+    q_estimate_candidate =[ones(1,3); zeros(L/delx,3)]; % ones(1+L/delx,3)/(1+L/delx); %
+    %kldiv((0:delx:L)',q_estimate_candidate(:,1)+eps,q_estimate_fake(:,1)+eps)
+    par_params = prior_params;
+while kldiv((0:delx:L)',q_estimate_candidate(:,1)+eps,q_estimate_fake(:,1)+eps) > delta(1)    %compare the summary statistic to that from original data
+
+    n=n+1;
 %Gaussian prior
 %rr = randn(1,3);
 %Uniform prior
@@ -67,7 +73,6 @@ rr = rand(1,3);
 %     candidate.phi = 0.58; %fix this too %+0.2*randn(1);
 %     candidate.theta_0 = 0; %these are fixed
 %     candidate.x_0 = 0.5; %these are fixed
-par_params = prior_params;
 par_params(p_indices) = prior_params(p_indices)+prior_sigma.*(rr-0.5);
 
     %simulate data using these model parameters
@@ -122,9 +127,9 @@ for tau=2:num_generations
     tau
 for i=1:N
     %initialise greater than tolerance
-q_estimate_candidate = 1-q_estimate_fake;
-while kldiv(0:L,q_estimate_candidate(:,1),q_estimate_fake(:,1))>delta(tau)    %compare the summary statistic to that from original data
-n=n+1;
+    q_estimate_candidate =[ones(1,3); zeros(L/delx,3)];
+while kldiv((0:delx:L)',q_estimate_candidate(:,1)+eps,q_estimate_fake(:,1)+eps)>delta(tau)    %compare the summary statistic to that from original data
+    n=n+1
 
     %simulate parameters from the prior    
 %     candidate.nu1 = 0.4 + 0.1*rr(1,j);
@@ -154,6 +159,10 @@ par_params(my_index,p_indices) = par_params(my_index,p_indices) + sigma.*randn(1
         fprintf('Thats more than enough parameters to look at for now.\n')
         break
     end
+ if abs(sum(q_estimate_candidate(:,1)+eps)-1)>10^-4
+q_estimate_candidate     
+toc;
+ end
 end    %repeat until N acceptances have been made
 abc_theta(i,:) = par_params(my_index,p_indices);
 %Gaussian prior
@@ -260,11 +269,9 @@ else
 end
 
 L=30;
-time_vec = (0.1:0.1:0.3);
+time_vec = (0.05:0.05:0.05);
 t=time_vec*60^2;
-t_max = 1;  %if this is too small, some runs will not reach anchoring giving infinite mfpt _> rejection.
-% these are probably not an issue as they would give large mfpt anyway,
-% which would be rejected. But can increase this. 
+t_max = 1;  
 l_t = length(time_vec);
 jumps = zeros(N,10^4);
 q_estimate = zeros(L/delx+1,l_t);
@@ -283,9 +290,17 @@ for j=1:N
         end
     end
 end
-parfor w=1:l_t
+for w=1:l_t
     %split into bins
     [Num_in_bins,~] = histc(xpos_discrete_time(:,w),0:delx:L);
+    if Num_in_bins ~= N
+        xpos_discrete_time(:,w)
+        ename = sprintf('Simplest_ABC_with_moments_errors.txt');
+fileIDerror = fopen(ename,'w');
+fprintf(fileIDerror,'%f \n',xpos_discrete_time);
+fclose('all');
+        error('outside of 0:L');
+    end
     q_estimate(:,w) = Num_in_bins/N/delx; %estimate of q at time T
 %     mean_position(w) = (delx/2:delx:(L-delx/2))*q_estimate(1:(end-1),w)*delx+delx*L*q_estimate(end,w); %use centre of each bin
 %     second_moment(w) = (delx/2:delx:(L-delx/2)).^2*q_estimate(1:(end-1),w)*delx+delx*L^2*q_estimate(end,w); %use centre of each bin

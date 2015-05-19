@@ -48,10 +48,15 @@ time=0; %unit seconds
 xpos = params.x_0; %initialise x position
 ypos = y_0; %initialise y
 
-pathx = [params.x_0; zeros(10^6,1)]; %add first point to path
-pathy = [y_0; zeros(10^6,1)];
-transitions = zeros(10^6,3); %falling off/reattaching events
-jump_times = zeros(1 + 10^6,1); %jumps
+%pathx = [params.x_0; zeros(10^6,1)]; %add first point to path
+%pathy = [y_0; zeros(10^6,1)];
+estimated_max_path_length = round(50000*input_time);
+pathx = zeros(1+estimated_max_path_length,1);
+pathx(1) = params.x_0;
+pathy = zeros(1+estimated_max_path_length,1);
+pathy(1) = y_0;
+transitions = zeros(estimated_max_path_length,3); %falling off/reattaching events
+jump_times = zeros(1 + estimated_max_path_length,1); %jumps
 n_transition = 0;
 n_jump = 1;
 

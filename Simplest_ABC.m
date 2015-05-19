@@ -13,11 +13,11 @@ rng(22);
 close all
 
 %Fake parameters
-params.nu1 = 1;
+params.nu1 = 0.85;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
-params.phi = 0.62; 
+params.phi = 0.58; 
 params.theta_0 = 0; 
 params.x_0=0.5;
 real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, params.theta_0, params.x_0];
