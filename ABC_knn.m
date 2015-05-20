@@ -34,19 +34,10 @@ real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, 
 q_estimate_fake = summary_statistic_calculator(params,100,0,65)
 
 %Choose tolerance sequence
-num_generations = 3;
-%delta values chosen by looking at the standard deviations of the summary
-%statistics as parameters vary
-%delta = [10,5,2,0.5,0.1]; %[40,20,10,5];
-
-accepted_proportion = 0.5;
-
+num_generations = 4;
+accepted_proportion = 0.3;
 %At t=1 for first generation
-N=1000;
-%N is # particles at each generation
-%Note that algorithm does not perform well when N is small. Needs to pick
-%sensible parameters, or acceptance rate is very very low.
-
+N=10000;
 %create while loop
 
 %set prior
@@ -89,10 +80,12 @@ to_keep = (abc_dist <= quantile(abc_dist,accepted_proportion));
 abc_theta = abc_theta(to_keep,:);
 abc_weights = abc_weights(to_keep);
 abc_dist = abc_dist(to_keep);
-sigma = 2*var(abc_theta);
+    ma = max(abc_dist)
+    mi = min(abc_dist)
+sigma = 2*var(abc_theta)
 
 
-figure(1);
+figure(my_seed+1);
 subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
 hold all
@@ -130,15 +123,12 @@ for tau=2:num_generations
     N = length(abc_weights)
     par_params = repmat(prior_params,N,1);
     par_params(:,p_indices) = theta_store;
-    n=0;
     abc_theta = zeros(N,length(p_indices));
     abc_weights = zeros(N,1);
     abc_dist = zeros(N,1);
 
     for i=1:N
         %initialise greater than tolerance
-        %while kldiv((0:delx:L)',q_estimate_candidate(:,1)+eps,q_estimate_fake(:,1)+eps)>delta(tau)    %compare the summary statistic to that from original data
-        
         %simulate parameters from the prior
         %     candidate.nu1 = 0.4 + 0.1*rr(1,j);
         %     candidate.nu2 = 0.08 + 0.02*rr(2,j);
@@ -186,10 +176,12 @@ for tau=2:num_generations
     abc_theta = abc_theta(to_keep,:);
     abc_weights = abc_weights(to_keep);
     abc_dist = abc_dist(to_keep);
-    sigma = 2*var(abc_theta);
+    ma = max(abc_dist)
+    mi = min(abc_dist)
+    sigma = 2*var(abc_theta)
     
     
-    figure(1);
+    figure(my_seed+1);
     subplot(3,1,1);
     plot(abc_theta(:,1),abc_theta(:,2),'o');
     hold all
@@ -222,7 +214,7 @@ abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that p
 length(abc_theta)
 
 
-figure(2);
+figure(my_seed+2);
 subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
 hold all
@@ -248,7 +240,7 @@ set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
 
-fname = sprintf('Simplest_ABC_with_moments_output%d.txt',my_seed);
+fname = sprintf('ABC_knn_output%d.txt',my_seed);
 fileID = fopen(fname,'w');
 fprintf(fileID,'%f \n',abc_theta);
 fclose('all');
