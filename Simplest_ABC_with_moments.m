@@ -121,6 +121,7 @@ ylabel('param3');
 for tau=2:num_generations
     %store previous theta
     theta_store = abc_theta;
+    weights_store = abc_weights;
     par_params = repmat(prior_params,N,1);
     par_params(:,p_indices) = theta_store;
     n=0;
@@ -144,7 +145,7 @@ while kldiv((0:delx:L)',q_estimate_candidate(:,1)+eps,q_estimate_fake(:,1)+eps)>
 u = rand(1);
 my_index = 1;
 %draw from discrete distribution with weights abc_weights
-while cumsum(abc_weights(1:my_index))/sum(abc_weights)<u
+while cumsum(weights_store(1:my_index))/sum(weights_store)<u
     my_index = my_index+1;
 end
 
@@ -174,7 +175,8 @@ prior = 1;
 for jj=1:3
 prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
 end
-abc_weights(i) = prior./(sum(abc_weights.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
+%fixed dependence on current weights to depend on previous weights
+abc_weights(i) = prior./(sum(weights_store.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
     .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
     .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2);
 if isnan(abc_weights)

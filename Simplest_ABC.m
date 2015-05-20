@@ -13,11 +13,11 @@ rng(22);
 close all
 
 %Fake parameters
-params.nu1 = 0.85;
+params.nu1 = 0.9;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
-params.phi = 0.58; 
+params.phi = 0.62; 
 params.theta_0 = 0; 
 params.x_0=0.5;
 real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, params.theta_0, params.x_0];
@@ -35,7 +35,7 @@ delta = [400,200,100,50;
     0.01,0.005,0.001,0.0005];
 
 %At t=1 for first generation
-N=50; %N particles at each generation
+N=100; %N particles at each generation
 %create while loop
 
 %set prior
@@ -116,6 +116,7 @@ ylabel('param3');
 for tau=2:num_generations
     %store previous theta
     theta_store = abc_theta;
+    weights_store = abc_weights;
     par_params = repmat(prior_params,N,1);
     par_params(:,p_indices) = theta_store;
     n=0;
@@ -141,7 +142,7 @@ n=n+1;
 u = rand(1);
 my_index = 1;
 %draw from discrete distribution with weights abc_weights
-while cumsum(abc_weights(1:my_index))/sum(abc_weights)<u
+while cumsum(weights_store(1:my_index))/sum(weights_store)<u
     my_index = my_index+1;
 end
 
@@ -167,7 +168,8 @@ prior = 1;
 for jj=1:3
 prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
 end
-abc_weights(i) = prior./(sum(abc_weights.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
+%fixed dependence on current weights so we have dependence on previous weights
+abc_weights(i) = prior./(sum(weights_store.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
     .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
     .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2);
 if isnan(abc_weights)
