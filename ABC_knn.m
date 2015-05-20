@@ -17,7 +17,7 @@ rng(my_seed);
 close all
 
 %Fake parameters
-params.nu1 = 0.9;
+params.nu1 = 1.0;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
@@ -35,7 +35,7 @@ q_estimate_fake = summary_statistic_calculator(params,100,0,65)
 
 %Choose tolerance sequence
 num_generations = 4;
-accepted_proportion = 0.3;
+accepted_proportion = 0.4;
 %At t=1 for first generation
 N=10000;
 %create while loop
@@ -178,7 +178,8 @@ for tau=2:num_generations
     abc_dist = abc_dist(to_keep);
     ma = max(abc_dist)
     mi = min(abc_dist)
-    sigma = 2*var(abc_theta)
+    sigma = 2*var(abc_theta);
+    entropy = calculate_entropy(abc_theta)
     
     
     figure(my_seed+1);
@@ -208,10 +209,11 @@ for tau=2:num_generations
     ylabel('param3');
     
 end
-length(abc_theta)
+
+%length(abc_theta)
 %get rid of values outside of cupport of prior
 abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
-length(abc_theta)
+%length(abc_theta)
 
 
 figure(my_seed+2);
