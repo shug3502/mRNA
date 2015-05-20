@@ -35,7 +35,7 @@ q_estimate_fake = summary_statistic_calculator(params,100,0,65)
 
 %Choose tolerance sequence
 num_generations = 4;
-accepted_proportion = 0.3;
+accepted_proportion = 0.4;
 %At t=1 for first generation
 N=10000;
 %create while loop
@@ -68,7 +68,7 @@ for i=1:N
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
     q_estimate_candidate = summary_statistic_calculator(par_params,20,1,4);
-    abc_dist(i) = kldiv((0:delx:L)',q_estimate_candidate(:,1)+eps,q_estimate_fake(:,1)+eps); %distance of proposed S(x) from S(x_obs)
+    abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake); %distance of proposed S(x) from S(x_obs)
     %end    %repeat until N acceptances have been made
     
     abc_theta(i,:) = par_params(p_indices);
@@ -153,7 +153,7 @@ for tau=2:num_generations
         %simulate data using these model parameters
         %Calculate summary statistic (MFPT)
         q_estimate_candidate = summary_statistic_calculator(par_params(my_index,:),20,1,4);
-        abc_dist(i) = kldiv((0:delx:L)',q_estimate_candidate(:,1)+eps,q_estimate_fake(:,1)+eps);
+        abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake);
         
         
         %end    %repeat until N acceptances have been made
@@ -267,7 +267,7 @@ else
 end
 
 L=30;
-time_vec = (0.05:0.05:0.05);
+time_vec = (0.05:0.05:0.15);
 t=time_vec*60^2;
 t_max = 1;
 l_t = length(time_vec);
@@ -304,4 +304,13 @@ for w=1:l_t
     %     second_moment(w) = (delx/2:delx:(L-delx/2)).^2*q_estimate(1:(end-1),w)*delx+delx*L^2*q_estimate(end,w); %use centre of each bin
 end
 
+end
+function dist = distance_metric(q1,q2)
+%equal weightings to each of the time points currently
+delx = 1;
+L=30;
+dist = 0;
+for j=1:length(q1(1,:))
+dist = dist + kldiv((0:delx:L)',q1(:,j)+eps,q2(:,j)+eps);
+end
 end
