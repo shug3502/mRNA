@@ -35,9 +35,9 @@ q_estimate_fake = summary_statistic_calculator(params,100,0,65)
 
 %Choose tolerance sequence
 num_generations = 4;
-accepted_proportion = 0.4;
+accepted_proportion = 0.5;
 %At t=1 for first generation
-N=10000;
+N=500;
 %create while loop
 
 %set prior
@@ -214,6 +214,7 @@ end
 %get rid of values outside of cupport of prior
 abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
 %length(abc_theta)
+entropy = calculate_entropy(abc_theta)
 
 
 figure(my_seed+2);
