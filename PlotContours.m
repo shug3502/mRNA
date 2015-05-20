@@ -1,10 +1,11 @@
 function PlotContours
 %or use contourf 
 
-fname = sprintf('Simplest_ABC_output.txt');
+fname = sprintf('Simplest_ABC_with_moments_output2.txt');
 fileID = fopen(fname,'r');
 abc_theta = fscanf(fileID, '%f');
 abc_theta
+length(abc_theta)
 fclose('all');
 
 N=10;

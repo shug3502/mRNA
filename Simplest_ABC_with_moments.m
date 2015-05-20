@@ -1,7 +1,7 @@
-function [abc_theta,abc_weights] = Simplest_ABC_with_moments
+function [abc_theta,abc_weights] = Simplest_ABC_with_moments(my_seed)
 
 %created 13/5/15
-%last edit 17/5/15
+%last edit 20/5/15
 %AS simple as ABC
 %implements a version of ABC via rejection sampling to fit parameters to
 %some 'data' which is first simulated from the model
@@ -9,7 +9,7 @@ function [abc_theta,abc_weights] = Simplest_ABC_with_moments
 %see Turner 2012 for ABC population monte carlo tutorial
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic; 
-rng(22);
+rng(my_seed);
 close all
 
 %Fake parameters
@@ -33,7 +33,7 @@ q_estimate_fake = summary_statistic_calculator(params,100,0,65)
 num_generations = 3;
 %delta values chosen by looking at the standard deviations of the summary
 %statistics as parameters vary
-delta = [10,5,1,0.5,0.1]; %[40,20,10,5];
+delta = [10,5,2,0.5,0.1]; %[40,20,10,5];
 
 %At t=1 for first generation
 N=100; 
@@ -185,9 +185,6 @@ end
   sigma = 2*var(abc_theta);  
     
 
-
-abc_theta
-
 figure(1);
 subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
@@ -215,6 +212,11 @@ xlabel('param2');
 ylabel('param3');
 
 end
+length(abc_theta)
+%get rid of values outside of cupport of prior
+abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
+length(abc_theta)
+
 
 figure(2);
 subplot(3,1,1);
@@ -242,7 +244,7 @@ set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
 
-fname = sprintf('Simplest_ABC_with_moments_output.txt');
+fname = sprintf('Simplest_ABC_with_moments_output%d.txt',my_seed);
 fileID = fopen(fname,'w');
 fprintf(fileID,'%f \n',abc_theta);
 fclose('all');
@@ -286,14 +288,14 @@ for j=1:N
         if isempty(xpos(j,find(t(w)<jumps(j,:),1,'first')))
             xpos_discrete_time(j,w) = L;
         else
-            xpos_discrete_time(j,w) =  xpos(j,find(t(w)<jumps(j,:),1,'first'));
+            xpos_discrete_time(j,w) =  min(xpos(j,find(t(w)<jumps(j,:),1,'first')),L);
         end
     end
 end
 for w=1:l_t
     %split into bins
     [Num_in_bins,~] = histc(xpos_discrete_time(:,w),0:delx:L);
-    if Num_in_bins ~= N
+    if sum(Num_in_bins) ~= N
         xpos_discrete_time(:,w)
         ename = sprintf('Simplest_ABC_with_moments_errors.txt');
 fileIDerror = fopen(ename,'w');
