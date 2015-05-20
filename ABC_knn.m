@@ -17,7 +17,7 @@ rng(my_seed);
 close all
 
 %Fake parameters
-params.nu1 = 1.0;
+params.nu1 = 0.9;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
@@ -39,10 +39,10 @@ num_generations = 3;
 %statistics as parameters vary
 %delta = [10,5,2,0.5,0.1]; %[40,20,10,5];
 
-accepted_proportion = 0.25;
+accepted_proportion = 0.5;
 
 %At t=1 for first generation
-N=2000;
+N=1000;
 %N is # particles at each generation
 %Note that algorithm does not perform well when N is small. Needs to pick
 %sensible parameters, or acceptance rate is very very low.
