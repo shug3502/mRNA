@@ -13,7 +13,7 @@ rng(my_seed);
 close all
 
 %Fake parameters
-params.nu1 = 1.0;
+params.nu1 = 1.16;
 params.nu2 = 0;
 params.lambda = 7.7;
 params.omega = 0;
@@ -44,7 +44,7 @@ N=100;
 %create while loop
 
 %set prior
-prior_params = [0.9, 0, 7.7, 0, 0.58, 0, 0.5];
+prior_params = [1.16, 0, 7.7, 0, 0.58, 0, 0.5];
 prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 3, 5];
 

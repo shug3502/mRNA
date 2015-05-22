@@ -17,9 +17,9 @@ rng(my_seed);
 close all
 
 %Fake parameters
-params.nu1 = 1.0;
-params.nu2 = 0;
-params.lambda = 7.7;
+params.nu1 = 1.16;
+params.nu2 = 0; %0.8
+params.lambda = 0.42;
 params.omega = 0;
 params.phi = 0.58;
 params.theta_0 = 0;
@@ -34,15 +34,15 @@ real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, 
 q_estimate_fake = summary_statistic_calculator(params,100,0,65)
 
 %Choose tolerance sequence
-num_generations = 4;
+num_generations = 3;
 accepted_proportion = 0.5;
 %At t=1 for first generation
-N=500;
+N=1000;
 %create while loop
 
 %set prior
-prior_params = [0.9, 0, 7.7, 0, 0.58, 0, 0.5];
-prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
+prior_params = [1.16, 0, 0.42, 0, 0.58, 0, 0.5];
+prior_sigma = [0.4, 0.4, 0.4]/2; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 3, 5];
 par_params = prior_params;
 
@@ -164,7 +164,11 @@ for tau=2:num_generations
         for jj=1:3
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
-        abc_weights(i) = prior./(sum(weights_store.*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
+        (sum(weights_store./sum(weights_store).*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
+            .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
+            .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2)
+        
+        abc_weights(i) = prior./(sum(weights_store./sum(weights_store).*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
             .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
             .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2);
         if isnan(abc_weights)
@@ -179,7 +183,7 @@ for tau=2:num_generations
     ma = max(abc_dist)
     mi = min(abc_dist)
     sigma = 2*var(abc_theta);
-    entropy = calculate_entropy(abc_theta)
+    entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
     
     
     figure(my_seed+1);
@@ -214,7 +218,7 @@ end
 %get rid of values outside of cupport of prior
 abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
 %length(abc_theta)
-entropy = calculate_entropy(abc_theta)
+entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
 
 
 figure(my_seed+2);

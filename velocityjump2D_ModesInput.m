@@ -18,12 +18,13 @@ if nargin ~= 7
     input_time = 1;
     with_anchoring = 1;
     absorb_in_region = 0;
-    num_modes = 2;
-    with_plot = 0;
+    num_modes = 1;
+    with_plot = 1;
     my_seed = 32;
-    params.nu1 = 0.4; %speed of RNP complex under active transport [zimyanin et al 2008]
-    params.nu2 = 0.08; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
-    params.lambda=1/0.13; %transition rate =7.69 [zimyanin et al 2008]
+    %Now with data on nurse cells from Alex Davidson
+    params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
+    params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
+    params.lambda=0.42;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
     params.omega=1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
     params.phi = 0.58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
     params.x_0=0.5;  %Initially in first compartment, ie. at NPC
