@@ -78,12 +78,14 @@ end
 %keep now parameters with distances less than the accepted quantile
 to_keep = (abc_dist <= quantile(abc_dist,accepted_proportion));
 abc_theta = abc_theta(to_keep,:);
-abc_weights = abc_weights(to_keep);
+abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep))
 abc_dist = abc_dist(to_keep);
     ma = max(abc_dist)
     mi = min(abc_dist)
+wmean = sum(abc_theta.*repmat(abc_weights,1,length(p_indices)))/sum(abc_weights); %weighted mean
+wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
+sigma_alt = 2*wvariance  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
 sigma = 2*var(abc_theta)
-
 
 figure(my_seed+1);
 subplot(3,1,1);
@@ -164,13 +166,10 @@ for tau=2:num_generations
         for jj=1:3
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
-        (sum(weights_store./sum(weights_store).*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
-            .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
-            .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2)
         
         abc_weights(i) = prior./(sum(weights_store./sum(weights_store).*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
             .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
-            .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sigma(1)*sigma(2)*sigma(3))^2);
+            .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2));
         if isnan(abc_weights)
             abc_weights
             error('weights are NAN due to division by 0 in calculation of weights. Oops.');
@@ -178,11 +177,14 @@ for tau=2:num_generations
     end
     to_keep = (abc_dist <= quantile(abc_dist,accepted_proportion));
     abc_theta = abc_theta(to_keep,:);
-    abc_weights = abc_weights(to_keep);
+    abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep))
     abc_dist = abc_dist(to_keep);
     ma = max(abc_dist)
     mi = min(abc_dist)
-    sigma = 2*var(abc_theta);
+    wmean = sum(abc_theta.*repmat(abc_weights,1,length(p_indices)))/sum(abc_weights); %weighted mean
+    wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
+    sigma_alt = 2*wvariance  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
+    sigma = 2*var(abc_theta)
     entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
     
     
@@ -215,7 +217,7 @@ for tau=2:num_generations
 end
 
 %length(abc_theta)
-%get rid of values outside of cupport of prior
+%get rid of values outside of support of prior
 abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
 %length(abc_theta)
 entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
@@ -274,7 +276,7 @@ else
 end
 
 L=30;
-time_vec = (0.05:0.05:0.15);
+time_vec = (0.05:0.05:0.05);
 t=time_vec*60^2;
 t_max = 1;
 l_t = length(time_vec);
