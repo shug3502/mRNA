@@ -35,7 +35,7 @@ if nargin ~= 7
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
 end
-rng(35); % set random seed
+rng(3); % set random seed
 
 %dx=1; %compartment width for initial condition
 
