@@ -31,18 +31,18 @@ real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, 
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
-q_estimate_fake = summary_statistic_calculator(params,100,0,65)
+q_estimate_fake = summary_statistic_calculator(params,1000,0,65)
 
 %Choose tolerance sequence
-num_generations = 3;
+num_generations = 4;
 accepted_proportion = 0.5;
 %At t=1 for first generation
-N=1000;
+N=10000;
 %create while loop
 
 %set prior
 prior_params = [1.16, 0, 0.42, 0, 0.58, 0, 0.5];
-prior_sigma = [0.4, 0.4, 0.4]/2; %sd of gaussian or spread around mean of uniform
+prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 3, 5];
 par_params = prior_params;
 
@@ -78,14 +78,15 @@ end
 %keep now parameters with distances less than the accepted quantile
 to_keep = (abc_dist <= quantile(abc_dist,accepted_proportion));
 abc_theta = abc_theta(to_keep,:);
-abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep))
+abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep));
 abc_dist = abc_dist(to_keep);
-    ma = max(abc_dist)
-    mi = min(abc_dist)
+ma = max(abc_dist)
+mi = min(abc_dist)
 wmean = sum(abc_theta.*repmat(abc_weights,1,length(p_indices)))/sum(abc_weights); %weighted mean
 wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
-sigma_alt = 2*wvariance  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
-sigma = 2*var(abc_theta)
+wvariance = 1/(length(abc_weights)-1).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
+sigma = 2*wvariance;  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
+sigma_alt = 2*var(abc_theta);
 
 figure(my_seed+1);
 subplot(3,1,1);
@@ -118,14 +119,14 @@ ylabel('param3');
 %Now loop over generations
 for tau=2:num_generations
     %store previous theta
-    theta_store = abc_theta;
     weights_store = abc_weights;
     
     tau
     N = length(abc_weights)
     par_params = repmat(prior_params,N,1);
-    par_params(:,p_indices) = theta_store;
+    par_params(:,p_indices) = abc_theta;
     abc_theta = zeros(N,length(p_indices));
+    previous_params = zeros(N,length(p_indices));
     abc_weights = zeros(N,1);
     abc_dist = zeros(N,1);
 
@@ -147,7 +148,7 @@ for tau=2:num_generations
         while cumsum(weights_store(1:my_index))/sum(weights_store)<u
             my_index = my_index+1;
         end
-        
+        previous_params(i,:) = par_params(my_index,p_indices); %store previous parameters in correct order to help measure displacement 
         
         %peturb previous parameters
         par_params(my_index,p_indices) = par_params(my_index,p_indices) + sigma.*randn(1,length(p_indices));
@@ -160,16 +161,16 @@ for tau=2:num_generations
         
         %end    %repeat until N acceptances have been made
         abc_theta(i,:) = par_params(my_index,p_indices);
-        
+    end
+    for i=1:N
         %Uniform prior
         prior = 1;
         for jj=1:3
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
-        
-        abc_weights(i) = prior./(sum(weights_store./sum(weights_store).*exp(-((abc_theta(:,1)-theta_store(:,1)).^2)/(2*sigma(1)^2))...
-            .*exp(-((abc_theta(:,2)-theta_store(:,2)).^2)/(2*sigma(2)^2))...
-            .*exp(-((abc_theta(:,3)-theta_store(:,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2));
+        abc_weights(i) = prior./(sum(weights_store./sum(weights_store).*exp(-((abc_theta(i,1)-previous_params(:,1)).^2)/(2*sigma(1)^2))...
+            .*exp(-((abc_theta(i,2)-previous_params(:,2)).^2)/(2*sigma(2)^2))...
+            .*exp(-((abc_theta(i,3)-previous_params(:,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2));
         if isnan(abc_weights)
             abc_weights
             error('weights are NAN due to division by 0 in calculation of weights. Oops.');
@@ -177,14 +178,15 @@ for tau=2:num_generations
     end
     to_keep = (abc_dist <= quantile(abc_dist,accepted_proportion));
     abc_theta = abc_theta(to_keep,:);
-    abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep))
+    abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep));
     abc_dist = abc_dist(to_keep);
     ma = max(abc_dist)
     mi = min(abc_dist)
     wmean = sum(abc_theta.*repmat(abc_weights,1,length(p_indices)))/sum(abc_weights); %weighted mean
     wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
-    sigma_alt = 2*wvariance  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
-    sigma = 2*var(abc_theta)
+    wvariance = 1/(length(abc_weights)-1).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
+    sigma = 2*wvariance;  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
+    sigma_alt = 2*var(abc_theta);
     entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
     
     
@@ -276,7 +278,7 @@ else
 end
 
 L=30;
-time_vec = (0.05:0.05:0.05);
+time_vec = (0.05:0.05:0.15)*0.2;
 t=time_vec*60^2;
 t_max = 1;
 l_t = length(time_vec);
