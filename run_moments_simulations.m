@@ -10,7 +10,7 @@ params.nu1 = 0.4;
 params.nu2 = 0.08;
 params.lambda = 1/0.13;
 params.omega = 1/6;
-params.x_0=0.0005;
+params.x_0=0.00005;
 params.theta_0 = 0;
 params.phi = 0.58 ; %bias in MTs
 
@@ -33,6 +33,7 @@ for j=1:N
     for w=2:l_t
         if isempty(xpos(j,find(t(w)<jumps(j,:),1,'first')))
             xpos_discrete_time(j,w) = L;
+            xpos_discrete_time(j,w) = L;
         else
             xpos_discrete_time(j,w) =  xpos(j,find(t(w)<jumps(j,:),1,'first'));
         end
@@ -43,7 +44,8 @@ end
 %     hist(final_xpos,0:5*delx:L);
 for w=1:l_t
     %split into bins
-    [Num_in_bins,edges] = histc(xpos_discrete_time(:,w),0:delx:L);
+    xpos_temp = xpos_discrete_time(xpos_discrete_time(:,w)<L+1,w)-params.x_0; %remove partiles that have exited the interval
+    [Num_in_bins,edges] = histc(xpos_temp,0:delx:L);  %histc(xpos_discrete_time(:,w),0:delx:L);
     q_estimate(:,w) = Num_in_bins/N/delx; %estimate of q at time T
 
     mean_position(w) = (delx/2:delx:(L-delx/2))*q_estimate(1:(end-1),w)*delx+delx*L*q_estimate(end,w); %use centre of each bin
@@ -63,7 +65,7 @@ grid on
 hold on
 
 %PLOT ANALYTIC RESULT
-mu_initial = params.x_0; %initial mean position
+mu_initial = 0; %params.x_0; %initial mean position
 nu_1 = params.nu1; %speed in active transport mode
 F1 = (4*params.phi-2)/pi;
 mu1 = min((nu_1*F1*t + mu_initial),L); %note time scaled to seconds
@@ -96,8 +98,6 @@ grid on
 hold on
 
 %PLOT ANALYTIC RESULT
-mu_initial = params.x_0; %initial mean position
-nu_1 = params.nu1; %speed in active transport mode
 omega = params.omega; %switching rate
 F1 = (4*params.phi-2)/pi;
 mu2 = min((nu_1*F1*t).^2 + 2*nu_1*F1*t*mu_initial+ mu_initial^2,L^2); %note time scaled to seconds
