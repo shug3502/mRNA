@@ -15,7 +15,7 @@ close all
 %Fake parameters
 params.nu1 = 1.16;
 params.nu2 = 0;
-params.lambda = 7.7;
+params.lambda = 0.42;
 params.omega = 0;
 params.phi = 0.58; 
 params.theta_0 = 0; 
@@ -35,11 +35,11 @@ delta = [400,200,100,50;
     0.01,0.005,0.001,0.0005];
 
 %At t=1 for first generation
-N=100; %N particles at each generation
+N=500; %N particles at each generation
 %create while loop
 
 %set prior
-prior_params = [1.16, 0, 7.7, 0, 0.58, 0, 0.5];
+prior_params = [1.16, 0, 0.42, 0, 0.58, 0, 0.5];
 prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 3, 5];
 
@@ -210,6 +210,10 @@ xlabel('param2');
 ylabel('param3');
 
 end
+length(abc_theta)
+%get rid of values outside of support of prior
+abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
+length(abc_theta)
 
 figure(2);
 subplot(3,1,1);

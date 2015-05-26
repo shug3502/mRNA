@@ -15,7 +15,7 @@ close all
 %Fake parameters
 params.nu1 = 1.16;
 params.nu2 = 0;
-params.lambda = 7.7;
+params.lambda = 0.42;
 params.omega = 0;
 params.phi = 0.58; 
 params.theta_0 = 0; 
@@ -36,7 +36,7 @@ num_generations = 3;
 delta = [10,5,2,0.5,0.1]; %[40,20,10,5];
 
 %At t=1 for first generation
-N=100; 
+N=500; 
 %N is # particles at each generation
 %Note that algorithm does not perform well when N is small. Needs to pick
 %sensible parameters, or acceptance rate is very very low. 
@@ -44,7 +44,7 @@ N=100;
 %create while loop
 
 %set prior
-prior_params = [1.16, 0, 7.7, 0, 0.58, 0, 0.5];
+prior_params = [1.16, 0, 0.42, 0, 0.58, 0, 0.5];
 prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 3, 5];
 
@@ -273,7 +273,7 @@ else
 end
 
 L=30;
-time_vec = (0.05:0.05:0.05);
+time_vec = (0.01:0.01:0.01);
 t=time_vec*60^2;
 t_max = 1;  
 l_t = length(time_vec);
