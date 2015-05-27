@@ -238,7 +238,7 @@ if with_plot
     if num_modes>1
         mu1 = min((0.5*nu_1*F1*t + mu_initial),params.Lx); %adjust for different analytical results for different numbers of modes
     end
-    plot(t, mu1, 'b--', 'linewidth',3);
+    %plot(t, mu1, 'b--', 'linewidth',3);
     set(gca, 'fontsize',14)
     
     nframe=min(200,length(pathx));

@@ -21,7 +21,7 @@ params.nu1 = 1.16;
 params.nu2 = 0; %0.8
 params.lambda = 0.42;
 params.omega = 0;
-params.phi = 0.58;
+params.phi = 0.63;
 params.theta_0 = 0;
 params.x_0=0.5;
 
