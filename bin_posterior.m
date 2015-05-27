@@ -19,16 +19,17 @@ end
 N = length(abc_theta(:,1));
 
 %split into bins
-edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,11);linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,11)];
+edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,11);linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,11)]
 counts = zeros(length(edges_vecs(1,:)));
-for k=1:N
-    bin_index = [1,1];
+for k=1:N    
     for j=1:2
+    bin_index = [1,1];
         while edges_vecs(j,bin_index(j))<abc_theta(k,indices(j))
             bin_index(j) = bin_index(j)+1;
         end
+        bin_index
     end
-    counts(bin_index) = counts(bin_index)+1;
+    counts(bin_index(1),bin_index(2)) = counts(bin_index(1),bin_index(2))+1;
 end
 %[Num_in_bins,~] = histc(abc_theta(:,indices),meshgrid(linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,11),linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,11)))
 posterior = counts/N; 
