@@ -116,6 +116,9 @@ while time<endtime && ~is_anchored
             %end
         end
     else
+        params
+        alpha
+        rr(3)
         %oops
         error('something is wrong')
     end
