@@ -6,7 +6,7 @@ function posterior = bin_posterior(abc_theta,prior_params,range,indices)
 
 if nargin~=4
     fprintf('Using defaults');
-    fname = sprintf('Simplest_ABC_with_moments_output3.txt');
+    fname = sprintf('ABC_knn_output4.txt');   %('Simplest_ABC_with_moments_output2.txt');
     fileID = fopen(fname,'r');
     abc_theta = fscanf(fileID, '%f');
     N = length(abc_theta)/3;
@@ -18,16 +18,17 @@ if nargin~=4
 end
 N = length(abc_theta(:,1));
 
+M=21;
+
 %split into bins
-edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,11);linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,11)]
+edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,M);linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,M)];
 counts = zeros(length(edges_vecs(1,:)));
-for k=1:N    
+for k=1:N      
+    bin_index = [1,1];  
     for j=1:2
-    bin_index = [1,1];
         while edges_vecs(j,bin_index(j))<abc_theta(k,indices(j))
             bin_index(j) = bin_index(j)+1;
         end
-        bin_index
     end
     counts(bin_index(1),bin_index(2)) = counts(bin_index(1),bin_index(2))+1;
 end
@@ -36,5 +37,7 @@ posterior = counts/N;
 
 figure;
 contourf(posterior)
+figure;
+pcolor(posterior)
 
 end

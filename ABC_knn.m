@@ -21,7 +21,7 @@ params.nu1 = 1.16;
 params.nu2 = 0; %0.8
 params.lambda = 0.42;
 params.omega = 0;
-params.phi = 0.63;
+params.phi = 0.58;
 params.theta_0 = 0;
 params.x_0=0.5;
 
@@ -34,7 +34,7 @@ real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, 
 q_estimate_fake = summary_statistic_calculator(params,1000,0,65)
 
 %Choose tolerance sequence
-num_generations = 4;
+num_generations = 3;
 accepted_proportion = 0.5;
 %At t=1 for first generation
 N=10000;
