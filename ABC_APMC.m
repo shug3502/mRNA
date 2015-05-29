@@ -38,7 +38,7 @@ accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
 N=100;
 
-p_accept_min = 0.1; % 1%
+p_accept_min = 0.01; % 1%
 
 %create while loop
 

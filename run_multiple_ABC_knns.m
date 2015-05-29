@@ -3,7 +3,7 @@ function run_multiple_ABC_knns(num_runs)
 %parameters
 prior_params = [1.16, 0.42, 0.58];
 range = 0.4;
-indices = [1,2];
+indices = [1,3];
 posterior = zeros(11);
 
 %num_runs = 20;
@@ -18,6 +18,10 @@ M=11;
 x1 = linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,M);
 x2 = linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,M);
 pcolor(x1,x2,posterior);
+hold on 
+plot(prior_params(indices(1)),prior_params(indices(2)),'ko','MarkerSize',12);
 figure;
 contourf(x1,x2,posterior);
+hold on 
+plot(prior_params(indices(1)),prior_params(indices(2)),'ko','MarkerSize',12);
 end
