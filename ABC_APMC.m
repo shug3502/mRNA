@@ -19,33 +19,38 @@ rng(my_seed);
 close all
 
 %Fake parameters
-params.nu1 = 1.16;
-params.nu2 = 0; %0.8
-params.lambda = 0.42;
-params.omega = 0;
-params.phi = 0.58;
-params.theta_0 = 0;
-params.x_0=0.5;
+    params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
+    params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
+    params.lambda_1=0;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
+    params.lambda_2 = 0.11;
+    params.omega_1= 0.42;    %1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
+    params.omega_2 = 0.84;
+    params.phi = 0.58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
+    params.x_0=0.5;  %Initially in first compartment, ie. at NPC
+    params.Lx = 52; %length of cell in x direction
+    params.Ly = 37; %in y direction
+    params.nuc_radius = 10; %radius of nucleus
+    params.theta_0 = 0; %initial angle is 0
 
 real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, params.theta_0, params.x_0];
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
-q_estimate_fake = summary_statistic_calculator(params,1000,0,65)
+q_estimate_fake = summary_statistic_calculator(params,1000,0)
 
 %Choose tolerance sequence
 accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
 N=500;
 
-p_accept_min = 0.05; % 1%
+p_accept_min = 0.1; % 1%
 
 %create while loop
 
 %set prior
-prior_params = [1.16, 0, 0.42, 0, 0.58, 0, 0.5];
+prior_params = [1.16, 0.8, 0.11, 0.42, 0.84, 0.58, 0.5, 0];
 prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
-p_indices = [1, 3, 5];
+p_indices = [1, 4, 6];
 par_params = prior_params;
 
 abc_theta = zeros(N,length(p_indices));
@@ -70,7 +75,7 @@ for i=1:N
     
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
-    q_estimate_candidate = summary_statistic_calculator(par_params,20,1,4);
+    q_estimate_candidate = summary_statistic_calculator(par_params,20,1);
     abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake); %distance of proposed S(x) from S(x_obs)
     %end    %repeat until N acceptances have been made
     
@@ -140,7 +145,7 @@ while p_accept >p_accept_min
     abc_weights(1:N_current) = weights_store(1:N_current);
     abc_dist = zeros(N,1);
     abc_dist(1:N_current) = dist_store(1:N_current);
-
+    
     for i=(N_current+1):N
         %sample params from previous iteration
         u = rand(1);
@@ -149,14 +154,14 @@ while p_accept >p_accept_min
         while cumsum(weights_store(1:my_index))/sum(weights_store)<u
             my_index = my_index+1;
         end
-        previous_params(i,:) = par_params(my_index,p_indices); %store previous parameters in correct order to help measure displacement 
+        previous_params(i,:) = par_params(my_index,p_indices); %store previous parameters in correct order to help measure displacement
         
         %peturb previous parameters
         par_params(my_index,p_indices) = par_params(my_index,p_indices) + sigma.*randn(1,length(p_indices));
         
         %simulate data using these model parameters
         %Calculate summary statistic (MFPT)
-        q_estimate_candidate = summary_statistic_calculator(par_params(my_index,:),20,1,4);
+        q_estimate_candidate = summary_statistic_calculator(par_params(my_index,:),20,1);
         abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake);
         
         
@@ -192,7 +197,7 @@ while p_accept >p_accept_min
     %wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
     wvariance = 1/(length(abc_weights)-1).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
     if isnan(wvariance)
-    error('weights are nan second time');
+        error('weights are nan second time');
     end
     sigma = 2*wvariance;  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
     %sigma_alt = 2*var(abc_theta);
@@ -268,25 +273,31 @@ fclose('all');
 toc
 end
 
-function [q_estimate] = summary_statistic_calculator(par_params,N,is_parallel, r_random)
+function [q_estimate] = summary_statistic_calculator(par_params,N,is_parallel)
 %runs velocityjump2D_ModesInput which is a velocity jump process for a single particle
 %runs this many times for many particles and returns simulated estimates of
 %mfpt
 
 delx = 1; %bin size;
 if is_parallel
-    params.nu1 = par_params(1);
-    params.nu2 = par_params(2);
-    params.lambda = par_params(3);
-    params.omega = par_params(4);
-    params.phi = par_params(5);
-    params.theta_0 = par_params(6);
-    params.x_0 = par_params(7);
+    params.nu1 = par_params(1); %speed of RNP complex under active transport [zimyanin et al 2008]
+    params.nu2 = par_params(2); %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
+    params.lambda_1=0;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
+    params.lambda_2 = par_params(3);
+    params.omega_1= par_params(4);    %1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
+    params.omega_2 = par_params(5);
+    params.phi = par_params(6); %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
+    params.x_0= par_params(7);  %Initially in first compartment, ie. at NPC
+    params.Lx = 52; %length of cell in x direction
+    params.Ly = 37; %in y direction
+    params.nuc_radius = 10; %radius of nucleus
+    params.theta_0 = par_params(8); %initial angle is 0
+    
 else
     params = par_params;
 end
 
-L=30;
+L=params.Lx;
 time_vec = (0.05:0.05:0.15)*0.2;
 t=time_vec*60^2;
 l_t = length(time_vec);
@@ -296,7 +307,7 @@ xpos = zeros(N,10^4);
 xpos_discrete_time = zeros(N,10^4);
 
 for j=1:N
-    [~, ~, ~, ~, xpos_temp, jump_temp] = velocityjump2D_ModesInput(max(time_vec), params, 1, 0, 1, 0, r_random*j);
+    [~, ~, ~, ~, xpos_temp, ~, jump_temp] = velocityjump2D_with_nucleus(max(time_vec), params, 1, 1, 0);
     jumps(j,1:length(jump_temp)) = jump_temp;
     xpos(j,1:length(xpos_temp)) = xpos_temp;
     for w=1:l_t
@@ -312,17 +323,14 @@ for w=1:l_t
     [Num_in_bins,~] = histc(xpos_discrete_time(:,w),0:delx:L);
     if sum(Num_in_bins) ~= N
         xpos_discrete_time(:,w)
-        ename = sprintf('Simplest_ABC_with_moments_errors.txt');
+        ename = sprintf('ABC_errors.txt');
         fileIDerror = fopen(ename,'w');
         fprintf(fileIDerror,'%f \n',xpos_discrete_time);
         fclose('all');
         error('outside of 0:L');
     end
     q_estimate(:,w) = Num_in_bins/N/delx; %estimate of q at time T
-    %     mean_position(w) = (delx/2:delx:(L-delx/2))*q_estimate(1:(end-1),w)*delx+delx*L*q_estimate(end,w); %use centre of each bin
-    %     second_moment(w) = (delx/2:delx:(L-delx/2)).^2*q_estimate(1:(end-1),w)*delx+delx*L^2*q_estimate(end,w); %use centre of each bin
 end
-
 end
 function dist = distance_metric(q1,q2)
 %equal weightings to each of the time points currently
@@ -330,6 +338,6 @@ delx = 1;
 L=30;
 dist = 0;
 for j=1:length(q1(1,:))
-dist = dist + kldiv((0:delx:L)',q1(:,j)+eps,q2(:,j)+eps);
+    dist = dist + kldiv((0:delx:L)',q1(:,j)+eps,q2(:,j)+eps);
 end
 end
