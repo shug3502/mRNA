@@ -8,7 +8,7 @@ posterior = zeros(11);
 
 %num_runs = 20;
 parfor b=1:num_runs
-    [abc_theta,~]=ABC_knn(b);
+    [abc_theta,~]=ABC_APMC(b);
     posterior_temp = bin_posterior(abc_theta,prior_params,range,indices);
     posterior = posterior+posterior_temp;
 end
