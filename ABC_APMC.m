@@ -32,7 +32,7 @@ close all
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
 
-real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, params.theta_0, params.x_0];
+real_params = [params.nu1, params.nu2, params.lambda_1, params.lambda_2, params.omega_1, params.omega_2, params.phi, params.x_0, params.Lx, params.Ly, params.nuc_radius, params.theta_0];
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
@@ -41,7 +41,7 @@ q_estimate_fake = summary_statistic_calculator(params,1000,0)
 %Choose tolerance sequence
 accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
-N=500;
+N=2000;
 
 p_accept_min = 0.1; % 1%
 
@@ -76,7 +76,7 @@ for i=1:N
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
     q_estimate_candidate = summary_statistic_calculator(par_params,20,1);
-    abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake); %distance of proposed S(x) from S(x_obs)
+    abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake,params.Lx); %distance of proposed S(x) from S(x_obs)
     %end    %repeat until N acceptances have been made
     
     abc_theta(i,:) = par_params(p_indices);
@@ -88,8 +88,8 @@ to_keep = (abc_dist <= quantile(abc_dist,accepted_proportion));
 abc_theta = abc_theta(to_keep,:);
 abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep));
 abc_dist = abc_dist(to_keep);
-ma = max(abc_dist)
-mi = min(abc_dist)
+ma = max(abc_dist);
+mi = min(abc_dist);
 wmean = sum(abc_theta.*repmat(abc_weights,1,length(p_indices)))/sum(abc_weights); %weighted mean
 %wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
 wvariance = 1/(length(abc_weights)-1).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
@@ -126,7 +126,6 @@ ylabel('param3');
 
 %First generation for t=1 is done
 %Now loop over generations
-p_accept
 while p_accept >p_accept_min
     num_generations = num_generations+1
     %store previous theta
@@ -162,7 +161,7 @@ while p_accept >p_accept_min
         %simulate data using these model parameters
         %Calculate summary statistic (MFPT)
         q_estimate_candidate = summary_statistic_calculator(par_params(my_index,:),20,1);
-        abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake);
+        abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake,params.Lx);
         
         
         %end    %repeat until N acceptances have been made
@@ -183,6 +182,9 @@ while p_accept >p_accept_min
             -((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2)
             -((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2)
             -((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)
+%             abc_weights(i) = exp(log(prior)-log((sum(weights_store./sum(weights_store).*exp(-((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2))...
+%             .*exp(-((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2))...
+%             .*exp(-((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2))))
             abc_weights(i) = 0;
             %error('weights are NAN due to division by 0 in calculation of weights. Oops.');
         end
@@ -191,8 +193,8 @@ while p_accept >p_accept_min
     abc_theta = abc_theta(to_keep,:);
     abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep));
     abc_dist = abc_dist(to_keep);
-    ma = max(abc_dist)
-    mi = min(abc_dist)
+    ma = max(abc_dist);
+    mi = min(abc_dist);
     wmean = sum(abc_theta.*repmat(abc_weights,1,length(p_indices)))/sum(abc_weights); %weighted mean
     %wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
     wvariance = 1/(length(abc_weights)-1).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
@@ -202,7 +204,7 @@ while p_accept >p_accept_min
     sigma = 2*wvariance;  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
     %sigma_alt = 2*var(abc_theta);
     p_accept = 1/(N-N_current)*sum(to_keep((N_current+1):N)); %set this
-    entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
+    entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
     
     figure(my_seed+1);
     subplot(3,1,1);
@@ -236,7 +238,7 @@ end
 %get rid of values outside of support of prior
 abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
 %length(abc_theta)
-entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
+entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
 
 
 figure(my_seed+2);
@@ -332,10 +334,9 @@ for w=1:l_t
     q_estimate(:,w) = Num_in_bins/N/delx; %estimate of q at time T
 end
 end
-function dist = distance_metric(q1,q2)
+function dist = distance_metric(q1,q2,L)
 %equal weightings to each of the time points currently
 delx = 1;
-L=30;
 dist = 0;
 for j=1:length(q1(1,:))
     dist = dist + kldiv((0:delx:L)',q1(:,j)+eps,q2(:,j)+eps);

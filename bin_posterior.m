@@ -18,7 +18,6 @@ if nargin~=4
 end
 N = length(abc_theta(:,1));
 M=11;
-abc_theta
 
 %split into bins
 edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,M);linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,M)];

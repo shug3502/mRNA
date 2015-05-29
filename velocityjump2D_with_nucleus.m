@@ -15,12 +15,12 @@ function [is_anchored, anchoring_time, final_position_x, final_position_y, pathx
 %my_seed is the random seed to be used
 %num_modes is for the number of modes of motion ie only AT or with
 %diffusion also
-if nargin ~= 7
+if nargin ~= 5
     fprintf('default parameters used\n')
     input_time = 1;
     with_anchoring = 1;
     num_modes = 1;
-    with_plot = 1;
+    with_plot = 0;
     %Now with data on nurse cells from Alex Davidson
     params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
     params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
@@ -35,11 +35,8 @@ if nargin ~= 7
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
 end
-rng(3); % set random seed
+%rng(3); % set random seed
 
-%dx=1; %compartment width for initial condition
-
-%y_0 = 0;  %domain_size/4; %initially half way up y axis
 is_anchored=0; %has RNP reach destination and anchored yet?
 is_attached=1; %is molecular motor attached to the microtubule?
 v = params.nu1*is_attached + params.nu2*(1-is_attached); %initialise the speed

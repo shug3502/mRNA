@@ -12,7 +12,7 @@ parfor b=1:num_runs
     posterior_temp = bin_posterior(abc_theta,prior_params,range,indices);
     posterior = posterior+posterior_temp;
 end
-posterior = posterior/num_runs
+posterior = posterior/num_runs;
 figure;
 M=11;
 x1 = linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,M);
@@ -20,8 +20,12 @@ x2 = linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,
 pcolor(x1,x2,posterior);
 hold on 
 plot(prior_params(indices(1)),prior_params(indices(2)),'ko','MarkerSize',12);
+xlabel('\nu_1');
+ylabel('\phi');
 figure;
 contourf(x1,x2,posterior);
 hold on 
 plot(prior_params(indices(1)),prior_params(indices(2)),'ko','MarkerSize',12);
+xlabel('\nu_1');
+ylabel('\phi');
 end
