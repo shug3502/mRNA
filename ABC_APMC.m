@@ -27,7 +27,6 @@ params.phi = 0.58;
 params.theta_0 = 0;
 params.x_0=0.5;
 
-L=30;
 real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, params.theta_0, params.x_0];
 
 %Generate fake data
@@ -35,10 +34,9 @@ real_params = [params.nu1, params.nu2, params.lambda, params.omega, params.phi, 
 q_estimate_fake = summary_statistic_calculator(params,1000,0,65)
 
 %Choose tolerance sequence
-num_generations = 4;
 accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
-N=500;
+N=1000;
 
 p_accept_min = 0.1; % 1%
 
@@ -54,6 +52,7 @@ abc_theta = zeros(N,length(p_indices));
 abc_weights = zeros(N,1);
 abc_dist = zeros(N,1);
 fprintf('Generation 1 begins\n');
+num_generations = 1;
 for i=1:N
     %initialise greater than tolerance
     %Uniform prior
@@ -124,18 +123,19 @@ ylabel('param3');
 %Now loop over generations
 p_accept
 while p_accept >p_accept_min
-    
+    num_generations = num_generations+1
     %store previous theta
     weights_store = abc_weights;
     theta_store = abc_theta;
     dist_store = abc_dist;
     
-    N_current = length(abc_weights)
+    N_current = length(abc_weights);
     par_params = repmat(prior_params,N,1);
     par_params(1:N_current,p_indices) = theta_store;
     abc_theta = zeros(N,length(p_indices));
     abc_theta(1:N_current,1:length(p_indices)) = theta_store;
     previous_params = zeros(N,length(p_indices));
+    previous_params(1:N_current,:) = theta_store;
     abc_weights = zeros(N,1);
     abc_weights(1:N_current) = weights_store(1:N_current);
     abc_dist = zeros(N,1);
@@ -169,11 +169,16 @@ while p_accept >p_accept_min
         for jj=1:3
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
-        abc_weights(i) = prior./(sum(weights_store./sum(weights_store).*exp(-((abc_theta(i,1)-previous_params(:,1)).^2)/(2*sigma(1)^2))...
-            .*exp(-((abc_theta(i,2)-previous_params(:,2)).^2)/(2*sigma(2)^2))...
-            .*exp(-((abc_theta(i,3)-previous_params(:,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2));
+        abc_weights(i) = prior./(sum(weights_store./sum(weights_store).*exp(-((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2))...
+            .*exp(-((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2))...
+            .*exp(-((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2));
         if isnan(abc_weights(i)) || isinf(abc_weights(i))
-            abc_weights(i) = 0
+            fprintf('Some weights are Nan or Inf\n');
+            sum(weights_store)
+            -((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2)
+            -((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2)
+            -((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)
+            abc_weights(i) = 0;
             %error('weights are NAN due to division by 0 in calculation of weights. Oops.');
         end
     end
