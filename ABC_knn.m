@@ -37,7 +37,7 @@ q_estimate_fake = summary_statistic_calculator(params,1000,0,65)
 num_generations = 4;
 accepted_proportion = 0.5;
 %At t=1 for first generation
-N=10000;
+N=100;
 %create while loop
 
 %set prior
