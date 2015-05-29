@@ -2,7 +2,7 @@ function run_multiple_ABC_knns(num_runs)
 %note that prior_params are not exactly as in ABC_knn code, only varied
 %parameters
 prior_params = [1.16, 0.42, 0.58];
-range = 0.4;
+range = 0.8;
 indices = [1,3];
 posterior = zeros(11);
 
