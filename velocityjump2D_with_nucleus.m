@@ -42,6 +42,7 @@ is_attached=1; %is molecular motor attached to the microtubule?
 v = params.nu1*is_attached + params.nu2*(1-is_attached); %initialise the speed
 T = params.lambda_2; %store lambda
 params.lambda_2 = (1-is_attached*(num_modes>1))*T; %initially is attached so 0
+nuc_rad = params.nuc_radius^2;
 
 time=0; %unit seconds
 xpos = params.Lx/2 + params.nuc_radius*(2*rand(1)-1); %initialise x position
@@ -49,7 +50,7 @@ ypos = sqrt(params.nuc_radius^2-(xpos-params.Lx/2).^2); %initialise y
 
 %pathx = [params.x_0; zeros(10^6,1)]; %add first point to path
 %pathy = [y_0; zeros(10^6,1)];
-estimated_max_path_length = round(50000*input_time);
+estimated_max_path_length = round(20000*input_time);
 pathx = zeros(1+estimated_max_path_length,1);
 pathx(1) = xpos;
 pathy = zeros(1+estimated_max_path_length,1);
@@ -93,16 +94,7 @@ while time<endtime && ~is_anchored
     
     %test for interaction with nucleus
     rad = (xpos-params.Lx/2)^2 + ypos^2; %euclidean distance from centre of nucleus squared
-    if rad<params.nuc_radius^2
-%        x1 = [xpos - delx*sin(theta),ypos - delx*cos(theta)] 
-%         xpos
-%         ypos
-%         delx
-%         theta
-%         figure;
-%         plot(x1(1),x1(2),'ko','MarkerSize',12); %black is x_1
-%         hold on
-
+    if rad<nuc_rad
         %particle has gone inside nucleus so reflect
         G = 1/tan(theta); %gradient
         x_intersection = [((params.Lx - 2*G*(ypos-G*xpos)) -sqrt((2*G*(ypos-G*xpos)-params.Lx)^2 - 4*(1+G^2)*((params.Lx^2)/4+(ypos-G*xpos)^2-params.nuc_radius^2)))/(2*(1+G^2)),...

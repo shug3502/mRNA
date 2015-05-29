@@ -19,7 +19,7 @@ rng(my_seed);
 close all
 
 %Fake parameters
-    params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
+    params.nu1 = 1.0; %speed of RNP complex under active transport [zimyanin et al 2008]
     params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
     params.lambda_1=0;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
     params.lambda_2 = 0.11;
@@ -32,7 +32,7 @@ close all
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
 
-real_params = [params.nu1, params.nu2, params.lambda_1, params.lambda_2, params.omega_1, params.omega_2, params.phi, params.x_0, params.Lx, params.Ly, params.nuc_radius, params.theta_0];
+real_params = [params.nu1, params.nu2, params.lambda_2, params.omega_1, params.omega_2, params.phi, params.x_0, params.Lx, params.Ly, params.nuc_radius, params.theta_0];
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
@@ -41,7 +41,7 @@ q_estimate_fake = summary_statistic_calculator(params,1000,0)
 %Choose tolerance sequence
 accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
-N=2000;
+N=1000;
 
 p_accept_min = 0.1; % 1%
 
@@ -64,13 +64,6 @@ for i=1:N
     rr = rand(1,3);
     
     %simulate parameters from the prior
-    %     candidate.nu1 = 0.4 + 0.1*rr(1,j);
-    %     candidate.nu2 = 0.08 + 0.02*rr(2,j);
-    %     candidate.lambda = 7.7; % + 2*randn(1);
-    %     candidate.omega = 1/6; %and this  %+ 0.5*randn(1);
-    %     candidate.phi = 0.58; %fix this too %+0.2*randn(1);
-    %     candidate.theta_0 = 0; %these are fixed
-    %     candidate.x_0 = 0.5; %these are fixed
     par_params(p_indices) = prior_params(p_indices)+prior_sigma.*(rr-0.5);
     
     %simulate data using these model parameters
@@ -300,13 +293,13 @@ else
 end
 
 L=params.Lx;
-time_vec = (0.05:0.05:0.15)*0.2;
+time_vec = (0.05:0.05:0.15)*0.5;
 t=time_vec*60^2;
 l_t = length(time_vec);
-jumps = zeros(N,10^4);
+jumps = zeros(N,10^3);
 q_estimate = zeros(L/delx+1,l_t);
-xpos = zeros(N,10^4);
-xpos_discrete_time = zeros(N,10^4);
+xpos = zeros(N,10^3);
+xpos_discrete_time = zeros(N,10^3);
 
 for j=1:N
     [~, ~, ~, ~, xpos_temp, ~, jump_temp] = velocityjump2D_with_nucleus(max(time_vec), params, 1, 1, 0);
