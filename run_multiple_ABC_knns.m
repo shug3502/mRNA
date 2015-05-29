@@ -14,7 +14,10 @@ parfor b=1:num_runs
 end
 posterior = posterior/num_runs
 figure;
-pcolor(posterior);
+M=11;
+x1 = linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,M);
+x2 = linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,M);
+pcolor(x1,x2,posterior);
 figure;
-contourf(posterior);
+contourf(x1,x2,posterior);
 end
