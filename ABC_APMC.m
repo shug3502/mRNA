@@ -36,9 +36,9 @@ q_estimate_fake = summary_statistic_calculator(params,1000,0,65)
 %Choose tolerance sequence
 accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
-N=100;
+N=500;
 
-p_accept_min = 0.01; % 1%
+p_accept_min = 0.05; % 1%
 
 %create while loop
 
