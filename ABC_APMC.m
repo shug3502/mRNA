@@ -39,11 +39,11 @@ real_params = [params.nu1, params.nu2, params.lambda_2, params.omega_1, params.o
 q_estimate_fake = summary_statistic_calculator(params,1000,0)
 
 %Choose tolerance sequence
-accepted_proportion = 0.5; %alpha
+accepted_proportion = 0.3; %alpha
 %At t=1 for first generation
 N=1000;
 
-p_accept_min = 0.1; % 1%
+p_accept_min = 0.01; % 1%
 
 %create while loop
 
@@ -166,12 +166,13 @@ while p_accept >p_accept_min
         for jj=1:3
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
-        abc_weights(i) = prior./(sum(weights_store./sum(weights_store).*exp(-((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2))...
+        abc_weights(i) = prior./(sum(weights_store./sum(weights_store(1:N_current)).*exp(-((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2))...
             .*exp(-((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2))...
             .*exp(-((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2));
         if isnan(abc_weights(i)) || isinf(abc_weights(i))
             fprintf('Some weights are Nan or Inf\n');
             sum(weights_store)
+            (abc_theta(i,1)-previous_params(1:N_current,1)).^2
             -((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2)
             -((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2)
             -((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)
@@ -184,7 +185,7 @@ while p_accept >p_accept_min
     end
     to_keep = (abc_dist <= quantile(abc_dist,accepted_proportion));
     abc_theta = abc_theta(to_keep,:);
-    abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep));
+    abc_weights = abc_weights(to_keep);  %choose not to renormalise ./sum(abc_weights(to_keep));
     abc_dist = abc_dist(to_keep);
     ma = max(abc_dist);
     mi = min(abc_dist);
