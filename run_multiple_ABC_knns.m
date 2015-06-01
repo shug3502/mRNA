@@ -1,15 +1,16 @@
 function run_multiple_ABC_knns(num_runs)
 %note that prior_params are not exactly as in ABC_knn code, only varied
 %parameters
-prior_params = [1.16, 0.42, 0.58];
+prior_params = [1.16, 0.8, 0.11, 0.42, 0.84, 0.58, 0.5, 0];
+real_params = prior_params; %if real params used are different then MUST change this!
 range = 0.8;
-indices = [1,3];
+indices = [1,4,6];
 posterior = zeros(11);
 
 %num_runs = 20;
-parfor b=1:num_runs
-    [abc_theta,~]=ABC_APMC(b);
-    posterior_temp = bin_posterior(abc_theta,prior_params,range,indices);
+for b=1:num_runs
+    [abc_theta,abc_weights]=ABC_APMC(b);
+    posterior_temp = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,range,indices,0); %edited from bin_posterior
     posterior = posterior+posterior_temp;
 end
 posterior = posterior/num_runs;

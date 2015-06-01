@@ -1,9 +1,9 @@
-function [abc_theta,abc_weights] = ABC_APMC(my_seed)
+function [abc_theta,abc_weights] = ABC_Weights_depend_on_dist(my_seed)
 
-%created 20/5/15
-%last edit 28/5/15
+%created 1/6/15
+%last edit 1/6/15
 %AS simple as ABC
-%Based on Simplest_ABC_with_moments
+%Based on ABC_APMC
 %added in knn selection of theta for parameters rather than less than a
 %specific delta value
 %implements a version of ABC via population mc to fit parameters to
@@ -41,9 +41,9 @@ q_estimate_fake = summary_statistic_calculator(params,1000,0)
 %Choose tolerance sequence
 accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
-N=500;
+N=1000;
 
-p_accept_min = 0.2; % 1%
+p_accept_min = 0.1; % 1%
 
 %create while loop
 
@@ -166,19 +166,9 @@ while p_accept >p_accept_min
         for jj=1:3
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
-        abc_weights(i) = prior./(sum(weights_store./sum(weights_store(1:N_current)).*exp(-((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2))...
-            .*exp(-((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2))...
-            .*exp(-((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2));
+        abc_weights(i) = prior.*weights_store(my_index)/sum(weights_store)./abc_dist(i);
         if isnan(abc_weights(i)) || isinf(abc_weights(i))
             fprintf('Some weights are Nan or Inf\n');
-            sum(weights_store)
-            (abc_theta(i,1)-previous_params(1:N_current,1)).^2
-            -((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2)
-            -((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2)
-            -((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)
-%             abc_weights(i) = exp(log(prior)-log((sum(weights_store./sum(weights_store).*exp(-((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2))...
-%             .*exp(-((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2))...
-%             .*exp(-((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2))))
             abc_weights(i) = 0;
             %error('weights are NAN due to division by 0 in calculation of weights. Oops.');
         end
@@ -260,6 +250,8 @@ plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
+
+multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
 
 fname = sprintf('ABC_APMC_output%d.txt',my_seed);
 fileID = fopen(fname,'w');
