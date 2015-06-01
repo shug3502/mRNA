@@ -32,17 +32,25 @@ edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))
 [count, ~, mid, ~] = histcn(abc_theta, edges_vecs(1,:),edges_vecs(2,:),edges_vecs(3,:),'AccumData',abc_weights);
 posterior = count/N;
 
+
 if plot_option
+    posterior_mode = zeros(length(indices),1);
     figure;
     for j=1:3
         p_string = sprintf('param %d',j);
         subplot(3,1,j)
         bincounts = histc(abc_theta(:,j),edges_vecs(j,:));
+        [~,mode_index] = max(bincounts);
+        posterior_mode(j) = (edges_vecs(j,mode_index)+edges_vecs(j,mode_index+1))/2;
         bar(edges_vecs(j,:),bincounts,'histc');
         hold on
         line([real_params(indices(j)),real_params(indices(j))],[0,max(bincounts)],'LineWidth',3,'Color','g');
         xlabel(p_string);
+        
     end
+    posterior_mode
+    quality_of_posterior = sqrt(sum((posterior_mode' - real_params(indices)).^2)) %note this currently does not depend equally on all params due to scaling of each param
+    
 %     figure;
 %     imagesc(mid{1:2},posterior(:,:,ceil(end/2)));
 %     
