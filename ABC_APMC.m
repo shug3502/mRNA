@@ -41,9 +41,9 @@ q_estimate_fake = summary_statistic_calculator(params,1000,0)
 %Choose tolerance sequence
 accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
-N=500;
+N=1000;
 
-p_accept_min = 0.2; % 1%
+p_accept_min = 0.1; % 1%
 
 %create while loop
 
@@ -232,7 +232,7 @@ end
 %get rid of values outside of support of prior
 abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
 %length(abc_theta)
-entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
+entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
 
 
 figure(my_seed+2);
@@ -260,6 +260,8 @@ plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
+
+multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
 
 fname = sprintf('ABC_APMC_output%d.txt',my_seed);
 fileID = fopen(fname,'w');
@@ -303,7 +305,7 @@ xpos = zeros(N,10^3);
 xpos_discrete_time = zeros(N,10^3);
 
 for j=1:N
-    [~, ~, ~, ~, xpos_temp, ~, jump_temp] = velocityjump2D_with_nucleus(max(time_vec), params, 1, 1, 0);
+    [~, ~, ~, ~, xpos_temp, ~, jump_temp] = velocityjump2D_with_nucleus(max(time_vec), params, 1, 2, 0);
     jumps(j,1:length(jump_temp)) = jump_temp;
     xpos(j,1:length(xpos_temp)) = xpos_temp;
     for w=1:l_t
