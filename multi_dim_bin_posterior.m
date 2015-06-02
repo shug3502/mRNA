@@ -1,4 +1,4 @@
-function posterior = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,range,indices,plot_option)
+function [posterior,quality_of_posterior] = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,range,indices,plot_option)
 %prior params should be a vector with the centres of the uniform
 %distribution for the prior
 %range is the spread of the normal prior. Assumed this is the same for all
@@ -34,7 +34,7 @@ posterior = count/N;
 
 
 if plot_option
-    posterior_mode = zeros(length(indices),1);
+    posterior_mode = zeros(1,length(indices));
     figure;
     for j=1:3
         p_string = sprintf('param %d',j);
@@ -49,7 +49,8 @@ if plot_option
         
     end
     posterior_mode
-    quality_of_posterior = sqrt(sum((posterior_mode' - real_params(indices)).^2)) %note this currently does not depend equally on all params due to scaling of each param
+    posterior_mean = mean(abc_theta,1);
+    quality_of_posterior = [sqrt(sum((posterior_mode - real_params(indices)).^2)),sqrt(sum((posterior_mean - real_params(indices)).^2))]; %note this currently does not depend equally on all params due to scaling of each param
     
 %     figure;
 %     imagesc(mid{1:2},posterior(:,:,ceil(end/2)));

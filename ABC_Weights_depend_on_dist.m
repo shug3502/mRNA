@@ -1,4 +1,4 @@
-function [abc_theta,abc_weights] = ABC_Weights_depend_on_dist(my_seed)
+function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_Weights_depend_on_dist(N,my_seed)
 
 %created 1/6/15
 %last edit 1/6/15
@@ -41,9 +41,9 @@ q_estimate_fake = summary_statistic_calculator(params,1000,0)
 %Choose tolerance sequence
 accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
-N=500;
+%N=500;
 
-p_accept_min = 0.25; % 1%
+p_accept_min = 0.2; % 1%
 
 %create while loop
 
@@ -218,10 +218,9 @@ while p_accept >p_accept_min
     
 end
 
-%length(abc_theta)
 %get rid of values outside of support of prior
 abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
-%length(abc_theta)
+%entropy gives measure of difference from uniform distn
 entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
 
 
@@ -251,7 +250,16 @@ set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
 
-multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
+%post-processing to check quality of posterior
+[~, quality] = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
+%find 95% interval for posterior
+box = zeros(length(p_indices),2);
+contained_in_pred_interval = 1;
+for k=1:3
+box(k,:) = [quantile(abc_theta(:,k),0.025),quantile(abc_theta(:,k),1-0.025)];
+contained_in_pred_interval = contained_in_pred_interval*(real_params(p_indices(k))>box(k,1))*(real_params(p_indices(k))<box(k,2));
+end
+box
 
 fname = sprintf('ABC_APMC_output%d.txt',my_seed);
 fileID = fopen(fname,'w');
@@ -295,7 +303,7 @@ xpos = zeros(N,10^3);
 xpos_discrete_time = zeros(N,10^3);
 
 for j=1:N
-    [~, ~, ~, ~, xpos_temp, ~, jump_temp] = velocityjump2D_with_nucleus(max(time_vec), params, 1, 1, 0);
+    [~, ~, ~, ~, xpos_temp, ~, jump_temp] = velocityjump2D_with_nucleus(max(time_vec), params, 1, 2, 0);
     jumps(j,1:length(jump_temp)) = jump_temp;
     xpos(j,1:length(xpos_temp)) = xpos_temp;
     for w=1:l_t

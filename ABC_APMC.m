@@ -1,4 +1,4 @@
-function [abc_theta,abc_weights] = ABC_APMC(my_seed)
+function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_APMC(N,my_seed)
 
 %created 20/5/15
 %last edit 28/5/15
@@ -39,17 +39,17 @@ real_params = [params.nu1, params.nu2, params.lambda_2, params.omega_1, params.o
 q_estimate_fake = summary_statistic_calculator(params,1000,0)
 
 %Choose tolerance sequence
-accepted_proportion = 0.2; %alpha
+accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
-N=1000;
+%N=500;
 
-p_accept_min = 0.1; % 1%
+p_accept_min = 0.2; % 1%
 
 %create while loop
 
 %set prior
 prior_params = [1.16, 0.8, 0.11, 0.42, 0.84, 0.58, 0.5, 0];
-prior_sigma = [0.4, 0.4, 0.4]; %sd of gaussian or spread around mean of uniform
+prior_sigma = [0.8, 0.8, 0.8]; %sd of gaussian or spread around mean of uniform
 p_indices = [1, 4, 6];
 par_params = prior_params;
 
@@ -228,11 +228,10 @@ while p_accept >p_accept_min
     
 end
 
-%length(abc_theta)
 %get rid of values outside of support of prior
 abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that parameter
-%length(abc_theta)
-entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices)
+%entropy gives measure of difference from uniform distn
+entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
 
 
 figure(my_seed+2);
@@ -261,7 +260,16 @@ set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
 
-multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
+%post-processing to check quality of posterior
+[~, quality] = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
+%find 95% interval for posterior
+box = zeros(length(p_indices),2);
+contained_in_pred_interval = 1;
+for k=1:3
+box(k,:) = [quantile(abc_theta(:,k),0.025),quantile(abc_theta(:,k),1-0.025)];
+contained_in_pred_interval = contained_in_pred_interval*(real_params(p_indices(k))>box(k,1))*(real_params(p_indices(k))<box(k,2));
+end
+box
 
 fname = sprintf('ABC_APMC_output%d.txt',my_seed);
 fileID = fopen(fname,'w');
