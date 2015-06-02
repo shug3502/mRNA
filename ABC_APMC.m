@@ -39,7 +39,7 @@ real_params = [params.nu1, params.nu2, params.lambda_2, params.omega_1, params.o
 q_estimate_fake = summary_statistic_calculator(params,1000,0)
 
 %Choose tolerance sequence
-accepted_proportion = 0.5; %alpha
+accepted_proportion = 0.2; %alpha
 %At t=1 for first generation
 N=1000;
 
