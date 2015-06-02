@@ -42,7 +42,7 @@ if plot_option
         bincounts = histc(abc_theta(:,j),edges_vecs(j,:));
         [~,mode_index] = max(bincounts);
         posterior_mode(j) = (edges_vecs(j,mode_index)+edges_vecs(j,mode_index+1))/2;
-        bar(edges_vecs(j,:),bincounts,'histc');
+        bar(edges_vecs(j,:),bincounts); %,'histc');
         hold on
         line([real_params(indices(j)),real_params(indices(j))],[0,max(bincounts)],'LineWidth',3,'Color','g');
         xlabel(p_string);
