@@ -166,7 +166,7 @@ while p_accept >p_accept_min
         for jj=1:3
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
-        abc_weights(i) = prior.*weights_store(my_index)/sum(weights_store)./abc_dist(i);
+        abc_weights(i) = prior./abc_dist(i).*weights_store(my_index)/sum(weights_store);
         if isnan(abc_weights(i)) || isinf(abc_weights(i))
             fprintf('Some weights are Nan or Inf\n');
             abc_weights(i) = 0;
