@@ -1,4 +1,4 @@
-function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_APMC(N,my_seed)
+function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_APMC(N,option_a,my_seed)
 
 %created 20/5/15
 %last edit 28/5/15
@@ -40,7 +40,7 @@ accepted_proportion = 0.5; %alpha
 %N=500;
 
 p_accept_min = 0.1; % 1%
-option_a = 1; %1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
+%option_a = 1; %1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
@@ -360,6 +360,7 @@ else %else use the spatial distribution and kl divergence
         params = par_params;
     end
     
+    N=num_particles;
     L=params.Lx;
     time_vec = (0.05:0.05:0.15)*0.5;
     t=time_vec*60^2;

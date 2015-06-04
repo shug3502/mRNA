@@ -1,4 +1,4 @@
-function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_Weights_depend_on_dist(N,my_seed)
+function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_Weights_depend_on_dist(N,option_a,my_seed)
 
 %created 1/6/15
 %last edit 1/6/15
@@ -39,8 +39,8 @@ accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
 %N=500;
 
-p_accept_min = 2; %0.1; 
-option_a = 1; %1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
+p_accept_min = 0.1; 
+%option_a = 1; %1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
 
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
@@ -354,12 +354,12 @@ else %else use the spatial distribution and kl divergence
     time_vec = (0.05:0.05:0.15)*0.5;
     t=time_vec*60^2;
     l_t = length(time_vec);
-    jumps = zeros(N,10^3);
+    jumps = zeros(num_particles,10^3);
     q_estimate = zeros(L/delx+1,l_t);
-    xpos = zeros(N,10^3);
-    xpos_discrete_time = zeros(N,10^3);
+    xpos = zeros(num_particles,10^3);
+    xpos_discrete_time = zeros(num_particles,10^3);
     
-    for j=1:N
+    for j=1:num_particles
         [~, ~, ~, ~, xpos_temp, ~, jump_temp] = velocityjump2D_with_nucleus(max(time_vec), params, 1, 2, 0);
         jumps(j,1:length(jump_temp)) = jump_temp;
         xpos(j,1:length(xpos_temp)) = xpos_temp;
@@ -374,7 +374,7 @@ else %else use the spatial distribution and kl divergence
     for w=1:l_t
         %split into bins
         [Num_in_bins,~] = histc(xpos_discrete_time(:,w),0:delx:L);
-        if sum(Num_in_bins) ~= N
+        if sum(Num_in_bins) ~= num_particles
             xpos_discrete_time(:,w)
             ename = sprintf('ABC_errors.txt');
             fileIDerror = fopen(ename,'w');
@@ -382,7 +382,7 @@ else %else use the spatial distribution and kl divergence
             fclose('all');
             error('outside of 0:L');
         end
-        q_estimate(:,w) = Num_in_bins/N/delx; %estimate of q at time T
+        q_estimate(:,w) = Num_in_bins/num_particles/delx; %estimate of q at time T
     end
 end
 
