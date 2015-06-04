@@ -13,12 +13,11 @@ entropy = 0;
 quality = 0;
 %num_runs = 20;
 parfor b=1:num_runs
-    [~,~,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_APMC(N,b);
+    [~,~,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_Weights_depend_on_dist(N,b);
     proportion_in_interval = proportion_in_interval+contained_in_pred_interval;
     entropy = entropy+entropy_temp;
     quality = quality+quality_temp;
 end
-posterior = posterior/num_runs;
 
 proportion_in_interval = proportion_in_interval/num_runs;
 entropy = entropy/num_runs;
