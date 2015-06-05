@@ -16,7 +16,7 @@ function [entropy, quality, proportion_in_interval] = compare_posterior_qualitie
 
 
 
-for k=[0,1]
+for k=[0,1] %0 is with spatial distribution; 1 is mfpt etc.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 proportion_in_interval = 0;
 entropy = 0;
@@ -36,7 +36,7 @@ entropy = entropy/num_runs;
 quality = quality/num_runs;
 
 
-fname = sprintf('Comparison_of_ABC_methods.txt');
+fname = sprintf('Comparison_of_ABC_methods_more_repeats.txt');
 fileID = fopen(fname,'a');
 fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
 fclose('all');
@@ -61,7 +61,6 @@ entropy = entropy/num_runs;
 quality = quality/num_runs;
 
 
-fname = sprintf('Comparison_of_ABC_methods.txt');
 fileID = fopen(fname,'a');
 fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
 fclose('all');
@@ -86,7 +85,6 @@ entropy = entropy/num_runs;
 quality = quality/num_runs;
 
 
-fname = sprintf('Comparison_of_ABC_methods.txt');
 fileID = fopen(fname,'a');
 fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
 fclose('all');
