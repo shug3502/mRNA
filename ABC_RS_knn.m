@@ -23,23 +23,23 @@ rng(my_seed);
 close all
 
 %Fake parameters
-    params.nu1 = 1.0; %speed of RNP complex under active transport [zimyanin et al 2008]
-    params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
-    params.lambda_1=0;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
-    params.lambda_2 = 0.11;
-    params.omega_1= 0.42;    %1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
-    params.omega_2 = 0.84;
-    params.phi = 0.58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
-    params.x_0=0.5;  %Initially in first compartment, ie. at NPC
-    params.Lx = 52; %length of cell in x direction
-    params.Ly = 37; %in y direction
-    params.nuc_radius = 10; %radius of nucleus
-    params.theta_0 = 0; %initial angle is 0
+params.nu1 = 1.0; %speed of RNP complex under active transport [zimyanin et al 2008]
+params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
+params.lambda_1=0;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
+params.lambda_2 = 0.11;
+params.omega_1= 0.42;    %1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
+params.omega_2 = 0.84;
+params.phi = 0.58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
+params.x_0=0.5;  %Initially in first compartment, ie. at NPC
+params.Lx = 52; %length of cell in x direction
+params.Ly = 37; %in y direction
+params.nuc_radius = 10; %radius of nucleus
+params.theta_0 = 0; %initial angle is 0
 
 real_params = [params.nu1, params.nu2, params.lambda_2, params.omega_1, params.omega_2, params.phi, params.x_0, params.Lx, params.Ly, params.nuc_radius, params.theta_0];
 
 %Choose tolerance sequence
-accepted_proportion = 0.5; %alpha
+accepted_proportion = 0.5; %0.5 %alpha
 %At t=1 for first generation
 %N=500;
 
@@ -114,6 +114,7 @@ ylabel('param3');
 
 %entropy gives measure of difference from uniform distn
 entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
+abc_theta
 
 %post-processing to check quality of posterior
 [~, quality] = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
@@ -121,8 +122,8 @@ entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
 box = zeros(length(p_indices),2);
 contained_in_pred_interval = 1;
 for k=1:3
-box(k,:) = [quantile(abc_theta(:,k),0.025),quantile(abc_theta(:,k),1-0.025)];
-contained_in_pred_interval = contained_in_pred_interval*(real_params(p_indices(k))>box(k,1))*(real_params(p_indices(k))<box(k,2));
+    box(k,:) = [quantile(abc_theta(:,k),0.025),quantile(abc_theta(:,k),1-0.025)];
+    contained_in_pred_interval = contained_in_pred_interval*(real_params(p_indices(k))>box(k,1))*(real_params(p_indices(k))<box(k,2));
 end
 box
 
@@ -160,7 +161,7 @@ if option_a_summary_statistic %choose which type of summary statistic to use
     else
         params = par_params;
     end
-    non_infinite = 0;
+    %non_infinite = 0;
     t_max = 1;  %if this is too small, some runs will not reach anchoring giving infinite mfpt _> rejection.
     % these are probably not an issue as they would give large mfpt anyway,
     % which would be rejected. But can increase this.
@@ -168,8 +169,8 @@ if option_a_summary_statistic %choose which type of summary statistic to use
     anchor_times = zeros(num_particles,1);
     num_jumps = zeros(num_particles,1);
     jump_distances = zeros(num_particles,1);
-    parfor j=1:num_particles
-        [~, anchor_times(j), ~, ~, pathx, pathy, ~] = velocityjump2D_with_nucleus(t_max, params, 1, 2, 0);;
+    for j=1:num_particles
+        [~, anchor_times(j), ~, ~, pathx, pathy, ~] = velocityjump2D_with_nucleus(t_max, params, 1, 2, 0);
         num_jumps(j) = length(pathx);
         jump_distances(j) = median(sqrt(diff(pathx).^2+diff(pathy).^2)); %median(abs(diff(pathx)))
     end
@@ -177,18 +178,21 @@ if option_a_summary_statistic %choose which type of summary statistic to use
     mean_num_jumps = mean(num_jumps); %use mean number of jumps in a single passage as another
     mean_jump_distances = mean(jump_distances); %use mean jump distance as final summary statistic
     q_estimate = [mean_fp_time; mean_num_jumps; mean_jump_distances];
-    %non_infinite = 0;
-    % if non_infinite
-    % while isinf(mean_fp_time)
-    %     t_max = 2*t_max;
-    %     parfor j=1:num_particles
-    %     [~, anchor_times(j), ~, ~, pathx, ~] = velocityjump2D_ModesInput(t_max, params, 1, 0, 1, 0, r_random*j);
-    %     num_jumps(j) = length(pathx);
-    %     end
-    %     mean_fp_time = mean(anchor_times);
-    %     mean_num_jumps = mean(num_jumps);
-    % end
-    % end
+%     non_infinite = 1;
+%     if non_infinite
+%         while isinf(mean_fp_time)
+%             t_max = 2*t_max
+%             for j=1:num_particles
+%                 [~, anchor_times(j), ~, ~, pathx, pathy, ~] = velocityjump2D_with_nucleus(t_max, params, 1, 2, 0);
+%                 num_jumps(j) = length(pathx);
+%                 jump_distances(j) = median(sqrt(diff(pathx).^2+diff(pathy).^2)); %median(abs(diff(pathx)))
+%             end
+%             mean_fp_time = mean(anchor_times);
+%             mean_num_jumps = mean(num_jumps);
+%             mean_jump_distances = mean(jump_distances);
+%             q_estimate = [mean_fp_time; mean_num_jumps; mean_jump_distances];
+%         end
+%     end
 else %else use the spatial distribution and kl divergence
     
     %runs velocityjump2D_ModesInput which is a velocity jump process for a single particle

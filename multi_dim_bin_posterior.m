@@ -23,14 +23,15 @@ if nargin~=7
 end
 N = length(abc_theta(:,1));
 M=21;
+posterior = 1;
 
 %split into bins
 edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,M);
     linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,M);
     linspace(prior_params(indices(3))-range/2,prior_params(indices(3))+range/2,M)];
 
-[count, ~, mid, ~] = histcn(abc_theta, edges_vecs(1,:),edges_vecs(2,:),edges_vecs(3,:),'AccumData',abc_weights);
-posterior = count/N;
+% [count, ~, mid, ~] = histcn(abc_theta, edges_vecs(1,:),edges_vecs(2,:),edges_vecs(3,:),'AccumData',abc_weights);
+% posterior = count/N;
 
 
 if plot_option
