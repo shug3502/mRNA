@@ -36,7 +36,7 @@ entropy = entropy/num_runs;
 quality = quality/num_runs;
 
 
-fname = sprintf('Comparison_of_ABC_methods_more_repeats.txt');
+fname = sprintf('Comparison_of_ABC_methods_N10000.txt');
 fileID = fopen(fname,'a');
 fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
 fclose('all');
