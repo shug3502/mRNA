@@ -82,8 +82,8 @@ to_keep = (abc_dist <= quantile(abc_dist,accepted_proportion));
 abc_theta = abc_theta(to_keep,:);
 abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep));
 abc_dist = abc_dist(to_keep);
-ma = max(abc_dist);
-mi = min(abc_dist);
+% ma = max(abc_dist);
+% mi = min(abc_dist);
 wmean = sum(abc_theta.*repmat(abc_weights,1,length(p_indices)))/sum(abc_weights); %weighted mean
 %wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
 wvariance = 1/(length(abc_weights)-1).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
@@ -121,7 +121,7 @@ ylabel('param3');
 %First generation for t=1 is done
 %Now loop over generations
 while p_accept >p_accept_min
-    num_generations = num_generations+1
+    num_generations = num_generations+1;
     %store previous theta
     weights_store = abc_weights;
     theta_store = abc_theta;
@@ -188,8 +188,8 @@ while p_accept >p_accept_min
     abc_theta = abc_theta(to_keep,:);
     abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep));  %choose not to renormalise 
     abc_dist = abc_dist(to_keep);
-    ma = max(abc_dist);
-    mi = min(abc_dist);
+%     ma = max(abc_dist);
+%     mi = min(abc_dist);
     wmean = sum(abc_theta.*repmat(abc_weights,1,length(p_indices)))/sum(abc_weights); %weighted mean
     %wvariance = (sum(abc_weights)/(sum(abc_weights)^2-sum(abc_weights.^2))).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
     wvariance = 1/(length(abc_weights)-1).*sum(repmat(abc_weights,1,length(p_indices)).*(abc_theta - repmat(wmean,length(abc_weights),1)).^2); %weighted variance
@@ -198,7 +198,7 @@ while p_accept >p_accept_min
     end
     sigma = 2*wvariance;  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of theta values
     %sigma_alt = 2*var(abc_theta);
-    p_accept = 1/(N-N_current)*sum(to_keep((N_current+1):N)) 
+    p_accept = 1/(N-N_current)*sum(to_keep((N_current+1):N)); 
     entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
     
     figure(my_seed+1);
@@ -262,15 +262,7 @@ xlabel('param2');
 ylabel('param3');
 
 %post-processing to check quality of posterior
-[~, quality] = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
-%find 95% interval for posterior
-box = zeros(length(p_indices),2);
-contained_in_pred_interval = 1;
-for k=1:3
-box(k,:) = [quantile(abc_theta(:,k),0.025),quantile(abc_theta(:,k),1-0.025)];
-contained_in_pred_interval = contained_in_pred_interval*(real_params(p_indices(k))>box(k,1))*(real_params(p_indices(k))<box(k,2));
-end
-box
+[entropy, quality, contained_in_pred_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,prior_sigma,p_indices);
 
 fname = sprintf('ABC_APMC_output%d.txt',my_seed);
 fileID = fopen(fname,'w');
@@ -315,7 +307,7 @@ if option_a_summary_statistic %choose which type of summary statistic to use
     num_jumps = zeros(num_particles,1);
     jump_distances = zeros(num_particles,1);
     parfor j=1:num_particles
-        [~, anchor_times(j), ~, ~, pathx, pathy, ~] = velocityjump2D_with_nucleus(t_max, params, 1, 2, 0);;
+        [~, anchor_times(j), ~, ~, pathx, pathy, ~] = velocityjump2D_with_nucleus(t_max, params, 1, 2, 0);
         num_jumps(j) = length(pathx);
         jump_distances(j) = median(sqrt(diff(pathx).^2+diff(pathy).^2)); %median(abs(diff(pathx)))
     end
