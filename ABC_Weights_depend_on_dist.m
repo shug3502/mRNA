@@ -343,7 +343,7 @@ else %else use the spatial distribution and kl divergence
     end
     
     L=params.Lx;
-    time_vec = (0.05:0.05:0.15)*0.5;
+    time_vec = (0.05:0.02:0.25)*0.5;
     t=time_vec*60^2;
     l_t = length(time_vec);
     jumps = zeros(num_particles,10^3);
