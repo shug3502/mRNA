@@ -38,7 +38,7 @@ for k=[0,1] %0 is with spatial distribution; 1 is mfpt etc.
 %     quality = quality/num_runs;
     [entropy, quality, proportion_in_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,repmat(range,1,3),indices);
     
-    fname = sprintf('Comparison_of_ABC_methods_New_method.txt');
+    fname = sprintf('Comparison_of_ABC_methods_New_method_repeats100.txt');
     fileID = fopen(fname,'a');
     fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
     fclose('all');
