@@ -39,7 +39,7 @@ accepted_proportion = 0.5; %alpha
 %At t=1 for first generation
 %N=500;
 
-p_accept_min = 0.01; % 1%
+p_accept_min = 0.1; % 1%
 %option_a = 1; %1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
 
 %Generate fake data
