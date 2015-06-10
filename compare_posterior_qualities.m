@@ -16,7 +16,7 @@ alpha = 0.5;
 
 
 
-for k=[0,1] %0 is with spatial distribution; 1 is mfpt etc.
+for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     proportion_in_interval = 0;
     entropy = 0;
