@@ -23,7 +23,7 @@ rng(my_seed);
 close all
 
 %Fake parameters
-params.nu1 = 1.0; %speed of RNP complex under active transport [zimyanin et al 2008]
+params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
 params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
 params.lambda_1=0;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
 params.lambda_2 = 0.11;
@@ -48,7 +48,7 @@ accepted_proportion = 0.5; %0.5 %alpha
 if data_to_read
 %read in data from files
 fprintf('reading in data from file\n');
-q_estimate_fake = read_in_particle_coords(1,[10,10]) %arguments are the file_number and the pixel sizes
+q_estimate_fake = read_in_particle_coords(9,[10,10]) %arguments are the file_number and the pixel sizes
 
 else
 %Generate fake data
@@ -60,9 +60,9 @@ end
 %create while loop
 
 %set prior
-prior_params = [1.16, 0.8, 0.11, 0.42, 0.84, 0.58, 0.5, 0];
-prior_sigma = [0.8, 0.8, 0.8]; %sd of gaussian or spread around mean of uniform
-p_indices = [1, 4, 6];
+prior_params = [1.16, 0.8, 0.42, 0.42, 0.84, 0.58, 0.5, 0];
+p_indices = 1:6; %[1, 4, 6];
+prior_sigma = 0.8*ones(1,6); %[0.8, 0.8, 0.8]; %sd of gaussian or spread around mean of uniform
 par_params = prior_params;
 
 abc_theta = zeros(N,length(p_indices));
@@ -73,10 +73,10 @@ fprintf('Generation 1 begins\n');
 for i=1:N
     %initialise greater than tolerance
     %Uniform prior
-    rr = rand(1,3);
+    rr = rand(1,length(p_indices));
     
     %simulate parameters from the prior
-    par_params(p_indices) = prior_params(p_indices)+prior_sigma.*(rr-0.5);
+    par_params(p_indices) = prior_params(p_indices)+prior_sigma(p_indices).*(rr-0.5);
     
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)

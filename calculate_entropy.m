@@ -13,16 +13,16 @@ end
 
 bin_width = 0.01;
 %param_bins = zeros(3,max(prior_sigma)/bin_width+1);
-for i=1:3
+for i=1:length(p_indices)
 param_bins(i,:) = (prior_params(p_indices(i))-prior_sigma(i)/2):bin_width:(prior_params(p_indices(i))+prior_sigma(i)/2); 
 end
 
 distn_theta = zeros(size(param_bins));
-for j=1:3
+for j=1:length(p_indices)
  [distn_theta(j,:),~] = histc(abc_theta(:,j),param_bins(j,:));
 end
 entropy = 0;
-for i=1:3
+for i=1:length(p_indices)
 entropy = entropy + kldiv(param_bins(i,:)+bin_width/2, distn_theta(i,:)/sum(distn_theta(i,:))+eps,ones(size(distn_theta(i,:)))/length(distn_theta));
 end
 

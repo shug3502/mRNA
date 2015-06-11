@@ -4,7 +4,7 @@ function [entropy, quality, contained_in_pred_interval]= post_processing(abc_the
 entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
 
 %post-processing to check quality of posterior
-[~, quality] = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma(1),p_indices,1);
+[~, quality] = multi_dim_bin_posterior(abc_theta,abc_weights,prior_params,real_params,prior_sigma,p_indices,1);
 %find 95% interval for posterior
 box = zeros(length(p_indices),2);
 contained_in_pred_interval = 1;

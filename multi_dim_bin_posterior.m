@@ -26,10 +26,10 @@ M=21;
 posterior = 1;
 
 %split into bins
-edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))+range/2,M);
-    linspace(prior_params(indices(2))-range/2,prior_params(indices(2))+range/2,M);
-    linspace(prior_params(indices(3))-range/2,prior_params(indices(3))+range/2,M)];
-
+edges_vecs = zeros(length(indices),M);
+for i=1:length(indices)
+edges_vecs(i,1:M) = linspace(prior_params(indices(i))-range(indices(i))/2,prior_params(indices(i))+range(indices(i))/2,M);
+end
 % [count, ~, mid, ~] = histcn(abc_theta, edges_vecs(1,:),edges_vecs(2,:),edges_vecs(3,:),'AccumData',abc_weights);
 % posterior = count/N;
 
@@ -37,9 +37,9 @@ edges_vecs = [linspace(prior_params(indices(1))-range/2,prior_params(indices(1))
 if plot_option
     posterior_mode = zeros(1,length(indices));
     figure;
-    for j=1:3
+    for j=1:length(indices)
         p_string = sprintf('param %d',j);
-        subplot(3,1,j)
+        subplot(length(indices),1,j)
         bincounts = histc(abc_theta(:,j),edges_vecs(j,:));
         [~,mode_index] = max(bincounts);
         posterior_mode(j) = (edges_vecs(j,mode_index)+edges_vecs(j,mode_index+1))/2;
