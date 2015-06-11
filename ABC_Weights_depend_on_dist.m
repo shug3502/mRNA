@@ -1,4 +1,4 @@
-function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_Weights_depend_on_dist(N,option_a,my_seed)
+function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_Weights_depend_on_dist(N,option_a,my_seed,data_to_read)
 
 %created 1/6/15
 %last edit 1/6/15
@@ -42,9 +42,17 @@ accepted_proportion = 0.5; %alpha
 p_accept_min = 0.1; 
 %option_a = 1; %1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
 
+if data_to_read
+%read in data from files
+fprintf('reading in data from file');
+read_in_particle_coords(1,[10,10]); %arguments are the file_number and the pixel sizes
+
+else
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
+fprintf('generating in silico data');
 q_estimate_fake = summary_statistic_calculator(params,1000,0,option_a)
+end
 
 %create while loop
 

@@ -25,7 +25,7 @@ for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
     abc_weights = [];
     
     for b=1:num_runs
-        [abc_theta_temp,abc_weights_temp,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_RS_knn(N,k,b);
+        [abc_theta_temp,abc_weights_temp,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_RS_knn(N,k,b,0);
         abc_theta = [abc_theta; abc_theta_temp];
         abc_weights = [abc_weights; abc_weights_temp];       
 %         proportion_in_interval = proportion_in_interval+contained_in_pred_interval;
@@ -51,7 +51,7 @@ for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
     abc_weights = [];
     
     for b=1:num_runs
-        [abc_theta,abc_weights,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_Weights_depend_on_dist(N,k,b);
+        [abc_theta,abc_weights,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_Weights_depend_on_dist(N,k,b,0);
         abc_theta = [abc_theta; abc_theta_temp];
         abc_weights = [abc_weights; abc_weights_temp];       
 %         proportion_in_interval = proportion_in_interval+contained_in_pred_interval;
@@ -77,7 +77,7 @@ for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
     abc_weights = [];
     
     for b=1:num_runs
-        [abc_theta,abc_weights,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_APMC(N,k,b);
+        [abc_theta,abc_weights,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_APMC(N,k,b,0);
         abc_theta = [abc_theta; abc_theta_temp];
         abc_weights = [abc_weights; abc_weights_temp];       
 %         proportion_in_interval = proportion_in_interval+contained_in_pred_interval;

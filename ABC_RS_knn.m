@@ -1,4 +1,4 @@
-function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_RS_knn(N,option_a,my_seed)
+function [abc_theta,abc_weights,entropy,quality,contained_in_pred_interval] = ABC_RS_knn(N,option_a,my_seed,data_to_read)
 
 %created 4/6/15
 %last edit 28/5/15
@@ -45,9 +45,17 @@ accepted_proportion = 0.5; %0.5 %alpha
 
 %option_a = 1; %1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
 
+if data_to_read
+%read in data from files
+fprintf('reading in data from file\n');
+q_estimate_fake = read_in_particle_coords(1,[10,10]) %arguments are the file_number and the pixel sizes
+
+else
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
+fprintf('generating in silico data');
 q_estimate_fake = summary_statistic_calculator(params,1000,0,option_a)
+end
 
 %create while loop
 
