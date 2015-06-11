@@ -12,4 +12,3 @@ else %kl divergence
         dist = dist + kldiv((0:delx:L)',q1(:,j)+eps,q2(:,j)+eps);
     end
 end
-end
