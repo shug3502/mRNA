@@ -22,7 +22,7 @@ if nargin~=7
     plot_option = 1;
 end
 N = length(abc_theta(:,1));
-M=21;
+M=51;
 posterior = 1;
 
 %split into bins

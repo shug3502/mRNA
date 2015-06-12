@@ -18,49 +18,8 @@ tic;
 rng(my_seed);
 close all
 
-%Fake parameters
-params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
-params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
-params.lambda_1=0;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
-params.lambda_2 = 0.11;
-params.omega_1= 0.42;    %1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
-params.omega_2 = 0.84;
-params.phi = 0.58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
-params.x_0=0.5;  %Initially in first compartment, ie. at NPC
-params.Lx = 52; %length of cell in x direction
-params.Ly = 37; %in y direction
-params.nuc_radius = 10; %radius of nucleus
-params.theta_0 = 0; %initial angle is 0
-
-real_params = [params.nu1, params.nu2, params.lambda_2, params.omega_1, params.omega_2, params.phi, params.x_0, params.Lx, params.Ly, params.nuc_radius, params.theta_0];
-
-%Choose tolerance sequence
-accepted_proportion = 0.5; %alpha
-%At t=1 for first generation
-%N=500;
-
-p_accept_min = 0.1; 
-%option_a = 1; %1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
-
-if data_to_read
-%read in data from files
-fprintf('reading in data from file');
-q_estimate_fake = read_in_particle_coords(9,[10,10]) %arguments are the file_number and the pixel sizes
-
-else
-%Generate fake data
-%calculate appropriate summary statistic - we choose MFPT
-fprintf('generating in silico data');
-q_estimate_fake = summary_statistic_calculator(params,1000,0,option_a)
-end
-
-%create while loop
-
-%set prior
-prior_params = [1.16, 0.8, 0.42, 0.42, 0.84, 0.58, 0.5, 0];
-prior_sigma = 0.8*ones(1,6); %[0.8, 0.8, 0.8]; %sd of gaussian or spread around mean of uniform
-p_indices = 1:6; %[1, 4, 6];
-par_params = prior_params;
+[params, real_params, accepted_proportion, p_accept_min, ...
+    q_estimate_fake, prior_params, p_indices, prior_sigma, par_params] = initialise_parameters(data_to_read,option_a);
 
 abc_theta = zeros(N,length(p_indices));
 abc_weights = zeros(N,1);
@@ -99,31 +58,31 @@ sigma = 2*wvariance;  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of
 %sigma_alt = 2*var(abc_theta);
 p_accept = 1; %initialise
 
-figure(my_seed+1);
-subplot(3,1,1);
-plot(abc_theta(:,1),abc_theta(:,2),'o');
-hold all
-grid on
-plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
-set(gca, 'fontsize',14);
-xlabel('param1');
-ylabel('param2');
-subplot(3,1,2);
-plot(abc_theta(:,1),abc_theta(:,3),'o');
-hold all
-grid on
-plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
-set(gca, 'fontsize',14);
-xlabel('param1');
-ylabel('param3');
-subplot(3,1,3);
-plot(abc_theta(:,2),abc_theta(:,3),'o');
-hold all
-grid on
-plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
-set(gca, 'fontsize',14);
-xlabel('param2');
-ylabel('param3');
+% figure(my_seed+1);
+% subplot(3,1,1);
+% plot(abc_theta(:,1),abc_theta(:,2),'o');
+% hold all
+% grid on
+% plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
+% set(gca, 'fontsize',14);
+% xlabel('param1');
+% ylabel('param2');
+% subplot(3,1,2);
+% plot(abc_theta(:,1),abc_theta(:,3),'o');
+% hold all
+% grid on
+% plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
+% set(gca, 'fontsize',14);
+% xlabel('param1');
+% ylabel('param3');
+% subplot(3,1,3);
+% plot(abc_theta(:,2),abc_theta(:,3),'o');
+% hold all
+% grid on
+% plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
+% set(gca, 'fontsize',14);
+% xlabel('param2');
+% ylabel('param3');
 
 
 %First generation for t=1 is done
@@ -172,7 +131,7 @@ while p_accept >p_accept_min
     for i=(N_current+1):N
         %Uniform prior
         prior = 1;
-        for jj=1:3
+        for jj=1:length(p_indices)
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
         abc_weights(i) = prior./abc_dist(i).*weights_store(my_index)/sum(weights_store);
@@ -199,31 +158,31 @@ while p_accept >p_accept_min
     p_accept = 1/(N-N_current)*sum(to_keep((N_current+1):N));
     entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
     
-    figure(my_seed+1);
-    subplot(3,1,1);
-    plot(abc_theta(:,1),abc_theta(:,2),'o');
-    hold all
-    grid on
-    plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
-    set(gca, 'fontsize',14);
-    xlabel('param1');
-    ylabel('param2');
-    subplot(3,1,2);
-    plot(abc_theta(:,1),abc_theta(:,3),'o');
-    hold all
-    grid on
-    plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
-    set(gca, 'fontsize',14);
-    xlabel('param1');
-    ylabel('param3');
-    subplot(3,1,3);
-    plot(abc_theta(:,2),abc_theta(:,3),'o');
-    hold all
-    grid on
-    plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
-    set(gca, 'fontsize',14);
-    xlabel('param2');
-    ylabel('param3');
+%     figure(my_seed+1);
+%     subplot(3,1,1);
+%     plot(abc_theta(:,1),abc_theta(:,2),'o');
+%     hold all
+%     grid on
+%     plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
+%     set(gca, 'fontsize',14);
+%     xlabel('param1');
+%     ylabel('param2');
+%     subplot(3,1,2);
+%     plot(abc_theta(:,1),abc_theta(:,3),'o');
+%     hold all
+%     grid on
+%     plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
+%     set(gca, 'fontsize',14);
+%     xlabel('param1');
+%     ylabel('param3');
+%     subplot(3,1,3);
+%     plot(abc_theta(:,2),abc_theta(:,3),'o');
+%     hold all
+%     grid on
+%     plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
+%     set(gca, 'fontsize',14);
+%     xlabel('param2');
+%     ylabel('param3');
     
 end
 
@@ -233,31 +192,31 @@ abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that p
 entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
 
 
-figure(my_seed+2);
-subplot(3,1,1);
-plot(abc_theta(:,1),abc_theta(:,2),'o');
-hold all
-grid on
-plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
-set(gca, 'fontsize',14);
-xlabel('param1');
-ylabel('param2');
-subplot(3,1,2);
-plot(abc_theta(:,1),abc_theta(:,3),'o');
-hold all
-grid on
-plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
-set(gca, 'fontsize',14);
-xlabel('param1');
-ylabel('param3');
-subplot(3,1,3);
-plot(abc_theta(:,2),abc_theta(:,3),'o');
-hold all
-grid on
-plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
-set(gca, 'fontsize',14);
-xlabel('param2');
-ylabel('param3');
+% figure(my_seed+2);
+% subplot(3,1,1);
+% plot(abc_theta(:,1),abc_theta(:,2),'o');
+% hold all
+% grid on
+% plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
+% set(gca, 'fontsize',14);
+% xlabel('param1');
+% ylabel('param2');
+% subplot(3,1,2);
+% plot(abc_theta(:,1),abc_theta(:,3),'o');
+% hold all
+% grid on
+% plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
+% set(gca, 'fontsize',14);
+% xlabel('param1');
+% ylabel('param3');
+% subplot(3,1,3);
+% plot(abc_theta(:,2),abc_theta(:,3),'o');
+% hold all
+% grid on
+% plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
+% set(gca, 'fontsize',14);
+% xlabel('param2');
+% ylabel('param3');
 
 %post-processing to check quality of posterior
 [entropy, quality, contained_in_pred_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,prior_sigma,p_indices);

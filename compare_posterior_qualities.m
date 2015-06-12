@@ -2,11 +2,11 @@ function [entropy, quality, proportion_in_interval] = compare_posterior_qualitie
 %compare quality of posterior from ABC with ABC_APMC and ABC_weights
 %dependent on distance
 
-prior_params = [1.16, 0.8, 0.11, 0.42, 0.84, 0.58, 0.5, 0];
+prior_params = [5, 0.8, 0.11, 0.42, 0.84, 0.58, 0.5, 0];
 real_params = prior_params; %if real params used are different then MUST change this!
-real_params(1) = 1;
-range = 0.8;
-indices = [1,4,6];
+real_params(1) = 1.16;
+sigma = 10;
+indices = 1; %[1,4,6];
 alpha = 0.5;
 % abc_theta = zeros(N*num_runs*alpha,3);
 % abc_weights = zeros(N*num_runs*alpha,1);
@@ -16,7 +16,7 @@ alpha = 0.5;
 
 
 
-for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
+for k=[0, 1] %0 is with spatial distribution; 1 is mfpt etc.
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     proportion_in_interval = 0;
     entropy = 0;
@@ -36,9 +36,9 @@ for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
 %     proportion_in_interval = proportion_in_interval/num_runs;
 %     entropy = entropy/num_runs;
 %     quality = quality/num_runs;
-    [entropy, quality, proportion_in_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,repmat(range,1,3),indices);
+    [entropy, quality, proportion_in_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,sigma,indices);
     
-    fname = sprintf('Comparison_of_ABC_methods_timing.txt');
+     fname = sprintf('Comparison_of_ABC_methods_test.txt');
     fileID = fopen(fname,'a');
     fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
     fclose('all');
@@ -51,7 +51,7 @@ for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
     abc_weights = [];
     
     for b=1:num_runs
-        [abc_theta,abc_weights,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_Weights_depend_on_dist(N,k,b,0);
+        [abc_theta_temp,abc_weights_temp,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_Weights_depend_on_dist(N,k,b,0);
         abc_theta = [abc_theta; abc_theta_temp];
         abc_weights = [abc_weights; abc_weights_temp];       
 %         proportion_in_interval = proportion_in_interval+contained_in_pred_interval;
@@ -62,7 +62,7 @@ for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
 %     proportion_in_interval = proportion_in_interval/num_runs;
 %     entropy = entropy/num_runs;
 %     quality = quality/num_runs;
-    [entropy, quality, proportion_in_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,repmat(range,1,3),indices);
+    [entropy, quality, proportion_in_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,sigma,indices);
     
     fileID = fopen(fname,'a');
     fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
@@ -77,7 +77,7 @@ for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
     abc_weights = [];
     
     for b=1:num_runs
-        [abc_theta,abc_weights,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_APMC(N,k,b,0);
+        [abc_theta_temp,abc_weights_temp,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_APMC(N,k,b,0);
         abc_theta = [abc_theta; abc_theta_temp];
         abc_weights = [abc_weights; abc_weights_temp];       
 %         proportion_in_interval = proportion_in_interval+contained_in_pred_interval;
@@ -88,7 +88,7 @@ for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
 %     proportion_in_interval = proportion_in_interval/num_runs;
 %     entropy = entropy/num_runs;
 %     quality = quality/num_runs;
-    [entropy, quality, proportion_in_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,repmat(range,1,3),indices);
+    [entropy, quality, proportion_in_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,sigma,indices);
     
     fileID = fopen(fname,'a');
     fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);

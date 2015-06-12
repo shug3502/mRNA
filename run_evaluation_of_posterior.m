@@ -8,7 +8,7 @@ entropy = 0;
 quality = 0;
 
 for b=1:num_runs
-    [~,~,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_RS_knn(N,k,b);
+    [~,~,entropy_temp,quality_temp,contained_in_pred_interval] =ABC_Weights_depend_on_dist(N,k,b,0);
 %     abc_theta((1+(b-1)*N*alpha):(N*b*alpha),:) = abc_theta_temp;
 %     abc_weights((1+(b-1)*N*alpha):(N*b*alpha),:) = abc_weights_temp;    
     proportion_in_interval = proportion_in_interval+contained_in_pred_interval;
@@ -21,7 +21,7 @@ entropy = entropy/num_runs;
 quality = quality/num_runs;
 
 
-fname = sprintf('Comparison_of_ABC_methods_prior.txt');
+fname = sprintf('Comparison_of_ABC_methods_test.txt');
 fileID = fopen(fname,'a');
 fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
 fclose('all');

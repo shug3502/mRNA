@@ -11,10 +11,12 @@ fclose('all');
 abc_theta = reshape(abc_theta,length(abc_theta)/3,3);
 end
 
-bin_width = 0.01;
+%bin_width = 0.01;
+M=21;
 %param_bins = zeros(3,max(prior_sigma)/bin_width+1);
+%(prior_params(p_indices(i))-prior_sigma(i)/2):bin_width:(prior_params(p_indices(i))+prior_sigma(i)/2); 
 for i=1:length(p_indices)
-param_bins(i,:) = (prior_params(p_indices(i))-prior_sigma(i)/2):bin_width:(prior_params(p_indices(i))+prior_sigma(i)/2); 
+param_bins(i,:) = linspace((prior_params(p_indices(i))-prior_sigma(i)/2),(prior_params(p_indices(i))+prior_sigma(i)/2),M); 
 end
 
 distn_theta = zeros(size(param_bins));
@@ -23,7 +25,7 @@ for j=1:length(p_indices)
 end
 entropy = 0;
 for i=1:length(p_indices)
-entropy = entropy + kldiv(param_bins(i,:)+bin_width/2, distn_theta(i,:)/sum(distn_theta(i,:))+eps,ones(size(distn_theta(i,:)))/length(distn_theta));
+entropy = entropy + kldiv(param_bins(i,:)+prior_sigma(i)/(2*M), distn_theta(i,:)/sum(distn_theta(i,:))+eps,ones(size(distn_theta(i,:)))/length(distn_theta));
 end
 
 end
