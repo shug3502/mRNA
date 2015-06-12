@@ -58,32 +58,33 @@ sigma = 2*wvariance;  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of
 %sigma_alt = 2*var(abc_theta);
 p_accept = 1; %initialise
 
-% figure(my_seed+1);
-% subplot(3,1,1);
-% plot(abc_theta(:,1),abc_theta(:,2),'o');
-% hold all
-% grid on
-% plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
-% set(gca, 'fontsize',14);
-% xlabel('param1');
-% ylabel('param2');
-% subplot(3,1,2);
-% plot(abc_theta(:,1),abc_theta(:,3),'o');
-% hold all
-% grid on
-% plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
-% set(gca, 'fontsize',14);
-% xlabel('param1');
-% ylabel('param3');
-% subplot(3,1,3);
-% plot(abc_theta(:,2),abc_theta(:,3),'o');
-% hold all
-% grid on
-% plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
-% set(gca, 'fontsize',14);
-% xlabel('param2');
-% ylabel('param3');
-
+if length(p_indices)>=3
+figure(my_seed+1);
+subplot(3,1,1);
+plot(abc_theta(:,1),abc_theta(:,2),'o');
+hold all
+grid on
+plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param1');
+ylabel('param2');
+subplot(3,1,2);
+plot(abc_theta(:,1),abc_theta(:,3),'o');
+hold all
+grid on
+plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param1');
+ylabel('param3');
+subplot(3,1,3);
+plot(abc_theta(:,2),abc_theta(:,3),'o');
+hold all
+grid on
+plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param2');
+ylabel('param3');
+end
 
 %First generation for t=1 is done
 %Now loop over generations
@@ -158,31 +159,33 @@ while p_accept >p_accept_min
     p_accept = 1/(N-N_current)*sum(to_keep((N_current+1):N));
     entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
     
-%     figure(my_seed+1);
-%     subplot(3,1,1);
-%     plot(abc_theta(:,1),abc_theta(:,2),'o');
-%     hold all
-%     grid on
-%     plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
-%     set(gca, 'fontsize',14);
-%     xlabel('param1');
-%     ylabel('param2');
-%     subplot(3,1,2);
-%     plot(abc_theta(:,1),abc_theta(:,3),'o');
-%     hold all
-%     grid on
-%     plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
-%     set(gca, 'fontsize',14);
-%     xlabel('param1');
-%     ylabel('param3');
-%     subplot(3,1,3);
-%     plot(abc_theta(:,2),abc_theta(:,3),'o');
-%     hold all
-%     grid on
-%     plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
-%     set(gca, 'fontsize',14);
-%     xlabel('param2');
-%     ylabel('param3');
+    if length(p_indices)>=3
+    figure(my_seed+1);
+    subplot(3,1,1);
+    plot(abc_theta(:,1),abc_theta(:,2),'o');
+    hold all
+    grid on
+    plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
+    set(gca, 'fontsize',14);
+    xlabel('param1');
+    ylabel('param2');
+    subplot(3,1,2);
+    plot(abc_theta(:,1),abc_theta(:,3),'o');
+    hold all
+    grid on
+    plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
+    set(gca, 'fontsize',14);
+    xlabel('param1');
+    ylabel('param3');
+    subplot(3,1,3);
+    plot(abc_theta(:,2),abc_theta(:,3),'o');
+    hold all
+    grid on
+    plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
+    set(gca, 'fontsize',14);
+    xlabel('param2');
+    ylabel('param3');
+    end
     
 end
 
@@ -191,32 +194,33 @@ abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that p
 %entropy gives measure of difference from uniform distn
 entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
 
-
-% figure(my_seed+2);
-% subplot(3,1,1);
-% plot(abc_theta(:,1),abc_theta(:,2),'o');
-% hold all
-% grid on
-% plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
-% set(gca, 'fontsize',14);
-% xlabel('param1');
-% ylabel('param2');
-% subplot(3,1,2);
-% plot(abc_theta(:,1),abc_theta(:,3),'o');
-% hold all
-% grid on
-% plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
-% set(gca, 'fontsize',14);
-% xlabel('param1');
-% ylabel('param3');
-% subplot(3,1,3);
-% plot(abc_theta(:,2),abc_theta(:,3),'o');
-% hold all
-% grid on
-% plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
-% set(gca, 'fontsize',14);
-% xlabel('param2');
-% ylabel('param3');
+if length(p_indices)>=3
+figure(my_seed+2);
+subplot(3,1,1);
+plot(abc_theta(:,1),abc_theta(:,2),'o');
+hold all
+grid on
+plot(real_params(p_indices(1)),real_params(p_indices(2)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param1');
+ylabel('param2');
+subplot(3,1,2);
+plot(abc_theta(:,1),abc_theta(:,3),'o');
+hold all
+grid on
+plot(real_params(p_indices(1)),real_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param1');
+ylabel('param3');
+subplot(3,1,3);
+plot(abc_theta(:,2),abc_theta(:,3),'o');
+hold all
+grid on
+plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
+set(gca, 'fontsize',14);
+xlabel('param2');
+ylabel('param3');
+end
 
 %post-processing to check quality of posterior
 [entropy, quality, contained_in_pred_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,prior_sigma,p_indices);

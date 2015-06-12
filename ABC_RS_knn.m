@@ -55,6 +55,7 @@ abc_theta = abc_theta(to_keep,:);
 abc_weights = abc_weights(to_keep)./sum(abc_weights(to_keep));
 abc_dist = abc_dist(to_keep);
 
+if length(p_indices)>=3
 figure(my_seed+1);
 subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
@@ -80,6 +81,7 @@ plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
+end
 
 [entropy, quality, contained_in_pred_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,prior_sigma,p_indices);
 

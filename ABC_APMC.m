@@ -58,6 +58,7 @@ sigma = 2*wvariance;  %var(abc_theta.*repmat(abc_weights,1,3)); %weighted set of
 %sigma_alt = 2*var(abc_theta);
 p_accept = 1; %initialise
 
+if length(p_indices)>=3
 figure(my_seed+1);
 subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
@@ -83,7 +84,7 @@ plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
-
+end
 
 %First generation for t=1 is done
 %Now loop over generations
@@ -134,9 +135,11 @@ while p_accept >p_accept_min
         for jj=1:length(p_indices)
             prior = prior.*(abc_theta(i,jj)>prior_params(p_indices(jj))-0.5*prior_sigma(jj)).*(abc_theta(i,jj)<prior_params(p_indices(jj))+0.5*prior_sigma(jj))./(prior_sigma(jj));
         end
-        abc_weights(i) = prior./(sum(weights_store./sum(weights_store(1:N_current)).*exp(-((abc_theta(i,1)-previous_params(1:N_current,1)).^2)/(2*sigma(1)^2))...
-            .*exp(-((abc_theta(i,2)-previous_params(1:N_current,2)).^2)/(2*sigma(2)^2))...
-            .*exp(-((abc_theta(i,3)-previous_params(1:N_current,3)).^2)/(2*sigma(3)^2)))/(sqrt(2*pi)^length(p_indices)*(sigma(1)*sigma(2)*sigma(3))^2));
+        kernel=1;
+        for jk=1:length(p_indices)
+            kernel=kernel*exp(-((abc_theta(i,jk)-previous_params(1:N_current,jk)).^2)/(2*sigma(jk)^2))/sigma(jk);
+        end
+        abc_weights(i) = prior./(sum(weights_store./sum(weights_store(1:N_current)).*kernel)/(sqrt(2*pi)^length(p_indices)));        
         if isnan(abc_weights(i)) || isinf(abc_weights(i))
             fprintf('Some weights are Nan or Inf\n');
             sum(weights_store)
@@ -168,6 +171,7 @@ while p_accept >p_accept_min
     p_accept = 1/(N-N_current)*sum(to_keep((N_current+1):N)); 
     entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
     
+    if length(p_indices)>=3
     figure(my_seed+1);
     subplot(3,1,1);
     plot(abc_theta(:,1),abc_theta(:,2),'o');
@@ -193,6 +197,7 @@ while p_accept >p_accept_min
     set(gca, 'fontsize',14);
     xlabel('param2');
     ylabel('param3');
+    end
     
 end
 
@@ -201,7 +206,7 @@ abc_theta = abc_theta((abc_weights>0),:); %if weight is 0 then get rid of that p
 %entropy gives measure of difference from uniform distn
 entropy = calculate_entropy(abc_theta,prior_params,prior_sigma,p_indices);
 
-
+if length(p_indices)>=3
 figure(my_seed+2);
 subplot(3,1,1);
 plot(abc_theta(:,1),abc_theta(:,2),'o');
@@ -227,6 +232,7 @@ plot(real_params(p_indices(2)),real_params(p_indices(3)),'rx','MarkerSize',12);
 set(gca, 'fontsize',14);
 xlabel('param2');
 ylabel('param3');
+end
 
 %post-processing to check quality of posterior
 [entropy, quality, contained_in_pred_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,prior_sigma,p_indices);
