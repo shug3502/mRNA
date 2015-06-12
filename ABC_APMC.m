@@ -137,7 +137,7 @@ while p_accept >p_accept_min
         end
         kernel=1;
         for jk=1:length(p_indices)
-            kernel=kernel*exp(-((abc_theta(i,jk)-previous_params(1:N_current,jk)).^2)/(2*sigma(jk)^2))/sigma(jk);
+            kernel=kernel.*exp(-((abc_theta(i,jk)-previous_params(1:N_current,jk)).^2)/(2*sigma(jk)^2))/sigma(jk);
         end
         abc_weights(i) = prior./(sum(weights_store./sum(weights_store(1:N_current)).*kernel)/(sqrt(2*pi)^length(p_indices)));        
         if isnan(abc_weights(i)) || isinf(abc_weights(i))
