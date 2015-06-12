@@ -41,7 +41,7 @@ end
 prior_params = [5, 5, 5, 1.5, 1.5, 0.5, 0.5, 0];
 prior_params = real_params;
 prior_params(1) = 5;
-p_indices = 1;
+p_indices = [1,4,6];
 prior_sigma = [10, 10, 10, 3, 3, 1]; 
 % prior_params = [1.16, 0.8, 0.42, 0.42, 0.84, 0.58, 0.5, 0];
 % prior_sigma = 0.8*ones(1,6); %[0.8, 0.8, 0.8]; %sd of gaussian or spread around mean of uniform

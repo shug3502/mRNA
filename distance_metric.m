@@ -9,6 +9,7 @@ else %kl divergence
     delx = 1;
     dist = 0;
     for j=1:length(q1(1,:))
-        dist = dist + kldiv((0:delx:L)',q1(:,j)+eps,q2(:,j)+eps);
+        %now with symmetric version of kl divergence
+        dist = dist + 0.5*(kldiv((0:delx:L)',q1(:,j)+eps,q2(:,j)+eps)+kldiv((0:delx:L)',q2(:,j)+eps,q1(:,j)+eps));
     end
 end
