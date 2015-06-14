@@ -1,0 +1,314 @@
+% Template for Biophysics paper in LaTeX
+%
+% To compile into a document, run
+% latex biophys_latex_template
+% bibtex biophys_latex_template (if bib file and bst file is included in TeX file)
+% latex biophys_latex_template (run 2-3 times repeatedly)
+% dvips biophys_latex_template.dvi
+%
+% or replace the latex command by the pdflatex command in the lines above to
+% generate a PDF file and use acroread or xpdf for viewing and
+% printing instead of the postscript generating program dvips
+
+% Use standard biophys document class with default font size
+% and typeset in one column. If you need to typeset in two column
+% then give the option "twocolumn" ie \documentclass[twocolumn]{biophys}
+\documentclass[twocolumn]{biophys}
+\usepackage{helvet,times}
+\usepackage{bm,textcomp}
+
+\jno{kxl015} %journal number
+\gridframe{N}%option for grid around the text "Y" or "N"
+\cropmark{N}%option for cropmark around the text "Y" or "N"
+
+\doi{doi:15}% DOI number in the copyright line
+
+%The first page number and last page number automatically generated.
+%To change the page number \setcounter{page}{10} automatically reset
+%the first and last page number but two times compilation required.
+%If you want to edit the page range in catch line
+% then edit the below two lines
+%\fpage{}
+%\lpage{}
+%For update volume number, activate below command
+%\volume{00}
+%For update issue number, activate below command
+%\issue{00}
+%For update Month, activate below command
+%\Month{Month}
+%For update Year, activate below command
+%\Year{Year}
+
+
+% Packages to load (all standard on a modern LaTeX system on Linux)
+
+% Make doublespaced ugly typography required for mysterious
+% reasons by most journals - comment out for normal output
+%\usepackage{setspace}
+%\doublespacing
+% AMS-Math package to have nice multi-line equations and other goodies
+\usepackage{amsmath}
+% Show labels for easy orientation, comment out for final version
+% \usepackage{showlabels}
+
+% EPS/PDF graphics
+% Place figures in the document directory in both the EPS and PDF
+% formats, e.g., fig_1.eps and fig_1.pdf. Use the includegraphics
+% command without file extension, e.g. \includegraphics*[width=3.25in]{fig_1}
+% The pdflatex or latex programs then work automagically with the
+% appropriate formats.  EPS figures can be converted to PDF using
+% the epstopdf program present on most Linux disributions. Epstopdf and graphicx
+% are included in biophys class file.
+% \usepackage{graphicx}
+
+% Citation style in the text: numbers in parenthesis, sorted by their
+% order in the list of references.
+% Uses a range if possible: (1-3), not (1,2,3)
+
+\usepackage[round,numbers,sort&compress]{natbib}
+
+% Bibliography style (requires the style file biophysj.bst in the
+% document directory)
+
+%\bibliographystyle{biophysj}
+
+% Numbering style in the list of references: a number followed by a period
+
+\renewcommand{\bibnumfmt}[1]{#1.}
+
+% Examples of special definitions (amsmath package required)
+\newcommand{\erf}{\operatorname{erf}}        % error function
+\newcommand{\erfc}{\operatorname{erfc}}      % complementary error function
+\newcommand{\BibTeX}{\textsc{Bib}\TeX}       % corect BibTeX appearance
+
+
+% Running head
+
+
+\markboth{Biophysical Journal: Biophysical Letters}{Biophysical Journal: Biophysical Letters} %for running head
+
+% We are done with the headers, the actual document starts here
+
+
+
+
+\begin{document}
+
+
+
+\setcounter{page}{1} %first page number
+
+\title{Modelling of mRNA transport in \textit{Drosophila} nurse cells}
+
+
+\author{Jonathan Harrison, Richard Parton, Ruth Baker}
+
+\address{University of Oxford}
+
+
+% generate the title page from the info in the headers above
+
+
+%Abstract environment needs 3 arguments. They are
+%1. The abstract
+%2. Received date
+%3. Address, email
+
+\begin{abstract}%
+{Insert abstract information here}%1
+{Insert Received for publication Date and in final form Date.}%2
+{Insert Corresponding address and emails}%3
+\end{abstract}
+
+\maketitle %%The above information typeset through this command
+
+\section{Introduction}
+
+The localization of mRNA is crucial in a variety of biological contexts for the targeting of proteins to their site of function.
+%This enables proteins to be
+This mechanism of gene expression is particularly relevant for polarized cells such as oocytes and early embryos.
+For example, the axes of \textit{Drosophila Melongaster} are established through regulation of gradients in \textit{bicoid} (\textit{bcd}), \textit{gurken} (\textit{grk}), \textit{oskar} (\textit{osk}) and \textit{nanos} (\textit{nos}) mRNA \citep{wolpert1998}.
+mRNA localization has been observed in a variety of species and cell types, including Drosophila and Xenopus oocytes, neurons, chicken fibroblasts, yeast and bacteria \citep{wilkie2001drosophila, bobola1996asymmetric, mowry1992vegetal, rosbash1993rna, nevo2011translation}, thus demonstrating that this process is ubiquitous and not limited to large cells. 
+Drosophila rely heavily on asymmetric locatization of mRNAs to coordinate the early development process both spatially and temporally.
+
+Recent advances in imaging techniques and image analysis technologies \citep{jeffery1983localization, bertrand1998localization, hamilton2010particlestats} have allowed an advancement of our understanding of the mechanisms of mRNA localization. 
+The use of flourescence in situ hybridisation (FISH) enables single molecules of mRNA to be labelled with high levels of sensitivity and specificity. 
+The development of the MS2-MCP system, which consists of a MS2 bacteriophage RNA stem loop bound by MS2 coat protein fusion to a flourescent protein \citep{parton2014subcellular}, has had great benefits for the imaging of live cells \textit{in vivo}.
+The MS2-MCP system has been used successfully in the visualisation of \textit{nos}, \textit{grk}, \textit{bcd} and \textit{osk} mRNAs in Drosophila \citep{forrest2003live, jaramillo2008dynamics, weil2006localization, zimyanin2008vivo}.
+Although there are limitations to these technologies dependent on cell type, they have permitted an improvement of our understanding of intracellular motility and structure.
+What has become clear is that a variety of different mechanisms are used to ensure localization of mRNAs.
+
+\subsection{Outline of mRNA localization process}
+
+Once mRNA has been transcribed from DNA in the nucleus, the process by which it reaches its final site of localization, where it is then translated into protein, can be divided into four main stages: particle formation; nuclear export; transport; and anchoring.
+We will address each of these processes in turn.
+
+mRNA does not exist on its own inside the cell.
+Instead the mRNA binds to proteins to form particle complexes, which are also known as ribonuclearproteins (RNPs). 
+These proteins perform a range of different functions, including translational regulation to prevent translation while the mRNA is in transit, and may determine the final destination of the particle. Examples of proteins that form these paricles include \textit{Squid} (\textit{sqd}) and \textit{Orb}.
+There is also evidence that RNPs are dynamically remodelled during the transport process \citep{weil2012drosophila}.
+
+After the RNA has formed into RNPs, it must diffuse through the crowded interchromatin spaces in the nucleus until it reaches a nuclear pore complex (NPC).
+The RNP is then exported out of the NPC into the cytoplasm via interactions with co-factors.
+Certain NPCs are more active than others at different times \citep{weil2012drosophila}, but the overall direction of export out of the nucleus is unbiased \citep{wilkie2001drosophila}. 
+
+The transport stage of mRNA localization occurs by different mechanisms for different mRNAs.
+The most common method observed is transport via molecular motors moving along the cytoskeleton (either microtubules or actin filaments). 
+However, \textit{nos} mRNA localizes using a diffusion and trapping technique \citep{forrest2003live} rather than by active transport. 
+Active transport results in faster directed motion with velocities of the order of $1 \mu \text{m} \text{s}^{-1}$ \citep{weil2006localization, zimyanin2008vivo}, which is an order of magnitude quicker than movement by free diffusion.
+The motion of RNP complexes on microtubules is often non-uniform in nature, with bidirectionality observed by \citet{vendra2007dynactin} in Drosophila blastoderm embryos.
+It should be noted that, conventionally, individual types of molecular motors are thought to move unidirectionally, with Dynein directed towards the minus end of microtubules and Kinesin directed towards the plus end.
+The number of motors required for a given RNP complex can vary and may be governed by cis-acting localization elements in the mRNA \citep{amrute2012single}.
+Possible explanations for the bidirectionality include: the bidirectional disorganized distribution of the microtubule network; a tug of war between different molecular motors moving in opposing directions on different microtubules; a tug of war between different motor species all bound to the same RNP complex; reversal of a molecular motor moving on a single microtubule, possibly due to regulation by microtubule associated proteins (MAPs) \citep{buxbaum2015right}. 
+The molecular motors must be correctly joined to their cargo and the motor cargo complex secured to the cytoskeleton.
+This is ensured by the linkers \textit{Bicaudal D} (\textit{BicD}) and \textit{Egalitarian} (\textit{Egl}) \citep{parton2014subcellular}. 
+Although the cytoskeleton was initially thought to be a stable static network, due how it was analysed in fixed material, it has recently been revealed to be a dynamic network with a biased random orientation of microtubules \citep{parton20111}.
+This underlying structure had been suggested by the work of \citet{zimyanin2008vivo} who observed RNPs containing \textit{osk} mRNA moving in a biased random walk.  
+
+Once the RNP complex has reached its destination, it must be maintained in position by some anchoring mechanism to keep the mRNA localized within the cell.
+\textit{grk} mRNA is anchored by the molecular motor Dynein \citep{delanoue2005dynein} in the Drosophila oocyte and \textit{nos} is trapped by actin \citep{forrest2003live}.
+Dynein was observed by \citet{delanoue2005dynein} to act as a static motor without requiring further energy in the form of ATP to function. 
+An alternative hypothesis is that continuous active transport is required to ensure the localization of mRNA, since \citet{weil2006localization} found that Dynein motor activity is required to ensure \textit{bcd} localization in the anterior cortex of the Drosophila embryo.
+
+\subsection{Motivation}
+After transcription and transport out of the nucleus, many mRNAs are localized and translated in the distinct cytoplasmic domains where they function \citep{jansen2001mrna, parton2014subcellular}.
+This process is highly regulated and involves active transport by intricate molecular motors.
+mRNA localization is crucial for the establishment of polarity of cells and the formation of the basic animal body plan during development \citep{wolpert1998}. 
+It may have importance for a wide range of functions involving memory and learning in the nervous system. 
+However, we are a long way from a complete understanding of the mechanisms governing the mRNA cargo transport process.
+
+In particular, mRNA transcripts that set up the \textit{Drosophila} body axes originate in the nurse cells and are actively transported on specialized subpopulations of microtubules into the oocyte through the ring canals \citep{clark2007dynein}.
+We will focus on this maternal transfer of transcripts into the oocyte.
+
+One of the challenges involved in live imaging of cells to examine this transport process is the need to scan a sample in three spatial dimensions as well as in time.
+This places restrictions on the resolution of data that can be obtained temporally and in the $z$ direction \citep{weil2010making}.
+Although there are physical restrictions on what can be achieved by improvements in imaging technologies, these could be overcome by modelling of the transport of mRNA cargos, which may permit sparser sampling in time and finer sampling in space.
+This could be achieved by improvements in tracking of individual particles or by considering a more bulk flow approach.
+In this way, mathematical modelling could enable us to work with sparse data sets.
+
+\section{Materials and Methods}
+\subsection{Modelling approach}
+In this context, modelling involves breaking down the mRNA localization process into its key components and identifying the biologically important aspects. 
+We will put in place appropriate, simple modelling assumptions to describe the most important parts of the system biologically.
+These assumptions must agree with existing experimental observations.
+
+We propose two different approaches to parameterise our model. 
+The first will involve direct measurement of parameters, such as the average speed of cargo complexes in active transport.
+The second method requires application of an approximate Bayesian computation (ABC) framework \citep{johnston2014interpreting, turner2012tutorial, beaumont2002approximate} to parameterise the model via comparison with certain summary statistics of the data.
+This will enable comparison between the experimentally measured parameter values and the posterior for these parameters obtained via ABC.
+
+We aim to produce a testable model in the sense that we are able to make predictions from the model of the result of varying certain parameters, such as the speed of the motor carrying the cargo, which could be tested experimentally using genetic mutants that have behaviour that corresponds effectively to a different value of a given parameter. 
+This should inform our understanding of how transcripts transport and localize.
+
+\subsection{Velocity jump process}
+The movement of RNP cargos is often described as a biased random walk. Rather than modelling this as a simple random walk in position, we let the direction of motion vary. 
+This type of model is known as a velocity jump process and has been successfully applied to directed migration of animals and cells \citep{codling2005calculating}.
+
+There are two phases of motion included in the model: an active transport phase when the motor is moving on the microtubules with constant speed $\nu_1$ and a slower diffusive phase with constant speed $\nu_2$.
+Switching occurs between these two phases of motion with exponential waiting times between events.
+Biologically this switching corresponds to the molecular motor falling off and reattaching to the microtubule.
+The motor complex also changes direction with rate $\omega$ by remaining at the same speed due to its current phase of motion, but rotating to a new angle at random where the angle $\theta $ is drawn from some distribution $\Phi$. 
+Here we chose to define $\Phi$ empirically as uniform on $[0,\pi ]$ and $[\pi, 2\pi ]$ with a bias in favour of $[0,\pi ]$ based on biological data.
+
+
+We measured some parameters directly. Explain this here. We would like to compare this to inference via ABC.
+We are able to make predictions on what would happen if we halved the speed of the molecular motors via a genetic mutation. The resulting distribution over time would look like... and the MFPT would be...
+
+\subsubsection{Analytics}
+Is it worth doing any analytics? Is there anything worth including?
+
+\subsection{ABC}
+We want to parameterise our model. It seemed like a good idea to use ABC to do this. We should now explain how ABC works.
+We will generate parameters $\theta$ from a prior $\pi(\theta)$ on the parameters.
+Using these randomly generated parameters $\theta$, we will generate data from our model and compare this data generated from the model with experimental data.
+The comparison must be done via certain summary statistics rather than comparing the entire data set. 
+If it is close to the experimental data, we will accept the candidate parameters.
+We are thus able to approximate a posterior for the parameters given the experimental data.
+
+Something about summary statistics, tolerances and distance metrics.
+Mention the drawbacks of ABC. Robert et al 2011.
+
+\subsubsection{ABC Population Monte-Carlo}
+Some text about ABC PMC to explain the method and how it works. Possibly an algorithm too.
+
+\subsubsection{Dependence of weights on distance}
+Some text to explain why this might be a good idea. Maybe its not though.
+
+\section{Results and Discussion}
+\subsection{Evaluation of ABC methods on in silico data}
+Explain the set up.
+Which method performs best? Is this consistent?
+Why might this be?
+
+\subsection{Application of ABC to \textit{Drosophila} nurse cell data}
+We collected some data.
+What did we collect? Why? Might it have been more informative if we could have collected something else?
+Why didn't we do that?
+What estimates for the posterior of the parameters do we get from ABC?
+Are these informative?
+Do they agree with what we obtained by direct measurement? Why?
+
+\section{Conclusion}
+Some discussion and summary of what we have done
+
+\subsection{Further work}
+We would like to make our model more complex to capture extra parts of the biology. 
+Currently, the model does not account for crowding within the cell or ...or ...
+We might also want to improve our inference. Ways we could do this might be ...
+Motivated by a Kalman filter type approach, we would like to investigate further using our model combined with regular inputs of data over time to assist particle tracking algorithms in the linkage step of tracking.
+
+
+\section*{SUPPLEMENTARY MATERIAL}
+
+An online supplement to this article can be found by visiting BJ Online at http://www.biophysj.org.
+
+
+
+% Here references are directly included this tex file.
+% But we can generate reference list from bibliography database
+% Compile and format the bibliography (bj_bibtex_template.bib BibTeX
+% file must be present in the document directory)
+
+%The source file for this document is called
+%\emph{biophys\_latex\_template.tex}.  Apart from this \LaTeX\ file, you
+%will also need the bibliography file, the \BibTeX\ style file, and the
+%EPS and PDF figure files.
+
+%See the bibliography file \emph{bj\_bibtex\_template.bib} for the
+%literature data.  It was mostly generated from the saved
+%text-formatted PubMed entries using the \emph{med2bib} program and
+%edited by the \emph{tkbibtex} or directly in the \emph{emacs} editor.
+
+%The \emph{biophysj.bst} file is a \BibTeX\ style file that contains
+%information about the format required by Biophysical Journal for the
+%list of references.
+
+
+%\bibliography{bj_bibtex_template}
+
+% Bibliography style (requires the style file biophysj.bst in the
+% document directory)
+\bibliographystyle{biophysj}
+\bibliography{my_citations.bib}
+
+% Figure legends
+%%Automatically it will add the figure legends  and table legends as a list by below command
+
+
+\newpage
+
+\listoffigures
+
+\newpage
+
+\listoftables
+
+% Figures and Tables coding should be placed where the
+% first reference in the text.
+% All the Figure files should be placed same working directory,
+% for example (fig_1.eps and fig_1.pdf files must be present
+% in the document directory)
+
+% closing statement, nothing below matters
+
+\end{document}
