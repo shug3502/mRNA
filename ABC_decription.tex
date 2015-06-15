@@ -1,0 +1,58 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{Modelling of mRNA localization}
+\author{Jonathan Harrison}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{ABC}
+
+In a statistical inference context, the likelihood of data given a certain set of parameters is a central quantity. 
+In particular, it is essential in calculation of the posterior over the parameters given certain data. 
+Although for simple models it may be possible to evaluate the likelihood analytically, often for more complex models the likelihood is not tractable or is very expensive to compute.  
+Approximate Bayesian Computation (ABC) techniques have been developed to address this issue \cite{beaumont2002}.
+Instead of directly evaluating the likelihood, ABC techniques assume it is possible to cheaply simulate from the model and use this to approximate the likelihood.
+
+In an ABC rejection sampling approach we do the following:
+\begin{itemize}
+%for $i=1$ to $n$
+\item Sample parameters $\theta$ from a prior on those parameters $\pi (\theta)$ \\
+\item Simulate data $x$ from the model $M(\theta)$ using those parameters \\
+\item Calculate distance from observed data $y$ If $\rho (S(x),S(y)) < \epsilon $ then accept the parameters $\theta$. Else reject \\
+%end for 
+
+\end{itemize}
+where $\rho$ is a distance metric, $S(x)$ is a summary statistic used to summarize the data $x$ and $\epsilon$ is a maximum tolerance for acceptance. 
+The accepted parameters $\theta$ then represent an approximation to the posterior distribution. 
+
+One drawback of this algorithm is that it depends on appropriate choice of the distance metric $\rho$, the summary statistic $S(x)$ and the tolerance $\epsilon $. 
+Clearly the quality of the posterior will depend on the choice of these hyperparameters, as for example increasing $\epsilon $ will decrease the quality of the corresponding posterior.
+In some settings it may be possible to take the full data, rather than a summary statistic and to set $\epsilon=0$ which would give an exact sample from the posterior, but in general this is not possible computationally. 
+We can eliminate the importance of the tolerance to some extent by simulating $N$ samples from the prior, storing all the distances and keeping the closest $\alpha$ quantile of the sampled parameters to the observed data. 
+The quality of the posterior still depends on $N$ and $\alpha$ but the choice of $\epsilon $, which may be dependent on other model parameters, is removed. 
+
+The efficiency on the rejection sampling method is low, particularly for small values of $\epsilon$ which lead to tiny acceptance rates meaning many wasted samples. 
+More efficient ways of sampling possible parameters $\theta$ have been suggested including Sequential Monte Carlo and Population Monte Carlo techniques $\citep{Toni2009, Sissoon2007,Lenormand2013}$.
+We have opted to use an adaptive Population Monte Carlo (APMC) method presented in \citet{Lenormand2013}. 
+This is implemented as follows:
+\begin{itemize}
+
+\end{itemize}
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{my_citations.bib}
+
+
+\end{document}
