@@ -24,7 +24,7 @@ if option_a_summary_statistic %choose which type of summary statistic to use
         params = par_params;
     end
     non_infinite = 0;
-    t_max = 10;  %if this is too small, some runs will not reach anchoring giving infinite mfpt _> rejection.
+    t_max = 100;  %if this is too small, some runs will not reach anchoring giving infinite mfpt _> rejection.
     % these are probably not an issue as they would give large mfpt anyway,
     % which would be rejected. But can increase this.
     
