@@ -42,10 +42,10 @@ for k=[0, 1] %0 is with spatial distribution; 1 is mfpt etc.
 %     quality = quality/num_runs;
     [entropy, quality, proportion_in_interval]= post_processing(abc_theta,abc_weights,prior_params,real_params,sigma,indices);
     
-     fname = sprintf('Comparison_of_ABC_methods_N500_paccmin_0.05.txt');
+     fname = sprintf('Comparison_of_ABC_methods_N5000_paccmin_0.1.txt');
     fileID = fopen(fname,'a');
     fprintf(fileID,'%d %f %f %f %f \n',k,entropy,quality(1),quality(2),proportion_in_interval);
-    gname = sprintf('ABC_theta_store_N500_paccmin_0.05.txt');
+    gname = sprintf('ABC_theta_store_N5000_paccmin_0.1.txt');
     fileID2 = fopen(gname,'a');
     fprintf(fileID2,'%d \n \n %f \n',k,abc_theta);
     fclose('all');

@@ -18,7 +18,6 @@ M=21;
 for i=1:length(p_indices)
 param_bins(i,:) = linspace((prior_params(p_indices(i))-prior_sigma(p_indices(i))/2),(prior_params(p_indices(i))+prior_sigma(p_indices(i))/2),M); 
 end
-
 distn_theta = zeros(size(param_bins));
 for j=1:length(p_indices)
  [distn_theta(j,:),~] = histc(abc_theta(:,j),param_bins(j,:));
