@@ -1,5 +1,5 @@
 function evaluate_mfpt_simpler_version(plot_option)
-%last edit 9/6/15
+%last edit 15/6/15
 %created 6/5/15 harrison
 %runs velocityjump2D_Nucleus which is a velocity jump process for a single particle
 %runs this many times for many particles and returns simulated estimates of
@@ -20,23 +20,27 @@ params.Ly = 37; %in y direction
 params.nuc_radius = 10; %radius of nucleus
 params.theta_0 = 0; %initial angle is 0
 
-t_max = 100;
-my_length = 1;
+param_vec = [0.001,0.01,0.1,0.5,1,5,10];%0.4:0.05:0.75;
+my_length = length(param_vec);
+t_max = 200;
+%my_length = 1;
 mean_anchor_storage = zeros(my_length,1);
 sd_anchor_storage = zeros(my_length,1);
 
-num_particles = 500;
+num_particles = 100;
+
 
 for k=1:my_length
     
-    
+    params.nu1 = param_vec(k);
+    params.nu2 = param_vec(k)/2;
     %parfor? perhaps if it took longer might be needed
     anchored = zeros(num_particles,1);
     anchor_times = zeros(num_particles,1);
     final_positions = zeros(num_particles,2);
     
     for j=1:num_particles
-        [anchored(j), anchor_times(j), final_positions(j,1), final_positions(j,2), ~,~,~] = velocityjump2D_with_nucleus(t_max, params, 1,2, 0);
+        [anchored(j), anchor_times(j), final_positions(j,1), final_positions(j,2), ~,~,~] = velocityjump2D_with_nucleus(t_max, params, 1, 2, 0);
     end
     mean_anchor_time = mean(anchor_times);
     alt = sqrt(1/(num_particles-1)*sum((anchor_times-mean_anchor_time).^2));
@@ -48,14 +52,13 @@ end
 mean_anchor_storage
 sd_anchor_storage
 if plot_option
-    x_0_vec=0.5;
     figure;
-    errorbar(x_0_vec,mean_anchor_storage,sd_anchor_storage,'linewidth',3)
+    errorbar(log10(param_vec),mean_anchor_storage,sd_anchor_storage,'linewidth',3)
     set(gca, 'fontsize',16);
-    xlabel('x_0');
+    xlabel('log(\nu_1)');
     ylabel('MFPT');
     grid on
-    axis([x_0_vec(1)-0.5,x_0_vec(end)+0.5, 0, 3600*t_max]);
+%    axis([param_vec(1)-0.05,param_vec(end)+0.05, 0, 3600*t_max]);
 end
 toc(total)
 
