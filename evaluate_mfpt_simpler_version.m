@@ -20,12 +20,12 @@ params.Ly = 37; %in y direction
 params.nuc_radius = 10; %radius of nucleus
 params.theta_0 = 0; %initial angle is 0
 
-t_max = 10;
+t_max = 100;
 my_length = 1;
 mean_anchor_storage = zeros(my_length,1);
 sd_anchor_storage = zeros(my_length,1);
 
-num_particles = 200;
+num_particles = 500;
 
 for k=1:my_length
     

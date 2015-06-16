@@ -43,6 +43,7 @@ v = params.nu1*is_attached + params.nu2*(1-is_attached); %initialise the speed
 T = params.lambda_2; %store lambda
 params.lambda_2 = (1-is_attached*(num_modes>1))*T; %initially is attached so 0
 nuc_rad = params.nuc_radius^2;
+rc_width = 1; %3microns wide for ring canals
 
 time=0; %unit seconds
 xpos = params.Lx/2 + params.nuc_radius*(2*rand(1)-1); %initialise x position
@@ -80,9 +81,13 @@ while time<endtime && ~is_anchored
     ypos = ypos + delx*cos(theta);
     
     if xpos >=params.Lx
+        if abs(ypos)<rc_width
         anchoring_time = (params.Lx-(xpos-delx*sin(theta)))/(v*sin(theta))+ time;
         xpos = (2*params.Lx - xpos)*(with_anchoring<0.5)+(params.Lx)*(with_anchoring>0.5);
         is_anchored = with_anchoring; %absorb at right hand boundary or reflect depending on whether we have anchoring
+        else
+        xpos = 2*params.Lx - xpos;    
+        end
     elseif xpos < 0
         xpos = -xpos; %reflect at left hand boundary
     end
