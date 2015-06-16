@@ -32,8 +32,7 @@ num_particles = 100;
 
 for k=1:my_length
     
-    params.nu1 = param_vec(k);
-    params.nu2 = param_vec(k)/2;
+    params.omega_1 = param_vec(k);
     %parfor? perhaps if it took longer might be needed
     anchored = zeros(num_particles,1);
     anchor_times = zeros(num_particles,1);
@@ -55,7 +54,7 @@ if plot_option
     figure;
     errorbar(log10(param_vec),mean_anchor_storage,sd_anchor_storage,'linewidth',3)
     set(gca, 'fontsize',16);
-    xlabel('log(\nu_1)');
+    xlabel('log(\omega_1)');
     ylabel('MFPT');
     grid on
 %    axis([param_vec(1)-0.05,param_vec(end)+0.05, 0, 3600*t_max]);
