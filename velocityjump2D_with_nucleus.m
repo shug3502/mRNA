@@ -200,7 +200,7 @@ if with_plot
     plot3(jump_times, pathx, pathy, plot_col,'linewidth',3)
     set(gca,'fontsize',14)
     xlabel('t');
-    ylabel('x position along microtubule');
+    ylabel('x position');
     zlabel('y position');
     grid on
     hold all
@@ -215,10 +215,11 @@ if with_plot
     %     plot3(0:3600/(L*2):3600,0:0.5:L,-b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
     
     figure(3)
+    subplot(2,1,1)
     plot(jump_times, pathx, plot_col, 'linewidth',3)
     set(gca,'fontsize',16)
     xlabel('t');
-    ylabel('x position along microtubule');
+    ylabel('x position');
     grid on
     hold all
     if ~ isempty(transitions)
@@ -235,11 +236,12 @@ if with_plot
     %plot(t, mu1, 'b--', 'linewidth',3);
     set(gca, 'fontsize',14)
     
-    figure(5)
+    %figure(5)
+    subplot(2,1,2)
     plot(pathx,pathy,plot_col,'linewidth',3)
     set(gca,'fontsize',16)
-    xlabel('y');
-    ylabel('x');
+    xlabel('x position');
+    ylabel('y position');
     grid on
     hold all
     if ~ isempty(transitions)
