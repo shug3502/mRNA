@@ -20,7 +20,7 @@ if nargin ~= 5
     input_time = 1;
     with_anchoring = 1;
     num_modes = 1;
-    with_plot = 0;
+    with_plot = 1;
     %Now with data on nurse cells from Alex Davidson
     params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
     params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
@@ -235,23 +235,34 @@ if with_plot
     %plot(t, mu1, 'b--', 'linewidth',3);
     set(gca, 'fontsize',14)
     
-    nframe=min(200,length(pathx));
-    mov(1:nframe)=struct('cdata',[],'colormap',[]);
-    figure;
-    hold on
+    figure(5)
+    plot(pathx,pathy,plot_col,'linewidth',3)
+    set(gca,'fontsize',16)
+    xlabel('y');
+    ylabel('x');
     grid on
-    plot(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k');
-    plot(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k');
-    axis([0,params.Lx,-params.Ly/2,params.Ly/2]);
-    set(gca,'fontsize',14);
-    xlabel('x')
-    ylabel('y')
-    for i=1:nframe
-        frame_num = i;
-        plot(pathx(frame_num),pathy(frame_num),'ro','MarkerSize',12);
-        mov(frame_num)=getframe(gcf);
+    hold all
+    if ~ isempty(transitions)
+        plot(transitions(:,1),transitions(:,2),'bo')
     end
-    movie2avi(mov, 'VJ_With_Nucleus.avi', 'compression', 'None');
+%code to make a movie    
+%     nframe=min(200,length(pathx));
+%     mov(1:nframe)=struct('cdata',[],'colormap',[]);
+%     figure;
+%     hold on
+%     grid on
+%     plot(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k');
+%     plot(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k');
+%     axis([0,params.Lx,-params.Ly/2,params.Ly/2]);
+%     set(gca,'fontsize',14);
+%     xlabel('x')
+%     ylabel('y')
+%     for i=1:nframe
+%         frame_num = i;
+%         plot(pathx(frame_num),pathy(frame_num),'ro','MarkerSize',12);
+%         mov(frame_num)=getframe(gcf);
+%     end
+%     movie2avi(mov, 'VJ_With_Nucleus.avi', 'compression', 'None');
 end
 
 %toc
