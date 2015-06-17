@@ -26,38 +26,72 @@ t_max = 200;
 %my_length = 1;
 mean_anchor_storage = zeros(my_length,1);
 sd_anchor_storage = zeros(my_length,1);
+mean_jumps_storage = zeros(my_length,1);
+sd_jumps_storage = zeros(my_length,1);
+mean_distances_storage = zeros(my_length,1);
+sd_distances_storage = zeros(my_length,1);
 
 num_particles = 100;
-
+    
 
 for k=1:my_length
     
-    params.omega_1 = param_vec(k);
+    params.omega_2 = param_vec(k);
     %parfor? perhaps if it took longer might be needed
     anchored = zeros(num_particles,1);
     anchor_times = zeros(num_particles,1);
-    final_positions = zeros(num_particles,2);
+    num_jumps = zeros(num_particles,1);
+    jump_distances = zeros(num_particles,1);
     
     for j=1:num_particles
-        [anchored(j), anchor_times(j), final_positions(j,1), final_positions(j,2), ~,~,~] = velocityjump2D_with_nucleus(t_max, params, 1, 2, 0);
+        [anchored(j), anchor_times(j), ~, ~, pathx, pathy,~] = velocityjump2D_with_nucleus(t_max, params, 1, 2, 0);
+        num_jumps(j) = length(pathx);
+        jump_distances(j) = median(sqrt(diff(pathx).^2+diff(pathy).^2));
     end
     mean_anchor_time = mean(anchor_times);
     alt = sqrt(1/(num_particles-1)*sum((anchor_times-mean_anchor_time).^2));
     sd_anchor_time = std(anchor_times);
     
+    mean_num_jumps = mean(num_jumps); %use mean number of jumps in a single passage as another
+    sd_num_jumps = std(num_jumps);
+    mean_jump_distances = mean(jump_distances); %use mean jump distance as final summary statistic
+    sd_jump_distances = std(jump_distances);
+    
     mean_anchor_storage(k) = mean_anchor_time;
     sd_anchor_storage(k) = sd_anchor_time;
+    mean_jumps_storage(k) = mean_num_jumps;
+    sd_jumps_storage(k) = sd_num_jumps;
+    mean_distances_storage(k) = mean_jump_distances;
+    sd_distances_storage(k) = sd_jump_distances;
 end
 mean_anchor_storage
 sd_anchor_storage
 if plot_option
     figure;
+    subplot(3,1,1)
     errorbar(log10(param_vec),mean_anchor_storage,sd_anchor_storage,'linewidth',3)
-    set(gca, 'fontsize',16);
-    xlabel('log(\omega_1)');
+    set(gca, 'fontsize',24);
+    xlabel('log(\omega_2)');
     ylabel('MFPT');
     grid on
 %    axis([param_vec(1)-0.05,param_vec(end)+0.05, 0, 3600*t_max]);
+
+    %figure;
+    subplot(3,1,2)
+    errorbar(log10(param_vec),mean_jumps_storage,sd_jumps_storage,'linewidth',3)
+    set(gca, 'fontsize',24);
+    xlabel('log(\omega_2)');
+    ylabel('Number of Jumps');
+    grid on
+    
+    %figure;
+    subplot(3,1,3)
+    errorbar(log10(param_vec),mean_distances_storage,sd_distances_storage,'linewidth',3)
+    set(gca, 'fontsize',24);
+    xlabel('log(\omega_2)');
+    ylabel('Jump Distance');
+    grid on
+
 end
 toc(total)
 
