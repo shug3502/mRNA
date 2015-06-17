@@ -20,19 +20,19 @@ params.Ly = 37; %in y direction
 params.nuc_radius = 10; %radius of nucleus
 params.theta_0 = 0; %initial angle is 0
 
-param_vec = 0.4:0.05:0.8; %[0.001, 0.01,0.1,0.5,1,5,10]; 0.5:0.02:0.8;
+param_vec = [1.16/2,1.16]; %[0.001, 0.01,0.1,0.5,1,5,10]; %0.5:0.02:0.8; 0.4:0.05:0.8;
 my_length = length(param_vec);
 %my_length = 1;
 
 M=53;
 q_storage = zeros(my_length,M);
 
-num_particles = 100;
+num_particles = 1000;
     
 
 for k=1:my_length
     
-    params.phi = param_vec(k);
+    params.nu1 = param_vec(k);
     
     q_distn = summary_statistic_calculator(params,num_particles,0,0);
     q_storage(k,:) = q_distn;
