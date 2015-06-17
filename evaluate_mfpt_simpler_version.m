@@ -75,7 +75,7 @@ if plot_option
     xlabel('log(\nu_1)');
     ylabel('MFPT');
     grid on
-%    axis([param_vec(1)-0.05,param_vec(end)+0.05, 0, 3600*t_max]);
+    axis([-1.5,1.5, 0,100000]);
 
     %figure;
     subplot(3,1,2)
@@ -84,6 +84,7 @@ if plot_option
     xlabel('log(\nu_1)');
     ylabel('Number of Jumps');
     grid on
+    axis([-1.5,1.5, 0,200000]);
     
     %figure;
     subplot(3,1,3)
