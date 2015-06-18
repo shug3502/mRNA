@@ -18,10 +18,19 @@ function [entropy, quality, proportion_in_interval] = compare_posterior_qualitie
 
 %num_runs = 20;
 
-fname = sprintf('Comparison_of_ABC_methods_N1000_RS.txt');
-gname = sprintf('ABC_theta_store_N1000_RS.txt');
+if which_method==1
+    method_str = 'RS';
+elseif which_method==2
+    method_str = 'Weights';
+elseif which_method==3
+    method_str = 'APMC'
+end
 
-for k=[0, 1] %0 is with spatial distribution; 1 is mfpt etc.
+
+fname = sprintf('Comparison_of_ABC_methods_N1000_%s.txt',method_str);
+gname = sprintf('ABC_theta_store_N1000_%s.txt', method_str);
+
+for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
    
     if which_method==1
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
