@@ -44,7 +44,7 @@ function [count edges mid loc] = histcn(X, varargin)
 %   X = randn(M,N);
 %   [N edges mid loc] = histcn(X);
 %   imagesc(mid{1:2},N(:,:,ceil(end/2)))
-%
+% 
 % % Compute the mean on rectangular patch from scattered data
 %   DataSize = 1e5;
 %   Lat = rand(1,DataSize)*180;

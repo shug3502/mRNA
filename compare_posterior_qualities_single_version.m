@@ -28,7 +28,7 @@ end
 
 
 fname = sprintf('Comparison_of_ABC_methods_N100_%s.txt',method_str);
-gname = sprintf('ABC_theta_store_N100_%s.txt', method_str);
+gname = sprintf('ABC_theta_store_N100_read_from_R_%s.txt', method_str);
 
 for k=[0] %0 is with spatial distribution; 1 is mfpt etc.
    
@@ -62,6 +62,8 @@ for k=[0] %0 is with spatial distribution; 1 is mfpt etc.
     fprintf(fileID2,'%d \n \n %f \n',k,abc_theta);
     fclose('all');
     
+    csvwrite('ABC_theta_read_from_R.dat',abc_theta);
+    
     elseif which_method == 2
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     proportion_in_interval = 0;
@@ -89,6 +91,8 @@ for k=[0] %0 is with spatial distribution; 1 is mfpt etc.
     fileID2 = fopen(gname,'a');
     fprintf(fileID2,'%d %f \n',k,abc_theta);
     fclose('all');
+    
+        csvwrite('ABC_theta_read_from_R.dat',abc_theta);
     
     elseif which_method == 3
     %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -118,6 +122,8 @@ for k=[0] %0 is with spatial distribution; 1 is mfpt etc.
     fileID2 = fopen(gname,'a');
     fprintf(fileID2,'%d %f \n',k,abc_theta);
     fclose('all');
+    
+        csvwrite('ABC_theta_read_from_R.dat',abc_theta);
     end
 end
 

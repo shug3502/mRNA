@@ -19,7 +19,7 @@ function [params, real_params, accepted_proportion, p_accept_min, ...
 real_params = [params.nu1, params.nu2, params.lambda_2, params.omega_1, params.omega_2, params.phi, params.x_0, params.Lx, params.Ly, params.nuc_radius, params.theta_0];
 
 %Choose tolerance sequence
-accepted_proportion = 0.01; %alpha
+accepted_proportion = 0.1; %alpha
 
 p_accept_min = 0.05;
 %option_a : 1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
