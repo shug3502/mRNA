@@ -53,6 +53,7 @@ if plot_option
         xlabel(var_strings(j));
         
     end
+    print('Auto_hist_plot','-dpng');
     posterior_mode
     posterior_mean = mean(abc_theta,1);
     quality_of_posterior = [sqrt(sum((posterior_mode - real_params(indices)).^2)),sqrt(sum((posterior_mean - real_params(indices)).^2))]; %note this currently does not depend equally on all params due to scaling of each param
@@ -73,7 +74,7 @@ if plot_option
             end
         end
     end
-    
+    print('Auto_heatmap_plot','-dpng');
     %     figure;
     %     imagesc(mid{1:2},posterior(:,:,ceil(end/2)));
     %
