@@ -23,14 +23,14 @@ if which_method==1
 elseif which_method==2
     method_str = 'Weights';
 elseif which_method==3
-    method_str = 'APMC'
+    method_str = 'APMC';
 end
 
 
-fname = sprintf('Comparison_of_ABC_methods_N1000_%s.txt',method_str);
-gname = sprintf('ABC_theta_store_N1000_%s.txt', method_str);
+fname = sprintf('Comparison_of_ABC_methods_N100_%s.txt',method_str);
+gname = sprintf('ABC_theta_store_N100_%s.txt', method_str);
 
-for k=[1] %0 is with spatial distribution; 1 is mfpt etc.
+for k=[0] %0 is with spatial distribution; 1 is mfpt etc.
    
     if which_method==1
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

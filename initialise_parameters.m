@@ -19,9 +19,9 @@ function [params, real_params, accepted_proportion, p_accept_min, ...
 real_params = [params.nu1, params.nu2, params.lambda_2, params.omega_1, params.omega_2, params.phi, params.x_0, params.Lx, params.Ly, params.nuc_radius, params.theta_0];
 
 %Choose tolerance sequence
-accepted_proportion = 0.1; %alpha
+accepted_proportion = 0.01; %alpha
 
-p_accept_min = 0.01;
+p_accept_min = 0.05;
 %option_a : 1 gives euclidean distance and mfpt etc. 0 gives spatial distribution and kl div etc.
 
 if data_to_read
@@ -39,9 +39,9 @@ end
 
 %set prior
 prior_params = [5, 5, 5, 1.5, 1.5, 0.5, 0.5, 0];
-prior_params = real_params;
-p_indices = [1,4,6]; %1:6;
-prior_params(p_indices) = [5,1.5,0.5];
+%prior_params = real_params;
+p_indices = 1:6;
+%prior_params(p_indices) = [5,1.5,0.5];
 prior_sigma = [10, 10, 10, 3, 3, 1]; 
 % prior_params = [1.16, 0.8, 0.42, 0.42, 0.84, 0.58, 0.5, 0];
 par_params = prior_params;

@@ -81,12 +81,15 @@ while time<endtime && ~is_anchored
     ypos = ypos + delx*cos(theta);
     
     if xpos >=params.Lx
-        if abs(ypos)<rc_width
+        if abs(ypos)<rc_width %should probably use crossing position, not final position, but effect small if speed smallish
         anchoring_time = (params.Lx-(xpos-delx*sin(theta)))/(v*sin(theta))+ time;
         xpos = (2*params.Lx - xpos)*(with_anchoring<0.5)+(params.Lx)*(with_anchoring>0.5);
         is_anchored = with_anchoring; %absorb at right hand boundary or reflect depending on whether we have anchoring
         else
         xpos = 2*params.Lx - xpos;    
+        if xpos<0
+            xpos = min(-xpos,params.Lx);
+        end
         end
     elseif xpos < 0
         xpos = -xpos; %reflect at left hand boundary
