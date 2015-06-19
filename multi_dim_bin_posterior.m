@@ -8,20 +8,20 @@ function [posterior,quality_of_posterior] = multi_dim_bin_posterior(abc_theta,ab
 if nargin~=7
     fprintf('Using defaults \n');
     fname = sprintf('ABC_theta_read_from_R.dat');   %('Simplest_ABC_with_moments_output2.txt');
-%     fileID = fopen(fname,'r');
-%     abc_theta = fscanf(fileID, '%f')
-%     N = length(abc_theta)/3
+    %     fileID = fopen(fname,'r');
+    %     abc_theta = fscanf(fileID, '%f')
+    %     N = length(abc_theta)/3
     %abc_theta = reshape(abc_theta,N,3);
-%     fclose('all');
+    %     fclose('all');
     abc_theta = load(fname);
     abc_weights = ones(length(abc_theta),1);
     
     [~, real_params,~, ~, ~, prior_params, indices, range, ~] = initialise_parameters(0,0);
     
-%     prior_params = [5, 5, 5, 1.5, 1.5, 0.5, 0.5, 0];
-%     real_params = prior_params;
-%     range =  [10, 10, 10, 3, 3, 1]; 
-%     indices = 1:6; %[1,4,6];
+    %     prior_params = [5, 5, 5, 1.5, 1.5, 0.5, 0.5, 0];
+    %     real_params = prior_params;
+    %     range =  [10, 10, 10, 3, 3, 1];
+    %     indices = 1:6; %[1,4,6];
     plot_option = 1;
 end
 N = length(abc_theta(:,1));
@@ -51,9 +51,14 @@ if plot_option
         hold on
         line([real_params(indices(j)),real_params(indices(j))],[0,max(bincounts)],'LineWidth',3,'Color','g');
         xlabel(var_strings(j));
+        axis([0 max(edges_vecs(j,:)) 0 inf])
         
     end
-    print('Auto_hist_plot','-dpng');
+    fig = gcf;
+    fig.PaperUnits = 'inches';
+    fig.PaperPosition = [0 0 12 6];
+    fig.PaperPositionMode = 'manual';
+    print('Auto_hist_plot_v2','-dpng');
     posterior_mode
     posterior_mean = mean(abc_theta,1);
     quality_of_posterior = [sqrt(sum((posterior_mode - real_params(indices)).^2)),sqrt(sum((posterior_mean - real_params(indices)).^2))]; %note this currently does not depend equally on all params due to scaling of each param
@@ -74,7 +79,11 @@ if plot_option
             end
         end
     end
-    print('Auto_heatmap_plot','-dpng');
+    fig = gcf;
+    fig.PaperUnits = 'inches';
+    fig.PaperPosition = [0 0 12 6];
+    fig.PaperPositionMode = 'manual';
+    print('Auto_heatmap_plot_v2','-dpng');
     %     figure;
     %     imagesc(mid{1:2},posterior(:,:,ceil(end/2)));
     %
