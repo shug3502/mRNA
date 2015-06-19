@@ -32,6 +32,9 @@ abc_dist = zeros(N,1);
 fprintf('Generation 1 begins\n');
 
 for i=1:N
+    if mod(i,10)==0
+        i
+    end
     %initialise greater than tolerance
     %Uniform prior
     rr = rand(1,length(p_indices));
