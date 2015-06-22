@@ -58,7 +58,7 @@ if plot_option
     fig.PaperUnits = 'inches';
     fig.PaperPosition = [0 0 12 6];
     fig.PaperPositionMode = 'manual';
-    print('Auto_hist_plot_v2','-dpng');
+    print('Auto_hist_plot_v3','-dpng');
     posterior_mode
     posterior_mean = mean(abc_theta,1);
     quality_of_posterior = [sqrt(sum((posterior_mode - real_params(indices)).^2)),sqrt(sum((posterior_mean - real_params(indices)).^2))]; %note this currently does not depend equally on all params due to scaling of each param
@@ -83,7 +83,7 @@ if plot_option
     fig.PaperUnits = 'inches';
     fig.PaperPosition = [0 0 12 6];
     fig.PaperPositionMode = 'manual';
-    print('Auto_heatmap_plot_v2','-dpng');
+    print('Auto_heatmap_plot_v3','-dpng');
     %     figure;
     %     imagesc(mid{1:2},posterior(:,:,ceil(end/2)));
     %
