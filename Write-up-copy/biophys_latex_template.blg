@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: biophys_latex_template.aux
+The style file: biophysj.bst
+Database file #1: my_citations.bib.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+You've used 20 entries,
+            3176 wiz_defined-function locations,
+            781 strings with 9621 characters,
+and the built_in function-call counts, 10925 in all, are:
+= -- 780
+> -- 642
+< -- 6
++ -- 212
+- -- 172
+* -- 817
+:= -- 1545
+add.period$ -- 60
+call.type$ -- 20
+change.case$ -- 20
+chr.to.int$ -- 20
+cite$ -- 20
+duplicate$ -- 894
+empty$ -- 854
+format.name$ -- 224
+if$ -- 2238
+int.to.chr$ -- 1
+int.to.str$ -- 21
+missing$ -- 206
+newline$ -- 105
+num.names$ -- 60
+pop$ -- 290
+preamble$ -- 1
+purify$ -- 20
+quote$ -- 0
+skip$ -- 188
+stack$ -- 0
+substring$ -- 545
+swap$ -- 486
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 137
+warning$ -- 0
+while$ -- 78
+width$ -- 0
+write$ -- 263
