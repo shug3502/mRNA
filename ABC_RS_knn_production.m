@@ -52,16 +52,16 @@ else
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
 fprintf('generating in silico data');
-q_estimate_fake = generate_summary_stat(5, real_params, 10)
+q_estimate_fake = generate_summary_stat(5, real_params, 1)
 end
 %create while loop
 
 %set prior
-prior_params = [5, 5, 5, 1.5, 1.5, 0.5, 0.5, 0];
+prior_params = [5, 5, 5, 1.5, 1.5, 0.5, 0.05, 0];
 %prior_params = real_params;
 p_indices = 1:7;
 %prior_params(p_indices) = [5,1.5,0.5];
-prior_sigma = [10, 10, 10, 3, 3, 1, 1]; 
+prior_sigma = [10, 10, 10, 3, 3, 1, 0.1]; 
 % prior_params = [1.16, 0.8, 0.42, 0.42, 0.84, 0.58, 0.01, 0];
 par_params = prior_params;
 

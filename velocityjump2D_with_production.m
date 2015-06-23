@@ -85,7 +85,7 @@ for w=1:l_t
 %         fclose('all');
 %         error('outside of 0:L');
 %     end
-    q_distn(:,w) = Num_in_bins; %/num_particles/delx; %estimate of q at time T
+    q_distn(:,w) = Num_in_bins/sum(Num_in_bins); %/num_particles/delx; %estimate of q at time T
 end
 if with_plot
 %plot with a log scale
