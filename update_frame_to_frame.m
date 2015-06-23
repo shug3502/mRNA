@@ -1,4 +1,4 @@
-function [posterior] = update_frame_to_frame(state, position, angle, num_repeats, params)
+function [posterior] = update_frame_to_frame(state, position, angle, num_repeats)
 
 dt=1/3*60^(-2); %a third of a second between frames
     %set parameters
@@ -15,12 +15,24 @@ dt=1/3*60^(-2); %a third of a second between frames
     params.Ly = 37; %in y direction
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = angle; %initial angle is 0
+    
+    
+M=201;
+L=[params.Lx,params.Ly];
+q_distn = zeros(M,2);   
+final_pos_store = zeros(num_repeats,2); %store x and y positions
 
 for i=1:num_repeats
-[~, ~, final_position_x, final_position_y, pathx, pathy, jump_times, is_attached, theta] = aux_velocityjump2D(dt, params, 1, state, 2)
-
+[~, ~, final_position_x, final_position_y, pathx, pathy, jump_temp, is_attached, theta] = aux_velocityjump2D(dt, params, 1, state, 2);
+final_pos_store(i,:) = [final_position_x,final_position_y];
 end
-
+final_pos_store
+    %split into bins
+    for j=1:2
+    [Num_in_bins,~] = histc(final_pos_store(:,j),linspace(0,L(j),M));
+    q_distn(:,j) = Num_in_bins/sum(Num_in_bins); %/num_particles/delx; %estimate of q at time T
+    end
+posterior=q_distn;
 end
 
 function [is_anchored, anchoring_time, final_position_x, final_position_y, pathx, pathy, jump_times, is_attached, theta] = aux_velocityjump2D(input_time, params, with_anchoring, state, num_modes)
@@ -195,14 +207,14 @@ end
 if is_anchored
     final_position_x = params.Lx;
 else
-    final_position_x = xpos;
+    final_position_x = pathx(n_jump-1)+(input_time*60^2 - jump_times(n_jump-1))*params.nu1*sin(theta);
     anchoring_time = inf;
 end
 
 pathx = pathx(1:n_jump);
 pathy = pathy(1:n_jump);
 jump_times = jump_times(1:n_jump);
-final_position_y = ypos;
+final_position_y = pathy(n_jump-1)+(input_time*60^2 - jump_times(n_jump-1))*params.nu1*cos(theta);
 
 
 %toc

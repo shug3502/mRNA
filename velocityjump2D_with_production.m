@@ -16,19 +16,19 @@ function [q_distn] = velocityjump2D_with_production(input_time, params, with_anc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if nargin ~= 5
     fprintf('default parameters used\n')
-    input_time = 5;
+    input_time = 25;
     with_anchoring = 1;
     num_modes = 1;
-    with_plot = 0;
+    with_plot = 1;
     %Now with data on nurse cells from Alex Davidson
-    params.nu1 = 5.16; %speed of RNP complex under active transport [zimyanin et al 2008]
+    params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
     params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
     params.lambda_1=0;   %1/0.13; %transition rate =7.69 [zimyanin et al 2008]
     params.lambda_2 = 0.11;
-    params.omega_1= 2.42;    %1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
+    params.omega_1= 0.42;    %1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
     params.omega_2 = 0.84;
     params.phi = 0.58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
-    params.gamma = 1; %rate of prouction from the nucleus
+    params.gamma = 0.01; %rate of prouction from the nucleus
     params.Lx = 52; %length of cell in x direction
     params.Ly = 37; %in y direction
     params.nuc_radius = 10; %radius of nucleus
@@ -46,6 +46,7 @@ t=time_vec*60^2;
 l_t = length(time_vec);
 jumps = zeros(N,l_n);
 q_distn = zeros(L/delx+1,l_t);
+q_raw = q_distn;
 xpos = zeros(N,l_n);
 xpos_discrete_time = -1*ones(N,l_n);
 
@@ -86,18 +87,19 @@ for w=1:l_t
 %         error('outside of 0:L');
 %     end
     q_distn(:,w) = Num_in_bins/sum(Num_in_bins); %/num_particles/delx; %estimate of q at time T
+    q_raw(:,w) = Num_in_bins;
 end
 if with_plot
 %plot with a log scale
 figure;
 subplot(2,1,1)
-imagesc(time_vec(1:9), 0:L, log(q_distn(:,1:9))) %plot initial period
+imagesc(time_vec(1:9), 0:L, log(q_raw(:,1:9))) %plot initial period
 colormap(gray)
 set(gca, 'fontsize', 20);
 xlabel('Time')
 ylabel('Position')
 subplot(2,1,2)
-imagesc(time_vec, 0:L, log(q_distn)) % plot whole time course
+imagesc(time_vec, 0:L, log(q_raw)) % plot whole time course
 colormap(gray)
 set(gca, 'fontsize', 20);
 xlabel('Time')
@@ -106,13 +108,13 @@ ylabel('Position')
 %plot on a normal scale 
 figure;
 subplot(2,1,1)
-imagesc(time_vec(1:9), 0:L, q_distn(:,1:9)) % plot initial period
+imagesc(time_vec(1:9), 0:L, q_raw(:,1:9)) % plot initial period
 colormap(gray)
 set(gca, 'fontsize', 20);
 xlabel('Time')
 ylabel('Position')
 subplot(2,1,2)
-imagesc(time_vec, 0:L, q_distn)
+imagesc(time_vec, 0:L, q_raw)
 colormap(gray)
 set(gca, 'fontsize', 20);
 xlabel('Time')
