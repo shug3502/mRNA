@@ -112,7 +112,7 @@
 
 \setcounter{page}{1} %first page number
 
-\title{Using mathematical modelling to explore mRNA localisation}
+\title{Using mathematical modelling to explore mRNA localization}
 
 \author{Jonathan Harrison, Richard Parton, Ilan Davis, Ruth Baker}
 
@@ -194,7 +194,7 @@ mRNA localization is crucial for the establishment of polarity of cells and the 
 It may have importance for a wide range of functions involving memory and learning in the nervous system. 
 However, we are a long way from a complete understanding of the mechanisms governing the mRNA cargo transport process.
 
-In particular, the mRNA transcripts that set up the \textit{Drosophila} body axes originate in the nurse cells (see figure \ref{FIG:Drosophila_development}) and are actively transported on specialized subpopulations of microtubules into the oocyte through the ring canals \citep{clark2007dynein}.
+In particular, the mRNA transcripts that set up the \textit{Drosophila} body axes originate in the nurse cells (see Figure \ref{FIG:Drosophila_development}) and are actively transported on specialized subpopulations of microtubules into the oocyte through the ring canals \citep{clark2007dynein}.
 We will focus on this maternal transfer of transcripts into the oocyte.
 \begin{figure}[h]
  \centering
@@ -205,12 +205,15 @@ We will focus on this maternal transfer of transcripts into the oocyte.
 
 One of the challenges involved in live imaging of cells to examine this transport process is the need to scan a sample in three spatial dimensions as well as in time.
 This places restrictions on the resolution of data that can be obtained temporally and in the $z$ direction \citep{weil2010making}.
-Although there are physical restrictions on what can be achieved by improvements in imaging technologies, these could be overcome by modelling of the transport of mRNA cargos, which may permit sparser sampling in time and finer sampling in space.
+Although there are physical restrictions on what can be achieved by improvements in imaging technologies, these could be overcome by modelling of the transport of mRNA cargoes, which may permit sparser sampling in time and finer sampling in space.
 This could be achieved by improvements in tracking of individual particles or by considering a more bulk flow approach.
 In this way, mathematical modelling could enable us to work with sparse data sets.
 
+Through mathematical modelling of mRNA transport in the Drosophila nurse cell, we aim to better understand the limiting factors in mRNA localisation. This should improve our understanding of which parts of the process are important biologically for its function and could give insight into the molecular mechanisms used.
+We see also the potential for this modelling framework to be applied using a Hidden Markov Model framework to improve tracking of RNP complexes over longer time periods in three dimensional data.
+
 In this work, we present a simple model for transport of mRNA particles through nurse cells during localization and demonstrate how this model can be effectively parametrised.
-In Section \ref{Methods}, we construct the velocity jump process model and explain the approximate Bayesian computation approach taken in inference of the model parameters.
+In Section \ref{Methods}, we construct the velocity jump process model and explain the approximate Bayesian computation (ABC) approach taken in inference of the model parameters.
 We exhibit the posteriors over the model parameters generated via our inference approach for both \textit{in silico} and \textit{in vivo} data in Section \ref{Results}.
 Finally, in Section \ref{Conclusions}, we discuss some of the implications of our modelling and parameter inference, before exploring possible future directions.
 
@@ -220,57 +223,162 @@ In this context, modelling involves breaking down the mRNA localization process 
 We will put in place appropriate, simple modelling assumptions to describe the most important parts of the system biologically.
 These assumptions should as far as possible be supported by existing experimental observations.
 
-Previous modelling approaches in this area have focused on descriptions of the mechanisms of molecular motors at smaller spatial and and temporal scales \citep{bressloff2013stochastic} or with continuous densities of mRNA \citep{szymanska2014mathematical} rather than representing single RNP particles which may be more appropriate at low densities.
+Previous modelling approaches in this area have focused on descriptions of the mechanisms driving molecular motors at smaller spatial and temporal scales \citep{bressloff2013stochastic} or with continuous densities of mRNA \citep{szymanska2014mathematical} rather than representing single RNP particles which may be more appropriate at low densities.
 Other studies have generally considered mRNA dynamics in the oocyte in terms of cytoplasmic streaming or diffusion without direct reference to active transport \citep{ganguly2012cytoplasmic, liu2011role}.
 Instead we shall describe the active transport of mRNA in the nurse cells surrounding the ooctye, which are connected to each other and to the oocyte via ring canals, using an individual-based stochastic description.
 
 We propose two different approaches to parameterise our model. 
-The first will involve direct measurement of parameters, such as the average speed of cargo complexes in active transport.
-The second method requires application of an approximate Bayesian computation (ABC) framework \citep{johnston2014interpreting, turner2012tutorial, beaumont2002approximate} to parameterise the model via comparison with certain summary statistics of the data.
+The first will involve direct measurement of parameters, such as the average speed of cargo complexes during periods of active transport.
+The second method requires application of an ABC framework \citep{johnston2014interpreting, turner2012tutorial, beaumont2002approximate} to parameterise the model via comparison with certain summary statistics of the data.
 This will enable comparison between the experimentally measured parameter values and the posterior for these parameters obtained via ABC.
 
-We aim to produce a testable model in the sense that we are able to make predictions from the model of the result of varying certain parameters, such as the speed of the motor carrying the cargo, which could be tested experimentally using genetic mutants that have behaviour that corresponds to a different value of a given parameter. 
+We aim to produce a testable model in the sense that we are able to make predictions from the model based on varying certain parameters, such as the speed of the motor carrying the cargo, which could be tested experimentally using genetic mutants that have behaviour that corresponds to a different value of a given parameter. 
 This should inform our understanding of how transcripts transport and localize.
 
 \subsection{Velocity jump process}
-The movement of RNP cargos is often described as a biased random walk \citep{zimyanin2008vivo}. Rather than modelling this as a simple random walk in position, we let the direction of motion vary. 
+The movement of RNP cargoes is often described as a biased random walk \citep{zimyanin2008vivo}.
+Rather than modelling this transport process as a simple random walk in position, we let the direction of motion vary. 
 This type of model is known as a velocity jump process and has been successfully applied to directed migration of animals and cells \citep{codling2005calculating, taylorking2015birds}.
 
 \begin{figure}[h]
  \centering
  \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/States_diagram.pdf}
- \caption{States and transitions between the states in the velocity jump process model}
+ \caption{States and transitions between the states in the velocity jump process model. The speeds in active transport and diffusion are given by $\nu_1$ and $\nu_2$ respectively. Transition rates between states are given by $\omega_1$, $\omega_2$ and $\lambda$ as shown.}
  \label{FIG:Phases_of_motion}
 \end{figure}
 
+We model a two-dimensional slice through a nurse cell as a rectangular region $[0,L_x] \times [-L_y/2, L_y/2]$, with the $x$ axis aligned along the anterior-posterior axis of the oocyte.
+The cell nucleus is modelled as a circular region of given radius, $R$, placed centrally in the cell. 
+This is excluding to the RNP complexes in the model which are reflected by it.
+The remainder of the nurse cell is accessible to the particles, which seems reasonable since experimentally particles are observed in all parts of the nurse cell (data not shown).
+Initially, RNP cargoes are placed randomly at time $t=0$ on the circumference of the nucleus to represent their export from nuclear pore complexes.
+In the model therefore, all mRNAs are produced simultaneously rather than directly modelling continual production and export over time.
+Cargoes move randomly, as described below, until eventually they hit a small target at the posterior end of nurse cell representing the ring canal joining to the oocyte, where they are absorbed and removed from the system.
+Throughout all simulations in this work, we fix $L_x=52 \mu \text{m}$, $L_y=37 \mu \text{m}$, $R=10 \mu \text{m}$ and the size of the ring canal as $2\mu \text{m}$.
+The geometry of the system can be seen in Figure \ref{FIG:Typical_path}.
 
-There are two phases of motion included in the model: an active transport phase when the motor is moving on the microtubules with constant speed $\nu_1$ and a slower diffusive phase with constant speed $\nu_2$.
-Switching occurs between these two phases of motion with exponential waiting times between events.
+There are two phases of motion included in the model: an active transport phase when the motor is moving on the microtubules with constant speed $\nu_1$; and a slower diffusive phase with constant speed $\nu_2$.
+Switching occurs between these two phases of motion with exponential waiting times between switching events.
 Biologically this switching corresponds to the molecular motor falling off and reattaching to the microtubule.
-As illustrated in figure \ref{FIG:Phases_of_motion}, switching occurs from active transport to diffusion with rate $\omega_1$. 
+As illustrated in Figure \ref{FIG:Phases_of_motion}, switching occurs from the active transport state to diffusion with rate $\omega_1$. 
 From the diffusive phase, reorientations within the same phase occur with rate $\lambda$ and switching to the active transport phase takes place at rate $\omega_2$. 
-After each switching event, the motor complex also changes direction by rotating to a new angle at random where the angle $\theta $ is drawn from some distribution $T(\theta)$. 
-Here we chose to define $T(\theta)$ empirically as uniform on $[0,\pi ]$ and $[\pi, 2\pi ]$ with a bias in favour of $[0,\pi ]$ based on biological data.
-We define a proportion of microtubules, $\phi$, aligned in the posterior direction and thus take the following for $T(\theta)$:
+At a reorientation event, the particle remains in the diffusive phase at speed $\nu_2$ and a new direction is picked uniformly on $[0,2\pi)$.
+After each switching event from diffusion to the active transport state, the RNP complex also changes direction by picking a new direction of travel at random, where the angle $\theta $ is drawn from some distribution $T(\theta)$. 
+Here we choose to define $T(\theta)$ empirically as uniform on $[0,\pi ]$ and $[\pi, 2\pi ]$ with a bias in favour of $[0,\pi ]$ based on biological data.
+We define a proportion of microtubules, $\phi$, aligned in the posterior direction (parallel to the $x$ direction in our model) and thus take the following for $T(\theta)$:
 \begin{equation*}         
-T(\theta) = \begin{cases} \frac{\phi}{\pi} & : \theta \in [0,\pi] \\ \frac{1-\phi}{\pi} & : \theta \in [\pi,2\pi).                       
+T(\theta) = \begin{cases} \frac{\phi}{\pi} &  \theta \in [0,\pi] \\ \frac{1-\phi}{\pi} &  \theta \in [\pi,2\pi).                       
 \end{cases}
 \end{equation*}
 
-We model a two dimensional slice through a nurse cell as a rectangular region $[0,L_x] \times [-\frac{L_y}{2},\frac{L_y}{2}]$.
-The cell nucleus is modelled as a circular region of given radius, $R$, placed centrally in the cell. 
-This is excluding to the RNP complexes in the model which are reflected by it.
-Initially, cargoes are placed randomly at time $t=0$ on the circumference of the nucleus to represent their export from nuclear pore complexes.
-In the model therefore, all mRNAs are produced simulataneously rather than modelling production over time.
-Cargoes move randomly as described until eventually they hit a samll target at the posterior end of nurse cell representing the ring canal joining to the oocyte, where they are absorbed and removed from the model.
-Throughout all simulations in this work, we fix $L_x=52 \mu \text{m}$, $L_y=37 \mu \text{m}$, $R=10 \mu \text{m}$ and the size of the ring canal as $2\mu \text{m}$.
 
-We note that our model is dependent on 6 parameters: $\nu_1, \nu_2, \omega_1, \omega_2, \lambda, \phi$. 
+\subsubsection{Analytics}
+We may choose to include some analytics here at a later point in time.
+
+\subsection{Approximate Bayesian computation (ABC)}
+In a statistical inference context, the likelihood of data given a certain set of parameters is a central quantity. 
+In particular, it is essential in calculation of the posterior over the parameters given certain data. 
+The posterior is desirable as it offers more information than just point estimates of the model parameters.
+Although for simple models it may be possible to evaluate the likelihood analytically, often for more complex models the likelihood is not tractable or is very expensive to compute.  
+ABC techniques have been developed to address this issue \cite{beaumont2002approximate}.
+Instead of directly evaluating the likelihood, ABC techniques assume it is possible to cheaply simulate from the model and use this to approximate the likelihood.
+
+In an ABC rejection sampling approach we follow the procedure shown in Algorithm \ref{ABC-RS}, where $\pi(\theta)$ is a prior on the parameters, $\rho$ is a distance metric, $S(x)$ is a summary statistic used to summarize the data, $x$, and $\epsilon$ is a maximum tolerance for acceptance. 
+%The accepted parameters $\theta$ then represent an approximation to the posterior distribution. 
+\begin{algorithm}
+\caption{ABC Rejection Sampling}\label{ABC-RS}
+\begin{algorithmic}[1]
+\State \textbf{for} $i=1$ \text{to} $n$  \{
+\State Sample parameters $\theta$ from a prior on those parameters $\pi (\theta)$. 
+\State Simulate data $x$ from the model $M(\theta)$ using those parameters. 
+\State Calculate distance from observed data $y$: 
+\If {$\rho (S(x),S(y)) < \epsilon $} accept the parameters $\theta$
+\Else \hspace{2pt} reject the parameters $\theta$.
+\EndIf
+\State \}
+\end{algorithmic}
+\end{algorithm}
+
+One drawback of this algorithm is that it depends on appropriate choice of the distance metric, $\rho$, the summary statistic, $S(x)$, and the tolerance, $\epsilon $. 
+Clearly the quality of the posterior will depend on the choice of these hyperparameters, as, for example, increasing $\epsilon $ will decrease the quality of the corresponding posterior.
+In some settings it may be possible to take the full data, rather than a summary statistic, and to set $\epsilon=0$ which would give an exact sample from the posterior, but in general this is not possible computationally. 
+We can eliminate the importance of the tolerance to some extent by simulating $N$ samples from the prior, storing all the distances and keeping the closest $\alpha$ quantile of the sampled parameters to the observed data. 
+The quality of the posterior still depends on $N$ and $\alpha$ but the choice of $\epsilon $, which may be dependent on other model parameters, is removed. 
+
+The efficiency of the rejection sampling method is low, particularly for small values of $\epsilon$ as they entail tiny acceptance rates meaning many wasted samples. 
+More efficient ways of sampling possible parameters $\theta$ have been suggested including Sequential Monte Carlo and Population Monte Carlo techniques $\citep{toni2009approximate, sisson2007sequential, beaumont2009adaptive, lenormand2013adaptive}$.
+As such, we have opted to use an adaptive Population Monte Carlo (APMC) method  \citep{lenormand2013adaptive}. 
+This is implemented as shown in Algorithm \ref{ABC-APMC}, where $N$ is the number of parameter samples to simulate, $N_{\alpha} = \floor{\alpha N}$ is the number to keep at each iteration, $p_{acc_{min}}$ is the minimum acceptance rate at which the algorithm stops, and a Gaussian kernel $K_{\sigma}(x,y)$, where:
+$$K_{\sigma}(x,y) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-y)^2}{2\sigma^2}}.$$
+\begin{algorithm}
+\caption{ABC Adaptive Population Monte Carlo}\label{ABC-APMC}
+\begin{algorithmic}[1]
+\State Initialise by setting $N$,$\alpha$, $N_{\alpha}$ and $p_{acc_{min}}$.
+\State Set $t=1$.
+\State \textbf{for} $i=1$ \text{to} $N$  \{
+\State Sample form prior: $\theta \sim \pi (\theta)$. 
+\State Simulate data $x \sim f \left(x|\theta_i^{(0)} \right)$.
+\State Calculate distance from observed data $y$ via $\rho_i^{(0)} = \rho(S(x),S(y))$
+\State Set $w_i^{(0)} = 1$.
+\State \}
+\State Take $\epsilon_1$ as the first $\alpha$-quantile of $\rho^{(0)}$.
+\State Let \{ $(\theta_i^{(1)},w_i^{(1)}, \rho_i^{(1)})$ \} = \{ $(\theta_i^{(0)},w_i^{(0)}, \rho_i^{(0)}) | \rho_i^{(0)} \le \epsilon_1, 1 \le i \le N$ \} 
+\State Take $\sigma_1^2$ as twice the weighted empirical variance of $\{(\theta_i^{(1)} ,w_i^{(1)}) \} _{1\le i \le N_{\alpha}}$
+\State Set $p_{acc} = 1$.
+\State Update $t:=t+1$
+\State \textbf{while} $p_{acc}>p_{acc_{min}}$ \{ 
+\State \textbf{for} $i=N_{\alpha+1}$ \text{to} $N$ \{
+\State Pick $\theta_i^{*}$ from $\theta_j^{(t-1)}$ with probability $\frac{\omega_j^{(t-1)}}{\sum_{k=1}^{N_{\alpha}} w_k^{(t-1)}  }$, $1 \le j \le N_{\alpha}$.  
+\State Generate new parameters $\theta_i^{(t-1)}|\theta_i^{*} \sim \mathcal{N} \left(\theta_i^{*}, \sigma_{(t-1)}^2 \right)$ and data $x \sim f \left(x|\theta_i^{(t-1)} \right)$
+\State Set$ \rho_i^{(t-1)} = \rho (S(x),S(y))$
+\State Set $w_i^{(t-1)} = \frac{\pi(\theta_i^{(t-1)}}{\sum_{j=1}^{N_{\alpha}}(w_j^{(t-1)}/\sum_{k=1}^{N_{\alpha}} w_k^{(t-1)}) K_{\sigma_{(t-1)}}\left(\theta_i^{(t-1)},\theta_j^{(t-1)} \right) }$
+\State \}
+\State Set $p_{acc} = \frac{1}{N-N_{\alpha}} \sum_{k=N_{\alpha}+1}^N \mathds{1}_{\rho_i^{(t-1)} < \epsilon_{t-1}}$
+\State Take $\epsilon_1$ as the first $\alpha$-quantile of $\rho^{(t-1)}$.
+\State Let \{ $(\theta_i^{(t)},w_i^{(t)}, \rho_i^{(t)})$ \} = \{ $(\theta_i^{(t-1)},w_i^{(t-1)}, \rho_i^{(t-1)}) | \rho_i^{(t-1)} \le \epsilon_t, 1 \le i \le N$ \} 
+\State Take $\sigma_t^2$ as twice the weighted empirical variance of $\{(\theta_i^{(t)} ,w_i^(t)) \} _{1\le i \le N_{\alpha}}$
+\State Update t:=t+1
+\State \}
+\end{algorithmic}
+\end{algorithm}
+
+Inference on model parameters using ABC has been successfully applied to a variety of types of model in a biological context, often helping to offer biological insight into the model system.
+Cell migration models have used ABC to process data from scratch assays \citep{johnston2014interpreting} and \textit{in vivo} data \citep{liepe2012calibrating}, while an individual-based ecological models with 14 parameters has also applied ABC for parameterisation \citep{van2015calibration}. 
+
+When using ABC methods, it is important to be aware also of their limitations. 
+It has been highlighted via \citet{robert2011lack} that, although the error from the tolerance $\epsilon$ can be eliminated in the limit $\epsilon \rightarrow 0$, the use of summary statistics of the data may have larger effects, particularly when comparing models using ABC.
+Some more systematic methods for choice of summary statistics have been suggested, which use minimization of certain measures of entropy to determine which summary statistics are most informative \citep{nunes2010optimal}.
+
+\subsubsection{Dependence of weights on distance}
+At each generation of the APMC algorithm, we calculate a distance for each set of parameters.
+These ought to be informative for which particles should contribute most heavily to the next generation, but are not used directly in the ABC-APMC algorithm.
+We have considered how we could use weights in the ABC-APMC algorithm that depend directly on the distances, using the update step: 
+\begin{equation}
+ w_{i}^{(t-1)} = \frac{\pi(\theta_i^{(t-1)}}{\rho_i^{(t-1)}} \frac{ w_i^{(t-1)} }{\sum_{j=1}^{N_{\alpha}} w_j^{(t-1)} }. 
+\end{equation}                                                                                                                                                       
+However, the weights used in the ABC-APMC algorithm are required to ensure that the importance sampling is performed correctly when sampling from the weighted distribution at the next time step \citep{beaumont2009adaptive}.
+Without this exact choice, there is no guaruntee that the resulting posterior would be unbiased; a similar bias due to incorrect choice of weights was highlighted by \citet{beaumont2009adaptive} in the work of \citet{sisson2007sequential}.
+The appropriate weight for importance sampling to be effective uses the density $d_i^{(t)}$ from which parameter values are generated.
+Therefore the update step must be $w_i^{(t-1)} = \frac{\pi(\theta_i^{(t-1)})}{d_i^{(t-1)}}$, where $d_i^{(t)} $ is given by the probability to arrive at $\theta_i^{(t)}$ from one of the previous weighted parameter values. 
+Although heuristically, weights directy dependent on distance seem an attractive option, statistically they may result in poor quality posteriors.
+
+\subsection{Imaging}
+We observed \textit{grk} mRNA in \textit{Drosophila} nurse cells tagged using Dendra. 
+Imaging was performed with a wide-field deconvolution system (Delta Vision CORE) from Applied Precision. 
+Image stacks were deconvolved with the SoftWoRx Resolve 3D constrained iterative deconvolution algorithm (Applied Precision). 
+Segmentation of images was performed using Felzenswalb’s algorithm \citep{Felzenswalb2004efficient} after denoising and deconvolution of the images, with coordinates of particles obtained from centroids of appropriately sized segments. 
+The age of embryos was determined by measuring oocyte size and comparing to a logistic growth model.
+
+\section{Results and Discussion} \label{Results}
+
+\subsection{Sensitivity analysis}
+We note that our model is dependent on six parameters: $\nu_1, \nu_2, \omega_1, \omega_2, \lambda, \phi$. 
 We are able to explore the dependence of our model on these parameters by performing a sensitivity analysis, varying each paramters over several orders of magnitude.
-We show  in figure \ref{FIG:Sensitivity_analysis} the effect of varying key parameters on the mean first passage time (MFPT), the mean over different particles of the number of jumps in one path up to absorption, and the mean over different particles of the median jump distance on a single path.
-The results of this demonstrate that the turning rate within diffusion, $\lambda$, has no effect on any of these summary statistics. Decreasing the speed parameters $v_1$, $v_2$ or the microtubule bias $\phi$ leads to a sharp rise in the MFPT. 
-The transition rates $\omega_1$ and $\omega_2$ have opposite effects with an increase in $\omega_1$ increasing the MFPT, while a decrease in $\omega_2$ will increase the MFPT. 
-Similar effects are seen on the mean number of jumps per simulation and the mean of the median jump distance.
+We show  in Figure \ref{FIG:Sensitivity_analysis} the effect of varying key parameters on the mean first passage time (MFPT) from the nucleus to the posterior ring canal, the mean number of jumps on each path up to absorption, and the mean over different particles of the median jump distance on a single path.
+The results of this sensitivity analysis demonstrate that the turning rate within the diffusive state, $\lambda$, has no noticeable effect on any of these summary statistics (Panel \ref{fig:lambda}).
+Decreasing the speed parameters, $v_1$ and $v_2$, or the microtubule bias, $\phi$, leads to a sharp rise in the MFPT (Panels \ref{fig:nu1, fig:phi}). 
+The transition rates $\omega_1$ and $\omega_2$ have opposite effects with an increase in $\omega_1$ increasing the MFPT, and a decrease in $\omega_2$ increasing the MFPT (Panels \ref{fig:omega1, fig:omega2}). 
+Similar effects are seen for the mean number of jumps per simulation and the mean of the median jump distance.
 
 \begin{figure}
         \centering
@@ -365,50 +473,55 @@ Similar effects are seen on the mean number of jumps per simulation and the mean
         
         
         ~ 
-        \caption{The spatial distribution of particles simulated for parameters as in figure \ref{FIG:Sensitivity_analysis}. For each of \ref{fig:phi} to \ref{fig:lambda}, we vary a parameter in turn. 
+        \caption{The spatial distribution of particles simulated for parameters as in Figure \ref{FIG:Sensitivity_analysis}. For each of \ref{fig:phi} to \ref{fig:lambda}, we vary a parameter in turn. 
         For \ref{fig:nu1}, $\nu_2=\frac{1}{2}\nu_1$ while varying $\nu_1$. Results are shown for 100 particles at time $t=270s$. Note the final spatial box represents particles that have been absorbed and removed from the system.}
         \label{FIG:Sensitivity_of_Q}
 \end{figure}
-In addition, we exhibit the dependence of the spatial distribution of particles simulated from our model, as shown in figure \ref{FIG:Sensitivity_of_Q}.
+
+In addition, we exhibit the dependence of the spatial distribution of particles simulated from our model, as shown in Figure \ref{FIG:Sensitivity_of_Q}.
 For increased motor speeds, $\nu_1$ and $\nu_2$, the particles spread out faster from the nucelus and are directed towards the posterior of the nurse cell.
-By increasing the microtubule bias, $\phi$, the motion of the cargoes becomes much more directed towards to posterior with accumulation near the posterior and absoprtion from reaching the ring canal there.
-For high values of the switching rate $\omega_1$, the distribution of particles is spread and has not reached the posterior, as little time will be spent in the active transport state.
+By increasing the microtubule bias, $\phi$, the motion of the cargoes becomes much more directed towards to posterior with accumulation near the posterior and absorption upon reaching the ring canal there.
+For high values of the switching rate $\omega_1$, the distribution of particles is more spread and has not reached the posterior, as little time is spent in the active transport state.
 For low values of $\omega_1$, the particles do not change direction often in the active transport state so greater accumulation is seen for intermediate values of $\omega_1$.
-We note that for large values of $\omega_2$, there is an accumulation of particles near the posterior, but that these have not been absorbed, since they spend little time in the diffusive phase of motion.
+We note that, for large values of $\omega_2$, there is an accumulation of particles near the posterior, but that these are not quickly absorbed, since they spend little time in the diffusive phase of motion.
 The effect that the turning rate $\lambda$ has on the spatial distribution appears to be unclear.
 
 Based on direct measurements from manually tracked grk-GFP mRNA complexes in \textit{Drosophila} nurse cells, we are able to make direct preliminary estimates of the parameters of our model.
 All data were obtained from \citet{DavidsonPhD2015}.
 Particles are classed as static, paused or active.
-The number of total particles counted was $N=340$ in a 40x40 $\mu \text{m}$ area.
+Paused and active particles will correspond to those in the diffusive and active transport phases of our model respectively. 
+Static particles will be assumed to be either anchored or undergoing anomolous behaviour. 
+The number of total particles counted was $N=340$ in a 40 $\times$ 40 $\mu \text{m}$ area.
 The proportions of particles in each of the classes is $25\%$ active, $50\%$ paused and $21\%$ static. 
 Over the timescale observed, particles did not transition between states and these are proportions of particles. 
-Particle speeds were assessed by observing a 10x10 $\mu \text{m}$ area for 50 timepoints, with images taken in 1 $z$ slice at 3 frames per second. 
-Average speed in active transport $\nu_1 $ was  $1.163 \pm 0.08 \mu \text{ms}^{-1}$ from $n=33$. 
-Average run length was $2.785 \pm 0.66 \mu \text{m}$. 
+Particle speeds were assessed by observing a 10 $\times$ 10 $\mu \text{m}$ area for 50 timepoints, with images taken in a single $z$ slice at three frames per second. 
+The average speed in the active transport state $\nu_1 $ was  $1.163 \pm 0.08 \mu \text{ms}^{-1}$ from $n=33$. 
+The average run length was $2.785 \pm 0.66 \mu \text{m}$. 
 In the paused phase, an average speed, $\nu_2$, of $0.798 \pm 0.6 \mu \text{ms}^{-1}$ was observed from 58 particles with an average run length of  $0.84 \pm 0.06 \mu \text{m}$. 
 
-Considering the process as a continuous time Markov chain, with active transport and diffusive states, we obtain that the steady state of the continuous time markov chain is $[\frac{\omega_2 }{\omega_1 + \omega_2},\frac{ \omega_1}{\omega_1+\omega_2}]$. 
-Then assuming ergodicity and neglecting static particles, this approach gives us $\frac{\omega_2 }{\omega_1 + \omega_2} = \frac{2}{3}$ and $\frac{\omega_1 }{\omega_1 + \omega_2} = \frac{1}{3}$ by comparing to the proportions of particles observed in each state.
-Therefore the rates of falling off and reattaching must be different.
+Considering the process as a continuous time Markov chain, with active transport and diffusive states, we obtain that the steady state of the continuous time Markov chain is $[\omega_2 /(\omega_1 + \omega_2), \omega_1/(\omega_1+\omega_2)]$. 
+Then assuming ergodicity and neglecting static particles, this approach gives us $\omega_2 /(\omega_1 + \omega_2) = 2/3$ and $\omega_1 /(\omega_1 + \omega_2) = 1/3$ by comparing to the proportions of particles observed in each state.
+%Therefore the rates of falling off and reattaching must be different.
 
-Now assuming there are no internal transitions back to the active transport state, then we have $\omega_1 = 0.42 s^{-1}$ and hence $\omega_2 = 0.84 s^{-1}$. 
-We can also deduce that the rate $\lambda = 0.95-0.84 = 0.11 s^{-1}$.  
+Assuming there are no internal transitions back to the active transport state, then we have $\omega_1 = 0.42 \text{s}^{-1}$ and hence $\omega_2 = 0.84 \text{s}^{-1}$. 
+We can also deduce that the rate $\lambda = 0.95-0.84 = 0.11 \text{s}^{-1}$.  
+In addition, we assume the distribution of microtubule orientations in the nurse cells is similar to that in the oocyte, since there is data available for the oocyte \citep{parton20111} but not for the nurse cell. 
+Therefore we take $\phi = 0.58$.
 
-This gives parameter values to use of $\nu_1 = 1.16$, $\nu_2 = 0.80$, $\omega_1 = 0.42 $, $\omega_2 = 0.84$, $\lambda = 0.11$.
+This gives parameter estimates of $\nu_1 = 1.16  \mu \text{ms}^{-1}$, $\nu_2 = 0.80  \mu \text{ms}^{-1}$, $\omega_1 = 0.42 \text{s}^{-1} $, $\omega_2 = 0.84 \text{s}^{-1}$, $\lambda = 0.11 \text{s}^{-1}$, $\phi = 0.58$.
 
-Based on simulations from the model, we obtain a mean first passage time, averaged across 1000 particles, of $1070 \pm 840s \approx 18 \text{min}$.
-We plot the evolution of a typical path in figure \ref{FIG:Typical_path}.
+Based on simulations from the model, we obtain a MFPT, averaged across 1000 particles, of $1070 \pm 840 \text{s} \approx 18 \text{min}$.
+We plot the evolution of a typical path in Figure \ref{FIG:Typical_path}.
 \begin{figure}[h]
  \centering
  \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Typical_path.png}
- \caption{The evolution of a typical path until absorption at the posterior ring canal}
+ \caption{The evolution of a typical path until absorption at the posterior ring canal, showing also the geometry in the model.}
  \label{FIG:Typical_path}
 \end{figure}
-Given that stage 5 in \textit{Drosophila} oocytes lasts 5 hours, this timescale for the passage time appears to be an order of magnitude shorter, suggesting that the limiting step in the transport and localization of the mRNAs is their production from the nucleus rather than the transport step.
+Given that stage 5 in \textit{Drosophila} oocytes lasts five hours, this timescale for the MFPT appears to be an order of magnitude shorter than the timescales over which \textit{grk} mRNA transport is observed in oogenesis, suggesting that the limiting step in the transport and localization of the mRNAs is their production from the nucleus rather than the transport step.
 We are also able to make predictions on what would happen if we halved the speed of the molecular motors via a genetic mutation.
 We assume that altering the speed of the molecular motor, $\nu_1$, would leave the speed in diffusive motion, $\nu_2$, unchanged.
-The resulting distribution is shown in figure \ref{FIG:Half_speed_q} and the MFPT would be $2150\pm1600s \approx 36\text{min}$.
+The resulting distribution is shown in Figure \ref{FIG:Half_speed_q} and the MFPT would be $2150\pm1600 \text{s} \approx 36\text{min}$.
 \begin{figure}[h]
  \centering
  \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Half_speed_motor_q_distn.png}
@@ -417,105 +530,15 @@ The resulting distribution is shown in figure \ref{FIG:Half_speed_q} and the MFP
  \label{FIG:Half_speed_q}
 \end{figure}
 
-\subsubsection{Analytics}
-We may choose to include some analytics here at a later point in time.
 
-\subsection{Approximate Bayesian Computation (ABC)}
-In a statistical inference context, the likelihood of data given a certain set of parameters is a central quantity. 
-In particular, it is essential in calculation of the posterior over the parameters given certain data. 
-The posterior is desirable as it offers more information than just point estimates of the parameters.
-Although for simple models it may be possible to evaluate the likelihood analytically, often for more complex models the likelihood is not tractable or is very expensive to compute.  
-Approximate Bayesian Computation (ABC) techniques have been developed to address this issue \cite{beaumont2002approximate}.
-Instead of directly evaluating the likelihood, ABC techniques assume it is possible to cheaply simulate from the model and use this to approximate the likelihood.
-
-In an ABC rejection sampling approach we follow the procedure shown in algorithm \ref{ABC-RS}, where $\pi(\theta)$ is a prior on the parameters, $\rho$ is a distance metric, $S(x)$ is a summary statistic used to summarize the data $x$ and $\epsilon$ is a maximum tolerance for acceptance. 
-%The accepted parameters $\theta$ then represent an approximation to the posterior distribution. 
-\begin{algorithm}
-\caption{ABC Rejection Sampling}\label{ABC-RS}
-\begin{algorithmic}[1]
-\State \textbf{for} $i=1$ \text{to} $n$  \{
-\State Sample parameters $\theta$ from a prior on those parameters $\pi (\theta)$ 
-\State Simulate data $x$ from the model $M(\theta)$ using those parameters 
-\State Calculate distance from observed data $y$.
-\If {$\rho (S(x),S(y)) < \epsilon $} accept the parameters $\theta$
-\Else \hspace{2pt} reject the parameters $\theta$.
-\EndIf
-\State \}
-\end{algorithmic}
-\end{algorithm}
-
-One drawback of this algorithm is that it depends on appropriate choice of the distance metric $\rho$, the summary statistic $S(x)$ and the tolerance $\epsilon $. 
-Clearly the quality of the posterior will depend on the choice of these hyperparameters, as for example increasing $\epsilon $ will decrease the quality of the corresponding posterior.
-In some settings it may be possible to take the full data, rather than a summary statistic and to set $\epsilon=0$ which would give an exact sample from the posterior, but in general this is not possible computationally. 
-We can eliminate the importance of the tolerance to some extent by simulating $N$ samples from the prior, storing all the distances and keeping the closest $\alpha$ quantile of the sampled parameters to the observed data. 
-The quality of the posterior still depends on $N$ and $\alpha$ but the choice of $\epsilon $, which may be dependent on other model parameters, is removed. 
-
-The efficiency of the rejection sampling method is low, particularly for small values of $\epsilon$ which lead to tiny acceptance rates meaning many wasted samples. 
-More efficient ways of sampling possible parameters $\theta$ have been suggested including Sequential Monte Carlo and Population Monte Carlo techniques $\citep{toni2009approximate, sisson2007sequential, beaumont2009adaptive, lenormand2013adaptive}$.
-We have opted to use an adaptive Population Monte Carlo (APMC) method presented in \citet{lenormand2013adaptive}. 
-This is implemented as shown in algorithm \ref{ABC-APMC}, where $N$ is the number of parameter samples to simulate, $N_{\alpha} = \floor{\alpha N}$ is the number to keep at each iteration, $p_{acc_{min}}$ is the minimum acceptance rate at which the algorithm stops,
-and $K_{\sigma}(x,y) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-y)^2}{2\sigma^2}}$ is a Gaussian kernel.
-\begin{algorithm}
-\caption{ABC Adaptive Population Monte Carlo}\label{ABC-APMC}
-\begin{algorithmic}[1]
-\State Initialise by setting $N$,$\alpha$, $N_{\alpha}$ and $p_{acc_{min}}$.
-\State Set $t=1$.
-\State \textbf{for} $i=1$ \text{to} $N$  \{
-\State Sample form prior: $\theta \sim \pi (\theta)$ 
-\State Simulate data $x \sim f(x|\theta_i^{(0)}$
-\State Calculate distance from observed data $y$ via $\rho_i^{(0)} = \rho(S(x),S(y))$
-\State Set $w_i^{(0)} = 1$
-\State \}
-\State Take $\epsilon_1$ as the first $\alpha$-quantile of $\rho^{(0)}$.
-\State Let \{ $(\theta_i^{(1)},w_i^{(1)}, \rho_i^{(1)})$ \} = \{ $(\theta_i^{(0)},w_i^{(0)}, \rho_i^{(0)}) | \rho_i^{(0)} \le \epsilon_1, 1 \le i \le N$ \} 
-\State Take $\sigma_1^2$ as twice the weighted empirical variance of $\{(\theta_i^{(1)} ,w_i^(1)) \} _{1\le i \le N_{\alpha}}$
-\State Set $p_{acc} = 1$
-\State Update $t:=t+1$
-\State \textbf{while} $p_{acc}>p_{acc_{min}}$ \{ 
-\State \textbf{for} $i=N_{\alpha+1}$ \text{to} $N$ \{
-\State Pick $\theta_i^{*}$ from $\theta_j^{(t-1)}$ with probability $\frac{\omega_j^{(t-1)}}{\sum_{k=1}^{N_{\alpha}} w_k^{(t-1)}  }$, $1 \le j \le N_{\alpha}$.  
-\State Generate new parameters $\theta_i^{(t-1)}|\theta_i^{*} \sim \mathcal{N} (\theta_i^{*}, \sigma_{(t-1)}^2)$ and data $x \sim f(x|\theta_i^{(t-1)})$
-\State Set$ \rho_i^{(t-1)} = \rho (S(x),S(y))$
-\State Set $w_i^{(t-1)} = \frac{\pi(\theta_i^{(t-1)}}{\sum_{j=1}^{N_{\alpha}}(w_j^{(t-1)}/\sum_{k=1}^{N_{\alpha}} w_k^{(t-1)}) K_{\sigma_{(t-1)}}(\theta_i^{(t-1)},\theta_j^{(t-1)}) }$
-\State \}
-\State Set $p_{acc} = \frac{1}{N-N_{\alpha}} \sum_{k=N_{\alpha}+1}^N \mathds{1}_{\rho_i^{(t-1)} < \epsilon_{t-1}}$
-\State Take $\epsilon_1$ as the first $\alpha$-quantile of $\rho^{(t-1)}$.
-\State Let \{ $(\theta_i^{(t)},w_i^{(t)}, \rho_i^{(t)})$ \} = \{ $(\theta_i^{(t-1)},w_i^{(t-1)}, \rho_i^{(t-1)}) | \rho_i^{(t-1)} \le \epsilon_t, 1 \le i \le N$ \} 
-\State Take $\sigma_t^2$ as twice the weighted empirical variance of $\{(\theta_i^{(t)} ,w_i^(t)) \} _{1\le i \le N_{\alpha}}$
-\State Set t=t+1
-\State \}
-\end{algorithmic}
-\end{algorithm}
-
-Inference on model parameters using ABC has been successfully applied to a variety of types of model in a biological context, often helping to offer biological insight into the model system.
-Cell migration models have used ABC to process data from scratch assays \citep{johnston2014interpreting} and \textit{in vivo} data \citep{liepe2012calibrating}, while individual-based ecological models with up to 14 parameters have also applied ABC for parameterisation \citep{van2015calibration}. 
-
-When using ABC methods, it is important to be aware also of their limitations. 
-It has been highlighted via \citet{robert2011lack} that although the error from the tolerance $\epsilon$ can be eliminated in the limit $\epsilon \rightarrow 0$, the use of summary statistics of the data may have larger effects, particularly when comparing models using ABC.
-Some more systematic methods for choice of summary statistics have been suggested, which use minimization of certain measures of entropy to determine which summary statistics are most informative \citep{nunes2010optimal}.
-
-\subsubsection{Dependence of weights on distance}
-At each generation of the APMC algorithm, we calculate a distance for each set of parameters.
-These ought to be informative for which particles should contribute most heavily to the next generation, but are not used directly in the ABC-APMC algorithm.
-We have considered how we could use weights in the ABC-APMC algorithm that depend directly on the distances, using the update step: 
-\begin{equation}
- w_{i}^{(t-1)} = \frac{\pi(\theta_i^{(t-1)}}{\rho_i^{(t-1)}} \frac{ w_i^{(t-1)} }{\sum_{j=1}^{N_{\alpha}} w_j^{(t-1)} }. 
-\end{equation}                                                                                                                                                       
-However, the weights used in the ABC-APMC algorithm are required to ensure that the importance sampling is performed correctly when sampling from the weighted distribution at the next time step \citep{beaumont2009adaptive}.
-Without this exact choice, there is no guaruntee that the resulting posterior would be unbiased; a similar bias due to incorrect choice of weights was highlighted by \citet{beaumont2009adaptive} in the work of \citet{sisson2007sequential}.
-The appropriate weight for importance sampling to be effective uses the density $d_i^{(t)}$ from which parameter values are generated.
-Therefore the update step must be $w_i^{(t-1)} = \frac{\pi(\theta_i^{(t-1)})}{d_i^{(t-1)}}$, where $d_i^{(t)} $ is given by the probability to arrive at $\theta_i^{(t)}$ from one of the previous weighted parameter values. 
-Although heuristically, weights directy dependent on distance seem an attractive option, statistically they may result in poor quality posteriors.
-
-\section{Results and Discussion} \label{Results}
-\subsection{Evaluation of ABC methods on in silico data}
+\subsection{Evaluation of ABC methods for in silico data}
 We demonstrate the effectiveness of the ABC inference techniques on in silico data, before applying them directly to real data sets. 
-We present first the results of applying ABC methods to our model with a broad prior and known parameter values, as shown in figure \ref{FIG:ABC_Posterior}.
+We present first the results of applying ABC methods to our model with a broad prior and known parameter values, as shown in Figure \ref{FIG:ABC_Posterior}.
 \begin{figure} 
         \centering
         \begin{subfigure}[h]{0.95\columnwidth}
                 \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Posterior_Scatter_N_2000_RS_v2.png}
-                \caption{Posterior obtained for $N=2000$, $\alpha=0.1$}
+                \caption{Posterior obtained for $N=2000$, $\alpha=0.1$.}
                 \label{fig:a}
         \end{subfigure}%
         
@@ -524,7 +547,7 @@ We present first the results of applying ABC methods to our model with a broad p
           %(or a blank line to force the subfigure onto a new line)
         \begin{subfigure}[h]{0.95\columnwidth}
                 \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_2000_RS_from_matlab_v2.png}
-                \caption{Posterior obtained for $N=2000$, $\alpha=0.1$}
+                \caption{Posterior obtained for $N=2000$, $\alpha=0.1$.}
                 \label{fig:b}
         \end{subfigure}
         
@@ -532,11 +555,11 @@ We present first the results of applying ABC methods to our model with a broad p
           %(or a blank line to force the subfigure onto a new line)
         \begin{subfigure}[h]{0.95\columnwidth}
                 \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Pairwise_parameter_heatmap_N2000_RS.png}
-                \caption{Posterior obtained for $N=2000$, $\alpha=0.1$}
+                \caption{Posterior obtained for $N=2000$, $\alpha=0.1$.}
                 \label{fig:c}
         \end{subfigure}
         
-        \caption{Posterior for each parameter approximated via ABC rejection sampling, using $N=2000$, $\alpha=0.1$, $n_{repeats}=1$. For \ref{fig:a}, a pairwise scatter plot is shown of all the posterior parameters. In \ref{fig:b}, histograms for each parameter a shown, with a green line for the real parameter values used for the simulated data. For \ref{fig:c}, heatmaps are shown pairwise for the posterior parameters.}
+        \caption{Posterior for each parameter approximated via ABC rejection sampling, using $N=2000$, $\alpha=0.1$, $n_{repeats}=1$. For \ref{fig:a}, a pairwise scatter plot is shown of all the posterior parameters. In \ref{fig:b}, histograms for each parameter are shown, with a green line for the real parameter values used for the simulated data. For \ref{fig:c}, heatmaps are shown pairwise for the posterior parameters.}
         \label{FIG:ABC_Posterior}
 \end{figure}
 
@@ -545,12 +568,12 @@ That summary statistic is compared to summaries of data generated from proposed 
 We average the results obtained across a number of experiments denoted $n_{repeats}$.
 As summary statistics we take the spatial distribution of the cargoes averaged in the $x$ direction at given times $t_1,...,t_{\kappa}$ and use a symmetric version of the Kullback-Leibler divergence as our distance to compare distributions.
 Uniform priors are used for each parameter between biologically realistic maximum and minimum values.
-In figure \ref{FIG:ABC_Posterior}, scatterplots and heatmaps of the pairwise parameter distributions are shown, along with histograms for each parameter. 
+In Figure \ref{FIG:ABC_Posterior}, scatterplots and heatmaps of the pairwise parameter distributions are shown, along with histograms for each parameter. 
 In table (??), we present the results of varying the parameters $N, n_{repeats}, \alpha, p_{acc_{min}}$ on the quality of the posteriors.
 
-We obtain most information from the posterior for the microtubule bias $\phi$, while the speed parameters $\nu_1$ and $\nu_2$ are also identifiable. 
+We obtain most information from the posterior for the microtubule bias, $\phi$, while the speed parameters, $\nu_1$ and $\nu_2$, are also identifiable. 
 The remaining rate parameters have posteriors similar to the uniform prior and it is harder to recover the original parameter values used.
-This suggests that the microtubule bias and the speeds have most effect on the summary statistic chosen, which agrees with our earlier sensitivity analysis.
+This suggests that the microtubule bias and the speeds have most effect on the efficiency of the summary statistic chosen, which agrees with our earlier sensitivity analysis.
 %Explain the set up.
 %Which method performs best? Is this consistent?
 %Why might this be?
@@ -562,30 +585,25 @@ This suggests that the microtubule bias and the speeds have most effect on the s
 %What estimates for the posterior of the parameters do we get from ABC?
 %Are these informative?
 %Do they agree with what we obtained by direct measurement? Why?
-Although comparative simulation results with ABC suggest that the detailed summary statistics using MFPT, number of jumps and jump distances result in a higher quality posterior, there are limitations to what data can be collected.
-These summary statistics would require detailed tracking data over an extended period of time, which would be difficult to obtain. 
-Instead, we use spatial distribution of particles which is more tractable from single time points.
-
-We observed grk mRNA nurse cells tagged using Dendra. These were imaged at 100x resolution.
-The age of embryos was determined by measuring oocyte size and comparing to a logistic growth model.
-Positions of mRNA particles were extracted via segmentation with Felzenswalb's algorithm \citep{felzenszwalb2004efficient} after denoising and deconvolution of the images.
-The centroids of appropriately sized segments were then taken to give the positions of particles at a time corresponding to the calculated age of that egg chamber. 
+Although comparative simulation results with ABC suggest that the detailed summary statistics using MFPT, number of jumps and jump distances result in a higher quality posterior, there are limitations to what data can be collected experimentally.
+In particular, these summary statistics would require detailed tracking data of individual particles over an extended period of time, which would be difficult to obtain. 
+Instead, we use the spatial distribution of particles which is more tractable from single time points.
 
 Applying inference with ABC to these data, we obtain ... 
 
 \section{Conclusion} \label{Conclusions}
-Through use of a model based approach of mRNA transport and localization, we have been able to represent the dynamics of this process and reproduce behaviour observed experimentally.
-We constructed a velocity jump process with two phases of motion to represent motion in active transport and in diffusion.
-Since simulation from this model was accessible but the likelihood was intractable, we employed ABC methods to infer the parameters from our model from data collected via live \textit{in vitro} imaging and compared the results of this with values obtained from direct measurement.
+Through use of a model-based approach for explaining mRNA transport and localization, we have been able to represent the dynamics of this process and reproduce behaviour observed experimentally.
+We constructed a velocity jump process with two phases of motion to represent directed movement via active transport on microtubles and random motion in free diffusion.
+Since simulations of this model were accessible but the likelihood was intractable, we employed ABC methods to infer the parameters from our model from data collected via live \textit{in vitro} imaging and compared the results of this with values obtained from direct measurement.
 
-The timescales for mean first passage times based on simulations from the model are on the order of tens of minutes, rather than hours for the inferred parameters, suggesting that the transport step is not the rate limiting stage of the mRNA localization process.
-Based on the modelling work presented here, we postulate that the production of mRNA in the nucleus of the nurse cells is instead the rate limiting stage.
+The timescales for MFPTs based on simulations from the model are on the order of tens of minutes, rather than hours, for the inferred parameters, suggesting that the transport step is not the rate-limiting stage of the mRNA localization process.
+Based on the modelling work presented here, we postulate that the production of mRNA in the nucleus of the nurse cells is instead the rate-limiting stage.
 
 \subsection{Further work}
-The subcellular environment is in some ways drastically different to that assumed in our spatially homogeneous two dimensional model.
-In reality, cells exist in three dimensions and are crowded inside with a hetrogeneous environment. 
+The subcellular environment is in some ways drastically different to that assumed in our spatially homogeneous two-dimensional model.
+In reality, cells exist in three dimensions and are crowded inside with a heterogeneous environment. 
 One possible method of representing heterogeneity in the cell would be by use of a potential to account for volume exclusion effects, as used by \citet{isaacson2011influence} in the context of nuclear export of mRNAs.
-The three dimensional nature of the environment presents further challenges for tracking, as RNPs move between frames.
+The three-dimensional nature of the environment presents further challenges for tracking, as RNPs move between frames.
 Although some progress has already been made in this area \citep{thompson2010three}, we hope that incorporation of modelling into a tracking framework could enable tracking of particles over longer timescales at increased resolution. 
 Motivated by a Kalman filter type approach \citep{faragher2012understanding}, we would like to investigate further using our model combined with regular inputs of data over time to assist particle tracking algorithms in the linkage step of tracking.
 Therefore in future the model should be extended to enable us to capture behaviour in three dimensions. 
@@ -598,7 +616,7 @@ However, this may prove difficult to measure experimentally and to parametrise a
 An online supplement to this article can be found by visiting BJ Online at http://www.biophysj.org.
 
 \vspace{1cm}
-\footnotesize The authors would like to acknowedge valuable discussions from Dr S. Filippi and Dr J. Rittscher, in addition to beneficial input from Prof I. Davis.
+\footnotesize The authors would like to acknowedge valuable discussions with Dr S. Filippi and Dr J. Rittscher, in addition to beneficial input from Prof I. Davis.
 
 
 % Here references are directly included this tex file.
