@@ -52,7 +52,7 @@ if plot_option
     set(gca, 'YTick', yticks, 'YTickLabel', flipud(yticklabels(:)))
     colormap('gray');
     
-    print('Figures_for_writeup/Spatial_distn_half_speed_mutant','-deps');
+    print('Figures_for_writeup/Spatial_distn_half_speed_mutant','-dpng');
 end
 toc(total)
 
