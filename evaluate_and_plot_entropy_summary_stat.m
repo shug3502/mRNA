@@ -20,7 +20,7 @@ params.Ly = 37; %in y direction
 params.nuc_radius = 10; %radius of nucleus
 params.theta_0 = 0; %initial angle is 0
 
-param_vec = [1.16/2,1.16]; %[0.001, 0.01,0.1,0.5,1,5,10]; %0.5:0.02:0.8; 0.4:0.05:0.8;
+param_vec = [1.16/2,1.16]; %0.4:0.05:0.8; %[0.001, 0.01,0.1,0.5,1,5,10]; %0.5:0.02:0.8; 
 my_length = length(param_vec);
 %my_length = 1;
 
@@ -32,16 +32,16 @@ num_particles = 1000;
 
 for k=1:my_length
     
-    params.nu1 = param_vec(k);
+    params.nu_1 = param_vec(k);
     
     q_distn = summary_statistic_calculator(params,num_particles,0,0);
     q_storage(k,:) = q_distn;
 end
 if plot_option
     figure;
-    imagesc((param_vec),0:52,flipud(q_storage'))
+    imagesc(param_vec,0:52,flipud(q_storage'))
     set(gca, 'fontsize',24);
-    xlabel('\phi');
+    xlabel('\nu_1');
     ylabel('x');
 %     xticklabels =param_vec;
 %     xticks = 1:2;
@@ -52,8 +52,8 @@ if plot_option
     set(gca, 'YTick', yticks, 'YTickLabel', flipud(yticklabels(:)))
     colormap('gray');
     
+    print('Figures_for_writeup/Spatial_distn_half_speed_mutant','-deps');
     print('Figures_for_writeup/Spatial_distn_half_speed_mutant','-dpng');
 end
 toc(total)
-
 end

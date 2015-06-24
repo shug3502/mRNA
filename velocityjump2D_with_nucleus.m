@@ -35,7 +35,9 @@ if nargin ~= 5
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
 end
+if with_plot
 rng(493); % set random seed
+end
 
 is_anchored=0; %has RNP reach destination and anchored yet?
 is_attached=1; %is molecular motor attached to the microtubule?
