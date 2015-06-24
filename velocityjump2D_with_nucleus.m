@@ -19,7 +19,7 @@ if nargin ~= 5
     fprintf('default parameters used\n')
     input_time = 1;
     with_anchoring = 1;
-    num_modes = 1;
+    num_modes = 2;
     with_plot = 1;
     %Now with data on nurse cells from Alex Davidson
     params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
@@ -35,7 +35,7 @@ if nargin ~= 5
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
 end
-%rng(3); % set random seed
+rng(493); % set random seed
 
 is_anchored=0; %has RNP reach destination and anchored yet?
 is_attached=1; %is molecular motor attached to the microtubule?
@@ -76,10 +76,12 @@ while time<endtime && ~is_anchored
     %         theta = params.theta_0; %set an initial angle. Get rid of this to have T(theta) initially
     %     end
     
+    %update time 
+    time = time+tau;
     %jumps
     xpos = xpos + delx*sin(theta);
     ypos = ypos + delx*cos(theta);
-    
+       
     if xpos >=params.Lx
         if abs(ypos)<rc_width %should probably use crossing position, not final position, but effect small if speed smallish
         anchoring_time = (params.Lx-(xpos-delx*sin(theta)))/(v*sin(theta))+ time;
@@ -172,7 +174,7 @@ while time<endtime && ~is_anchored
         %oops
         error('something is wrong')
     end
-    time = time+tau;
+    
     n_jump = n_jump+1;
     pathx(n_jump) = xpos;
     pathy(n_jump) = ypos;
@@ -191,65 +193,84 @@ pathy = pathy(1:n_jump);
 jump_times = jump_times(1:n_jump);
 final_position_y = ypos;
 if with_plot
-    %close all
+    close all
     %some plots
     
+    transitions = transitions(1:n_transition,:);
+    
     if is_anchored == 1
-        plot_col = 'r--'; %plot in red if reached target within simulation time
+        plot_col = 'r'; %plot in red if reached target within simulation time
     else
-        plot_col = 'g--'; %green otherwise
+        plot_col = 'g'; %green otherwise
     end
-    figure(1);
-    plot3(jump_times, pathx, pathy, plot_col,'linewidth',3)
-    set(gca,'fontsize',14)
-    xlabel('t');
-    ylabel('x position');
-    zlabel('y position');
-    grid on
-    hold all
-    if ~isempty(transitions)
-        plot3(transitions(:,3),transitions(:,1),transitions(:,2),'bo')
-    end
-    plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
-    plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
-    %plot3(transitions(:,3),transitions(:,1),b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
-    %plot3(transitions(:,3),transitions(:,1),-b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
-    %     plot3(0:3600/(params.Lx*2):3600,0:0.5:L,b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
-    %     plot3(0:3600/(L*2):3600,0:0.5:L,-b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
+%     figure(1);
+%     plot3(jump_times, pathx, pathy, plot_col,'linewidth',3)
+%     set(gca,'fontsize',14)
+%     xlabel('t');
+%     ylabel('x position');
+%     zlabel('y position');
+%     grid on
+%     hold all
+%     if ~isempty(transitions)
+%         plot3(transitions(:,3),transitions(:,1),transitions(:,2),'bo')
+%     end
+%     plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
+%     plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
+%     %plot3(transitions(:,3),transitions(:,1),b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
+%     %plot3(transitions(:,3),transitions(:,1),-b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
+%     %     plot3(0:3600/(params.Lx*2):3600,0:0.5:L,b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
+%     %     plot3(0:3600/(L*2):3600,0:0.5:L,-b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
     
     figure(3)
     subplot(2,1,1)
-    plot(jump_times, pathx, plot_col, 'linewidth',3)
+    plot(jump_times, pathx, plot_col, 'linewidth',2)
     set(gca,'fontsize',16)
     xlabel('t');
     ylabel('x position');
     grid on
     hold all
     if ~ isempty(transitions)
-        plot(transitions(:,3),transitions(:,1),'bo')
+        plot(transitions(:,3),transitions(:,1),'ko','markersize',3)
     end
-    mu_initial = 0.5; %initial mean position
-    nu_1 = 0.4; %speed in active transport mode
-    F1 = (4*params.phi-2)/pi;
-    t = jump_times;
-    mu1 = min((nu_1*F1*t + mu_initial),params.Lx); %note time scaled to seconds
-    if num_modes>1
-        mu1 = min((0.5*nu_1*F1*t + mu_initial),params.Lx); %adjust for different analytical results for different numbers of modes
-    end
-    %plot(t, mu1, 'b--', 'linewidth',3);
-    set(gca, 'fontsize',14)
+    %axis equal
+    axis([0 210 30 60]);
+
+%     mu_initial = 0.5; %initial mean position
+%     nu_1 = 0.4; %speed in active transport mode
+%     F1 = (4*params.phi-2)/pi;
+%     t = jump_times;
+%     mu1 = min((nu_1*F1*t + mu_initial),params.Lx); %note time scaled to seconds
+%     if num_modes>1
+%         mu1 = min((0.5*nu_1*F1*t + mu_initial),params.Lx); %adjust for different analytical results for different numbers of modes
+%     end
+%     %plot(t, mu1, 'b--', 'linewidth',3);
+    set(gca, 'fontsize',18)
     
     %figure(5)
     subplot(2,1,2)
-    plot(pathx,pathy,plot_col,'linewidth',3)
-    set(gca,'fontsize',16)
+    plot(pathx,pathy,plot_col,'linewidth',2)
+    set(gca,'fontsize',18)
     xlabel('x position');
     ylabel('y position');
-    grid on
+    %grid on
     hold all
     if ~ isempty(transitions)
-        plot(transitions(:,1),transitions(:,2),'bo')
+        plot(transitions(:,1),transitions(:,2),'ko','markersize',3)
     end
+    hold on
+    nuc_vec = linspace(-params.nuc_radius,params.nuc_radius,2000);
+    fill(params.Lx/2+nuc_vec, sqrt(params.nuc_radius^2-(nuc_vec).^2),'k', params.Lx/2+nuc_vec, -sqrt(params.nuc_radius^2-(nuc_vec).^2),'k');
+    
+    hold on
+    plot((params.Lx)*ones(50,1),linspace(-rc_width,rc_width,50),'k','linewidth',5)
+    rectangle('Position',[0,-params.Ly/2,params.Lx,params.Ly],...
+          'LineWidth',2,...
+          'LineStyle','--')
+    axis equal
+    axis([-10, 60, -20, 20]);
+    %axis equal
+    
+    print('Figures_for_writeup/Typical_path','-depsc');
 %code to make a movie    
 %     nframe=min(200,length(pathx));
 %     mov(1:nframe)=struct('cdata',[],'colormap',[]);
