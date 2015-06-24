@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.4)  24 JUN 2015 10:33
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.4)  24 JUN 2015 15:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -546,36 +546,37 @@ Package lastpage Info: Please have a look at the pageslts package at
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 133.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 133.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 140.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 140.
 
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 133.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 140.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 174.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 177.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 174.
+LaTeX Font Info:    Try loading font information for U+msb on input line 177.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Font Info:    Try loading font information for TS1+phv on input line 183.
+LaTeX Font Info:    Try loading font information for TS1+phv on input line 177.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
 )
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 183.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 177.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd
@@ -588,9 +589,12 @@ Overfull \vbox (15.87198pt too high) has occurred while \output is active []
 
 
 ]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Drosophi
-la_development_grk.png' not found on input line 201.
+la_development_grk.png' not found on input line 208.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -600,33 +604,31 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.201 ...r_writeup/Drosophila_development_grk.png}
+l.208 ...r_writeup/Drosophila_development_grk.png}
                                                   
 ? s
 OK, entering \scrollmode...
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 201.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 208.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 1028) in paragraph at lines 197--205
+Underfull \hbox (badness 1028) in paragraph at lines 204--212
 []\OT1/ptm/m/n/10 In par-tic-u-lar, the mRNA tran-scripts that set up the
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [2]
-Underfull \hbox (badness 1454) in paragraph at lines 222--225
+[2]
+Underfull \hbox (badness 1454) in paragraph at lines 229--232
 \OT1/ptm/m/n/10 In this con-text, mod-elling involves break-ing down the
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/States_d
-iagram.pdf' not found on input line 245.
+iagram.pdf' not found on input line 252.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -636,36 +638,33 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.245 ...A/Figures_for_writeup/States_diagram.pdf}
+l.252 ...A/Figures_for_writeup/States_diagram.pdf}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 [3]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 275.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 291.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 282.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 298.
 
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 291.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 298.
 
-Overfull \hbox (20.46373pt too wide) in paragraph at lines 334--335
+Overfull \hbox (20.46373pt too wide) in paragraph at lines 341--342
 []\OT1/ptm/m/n/10 Set $\OML/cmm/m/it/10 w[] \OT1/cmr/m/n/10 = []$ 
  []
 
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 336.
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 343.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+Underfull \hbox (badness 10000) in paragraph at lines 345--346
 []\OT1/ptm/m/n/10 Let \OMS/cmsy/m/n/10 f $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^R
 []; w[]; ^^Z[]\OT1/cmr/m/n/10 )$ \OMS/cmsy/m/n/10 g \OT1/ptm/m/n/10 = \OMS/cmsy
 /m/n/10 f
@@ -678,24 +677,20 @@ Missing character: There is no ™ in font ptmr7t!
 
 
 Package natbib Warning: Citation `Felzenswalb2004efficient' on page 5 undefined
- on input line 368.
-
-
-Underfull \hbox (badness 2293) in paragraph at lines 366--369
-\OT1/ptm/m/n/10 ci-sion). Seg-men-ta-tion of images was per-formed using
- []
+ on input line 376.
 
 
 LaTeX Warning: Reference `fig:nu1, fig:phi' on page 5 undefined on input line 3
-77.
+86.
 
 
 LaTeX Warning: Reference `fig:omega1, fig:omega2' on page 5 undefined on input 
-line 378.
+line 387.
 
+[5]
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_phi.png' not found on input line 384.
+s_phi.png' not found on input line 393.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -705,7 +700,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.384 ...NA/Figures_for_writeup/3SumStats_phi.png}
+l.393 ...NA/Figures_for_writeup/3SumStats_phi.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -713,7 +708,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_nu.png' not found on input line 393.
+s_nu.png' not found on input line 402.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -723,7 +718,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.393 ...RNA/Figures_for_writeup/3SumStats_nu.png}
+l.402 ...RNA/Figures_for_writeup/3SumStats_nu.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -731,7 +726,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_omega1.png' not found on input line 401.
+s_omega1.png' not found on input line 410.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -741,7 +736,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.401 ...Figures_for_writeup/3SumStats_omega1.png}
+l.410 ...Figures_for_writeup/3SumStats_omega1.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -749,7 +744,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_omega2.png' not found on input line 409.
+s_omega2.png' not found on input line 418.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -759,7 +754,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.409 ...Figures_for_writeup/3SumStats_omega2.png}
+l.418 ...Figures_for_writeup/3SumStats_omega2.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -767,7 +762,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_lambda.png' not found on input line 418.
+s_lambda.png' not found on input line 427.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -777,18 +772,18 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.418 ...Figures_for_writeup/3SumStats_lambda.png}
+l.427 ...Figures_for_writeup/3SumStats_lambda.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: Float too large for page by 488.28072pt on input line 428.
+LaTeX Warning: Float too large for page by 488.28072pt on input line 437.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-phi.png' not found on input line 433.
+phi.png' not found on input line 442.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -798,7 +793,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.433 ...mRNA/Figures_for_writeup/Q_distn_phi.png}
+l.442 ...mRNA/Figures_for_writeup/Q_distn_phi.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -806,7 +801,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-nu.png' not found on input line 442.
+nu.png' not found on input line 451.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -816,7 +811,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.442 .../mRNA/Figures_for_writeup/Q_distn_nu.png}
+l.451 .../mRNA/Figures_for_writeup/Q_distn_nu.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -824,7 +819,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-omega1.png' not found on input line 450.
+omega1.png' not found on input line 459.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -834,7 +829,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.450 ...A/Figures_for_writeup/Q_distn_omega1.png}
+l.459 ...A/Figures_for_writeup/Q_distn_omega1.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -842,7 +837,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-omega2.png' not found on input line 458.
+omega2.png' not found on input line 467.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -852,7 +847,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.458 ...A/Figures_for_writeup/Q_distn_omega2.png}
+l.467 ...A/Figures_for_writeup/Q_distn_omega2.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -860,7 +855,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-lambda.png' not found on input line 467.
+lambda.png' not found on input line 476.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -870,19 +865,22 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.467 ...A/Figures_for_writeup/Q_distn_lambda.png}
+l.476 ...A/Figures_for_writeup/Q_distn_lambda.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: Float too large for page by 488.28072pt on input line 477.
+LaTeX Warning: Float too large for page by 488.28072pt on input line 486.
 
-[5] [6]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6]
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Typical_
-path.png' not found on input line 515.
+path.png' not found on input line 524.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -892,43 +890,44 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.515 ...RNA/Figures_for_writeup/Typical_path.png}
+l.524 ...RNA/Figures_for_writeup/Typical_path.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Half_spe
-ed_motor_q_distn.png' not found on input line 525.
+LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Spatial_
+distn_half_speed_mutant.eps' not found on input line 534.
 
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Spatial_distn_half_speed_mutant.eps>
+(epstopdf)             Output file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Spatial_distn_half_speed_mutant-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=/home/harrison/Documents/m
+RNA/Figures_for_writeup/Spatial_distn_half_speed_mutant-eps-converted-to.pdf /h
+ome/harrison/Documents/mRNA/Figures_for_writeup/Spatial_distn_half_speed_mutant
+.eps>
+(epstopdf)             \includegraphics on input line 534.
+Package epstopdf Info: Output file is already uptodate.
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/Half_speed_motor_q_distn.png' not found.
+teup/Spatial_distn_half_speed_mutant-eps-converted-to.pdf' not found.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.525 ...for_writeup/Half_speed_motor_q_distn.png}
+l.534 ...teup/Spatial_distn_half_speed_mutant.eps}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+[7]
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Posterio
-r_Scatter_N_2000_RS_v2.png' not found on input line 538.
+r_Scatter_N_2000_RS_v2.png' not found on input line 547.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -938,7 +937,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.538 ...iteup/Posterior_Scatter_N_2000_RS_v2.png}
+l.547 ...iteup/Posterior_Scatter_N_2000_RS_v2.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -946,7 +945,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_
-posterior_N_2000_RS_from_matlab_v2.png' not found on input line 547.
+posterior_N_2000_RS_from_matlab_v2.png' not found on input line 556.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -956,7 +955,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.547 ...f_posterior_N_2000_RS_from_matlab_v2.png}
+l.556 ...f_posterior_N_2000_RS_from_matlab_v2.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -964,7 +963,7 @@ If that doesn't work, type  X <return>  to quit.
 
 
 LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Pairwise
-_parameter_heatmap_N2000_RS.png' not found on input line 555.
+_parameter_heatmap_N2000_RS.png' not found on input line 564.
 
 
 ! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
@@ -974,22 +973,16 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.555 .../Pairwise_parameter_heatmap_N2000_RS.png}
+l.564 .../Pairwise_parameter_heatmap_N2000_RS.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: Float too large for page by 174.54877pt on input line 562.
+LaTeX Warning: Float too large for page by 174.54877pt on input line 571.
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [7]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8]
+[8]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -1039,9 +1032,9 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6141 strings out of 493315
- 93686 string characters out of 6137904
- 174211 words of memory out of 5000000
+ 6142 strings out of 493315
+ 93697 string characters out of 6137904
+ 172211 words of memory out of 5000000
  9393 multiletter control sequences out of 15000+600000
  39241 words of font info for 99 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -1072,7 +1065,7 @@ elvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic
 b></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/l
 ocal/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texli
 ve/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Modelling_of_mRNA_writeup_template.pdf (12 pages, 300538 byte
+Output written on Modelling_of_mRNA_writeup_template.pdf (12 pages, 301089 byte
 s).
 PDF statistics:
  149 PDF objects out of 1000 (max. 8388607)

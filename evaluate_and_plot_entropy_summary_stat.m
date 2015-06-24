@@ -39,11 +39,20 @@ for k=1:my_length
 end
 if plot_option
     figure;
-    imagesc((param_vec),0:52,q_storage')
+    imagesc((param_vec),0:52,flipud(q_storage'))
     set(gca, 'fontsize',24);
     xlabel('\phi');
-    ylabel('q');
+    ylabel('x');
+%     xticklabels =param_vec;
+%     xticks = 1:2;
+%    set(gca, 'XTick', xticks, 'XTickLabel', xticklabels)
+    set(gca,'XTick',param_vec)
+    yticklabels = 0:10:52;
+    yticks = linspace(1, size(q_storage', 1), numel(yticklabels));
+    set(gca, 'YTick', yticks, 'YTickLabel', flipud(yticklabels(:)))
+    colormap('gray');
     
+    print('Figures_for_writeup/Spatial_distn_half_speed_mutant','-deps');
 end
 toc(total)
 
