@@ -270,7 +270,7 @@ if with_plot
     axis([-10, 60, -20, 20]);
     %axis equal
     
-    print('Figures_for_writeup/Typical_path','-depsc');
+    print('Figures_for_writeup/Typical_path','-dpng');
 %code to make a movie    
 %     nframe=min(200,length(pathx));
 %     mov(1:nframe)=struct('cdata',[],'colormap',[]);
