@@ -73,6 +73,7 @@
 \usepackage{textcomp}
 \usepackage{amsfonts}
 \usepackage{dsfont}
+\usepackage{epstopdf}
 \usepackage{mathtools}
 
 \usepackage[round,numbers,sort&compress]{natbib}
@@ -86,6 +87,8 @@
 
 \renewcommand{\bibnumfmt}[1]{#1.}
 
+\epstopdfsetup{outdir=./}
+\graphicspath{{../}}
 % Examples of special definitions (amsmath package required)
 \newcommand{\erf}{\operatorname{erf}}        % error function
 \newcommand{\erfc}{\operatorname{erfc}}      % complementary error function
@@ -114,9 +117,9 @@
 
 \title{Using mathematical modelling to explore mRNA localization}
 
-\author{Jonathan Harrison, Richard Parton, Ilan Davis, Ruth Baker}
+\author{Jonathan Harrison \authdagger, Richard Parton \textsuperscript{$\ddagger$}, Ilan Davis \textsuperscript{$\ddagger$}, Ruth Baker \authdagger}
 
-\address{University of Oxford}
+\address{\addrdagger Mathematical Institute, University of Oxford; \textsuperscript{$\ddagger$} Department of Biochemistry, University of Oxford}
 
 
 % generate the title page from the info in the headers above
@@ -158,7 +161,7 @@ The MS2-MCP system has been used successfully in the visualisation of \textit{no
 Although there are limitations to these technologies dependent on cell type, they have permitted an improvement of our understanding of intracellular motility and structure.
 What has become clear is that a variety of different mechanisms are used to ensure localization of mRNAs.
 
-What is not yet entirely clear are the molecular mechanisms used in the mRNA localization process and why exactly such a variety of transport methods are present.
+What are not yet well understood are the molecular mechanisms used in the mRNA localization process and why exactly such a variety of transport methods are present.
 
 \subsection{Outline of mRNA localization process}
 
@@ -373,7 +376,7 @@ Although heuristically, weights directy dependent on distance seem an attractive
 We observed \textit{grk} mRNA in \textit{Drosophila} nurse cells tagged using Dendra. 
 Imaging was performed with a wide-field deconvolution system (Delta Vision CORE) from Applied Precision. 
 Image stacks were deconvolved with the SoftWoRx Resolve 3D constrained iterative deconvolution algorithm (Applied Precision). 
-Segmentation of images was performed using Felzenswalb’s algorithm \citep{Felzenswalb2004efficient} after denoising and deconvolution of the images, with coordinates of particles obtained from centroids of appropriately sized segments. 
+Segmentation of images was performed using Felzenszwalb's algorithm \citep{felzenszwalb2004efficient} after denoising and deconvolution of the images, with coordinates of particles obtained from centroids of appropriately sized segments. 
 The age of embryos was determined by measuring oocyte size and comparing to a logistic growth model.
 
 \section{Results and Discussion} \label{Results}
@@ -439,8 +442,8 @@ Similar effects are seen for the mean number of jumps per simulation and the mea
 \begin{figure}
         \centering
         \begin{subfigure}[h]{0.95\columnwidth}
-                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_phi.png}
-                \caption{Spatial distribution as a function of $\phi$}
+                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_phi.eps}
+                \caption{Spatial distribution as a function of $\phi$.}
                 \label{fig:phi}
         \end{subfigure}%
         
@@ -448,24 +451,24 @@ Similar effects are seen for the mean number of jumps per simulation and the mea
         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
           %(or a blank line to force the subfigure onto a new line)
         \begin{subfigure}[h]{0.95\columnwidth}
-                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_nu.png}
-                \caption{Spatial distribution as a function of $\nu_1$ and $\nu_2$}
+                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_nu.eps}
+                \caption{Spatial distribution as a function of $\nu_1$ and $\nu_2$.}
                 \label{fig:nu1}
         \end{subfigure}
          
          ~
          
          \begin{subfigure}[h]{0.95\columnwidth}
-                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega1.png}
-                \caption{Spatial distribution as a function of $\omega_1$}
+                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega1.eps}
+                \caption{Spatial distribution as a function of $\omega_1$.}
                 \label{fig:omega1}
         \end{subfigure}%
         
         ~ 
    
     \begin{subfigure}[h]{0.95\columnwidth}
-                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega2.png}
-                \caption{Spatial distribution as a function of $\omega_2$}
+                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega2.eps}
+                \caption{Spatial distribution as a function of $\omega_2$.}
                 \label{fig:omega2}
         \end{subfigure}%
         
@@ -473,19 +476,19 @@ Similar effects are seen for the mean number of jumps per simulation and the mea
         ~ 
         
          \begin{subfigure}[h]{0.95\columnwidth}
-                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_lambda.png}
-                \caption{Spatial distribution as a function of $\lambda$}
+                \includegraphics[width=0.85\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_lambda.eps}
+                \caption{Spatial distribution as a function of $\lambda$.}
                 \label{fig:lambda}
         \end{subfigure}%
         
         
         ~ 
-        \caption{The spatial distribution of particles simulated for parameters as in Figure \ref{FIG:Sensitivity_analysis}. For each of \ref{fig:phi} to \ref{fig:lambda}, we vary a parameter in turn. 
-        For \ref{fig:nu1}, $\nu_2=\frac{1}{2}\nu_1$ while varying $\nu_1$. Results are shown for 100 particles at time $t=270s$. Note the final spatial box represents particles that have been absorbed and removed from the system.}
+        \caption{The spatial distribution in the $x$ direction of particles simulated for parameters as in Figure \ref{FIG:Sensitivity_analysis}. For each of \ref{fig:phi} to \ref{fig:lambda}, we vary a parameter in turn. 
+        For \ref{fig:nu1}, $\nu_2=\frac{1}{2}\nu_1$ while varying $\nu_1$. Results are shown for 100 particles at time $t=270s$. Note the final spatial box (indexed as box 52) represents particles that have been absorbed and removed from the system.}
         \label{FIG:Sensitivity_of_Q}
 \end{figure}
 
-In addition, we exhibit the dependence of the spatial distribution of particles simulated from our model, as shown in Figure \ref{FIG:Sensitivity_of_Q}.
+In addition, we exhibit the dependence of the spatial distribution parallel to the anterior-posterior axis of particles simulated from our model, as shown in Figure \ref{FIG:Sensitivity_of_Q}.
 For increased motor speeds, $\nu_1$ and $\nu_2$, the particles spread out faster from the nucelus and are directed towards the posterior of the nurse cell.
 By increasing the microtubule bias, $\phi$, the motion of the cargoes becomes much more directed towards to posterior with accumulation near the posterior and absorption upon reaching the ring canal there.
 For high values of the switching rate $\omega_1$, the distribution of particles is more spread and has not reached the posterior, as little time is spent in the active transport state.
@@ -521,7 +524,7 @@ Based on simulations from the model, we obtain a MFPT, averaged across 1000 part
 We plot the evolution of a typical path in Figure \ref{FIG:Typical_path}.
 \begin{figure}[h]
  \centering
- \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Typical_path.png}
+ \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Typical_path.eps}
  \caption{The evolution of a typical path until absorption at the posterior ring canal, showing also the geometry in the model.}
  \label{FIG:Typical_path}
 \end{figure}
@@ -620,10 +623,11 @@ However, this may prove difficult to measure experimentally and to parametrise a
 
 \section*{SUPPLEMENTARY MATERIAL}
 
-An online supplement to this article can be found by visiting BJ Online at http://www.biophysj.org.
+\ack{An online supplement to this article can be found by visiting BJ Online at http://www.biophysj.org.}
 
 \vspace{1cm}
-\footnotesize The authors would like to acknowedge valuable discussions with Dr S. Filippi and Dr J. Rittscher, in addition to beneficial input from Prof I. Davis.
+%\footnotesize 
+\ack{The authors would like to acknowedge valuable discussions with Dr S. Filippi and Dr J. Rittscher, in addition to beneficial input from Prof I. Davis.}
 
 
 % Here references are directly included this tex file.
