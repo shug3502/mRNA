@@ -1,4 +1,4 @@
-function [q_distn] = velocityjump2D_with_production(input_time, params, with_anchoring, num_modes, with_plot)
+function [q_raw,q_distn] = velocityjump2D_with_production(input_time, params, with_anchoring, num_modes, with_plot)
 %Created 22 June 2015
 %Last edit 22 June 2015
 %2D velocity jump model for transport of an RNP along a MT by molecular motors
@@ -90,7 +90,6 @@ for w=1:l_t
     q_raw(:,w) = Num_in_bins;
 end
 if with_plot
-    q_raw
 %plot with a log scale
 figure;
 subplot(2,1,1)
