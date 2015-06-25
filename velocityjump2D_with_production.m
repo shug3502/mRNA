@@ -94,30 +94,42 @@ if with_plot
 %plot with a log scale
 figure;
 subplot(2,1,1)
-imagesc(time_vec(1:9), 0:L, log(q_raw(:,1:9))) %plot initial period
+imagesc(time_vec(1:9), 0:L, flipud(log(q_raw(:,1:9)))) %plot initial period
 colormap(gray)
 set(gca, 'fontsize', 20);
+yticklabels = 0:10:52;
+yticks = linspace(1, size(q_raw, 1), numel(yticklabels));
+set(gca, 'YTick', yticks, 'YTickLabel', flipud(yticklabels(:)))
 xlabel('Time')
 ylabel('Position')
 subplot(2,1,2)
-imagesc(time_vec, 0:L, log(q_raw)) % plot whole time course
+imagesc(time_vec, 0:L, flipud(log(q_raw))) % plot whole time course
 colormap(gray)
 set(gca, 'fontsize', 20);
+yticklabels = 0:10:52;
+yticks = linspace(1, size(q_raw, 1), numel(yticklabels));
+set(gca, 'YTick', yticks, 'YTickLabel', flipud(yticklabels(:)))
 xlabel('Time')
 ylabel('Position')
 
 %plot on a normal scale 
 figure;
 subplot(2,1,1)
-imagesc(time_vec(1:9), 0:L, q_raw(:,1:9)) % plot initial period
+imagesc(time_vec(1:9), 0:L, flipud(q_raw(:,1:9))) % plot initial period
 colormap(gray)
 set(gca, 'fontsize', 20);
+yticklabels = 0:10:52;
+yticks = linspace(1, size(q_raw, 1), numel(yticklabels));
+set(gca, 'YTick', yticks, 'YTickLabel', flipud(yticklabels(:)))
 xlabel('Time')
 ylabel('Position')
 subplot(2,1,2)
-imagesc(time_vec, 0:L, q_raw)
+imagesc(time_vec, 0:L, flipud(q_raw))
 colormap(gray)
 set(gca, 'fontsize', 20);
+yticklabels = 0:10:52;
+yticks = linspace(1, size(q_raw, 1), numel(yticklabels));
+set(gca, 'YTick', yticks, 'YTickLabel', flipud(yticklabels(:)))
 xlabel('Time')
 ylabel('Position')
 end
