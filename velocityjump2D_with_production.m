@@ -28,7 +28,7 @@ if nargin ~= 5
     params.omega_1= 0.42;    %1/6*(num_modes>1); %rate of falling off the microtubule [zimyanin et al 2008] since average track length 2.4 - 2.8 microns -> average jump for 6s -> rate 1/6
     params.omega_2 = 0.84;
     params.phi = 0.58; %percentage of microtubules in posterior direction for biased angle distn [parton et al 2011]
-    params.gamma = 0.08; %rate of prouction from the nucleus
+    params.gamma = 0.01; %rate of prouction from the nucleus
     params.Lx = 52; %length of cell in x direction
     params.Ly = 37; %in y direction
     params.nuc_radius = 10; %radius of nucleus
@@ -90,6 +90,7 @@ for w=1:l_t
     q_raw(:,w) = Num_in_bins;
 end
 if with_plot
+    q_raw
 %plot with a log scale
 figure;
 subplot(2,1,1)
