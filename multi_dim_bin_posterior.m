@@ -38,7 +38,7 @@ end
 
 
 if plot_option
-    var_strings = {'\nu_1','\nu_2','\lambda','\omega_1','\omega_2','\phi'};
+    var_strings = {'\nu_1','\nu_2','\lambda','\omega_1','\omega_2','\phi','\gamma'};
     posterior_mode = zeros(1,length(indices));
     figure;
     for j=1:length(indices)

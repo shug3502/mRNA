@@ -47,7 +47,7 @@ accepted_proportion = 0.1; %alpha
 if data_to_read
 %read in data from files
 fprintf('reading in data from file');
-q_estimate_fake = read_in_particle_coords(9,[10,10]) %arguments are the file_number and the pixel sizes
+q_estimate_fake = [zeros(params.Lx+1,1),repmat(read_in_particle_coords(9,[10,10]),1,(sstat_time-1)/0.5)] %arguments are the file_number and the pixel sizes
 
 else
 %Generate fake data
