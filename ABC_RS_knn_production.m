@@ -23,6 +23,7 @@ tic;
 rng(my_seed);
 close all
 
+sstat_time = 2; %time at which to compare summary statistics up to
 
 %Fake parameters
     params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
@@ -52,16 +53,16 @@ else
 %Generate fake data
 %calculate appropriate summary statistic - we choose MFPT
 fprintf('generating in silico data');
-q_estimate_fake = generate_summary_stat(5, real_params, 1)
+q_estimate_fake = generate_summary_stat(sstat_time, real_params, 1)
 end
 %create while loop
 
 %set prior
-prior_params = [5, 5, 5, 1.5, 1.5, 0.5, 0.05, 0];
+prior_params = [5, 5, 5, 1.5, 1.5, 0.5, 0.02, 0];
 %prior_params = real_params;
 p_indices = 1:7;
 %prior_params(p_indices) = [5,1.5,0.5];
-prior_sigma = [10, 10, 10, 3, 3, 1, 0.1]; 
+prior_sigma = [10, 10, 10, 3, 3, 1, 0.04]; 
 % prior_params = [1.16, 0.8, 0.42, 0.42, 0.84, 0.58, 0.01, 0];
 par_params = prior_params;
 
@@ -86,8 +87,8 @@ for i=1:N
     
     %simulate data using these model parameters
     %Calculate summary statistic (MFPT)
-    q_estimate_candidate = generate_summary_stat(5, par_params, 1);
-    abc_dist(i) = distance_metric(q_estimate_candidate,q_estimate_fake,params.Lx,0); %distance of proposed S(x) from S(x_obs)
+    q_estimate_candidate = generate_summary_stat(sstat_time, par_params, 1);
+    abc_dist(i) = custom_distance_metric(q_estimate_candidate,q_estimate_fake); %distance of proposed S(x) from S(x_obs)
     %end    %repeat until N acceptances have been made
     
     abc_theta(i,:) = par_params(p_indices);
@@ -147,14 +148,16 @@ function q_summary = generate_summary_stat(input_time, vparams, repeats)
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
 
-
-
 delx=1;
 q_summary = zeros(params.Lx/delx+1,(input_time-1)/0.5+1);
 for i=1:repeats
-    q_estimate_fake = velocityjump2D_with_production(input_time, params, 1, 2, 0);  %input time of 5 hrs
+   [q_estimate_fake,~] = velocityjump2D_with_production(input_time, params, 1, 2, 0);  %input time of 5 hrs
     q_summary = q_summary+q_estimate_fake;
 end
 q_summary=q_summary/repeats;
+end
+
+function dist = custom_distance_metric(q1,q2)
+dist = sum(sum((q1-q2).^2),2);
 end
 

@@ -16,7 +16,7 @@ fake_data = (aux>0.5).*(theta_real+randn(N,1))+(aux<=0.5).*(theta_real+randn(N,1
 y = histc(fake_data,bins);
 y = y./sum(y)/0.1;
 
-num_sims = 2000000;
+num_sims = 200000;
 alpha = 0.001;
 M=500;
 
