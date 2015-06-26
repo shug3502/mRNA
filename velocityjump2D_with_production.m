@@ -36,9 +36,9 @@ if nargin ~= 5
 end
 tic
 
-N=ceil(2*input_time*60^2*params.gamma); %guess for number of particles (guess larger than likely value)
+N=ceil(4*input_time*60^2*params.gamma); %guess for number of particles (guess larger than likely value)
 
-l_n = 10000; %storage for the jumps and paths
+l_n = 5000; %storage for the jumps and paths
 delx=1;
 L=params.Lx;
 time_vec = (0:0.5:(input_time-1));
