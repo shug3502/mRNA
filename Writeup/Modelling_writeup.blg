@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Modelling_writeup.aux
+The style file: biophysj.bst
+Database file #1: my_citations.bib.bib
+Repeated entry---line 540 of file my_citations.bib.bib
+ : @article{szymanska2014mathematical
+ :                                   ,
+I'm skipping whatever remains of this entry
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+You've used 53 entries,
+            3176 wiz_defined-function locations,
+            978 strings with 16073 characters,
+and the built_in function-call counts, 27758 in all, are:
+= -- 2041
+> -- 1509
+< -- 17
++ -- 508
+- -- 402
+* -- 2010
+:= -- 3909
+add.period$ -- 159
+call.type$ -- 53
+change.case$ -- 55
+chr.to.int$ -- 53
+cite$ -- 53
+duplicate$ -- 2295
+empty$ -- 2229
+format.name$ -- 529
+if$ -- 5732
+int.to.chr$ -- 1
+int.to.str$ -- 54
+missing$ -- 515
+newline$ -- 270
+num.names$ -- 159
+pop$ -- 743
+preamble$ -- 1
+purify$ -- 53
+quote$ -- 0
+skip$ -- 518
+stack$ -- 0
+substring$ -- 1400
+swap$ -- 1231
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 365
+warning$ -- 0
+while$ -- 202
+width$ -- 0
+write$ -- 692
+(There was 1 error message)

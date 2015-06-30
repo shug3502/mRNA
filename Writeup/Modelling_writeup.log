@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.4)  29 JUN 2015 18:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.11)  30 JUN 2015 12:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Modelling_writeup.tex
 (./Modelling_writeup.tex
 LaTeX2e <2011/06/27>
-Babel <3.9f> and hyphenation patterns for 78 languages loaded.
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
 (./biophys.cls
 Document Class: biophys 2013/08/30 V2 Standard LaTeX document class
 
@@ -15,7 +15,7 @@ This file is copyright 2013 by TNQ. All rights reserved
 See biophys.cls for copyright information.
 ******************************************************************************
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/size10.clo
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \fulltextwidth=\dimen102
@@ -32,31 +32,31 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen103
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/graphics.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count87
@@ -64,28 +64,28 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf.sty
 Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 
-(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 ))
-(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
-(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 
-(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -94,11 +94,11 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
@@ -112,14 +112,14 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )))
-(/usr/local/texlive/2013/texmf-dist/tex/latex/lastpage/lastpage.sty
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage.sty
 Package: lastpage 2013/01/28 v1.2l Refers to last page's name (HMM; JPG)
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/multicol.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
 \c@tracingmulticols=\count88
 
@@ -171,7 +171,7 @@ Package multicol Warning: May not work with the twocolumn option on input line
 \mult@nat@firstbox=\box51
 \colbreak@box=\box52
 \multicol@sort@counter=\count96
-) (/usr/local/texlive/2013/texmf-dist/tex/generic/ulem/ulem.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
 \UL@box=\box53
 \UL@hyphenbox=\box54
 \UL@skip=\skip45
@@ -183,18 +183,18 @@ Package multicol Warning: May not work with the twocolumn option on input line
 Package: ulem 2012/05/18
 \ULdepth=\dimen116
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/color.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/dcolumn.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/dcolumn.sty
 Package: dcolumn 2001/05/28 v1.06 decimal alignment package (DPC)
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/array.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \col@sep=\dimen117
 \extrarowheight=\dimen118
@@ -202,13 +202,13 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \extratabsurround=\skip46
 \backup@length=\skip47
 )))
-(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/helvet.sty
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
 Package: helvet 2005/04/12 PSNFSS-v9.2a (WaS) 
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/times.sty
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/bm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup4
 \symboldletters=\mathgroup5
@@ -216,7 +216,7 @@ Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 138.
 LaTeX Info: Redefining \bm on input line 204.
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
@@ -231,7 +231,7 @@ Package textcomp Info: Sub-encoding information:
 (textcomp)             See the documentation for details.
 Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 )
 LaTeX Info: Redefining \oldstylenums on input line 266.
@@ -297,25 +297,25 @@ Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsmath.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip48
 
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks17
 \ex@=\dimen119
 ))
-(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 LaTeX Info: Redefining \boldsymbol on input line 39.
 \pmbraise@=\dimen120
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsopn.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count98
@@ -356,11 +356,11 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/algorithms/algorithm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/float/float.sty
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count110
 \float@exts=\toks22
@@ -368,16 +368,16 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks23
 \@floatcapt=\box59
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ifthen.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks24
 \c@algorithm=\count111
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
 Package: algpseudocode 
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
@@ -393,10 +393,10 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip53
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen128
@@ -410,28 +410,28 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 \c@ContinuedFloat=\count119
 Package caption Info: float package is loaded.
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/caption/subcaption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 \c@subfigure=\count120
 \c@subtable=\count121
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup7
 \symAMSb=\mathgroup8
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/doublestroke/dsfont.sty
+(/usr/share/texlive/texmf-dist/tex/latex/doublestroke/dsfont.sty
 Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/was/gensymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/was/gensymb.sty
 Package: gensymb 2003/07/02 v1.0 (WaS)
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/mh/mathtools.sty
+(/usr/share/texlive/texmf-dist/tex/latex/mh/mathtools.sty
 Package: mathtools 2013/02/12 v1.13 mathematical typesetting tools
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/calc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count122
 \calc@Bcount=\count123
@@ -444,7 +444,7 @@ LaTeX Info: Redefining \addtolength on input line 77.
 \calc@Ccount=\count124
 \calc@Cskip=\skip56
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/mh/mhsetup.sty
+(/usr/share/texlive/texmf-dist/tex/latex/mh/mhsetup.sty
 Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
 )
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
@@ -459,7 +459,7 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_above_shortintertext_sep=\dimen142
 \l_MT_below_shortintertext_sep=\dimen143
 )
-(/usr/local/texlive/2013/texmf-dist/tex/latex/natbib/natbib.sty
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip58
 \bibsep=\skip59
@@ -485,17 +485,17 @@ LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 114.
 
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 114.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 114.
 
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count127
 \scratchdimen=\dimen144
@@ -530,740 +530,167 @@ LaTeX Info: Redefining \ohm on input line 114.
 Package gensymb Info: Using \textohm for \ohm on input line 114.
 Package gensymb Info: Using \textmu for \micro on input line 114.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 145.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 145.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 148.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 148.
 
- (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1phv.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 145.
-LaTeX Font Info:    Try loading font information for U+msa on input line 148.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 148.
+LaTeX Font Info:    Try loading font information for U+msa on input line 151.
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 148.
+LaTeX Font Info:    Try loading font information for U+msb on input line 151.
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 148.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 151.
 
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-
-Package natbib Warning: Citation `wolpert1998' on page 1 undefined on input lin
-e 155.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Package natbib Warning: Citation `wilkie2001drosophila' on page 1 undefined on 
-input line 156.
+</home/harrison/Documents/mRNA/Figures_for_writeup/Drosophila_development_grk_l
+abelled.png, id=1, 924.45375pt x 243.91125pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/Drosophila_development_
+grk_labelled.png Graphic file (type png)
 
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/Drosophila_development_g
+rk_labelled.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Dros
+ophila_development_grk_labelled.png used on input line 184.
+(pdftex.def)             Requested size: 240.60004pt x 63.47868pt.
 
-Package natbib Warning: Citation `bobola1996asymmetric' on page 1 undefined on 
-input line 156.
-
-
-Package natbib Warning: Citation `mowry1992vegetal' on page 1 undefined on inpu
-t line 156.
-
-
-Package natbib Warning: Citation `rosbash1993rna' on page 1 undefined on input 
-line 156.
-
-
-Package natbib Warning: Citation `nevo2011translation' on page 1 undefined on i
-nput line 156.
-
-
-Package natbib Warning: Citation `jeffery1983localization' on page 1 undefined 
-on input line 159.
-
-
-Package natbib Warning: Citation `bertrand1998localization' on page 1 undefined
- on input line 159.
-
-
-Package natbib Warning: Citation `hamilton2010particlestats' on page 1 undefine
-d on input line 159.
-
-
-Package natbib Warning: Citation `parton2014subcellular' on page 1 undefined on
- input line 161.
-
-
-Package natbib Warning: Citation `forrest2003live' on page 1 undefined on input
- line 162.
-
-
-Package natbib Warning: Citation `jaramillo2008dynamics' on page 1 undefined on
- input line 162.
-
-
-Package natbib Warning: Citation `weil2006localization' on page 1 undefined on 
-input line 162.
-
-
-Package natbib Warning: Citation `zimyanin2008vivo' on page 1 undefined on inpu
-t line 162.
+Underfull \hbox (badness 1028) in paragraph at lines 180--188
+[]\OT1/ptm/m/n/10 In par-tic-u-lar, the mRNA tran-scripts that set up the
+ []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+LaTeX Font Info:    Try loading font information for TS1+phv on input line 188.
 
 
-Package natbib Warning: Citation `hamilton2013multidisciplinary' on page 1 unde
-fined on input line 175.
-
-
-Package natbib Warning: Citation `weil2012drosophila' on page 1 undefined on in
-put line 177.
-
-
-Package natbib Warning: Citation `weil2012drosophila' on page 1 undefined on in
-put line 181.
-
-
-Package natbib Warning: Citation `wilkie2001drosophila' on page 1 undefined on 
-input line 181.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Font Info:    Try loading font information for TS1+phv on input line 182.
-
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1phv.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
 )
 Overfull \vbox (15.87198pt too high) has occurred while \output is active []
 
 
-[1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-
-Package natbib Warning: Citation `forrest2003live' on page 2 undefined on input
- line 185.
-
-
-Package natbib Warning: Citation `weil2006localization' on page 2 undefined on 
-input line 186.
-
-
-Package natbib Warning: Citation `zimyanin2008vivo' on page 2 undefined on inpu
-t line 186.
-
-
-Package natbib Warning: Citation `DavidsonPhD2015' on page 2 undefined on input
- line 186.
-
-
-Package natbib Warning: Citation `vendra2007dynactin' on page 2 undefined on in
-put line 187.
-
-
-Package natbib Warning: Citation `howard2001mechanics' on page 2 undefined on i
-nput line 188.
-
-
-Package natbib Warning: Citation `amrute2012single' on page 2 undefined on inpu
-t line 189.
-
-
-Package natbib Warning: Citation `buxbaum2015right' on page 2 undefined on inpu
-t line 190.
-
-
-Package natbib Warning: Citation `parton2014subcellular' on page 2 undefined on
- input line 192.
-
-
-Package natbib Warning: Citation `parton20111' on page 2 undefined on input lin
-e 193.
-
-
-Package natbib Warning: Citation `zimyanin2008vivo' on page 2 undefined on inpu
-t line 194.
-
-
-Package natbib Warning: Citation `delanoue2005dynein' on page 2 undefined on in
-put line 197.
-
-
-Package natbib Warning: Citation `forrest2003live' on page 2 undefined on input
- line 197.
-
-
-Package natbib Warning: Citation `delanoue2005dynein' on page 2 undefined on in
-put line 198.
-
-
-Package natbib Warning: Citation `weil2006localization' on page 2 undefined on 
-input line 199.
-
-
-Package natbib Warning: Citation `jansen2001mrna' on page 2 undefined on input 
-line 203.
-
-
-Package natbib Warning: Citation `parton2014subcellular' on page 2 undefined on
- input line 203.
-
-
-Package natbib Warning: Citation `wolpert1998' on page 2 undefined on input lin
-e 205.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-
-Package natbib Warning: Citation `clark2007dynein' on page 2 undefined on input
- line 209.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Drosophi
-la_development_grk_labelled.png' not found on input line 213.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/Drosophila_development_grk_labelled.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.213 .../Drosophila_development_grk_labelled.png}
-                                                  
-? s
-OK, entering \scrollmode...
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 213.
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-
-Package natbib Warning: Citation `lasko1999rna' on page 2 undefined on input li
-ne 214.
-
-
-Package natbib Warning: Citation `lasko1999rna' on page 2 undefined on input li
-ne 214.
-
-
-Underfull \hbox (badness 1028) in paragraph at lines 209--217
-[]\OT1/ptm/m/n/10 In par-tic-u-lar, the mRNA tran-scripts that set up the
- []
-
-
-Package natbib Warning: Citation `weil2010making' on page 2 undefined on input 
-line 219.
-
-
-Package natbib Warning: Citation `rosser2013novel' on page 2 undefined on input
- line 223.
-
-
-Package natbib Warning: Citation `persson2013extracting' on page 2 undefined on
- input line 223.
-
-[2]
-Underfull \hbox (badness 1454) in paragraph at lines 235--238
+ [2 </home/harrison/Documents/mRNA/Figures_for_writeup/Drosophila_development_g
+rk_labelled.png>]
+Underfull \hbox (badness 1454) in paragraph at lines 243--246
 \OT1/ptm/m/n/10 In this con-text, mod-elling involves break-ing down the
  []
 
 
-Package natbib Warning: Citation `bressloff2013stochastic' on page 3 undefined 
-on input line 239.
-
-
-Package natbib Warning: Citation `szymanska2014mathematical' on page 3 undefine
-d on input line 239.
-
-
-Package natbib Warning: Citation `ganguly2012cytoplasmic' on page 3 undefined o
-n input line 240.
-
-
-Package natbib Warning: Citation `liu2011role' on page 3 undefined on input lin
-e 240.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/States_diagram.eps>
+(epstopdf)                    date: 2015-06-30 11:19:44
+(epstopdf)                    size: 89579 bytes
+(epstopdf)             Output file: <./States_diagram-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-30 11:20:44
+(epstopdf)                    size: 29615 bytes
+(epstopdf)             Command: <repstopdf --outfile=./States_diagram-eps-conve
+rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/States_diagram.ep
+s>
+(epstopdf)             \includegraphics on input line 266.
+Package epstopdf Info: Output file is already uptodate.
 
+<./States_diagram-eps-converted-to.pdf, id=21, 727.71875pt x 345.29pt>
+File: ./States_diagram-eps-converted-to.pdf Graphic file (type pdf)
 
-Package natbib Warning: Citation `johnston2014interpreting' on page 3 undefined
- on input line 245.
+<use ./States_diagram-eps-converted-to.pdf>
+Package pdftex.def Info: ./States_diagram-eps-converted-to.pdf used on input li
+ne 266.
+(pdftex.def)             Requested size: 240.60004pt x 114.16206pt.
+ [3 <./States_diagram-eps-converted-to.pdf>]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 307.
 
-
-Package natbib Warning: Citation `turner2012tutorial' on page 3 undefined on in
-put line 245.
-
-
-Package natbib Warning: Citation `beaumont2002approximate' on page 3 undefined 
-on input line 245.
-
-
-Package natbib Warning: Citation `zimyanin2008vivo' on page 3 undefined on inpu
-t line 252.
-
-
-Package natbib Warning: Citation `codling2005calculating' on page 3 undefined o
-n input line 254.
-
-
-Package natbib Warning: Citation `taylorking2015birds' on page 3 undefined on i
-nput line 254.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/States_d
-iagram.pdf' not found on input line 258.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/States_diagram.pdf' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.258 ...A/Figures_for_writeup/States_diagram.pdf}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[3]
-
-Package natbib Warning: Citation `beaumont2002approximate' on page 4 undefined 
-on input line 292.
-
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 300.
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsptm.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 300.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 307.
 
-
-! LaTeX Error: Command \bfseries invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.318 ...umont2009adaptive, lenormand2013adaptive}
-                                                  $.
-Please use the math alphabet \mathbf instead of the \bfseries command. 
-
-
-Package natbib Warning: Citation `toni2009approximate' on page 4 undefined on i
-nput line 318.
-
-
-! LaTeX Error: Command \bfseries invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.318 ...umont2009adaptive, lenormand2013adaptive}
-                                                  $.
-Please use the math alphabet \mathbf instead of the \bfseries command. 
-
-
-Package natbib Warning: Citation `sisson2007sequential' on page 4 undefined on 
-input line 318.
-
-
-! LaTeX Error: Command \bfseries invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.318 ...umont2009adaptive, lenormand2013adaptive}
-                                                  $.
-Please use the math alphabet \mathbf instead of the \bfseries command. 
-
-
-Package natbib Warning: Citation `beaumont2009adaptive' on page 4 undefined on 
-input line 318.
-
-
-! LaTeX Error: Command \bfseries invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.318 ...umont2009adaptive, lenormand2013adaptive}
-                                                  $.
-Please use the math alphabet \mathbf instead of the \bfseries command. 
-
-
-Package natbib Warning: Citation `lenormand2013adaptive' on page 4 undefined on
- input line 318.
-
-
-Package natbib Warning: Citation `lenormand2013adaptive' on page 4 undefined on
- input line 319.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4]
-Overfull \hbox (20.46373pt too wide) in paragraph at lines 343--344
+Overfull \hbox (20.46373pt too wide) in paragraph at lines 350--351
 []\OT1/ptm/m/n/10 Set $\OML/cmm/m/it/10 w[] \OT1/cmr/m/n/10 = []$ 
  []
 
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 345.
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 352.
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/doublestroke/Udsrom.fd
+(/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 347--348
+Underfull \hbox (badness 10000) in paragraph at lines 354--355
 []\OT1/ptm/m/n/10 Let \OMS/cmsy/m/n/10 f $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^R
 []; w[]; ^^Z[]\OT1/cmr/m/n/10 )$ \OMS/cmsy/m/n/10 g \OT1/ptm/m/n/10 = \OMS/cmsy
 /m/n/10 f
  []
 
-
-Package natbib Warning: Citation `johnston2014interpreting' on page 5 undefined
- on input line 355.
-
-
-Package natbib Warning: Citation `liepe2012calibrating' on page 5 undefined on 
-input line 355.
-
-
-Package natbib Warning: Citation `van2015calibration' on page 5 undefined on in
-put line 355.
-
-
-Package natbib Warning: Citation `robert2011lack' on page 5 undefined on input 
-line 358.
-
-
-Package natbib Warning: Citation `nunes2010optimal' on page 5 undefined on inpu
-t line 359.
-
+[4]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 361.
-
-Package natbib Warning: Citation `beaumont2009adaptive' on page 5 undefined on 
-input line 368.
-
-
-Package natbib Warning: Citation `beaumont2009adaptive' on page 5 undefined on 
-input line 369.
-
-
-Package natbib Warning: Citation `sisson2007sequential' on page 5 undefined on 
-input line 369.
-
-
-Package natbib Warning: Citation `felzenszwalb2004efficient' on page 5 undefine
-d on input line 378.
-
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 368.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_phi.png' not found on input line 396.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/3SumStats_phi.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.396 ...NA/Figures_for_writeup/3SumStats_phi.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_nu.png' not found on input line 404.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/3SumStats_nu.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.404 ...RNA/Figures_for_writeup/3SumStats_nu.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_omega1.png' not found on input line 412.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/3SumStats_omega1.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.412 ...Figures_for_writeup/3SumStats_omega1.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_omega2.png' not found on input line 420.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/3SumStats_omega2.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.420 ...Figures_for_writeup/3SumStats_omega2.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/3SumStat
-s_lambda.png' not found on input line 428.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/3SumStats_lambda.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.428 ...Figures_for_writeup/3SumStats_lambda.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Float too large for page by 173.9109pt on input line 437.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-phi.eps' not found on input line 444.
-
-Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
-writeup/Q_distn_phi.eps>
-(epstopdf)             Output file: <./Q_distn_phi-eps-converted-to.pdf>
-(epstopdf)             Command: <repstopdf --outfile=./Q_distn_phi-eps-converte
-d-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_phi.eps>
-(epstopdf)             \includegraphics on input line 444.
-Package epstopdf Info: Output file is already uptodate.
-
-! Package pdftex.def Error: File `./Q_distn_phi-eps-converted-to.pdf' not found
-.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.444 ...mRNA/Figures_for_writeup/Q_distn_phi.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-nu.eps' not found on input line 452.
-
-Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
-writeup/Q_distn_nu.eps>
-(epstopdf)             Output file: <./Q_distn_nu-eps-converted-to.pdf>
-(epstopdf)             Command: <repstopdf --outfile=./Q_distn_nu-eps-converted
--to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_nu.eps>
-(epstopdf)             \includegraphics on input line 452.
-Package epstopdf Info: Output file is already uptodate.
-
-! Package pdftex.def Error: File `./Q_distn_nu-eps-converted-to.pdf' not found.
-
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.452 .../mRNA/Figures_for_writeup/Q_distn_nu.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-omega1.eps' not found on input line 460.
-
-Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
-writeup/Q_distn_omega1.eps>
-(epstopdf)             Output file: <./Q_distn_omega1-eps-converted-to.pdf>
-(epstopdf)             Command: <repstopdf --outfile=./Q_distn_omega1-eps-conve
-rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega1.ep
-s>
-(epstopdf)             \includegraphics on input line 460.
-Package epstopdf Info: Output file is already uptodate.
-
-! Package pdftex.def Error: File `./Q_distn_omega1-eps-converted-to.pdf' not fo
-und.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.460 ...A/Figures_for_writeup/Q_distn_omega1.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-omega2.eps' not found on input line 468.
-
-Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
-writeup/Q_distn_omega2.eps>
-(epstopdf)             Output file: <./Q_distn_omega2-eps-converted-to.pdf>
-(epstopdf)             Command: <repstopdf --outfile=./Q_distn_omega2-eps-conve
-rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega2.ep
-s>
-(epstopdf)             \includegraphics on input line 468.
-Package epstopdf Info: Output file is already uptodate.
-
-! Package pdftex.def Error: File `./Q_distn_omega2-eps-converted-to.pdf' not fo
-und.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.468 ...A/Figures_for_writeup/Q_distn_omega2.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_
-lambda.eps' not found on input line 476.
-
-Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
-writeup/Q_distn_lambda.eps>
-(epstopdf)             Output file: <./Q_distn_lambda-eps-converted-to.pdf>
-(epstopdf)             Command: <repstopdf --outfile=./Q_distn_lambda-eps-conve
-rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_lambda.ep
-s>
-(epstopdf)             \includegraphics on input line 476.
-Package epstopdf Info: Output file is already uptodate.
-
-! Package pdftex.def Error: File `./Q_distn_lambda-eps-converted-to.pdf' not fo
-und.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.476 ...A/Figures_for_writeup/Q_distn_lambda.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Float too large for page by 101.32187pt on input line 485.
-
-
-Package natbib Warning: Citation `DavidsonPhD2015' on page 6 undefined on input
- line 496.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package natbib Warning: Citation `parton20111' on page 6 undefined on input lin
-e 514.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Typical_
-path.eps' not found on input line 523.
-
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Typical_path.eps>
+(epstopdf)                    date: 2015-06-24 16:57:13
+(epstopdf)                    size: 58820 bytes
 (epstopdf)             Output file: <./Typical_path-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:19
+(epstopdf)                    size: 44580 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Typical_path-eps-convert
 ed-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Typical_path.eps>
-(epstopdf)             \includegraphics on input line 523.
+(epstopdf)             \includegraphics on input line 421.
 Package epstopdf Info: Output file is already uptodate.
 
-! Package pdftex.def Error: File `./Typical_path-eps-converted-to.pdf' not foun
-d.
+<./Typical_path-eps-converted-to.pdf, id=44, 500.87125pt x 408.52625pt>
+File: ./Typical_path-eps-converted-to.pdf Graphic file (type pdf)
 
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.523 ...RNA/Figures_for_writeup/Typical_path.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Spatial_
-distn_half_speed_mutant.eps' not found on input line 533.
-
+<use ./Typical_path-eps-converted-to.pdf>
+Package pdftex.def Info: ./Typical_path-eps-converted-to.pdf used on input line
+ 421.
+(pdftex.def)             Requested size: 240.60004pt x 196.23997pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Spatial_distn_half_speed_mutant.eps>
+(epstopdf)                    date: 2015-06-24 17:51:40
+(epstopdf)                    size: 7879 bytes
 (epstopdf)             Output file: <./Spatial_distn_half_speed_mutant-eps-conv
 erted-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:19
+(epstopdf)                    size: 6552 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Spatial_distn_half_speed
 _mutant-eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/
 Spatial_distn_half_speed_mutant.eps>
-(epstopdf)             \includegraphics on input line 533.
+(epstopdf)             \includegraphics on input line 431.
 Package epstopdf Info: Output file is already uptodate.
 
-! Package pdftex.def Error: File `./Spatial_distn_half_speed_mutant-eps-convert
-ed-to.pdf' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.533 ...teup/Spatial_distn_half_speed_mutant.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+<./Spatial_distn_half_speed_mutant-eps-converted-to.pdf, id=45, 516.93124pt x 4
+09.53pt>
+File: ./Spatial_distn_half_speed_mutant-eps-converted-to.pdf Graphic file (type
+ pdf)
+ <use ./Spatial_distn_half_speed_mutant-eps-converted-to.pdf>
+Package pdftex.def Info: ./Spatial_distn_half_speed_mutant-eps-converted-to.pdf
+ used on input line 431.
+(pdftex.def)             Requested size: 204.51149pt x 162.0219pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1272,294 +699,384 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Posterio
-r_Scatter_N_2000_RS_v2.png' not found on input line 546.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/Posterior_Scatter_N_2000_RS_v2.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.546 ...iteup/Posterior_Scatter_N_2000_RS_v2.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_
-posterior_N_2000_RS_from_matlab_v2.png' not found on input line 555.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/Hist_of_posterior_N_2000_RS_from_matlab_v2.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.555 ...f_posterior_N_2000_RS_from_matlab_v2.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Pairwise
-_parameter_heatmap_N2000_RS.png' not found on input line 563.
-
-
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/Pairwise_parameter_heatmap_N2000_RS.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.563 .../Pairwise_parameter_heatmap_N2000_RS.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Float too large for page by 461.45454pt on input line 570.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6]
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 579.
-
-[7] [8] [9]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package natbib Warning: Citation `milo2010bionumbers' on page 10 undefined on i
-nput line 597.
-
-
-Package natbib Warning: Citation `marygold2013flybase' on page 10 undefined on 
-input line 597.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Spatial_
-distn_gamma_008.eps' not found on input line 602.
-
-Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
-writeup/Spatial_distn_gamma_008.eps>
-(epstopdf)             Output file: <./Spatial_distn_gamma_008-eps-converted-to
-.pdf>
-(epstopdf)             Command: <repstopdf --outfile=./Spatial_distn_gamma_008-
-eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Spatial_
-distn_gamma_008.eps>
-(epstopdf)             \includegraphics on input line 602.
-Package epstopdf Info: Output file is already uptodate.
-
-! Package pdftex.def Error: File `./Spatial_distn_gamma_008-eps-converted-to.pd
-f' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.602 ..._for_writeup/Spatial_distn_gamma_008.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 602--604
- [][] 
+Underfull \hbox (badness 10000) in paragraph at lines 438--445
+\OT1/ptm/m/n/10 Our model is depen-dent on six param-e-ters:
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Underfull \hbox (badness 1755) in paragraph at lines 438--445
+\OML/cmm/m/it/10 ^^W[]; ^^W[]; ![]; ![]; ^^U; ^^^$\OT1/ptm/m/n/10 . We are able
+ to explore the depen-
+ []
 
 
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data
-.jpg' not found on input line 611.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6 <./Typical_path-eps-converted-to.pdf> <./Spatial_distn_half_speed_mutant-ep
+s-converted-to.pdf>]
+</home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_phi.png, id=64, 14
+45.4pt x 733.74126pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_phi.png Graph
+ic file (type png)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_phi.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/3Sum
+Stats_phi.png used on input line 450.
+(pdftex.def)             Requested size: 237.12308pt x 120.36794pt.
+
+</home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_nu.png, id=65, 144
+5.4pt x 733.74126pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_nu.png Graphi
+c file (type png)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_nu.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/3Sum
+Stats_nu.png used on input line 458.
+(pdftex.def)             Requested size: 237.12308pt x 120.36794pt.
+
+</home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_omega1.png, id=66,
+ 1445.4pt x 731.73375pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_omega1.png Gr
+aphic file (type png)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_omega1.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/3Sum
+Stats_omega1.png used on input line 466.
+(pdftex.def)             Requested size: 237.12308pt x 120.0386pt.
+
+</home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_omega2.png, id=67,
+ 1445.4pt x 731.73375pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_omega2.png Gr
+aphic file (type png)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_omega2.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/3Sum
+Stats_omega2.png used on input line 474.
+(pdftex.def)             Requested size: 237.12308pt x 120.0386pt.
+
+</home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_lambda.png, id=68,
+ 1445.4pt x 731.73375pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_lambda.png Gr
+aphic file (type png)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_lambda.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/3Sum
+Stats_lambda.png used on input line 482.
+(pdftex.def)             Requested size: 237.12308pt x 120.0386pt.
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Q_distn_phi.eps>
+(epstopdf)                    date: 2015-06-24 17:51:40
+(epstopdf)                    size: 8730 bytes
+(epstopdf)             Output file: <./Q_distn_phi-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:17
+(epstopdf)                    size: 6855 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Q_distn_phi-eps-converte
+d-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_phi.eps>
+(epstopdf)             \includegraphics on input line 498.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Q_distn_phi-eps-converted-to.pdf, id=69, 516.93124pt x 409.53pt>
+File: ./Q_distn_phi-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Q_distn_phi-eps-converted-to.pdf>
+Package pdftex.def Info: ./Q_distn_phi-eps-converted-to.pdf used on input line 
+498.
+(pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Q_distn_nu.eps>
+(epstopdf)                    date: 2015-06-24 17:51:40
+(epstopdf)                    size: 8721 bytes
+(epstopdf)             Output file: <./Q_distn_nu-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:18
+(epstopdf)                    size: 6897 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Q_distn_nu-eps-converted
+-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_nu.eps>
+(epstopdf)             \includegraphics on input line 506.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Q_distn_nu-eps-converted-to.pdf, id=70, 516.93124pt x 409.53pt>
+File: ./Q_distn_nu-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Q_distn_nu-eps-converted-to.pdf>
+Package pdftex.def Info: ./Q_distn_nu-eps-converted-to.pdf used on input line 5
+06.
+(pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Q_distn_omega1.eps>
+(epstopdf)                    date: 2015-06-24 17:51:40
+(epstopdf)                    size: 8725 bytes
+(epstopdf)             Output file: <./Q_distn_omega1-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:18
+(epstopdf)                    size: 7068 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Q_distn_omega1-eps-conve
+rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega1.ep
+s>
+(epstopdf)             \includegraphics on input line 514.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Q_distn_omega1-eps-converted-to.pdf, id=71, 516.93124pt x 409.53pt>
+File: ./Q_distn_omega1-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Q_distn_omega1-eps-converted-to.pdf>
+Package pdftex.def Info: ./Q_distn_omega1-eps-converted-to.pdf used on input li
+ne 514.
+(pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Q_distn_omega2.eps>
+(epstopdf)                    date: 2015-06-24 17:51:40
+(epstopdf)                    size: 8725 bytes
+(epstopdf)             Output file: <./Q_distn_omega2-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:18
+(epstopdf)                    size: 7031 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Q_distn_omega2-eps-conve
+rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega2.ep
+s>
+(epstopdf)             \includegraphics on input line 522.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Q_distn_omega2-eps-converted-to.pdf, id=72, 516.93124pt x 409.53pt>
+File: ./Q_distn_omega2-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Q_distn_omega2-eps-converted-to.pdf>
+Package pdftex.def Info: ./Q_distn_omega2-eps-converted-to.pdf used on input li
+ne 522.
+(pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Q_distn_lambda.eps>
+(epstopdf)                    date: 2015-06-24 17:51:40
+(epstopdf)                    size: 8631 bytes
+(epstopdf)             Output file: <./Q_distn_lambda-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:19
+(epstopdf)                    size: 7046 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Q_distn_lambda-eps-conve
+rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_lambda.ep
+s>
+(epstopdf)             \includegraphics on input line 530.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Q_distn_lambda-eps-converted-to.pdf, id=73, 516.93124pt x 409.53pt>
+File: ./Q_distn_lambda-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Q_distn_lambda-eps-converted-to.pdf>
+Package pdftex.def Info: ./Q_distn_lambda-eps-converted-to.pdf used on input li
+ne 530.
+(pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
+
+</home/harrison/Documents/mRNA/Figures_for_writeup/Posterior_Scatter_N_2000_RS_
+v2.png, id=74, 676.5275pt x 393.47pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/Posterior_Scatter_N_200
+0_RS_v2.png Graphic file (type png)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/Posterior_Scatter_N_2000
+_RS_v2.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Post
+erior_Scatter_N_2000_RS_v2.png used on input line 555.
+(pdftex.def)             Requested size: 329.47386pt x 191.62521pt.
+
+</home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_2000_RS_
+from_matlab_v2.png, id=75, 1396.4672pt x 753.5653pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_200
+0_RS_from_matlab_v2.png Graphic file (type png)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_2000
+_RS_from_matlab_v2.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Hist
+_of_posterior_N_2000_RS_from_matlab_v2.png used on input line 564.
+(pdftex.def)             Requested size: 339.4524pt x 183.17055pt.
+
+</home/harrison/Documents/mRNA/Figures_for_writeup/Pairwise_parameter_heatmap_N
+2000_RS.png, id=76, 1396.4672pt x 753.5653pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/Pairwise_parameter_heat
+map_N2000_RS.png Graphic file (type png)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/Pairwise_parameter_heatm
+ap_N2000_RS.png>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Pair
+wise_parameter_heatmap_N2000_RS.png used on input line 572.
+(pdftex.def)             Requested size: 339.4524pt x 183.17055pt.
 
 
-! Package pdftex.def Error: File `/home/harrison/Documents/mRNA/Figures_for_wri
-teup/Raw_data.jpg' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.611 ...ts/mRNA/Figures_for_writeup/Raw_data.jpg}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+LaTeX Warning: Float too large for page by 10.76624pt on input line 579.
 
 
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Processe
-d_data.eps' not found on input line 620.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Spatial_distn_gamma_008.eps>
+(epstopdf)                    date: 2015-06-25 15:01:56
+(epstopdf)                    size: 12786 bytes
+(epstopdf)             Output file: <./Spatial_distn_gamma_008-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:20
+(epstopdf)                    size: 7584 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Spatial_distn_gamma_008-
+eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Spatial_
+distn_gamma_008.eps>
+(epstopdf)             \includegraphics on input line 611.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Spatial_distn_gamma_008-eps-converted-to.pdf, id=77, 1444.39626pt x 736.7525
+pt>
+File: ./Spatial_distn_gamma_008-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Spatial_distn_gamma_008-eps-converted-to.pdf>
+Package pdftex.def Info: ./Spatial_distn_gamma_008-eps-converted-to.pdf used on
+ input line 611.
+(pdftex.def)             Requested size: 449.27701pt x 229.16661pt.
+
+</home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data.jpg, id=78, 874.266
+25pt x 649.42625pt>
+File: /home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data.jpg Graphic fi
+le (type jpg)
+
+<use /home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data.jpg>
+Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Raw_
+data.jpg used on input line 620.
+(pdftex.def)             Requested size: 182.8547pt x 135.8286pt.
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Processed_data.eps>
+(epstopdf)                    date: 2015-06-25 13:58:03
+(epstopdf)                    size: 8448 bytes
 (epstopdf)             Output file: <./Processed_data-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:20
+(epstopdf)                    size: 6064 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Processed_data-eps-conve
 rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Processed_data.ep
 s>
-(epstopdf)             \includegraphics on input line 620.
+(epstopdf)             \includegraphics on input line 629.
 Package epstopdf Info: Output file is already uptodate.
 
-! Package pdftex.def Error: File `./Processed_data-eps-converted-to.pdf' not fo
-und.
+<./Processed_data-eps-converted-to.pdf, id=79, 561.09625pt x 421.575pt>
+File: ./Processed_data-eps-converted-to.pdf Graphic file (type pdf)
 
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.620 ...A/Figures_for_writeup/Processed_data.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [10]
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Auto_his
-t_w_production2.eps' not found on input line 649.
-
+<use ./Processed_data-eps-converted-to.pdf>
+Package pdftex.def Info: ./Processed_data-eps-converted-to.pdf used on input li
+ne 629.
+(pdftex.def)             Requested size: 206.91617pt x 155.45924pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Auto_hist_w_production2.eps>
+(epstopdf)                    date: 2015-06-26 15:45:02
+(epstopdf)                    size: 32292 bytes
 (epstopdf)             Output file: <./Auto_hist_w_production2-eps-converted-to
 .pdf>
+(epstopdf)                    date: 2015-06-30 09:19:21
+(epstopdf)                    size: 12484 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Auto_hist_w_production2-
 eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Auto_his
 t_w_production2.eps>
-(epstopdf)             \includegraphics on input line 649.
-Package epstopdf Info: Output file is already uptodate.
-
-! Package pdftex.def Error: File `./Auto_hist_w_production2-eps-converted-to.pd
-f' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.649 ..._for_writeup/Auto_hist_w_production2.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `/home/harrison/Documents/mRNA/Figures_for_writeup/Auto_hea
-tmap_w_production2.eps' not found on input line 658.
-
-Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
-writeup/Auto_heatmap_w_production2.eps>
-(epstopdf)             Output file: <./Auto_heatmap_w_production2-eps-converted
--to.pdf>
-(epstopdf)             Command: <repstopdf --outfile=./Auto_heatmap_w_productio
-n2-eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Auto_
-heatmap_w_production2.eps>
 (epstopdf)             \includegraphics on input line 658.
 Package epstopdf Info: Output file is already uptodate.
 
-! Package pdftex.def Error: File `./Auto_heatmap_w_production2-eps-converted-to
-.pdf' not found.
+<./Auto_hist_w_production2-eps-converted-to.pdf, id=80, 1444.39626pt x 729.7262
+6pt>
+File: ./Auto_hist_w_production2-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Auto_hist_w_production2-eps-converted-to.pdf>
+Package pdftex.def Info: ./Auto_hist_w_production2-eps-converted-to.pdf used on
+ input line 658.
+(pdftex.def)             Requested size: 329.47386pt x 166.4528pt.
+Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
+writeup/Auto_heatmap_w_production2.eps>
+(epstopdf)                    date: 2015-06-26 15:45:02
+(epstopdf)                    size: 59991 bytes
+(epstopdf)             Output file: <./Auto_heatmap_w_production2-eps-converted
+-to.pdf>
+(epstopdf)                    date: 2015-06-30 09:19:21
+(epstopdf)                    size: 15128 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Auto_heatmap_w_productio
+n2-eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Auto_
+heatmap_w_production2.eps>
+(epstopdf)             \includegraphics on input line 667.
+Package epstopdf Info: Output file is already uptodate.
 
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.658 ...r_writeup/Auto_heatmap_w_production2.eps}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+<./Auto_heatmap_w_production2-eps-converted-to.pdf, id=81, 1444.39626pt x 729.7
+2626pt>
+File: ./Auto_heatmap_w_production2-eps-converted-to.pdf Graphic file (type pdf)
 
+ <use ./Auto_heatmap_w_production2-eps-converted-to.pdf>
+Package pdftex.def Info: ./Auto_heatmap_w_production2-eps-converted-to.pdf used
+ on input line 667.
+(pdftex.def)             Requested size: 379.38931pt x 191.67293pt.
 
-LaTeX Warning: Float too large for page by 143.85765pt on input line 666.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11]
-[12]
-
-Package natbib Warning: Citation `isaacson2011influence' on page 13 undefined o
-n input line 682.
-
-
-Package natbib Warning: Citation `thompson2010three' on page 13 undefined on in
-put line 684.
-
-
-Package natbib Warning: Citation `faragher2012understanding' on page 13 undefin
-ed on input line 685.
+ [8 </home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_phi.png (PNG c
+opy)> </home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_nu.png (PNG 
+copy)> </home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_omega1.png 
+(PNG copy)> </home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_omega2
+.png (PNG copy)> </home/harrison/Documents/mRNA/Figures_for_writeup/3SumStats_l
+ambda.png (PNG copy)>] [9 <./Q_distn_phi-eps-converted-to.pdf> <./Q_distn_nu-ep
+s-converted-to.pdf> <./Q_distn_omega1-eps-converted-to.pdf> <./Q_distn_omega2-e
+ps-converted-to.pdf> <./Q_distn_lambda-eps-converted-to.pdf>] [10 </home/harris
+on/Documents/mRNA/Figures_for_writeup/Posterior_Scatter_N_2000_RS_v2.png> </hom
+e/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_2000_RS_from_
+matlab_v2.png (PNG copy)> </home/harrison/Documents/mRNA/Figures_for_writeup/Pa
+irwise_parameter_heatmap_N2000_RS.png (PNG copy)>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [11 <./Spatial_distn_gamma_008-eps-converted-to.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12 <./Auto_hist_w_production2-eps-converted-to.pdf> <./Auto_heatmap_w_product
+ion2-eps-converted-to.pdf>] (./Modelling_writeup.bbl [13 </home/harrison/Docume
+nts/mRNA/Figures_for_writeup/Raw_data.jpg> <./Processed_data-eps-converted-to.p
+df>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Package natbib Warning: Citation `othmer1988models' on page 13 undefined on inp
-ut line 712.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[13]
-No file Modelling_writeup.bbl.
+ [14]
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ” in font ptmr7t!
+)
 
 AED: lastpage setting LastPage
-[14
+[15
 
-]
-
-Package natbib Warning: There were undefined citations.
-
-(./Modelling_writeup.aux) ) 
+] (./Modelling_writeup.aux) ) 
 Here is how much of TeX's memory you used:
- 6138 strings out of 493315
- 91833 string characters out of 6137904
- 170713 words of memory out of 5000000
- 9380 multiletter control sequences out of 15000+600000
- 46458 words of font info for 116 fonts, out of 8000000 for 9000
+ 6300 strings out of 493304
+ 99249 string characters out of 6139871
+ 175412 words of memory out of 5000000
+ 9555 multiletter control sequences out of 15000+600000
+ 44057 words of font info for 112 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 49i,11n,47p,1090b,545s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/
-base/8r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmex10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cmex
-tra/cmex7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi5.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
-.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pf
-b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/l
-ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
-cal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/loca
-l/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/
-texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/te
-xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texl
-ive/2013/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/tex
-live/2013/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/201
-3/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf
--dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/texmf-dist/f
-onts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/t
-ype1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/t
-imes/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr
-8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Modelling_writeup.pdf (14 pages, 289530 bytes).
+ 49i,11n,47p,1141b,545s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/bas
+e/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/t
+imes/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Modelling_writeup.pdf (15 pages, 833319 bytes).
 PDF statistics:
- 152 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
+ 270 PDF objects out of 1000 (max. 8388607)
+ 184 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
