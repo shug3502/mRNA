@@ -1,4 +1,4 @@
-\begin{thebibliography}{53}
+\begin{thebibliography}{54}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{ }
 
@@ -303,6 +303,12 @@ Nunes, M.~A., and D.~J. Balding, 2010.
 Felzenszwalb, P.~F., and D.~P. Huttenlocher, 2004.
 \newblock Efficient graph-based image segmentation.
 \newblock \emph{International Journal of Computer Vision} 59:167--181.
+
+\bibitem[Neuman-Silberberg and Sch{\"u}pbach(1996)]{neuman1996drosophila}
+Neuman-Silberberg, F.~S., and T.~Sch{\"u}pbach, 1996.
+\newblock The Drosophila TGF-$\alpha$-like protein Gurken: expression and
+  cellular localization during Drosophila oogenesis.
+\newblock \emph{Mechanisms of Development} 59:105--113.
 
 \bibitem[Milo et~al.(2010)Milo, Jorgensen, Moran, Weber, and
   Springer]{milo2010bionumbers}

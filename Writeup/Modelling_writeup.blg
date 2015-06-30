@@ -3,50 +3,50 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Modelling_writeup.aux
 The style file: biophysj.bst
 Database file #1: my_citations.bib.bib
-Repeated entry---line 540 of file my_citations.bib.bib
+Repeated entry---line 552 of file my_citations.bib.bib
  : @article{szymanska2014mathematical
  :                                   ,
 I'm skipping whatever remains of this entry
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-You've used 53 entries,
+You've used 54 entries,
             3176 wiz_defined-function locations,
-            978 strings with 16073 characters,
-and the built_in function-call counts, 27758 in all, are:
-= -- 2041
-> -- 1509
-< -- 17
-+ -- 508
-- -- 402
-* -- 2010
-:= -- 3909
-add.period$ -- 159
-call.type$ -- 53
-change.case$ -- 55
-chr.to.int$ -- 53
-cite$ -- 53
-duplicate$ -- 2295
-empty$ -- 2229
-format.name$ -- 529
-if$ -- 5732
+            983 strings with 16290 characters,
+and the built_in function-call counts, 28220 in all, are:
+= -- 2081
+> -- 1525
+< -- 18
++ -- 514
+- -- 406
+* -- 2041
+:= -- 3972
+add.period$ -- 162
+call.type$ -- 54
+change.case$ -- 56
+chr.to.int$ -- 54
+cite$ -- 54
+duplicate$ -- 2333
+empty$ -- 2269
+format.name$ -- 537
+if$ -- 5829
 int.to.chr$ -- 1
-int.to.str$ -- 54
-missing$ -- 515
-newline$ -- 270
-num.names$ -- 159
-pop$ -- 743
+int.to.str$ -- 55
+missing$ -- 523
+newline$ -- 275
+num.names$ -- 162
+pop$ -- 755
 preamble$ -- 1
-purify$ -- 53
+purify$ -- 54
 quote$ -- 0
-skip$ -- 518
+skip$ -- 528
 stack$ -- 0
-substring$ -- 1400
-swap$ -- 1231
+substring$ -- 1427
+swap$ -- 1251
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 365
+type$ -- 372
 warning$ -- 0
-while$ -- 202
+while$ -- 206
 width$ -- 0
-write$ -- 692
+write$ -- 705
 (There was 1 error message)
