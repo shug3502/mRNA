@@ -264,7 +264,7 @@ if with_plot
     fill(params.Lx/2+nuc_vec, sqrt(params.nuc_radius^2-(nuc_vec).^2),'k', params.Lx/2+nuc_vec, -sqrt(params.nuc_radius^2-(nuc_vec).^2),'k');
     
     hold on
-    plot((params.Lx)*ones(50,1),linspace(-rc_width,rc_width,50),'k','linewidth',5)
+    plot((params.Lx)*ones(50,1),linspace(-rc_width,rc_width,50),'c','linewidth',5)
     rectangle('Position',[0,-params.Ly/2,params.Lx,params.Ly],...
           'LineWidth',2,...
           'LineStyle','--')
@@ -272,7 +272,27 @@ if with_plot
     axis([-10, 60, -20, 20]);
     %axis equal
     
-    print('Figures_for_writeup/Typical_path','-dpng');
+    print('Figures_for_writeup/Typical_path','-depsc');
+    %geometry only
+    figure(4);
+    set(gca,'fontsize',18)
+    xlabel('x position');
+    ylabel('y position');
+    %grid on
+    hold on
+    nuc_vec = linspace(-params.nuc_radius,params.nuc_radius,2000);
+    fill(params.Lx/2+nuc_vec, sqrt(params.nuc_radius^2-(nuc_vec).^2),'k', params.Lx/2+nuc_vec, -sqrt(params.nuc_radius^2-(nuc_vec).^2),'k');    
+    hold on
+    plot((params.Lx)*ones(50,1),linspace(-rc_width,rc_width,50),'c','linewidth',5)
+    rectangle('Position',[0,-params.Ly/2,params.Lx,params.Ly],...
+          'LineWidth',2,...
+          'LineStyle','--')
+    axis equal
+    axis([-10, 60, -20, 20]);
+    %axis equal
+    print('Figures_for_writeup/Domain_geometry','-depsc');
+    
+    
 %code to make a movie    
 %     nframe=min(200,length(pathx));
 %     mov(1:nframe)=struct('cdata',[],'colormap',[]);

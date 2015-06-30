@@ -275,7 +275,7 @@ The remainder of the nurse cell is accessible to the particles, which seems reas
 Initially, RNP cargoes are placed randomly at time $t=0$ on the circumference of the nucleus to represent their export from nuclear pore complexes.
 In the model therefore, all mRNAs are produced simultaneously rather than directly modelling continual production and export over time.
 Cargoes move randomly, as described below, until eventually they hit a small target at the posterior end of nurse cell representing the ring canal joining to the oocyte, where they are absorbed and removed from the system.
-Throughout all simulations in this work, we fix $L_x=52 \mu \text{m}$, $L_y=37 \mu \text{m}$, $R=10 \mu \text{m}$ and the size of the ring canal as $2\mu \text{m}$.
+Throughout all simulations in this work, we fix $L_x=52 \mu \text{m}$, $L_y=37 \mu \text{m}$, $R=10 \mu \text{m}$ and the size of the ring canal as $2\mu \text{m}$, based on measurements taken of nurse cells in earlystages of oogenesis.
 The position of the ring canals between the nurse cells and the ooctye can be clearly seen in Figure \ref{FIG:ring_canals}.
 The geometry of the model system can be seen in Figure \ref{FIG:geometry} and contrasted with a real nurse cell.
 \begin{figure}[h]
@@ -287,21 +287,23 @@ The geometry of the model system can be seen in Figure \ref{FIG:geometry} and co
 
 \begin{figure}[h]
  \centering
- \begin{subfigure}[b]{0.425\textwidth}
+ \begin{subfigure}[b]{0.375\textwidth}
  \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_02.jpg}
     \caption[]%
   {{\small \textit{In vivo}.}}    
   \label{fig:vivo}
 \end{subfigure}
  ~
-  \begin{subfigure}[b]{0.425\textwidth}  
+  \begin{subfigure}[b]{0.475\textwidth}  
       \centering 
-      \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Typical_path.eps}
+      \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Domain_geometry.eps}
       \caption[]%
       {{\small Model nurse cell domain.}}    
       \label{fig:model}
   \end{subfigure}
-  \caption{Comparison of the geometrical structure of our model nurse cell and a nurse cell \textit{in vivo}.}  
+  \caption{Comparison of the geometrical structure of our model nurse cell and a nurse cell \textit{in vivo}. 
+  In (\subref{fig:vivo}), Sqh Utrophin GFP was used to show the position of the ring canals in an oocyte in stage 8 of oogenesis. 
+  In (\subref{fig:model}), the dashed black rectangular box shows the boundary of the nurse cell, with the solid black circle representing the nucleus, and the thick cyan line at the posterior showing the position of the ring canal between the nurse cell and the oocyte.}  
   \label{FIG:geometry}      
 \end{figure}
 
@@ -361,7 +363,8 @@ Some more systematic methods for choice of summary statistics have been suggeste
 
 
 \subsection{Imaging}
-We observed \textit{grk}-MS2 mRNA in \textit{Drosophila} nurse cells tagged using MCP-Dendra. 
+We observed \textit{grk}-MS2 mRNA in \textit{Drosophila} nurse cells tagged using MCP-Dendra and mcherry. 
+Sqh Utrophin GFP was used to show the position of ring canals.
 Imaging was performed with a wide-field deconvolution system (Delta Vision CORE) from Applied Precision. 
 Image stacks were deconvolved with the SoftWoRx Resolve 3D constrained iterative deconvolution algorithm (Applied Precision). 
 Segmentation of images was performed using Felzenszwalb's algorithm \citep{felzenszwalb2004efficient} after denoising and deconvolution of the images, with coordinates of particles obtained from centroids of appropriately sized segments. 
@@ -401,7 +404,9 @@ We plot the evolution of a typical path in Figure \ref{FIG:Typical_path}.
 \begin{figure}[h]
  \centering
  \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Typical_path.eps}
- \caption{The evolution of a typical path until absorption at the posterior ring canal, showing also the geometry in the model. Small black circles on the path show switching events between the active transport and diffusion states. The dashed box represents the boundary of the nurse cell, the large filled black circle shows the nurse cell nucleus, and the thick black line at the posterior represents the ring canal into the oocyte.}
+ \caption{The evolution of a typical path until absorption at the posterior ring canal. 
+ Small black circles on the path show switching events between the active transport and diffusion states. 
+ The geometry of the domain is as shown previously in Figure \ref{FIG:geometry}.}
  \label{FIG:Typical_path}
 \end{figure}
 Given that stage 5 in \textit{Drosophila} oocytes lasts five hours, this timescale for the MFPT appears to be an order of magnitude shorter than the timescales over which \textit{grk} mRNA transport is observed in oogenesis, suggesting that the limiting step in the transport and localization of the mRNAs is their production from the nucleus rather than the transport step.
