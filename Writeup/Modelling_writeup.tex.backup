@@ -193,7 +193,7 @@ By simulating from our model, assuming we have knowledge of the current state of
 This could be used to inform the linkage step to identify particles between frames and may allow larger timesteps $\Delta t$ to be taken between imaging frames, although a hidden Markov model (HMM) framework may be necessary to update the current state of the particle.
 An HMM approach has previously been applied to tracking in the context of bacteria \citep{rosser2013novel} and for single-molecule diffusive protein data \citep{persson2013extracting}.
 
-Through mathematical modelling of mRNA transport in the \textit{Drosophila} nurse cell, we aim to better understand the limiting factors in mRNA localisation.
+Through mathematical modelling of mRNA transport in the \textit{Drosophila} nurse cell, we aim to better understand the limiting factors in mRNA localization.
 This will improve our understanding of which parts of the process are important biologically for its function and should give insight into the molecular mechanisms used by informing future experimental design.
 In addition, we see the potential for this modelling framework to be applied using an HMM framework to improve tracking of RNP complexes over longer time periods in three-dimensional data.
 
@@ -586,7 +586,7 @@ In Figure \ref{FIG:ABC_Posterior}, heatmaps of the pairwise parameter distributi
 
 We obtain most information from the posterior for the microtubule bias, $\phi$, while the speed parameters, $\nu_1$ and $\nu_2$, are also identifiable. 
 The remaining rate parameters have posteriors similar to the uniform prior and it is harder to recover the original parameter values used.
-This suggests that the microtubule bias and the speeds have most effect on the efficiency of the summary statistic chosen, which agrees with our earlier sensitivity analysis.
+This suggests that the microtubule bias and the speeds have most effect on the summary statistic chosen, which agrees with our earlier sensitivity analysis.
 %Explain the set up.
 %Which method performs best? Is this consistent?
 %Why might this be?
@@ -642,7 +642,7 @@ Results are shown in Figure \ref{FIG:Production_sim} and exhibit spatial profile
 %Do they agree with what we obtained by direct measurement? Why?
 Although comparative simulation results with ABC suggest that the detailed summary statistics using MFPT, number of jumps and jump distances result in a higher quality posterior, there are limitations to what data can be collected experimentally.
 In particular, these summary statistics would require detailed tracking data of individual particles over an extended period of time, which would be difficult to obtain. 
-Instead, we use the spatial distribution of particles which is more tractable from single time points.
+Instead, we use the spatial distribution of particles which is more tractable from a single time point.
 To ensure the timescales of the observed experimental data and simulated data match, we use the model with production of mRNA at rate $\gamma$ and infer this parameter also.
 
 Applying inference with ABC to these data using a Euclidean distance measure and binned spatial histograms in the $x$ direction as summary statistics, we obtain posteriors for the model parameters as shown in Figure \ref{FIG:ABC_real_data}.
@@ -684,7 +684,7 @@ By incorporating production at a constant rate into our model, we recover transp
 We are also able to simulate spatial distributions of mRNA particles similar to what is observed experimentally.  
 
 \subsection{Further work}
-The subcellular environment is in some ways drastically different to that assumed in our spatially homogeneous two-dimensional model.
+The subcellular environment is in many ways drastically different to that assumed in our spatially homogeneous two-dimensional model.
 In reality, cells exist in three dimensions and are crowded inside with a heterogeneous environment. 
 One possible method of representing heterogeneity in the cell would be by use of a potential to account for volume exclusion effects, as used by \citet{isaacson2011influence} in the context of nuclear export of mRNAs.
 The three-dimensional nature of the environment presents further challenges for tracking, as RNPs move between frames.
@@ -761,8 +761,8 @@ Suppose we let $\mu^{(1)}(t) = \int_0^L x q(x,t) \text{d} x  $. Then we can writ
 We can interpret $\int_0^L q(x,t) \hspace{1mm} \text{d} x$ as a survival probability of a particle at time $t$.
 After very short times, when the particle cannot physically have exited the system yet, this will equal one, leading to a linear form for the average position, $\mu^{(1)}(t)$. 
 At later times, the particle may have exited the system and the survival probability will decrease to 0.
-If we release an ensemble of particles, we have the average position of this ensemble changes according to the mean net velocity, $\nu_1 \mean{\sin(\theta) T(\theta)}$, until particles begin to be absorbed.
-We note that is mean net velocity depends on the microtubule bias. 
+If we release an ensemble of particles, the average position of this ensemble changes according to the mean net velocity, $\nu_1 \mean{\sin(\theta) T(\theta)}$, until particles begin to be absorbed.
+We note that this mean net velocity depends on the microtubule bias. 
 For our specified choice of $T(\theta)$, we have $\nu_1 \mean{\sin(\theta) T(\theta)} = \nu_1 (4 \phi -2)/\pi$.
 Using our estimated parameters, $\phi=0.58$ and $\nu_1 = 1.16 \mu \text{ms}^{-1}$, we find an estimate of the mean net velocity of $0.12 \mu \text{ms}^{-1}$.
 
