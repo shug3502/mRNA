@@ -74,6 +74,7 @@
 \usepackage{amsfonts}
 \usepackage{dsfont}
 \usepackage{gensymb}
+\usepackage{caption}
 \usepackage{epstopdf}
 \usepackage{mathtools}
 
@@ -394,8 +395,24 @@ Assuming there are no internal transitions back to the active transport state, t
 We can also deduce that the rate $\lambda = 0.95-0.84 = 0.11 \text{s}^{-1}$.  
 In addition, we assume the distribution of microtubule orientations in the nurse cells is similar to that in the oocyte, since there is data available for the oocyte \citep{parton20111} but not for the nurse cell. 
 Therefore we take $\phi = 0.58$.
+This gives parameter estimates as shown in Table \ref{Table:Params}.
+\begin{center}
 
-This gives parameter estimates of $\nu_1 = 1.16  \mu \text{ms}^{-1}$, $\nu_2 = 0.80  \mu \text{ms}^{-1}$, $\omega_1 = 0.42 \text{s}^{-1} $, $\omega_2 = 0.84 \text{s}^{-1}$, $\lambda = 0.11 \text{s}^{-1}$, $\phi = 0.58$.
+ \begin{tabular}{| c | c |}
+   \hline
+   Parameter & Value \\ \hline
+   $\nu_1$ & 1.16 $\mu \text{ms}^{-1}$ \\ %\hline
+   $\nu_2$ & 0.8 $\mu \text{ms}^{-1}$ \\ %\hline
+   $\omega_1$ & 0.42 $\text{s}^{-1}$ \\ %\hline
+   $\omega_2$ & 0.84 $\text{s}^{-1}$ \\ %\hline
+   $\lambda$ & 0.11 $\text{s}^{-1}$ \\ %\hline
+   $\phi$ & 0.58 \\ %\hline
+   $\gamma$ & 0.01 $\text{s}^{-1}$ \\
+   \hline 
+ \end{tabular}
+
+ \end{center}
+ \captionof{table}{Parameter values for the velocity jump process model.} \label{Table:Params}
 
 \subsection{Timescales of the model}
 Here, we evaluate the timescales of the transport phase of the localization process.

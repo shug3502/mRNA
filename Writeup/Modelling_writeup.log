@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.11)  1 JUL 2015 14:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.11)  1 JUL 2015 18:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -500,26 +500,26 @@ LaTeX Warning: Label `sub@fig:3lambda' multiply defined.
 )
 \openout1 = `Modelling_writeup.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 114.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 115.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 115.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 114.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 115.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
@@ -545,40 +545,40 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             or
 (lastpage)             http://www.ctan.org/tex-archive/ 
 (lastpage)             install/macros/latex/contrib/pageslts.tds.zip
-(lastpage)             ! on input line 114.
+(lastpage)             ! on input line 115.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 \symgns@font=\mathgroup9
 LaTeX Font Info:    Overwriting symbol font `gns@font' in version `bold'
-(Font)                  TS1/ptm/m/n --> TS1/ptm/bx/n on input line 114.
-Package gensymb Info: Math companion symbols declared on input line 114.
-LaTeX Info: Redefining \degree on input line 114.
-LaTeX Info: Redefining \celsius on input line 114.
+(Font)                  TS1/ptm/m/n --> TS1/ptm/bx/n on input line 115.
+Package gensymb Info: Math companion symbols declared on input line 115.
+LaTeX Info: Redefining \degree on input line 115.
+LaTeX Info: Redefining \celsius on input line 115.
 Package gensymb Info: Using text companion symbols for \degree, \celsius and \p
-erthousand on input line 114.
-LaTeX Info: Redefining \ohm on input line 114.
-Package gensymb Info: Using \textohm for \ohm on input line 114.
-Package gensymb Info: Using \textmu for \micro on input line 114.
+erthousand on input line 115.
+LaTeX Info: Redefining \ohm on input line 115.
+Package gensymb Info: Using \textohm for \ohm on input line 115.
+Package gensymb Info: Using \textmu for \micro on input line 115.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 148.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 148.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 149.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 149.
 
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 148.
-LaTeX Font Info:    Try loading font information for U+msa on input line 151.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 149.
+LaTeX Font Info:    Try loading font information for U+msa on input line 152.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 151.
+LaTeX Font Info:    Try loading font information for U+msb on input line 152.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 151.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 152.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
@@ -595,17 +595,17 @@ grk_labelled.png Graphic file (type png)
 <use /home/harrison/Documents/mRNA/Figures_for_writeup/Drosophila_development_g
 rk_labelled.png>
 Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Dros
-ophila_development_grk_labelled.png used on input line 184.
+ophila_development_grk_labelled.png used on input line 185.
 (pdftex.def)             Requested size: 240.60004pt x 63.47868pt.
 
-Underfull \hbox (badness 1028) in paragraph at lines 180--188
+Underfull \hbox (badness 1028) in paragraph at lines 181--189
 []\OT1/ptm/m/n/10 In par-tic-u-lar, the mRNA tran-scripts that set up the
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Font Info:    Try loading font information for TS1+phv on input line 188.
+LaTeX Font Info:    Try loading font information for TS1+phv on input line 189.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
@@ -622,7 +622,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2 </home/harrison/Documents/mRNA/Figures_for_writeup/Drosophila_development_g
 rk_labelled.png>]
-Underfull \hbox (badness 1454) in paragraph at lines 243--246
+Underfull \hbox (badness 1454) in paragraph at lines 244--247
 \OT1/ptm/m/n/10 In this con-text, mod-elling involves break-ing down the
  []
 
@@ -639,7 +639,7 @@ writeup/States_diagram.eps>
 (epstopdf)             Command: <repstopdf --outfile=./States_diagram-eps-conve
 rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/States_diagram.ep
 s>
-(epstopdf)             \includegraphics on input line 266.
+(epstopdf)             \includegraphics on input line 267.
 Package epstopdf Info: Output file is already uptodate.
 
 <./States_diagram-eps-converted-to.pdf, id=21, 727.71875pt x 345.29pt>
@@ -647,7 +647,7 @@ File: ./States_diagram-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./States_diagram-eps-converted-to.pdf>
 Package pdftex.def Info: ./States_diagram-eps-converted-to.pdf used on input li
-ne 266.
+ne 267.
 (pdftex.def)             Requested size: 240.60004pt x 114.16206pt.
 
 </home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_01.jpg, id=
@@ -657,7 +657,7 @@ File: /home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_01.jpg
 
 <use /home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_01.jpg>
 Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Ring
-_canals_snap_01.jpg used on input line 283.
+_canals_snap_01.jpg used on input line 284.
 (pdftex.def)             Requested size: 240.60004pt x 236.8808pt.
 [3 <./States_diagram-eps-converted-to.pdf>]
 </home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_02.jpg, id=
@@ -667,7 +667,7 @@ File: /home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_02.jpg
 
 <use /home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_02.jpg>
 Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Ring
-_canals_snap_02.jpg used on input line 291.
+_canals_snap_02.jpg used on input line 292.
 (pdftex.def)             Requested size: 187.20003pt x 184.30399pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Domain_geometry.eps>
@@ -679,14 +679,14 @@ writeup/Domain_geometry.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Domain_geometry-eps-conv
 erted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Domain_geometry.
 eps>
-(epstopdf)             \includegraphics on input line 299.
+(epstopdf)             \includegraphics on input line 300.
 Package epstopdf Info: Output file is already uptodate.
 <./Domain_geometry-eps-converted-to.pdf, id=34, 385.44pt x 240.9pt>
 File: ./Domain_geometry-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Domain_geometry-eps-converted-to.pdf>
 Package pdftex.def Info: ./Domain_geometry-eps-converted-to.pdf used on input l
-ine 299.
+ine 300.
 (pdftex.def)             Requested size: 237.12308pt x 148.20222pt.
 
 
@@ -698,18 +698,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [4 </home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_01.jpg>
  </home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_02.jpg> <.
 /Domain_geometry-eps-converted-to.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 336.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 337.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 336.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 337.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
+
+Package caption Warning: \captionsetup{type*=...} or \captionof
+(caption)                outside box or environment on input line 415.
+See the caption package documentation for explanation.
+
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Typical_path.eps>
 (epstopdf)                    date: 2015-06-30 18:40:44
@@ -719,15 +724,14 @@ writeup/Typical_path.eps>
 (epstopdf)                    size: 92938 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Typical_path-eps-convert
 ed-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Typical_path.eps>
-(epstopdf)             \includegraphics on input line 406.
+(epstopdf)             \includegraphics on input line 423.
 Package epstopdf Info: Output file is already uptodate.
-
 <./Typical_path-eps-converted-to.pdf, id=48, 503.8825pt x 400.49625pt>
 File: ./Typical_path-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Typical_path-eps-converted-to.pdf>
 Package pdftex.def Info: ./Typical_path-eps-converted-to.pdf used on input line
- 406.
+ 423.
 (pdftex.def)             Requested size: 240.60004pt x 191.2338pt.
 
 </home/harrison/Documents/mRNA/Figures_for_writeup/mcherry_stages.pdf, id=49, 1
@@ -737,8 +741,12 @@ hic file (type pdf)
 
 <use /home/harrison/Documents/mRNA/Figures_for_writeup/mcherry_stages.pdf>
 Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/mche
-rry_stages.pdf used on input line 417.
+rry_stages.pdf used on input line 434.
 (pdftex.def)             Requested size: 449.27701pt x 336.9651pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Spatial_distn_half_speed_mutant.eps>
 (epstopdf)                    date: 2015-06-24 17:51:40
@@ -750,7 +758,7 @@ erted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=./Spatial_distn_half_speed
 _mutant-eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/
 Spatial_distn_half_speed_mutant.eps>
-(epstopdf)             \includegraphics on input line 427.
+(epstopdf)             \includegraphics on input line 444.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Spatial_distn_half_speed_mutant-eps-converted-to.pdf, id=50, 516.93124pt x 4
@@ -759,21 +767,21 @@ File: ./Spatial_distn_half_speed_mutant-eps-converted-to.pdf Graphic file (type
  pdf)
  <use ./Spatial_distn_half_speed_mutant-eps-converted-to.pdf>
 Package pdftex.def Info: ./Spatial_distn_half_speed_mutant-eps-converted-to.pdf
- used on input line 427.
+ used on input line 444.
 (pdftex.def)             Requested size: 204.51149pt x 162.0219pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 434--441
+Underfull \hbox (badness 10000) in paragraph at lines 451--458
 \OT1/ptm/m/n/10 Our model is depen-dent on six param-e-ters:
  []
 
 
-Underfull \hbox (badness 1755) in paragraph at lines 434--441
+Underfull \hbox (badness 1755) in paragraph at lines 451--458
 \OML/cmm/m/it/10 ^^W[]; ^^W[]; ![]; ![]; ^^U; ^^^$\OT1/ptm/m/n/10 . We are able
  to explore the depen-
  []
 
 
-Underfull \hbox (badness 1394) in paragraph at lines 434--441
+Underfull \hbox (badness 1394) in paragraph at lines 451--458
 \OT1/ptm/m/n/10 orders of mag-ni-tude. We show in Fig-ure 8[] the effect
  []
 
@@ -788,14 +796,14 @@ writeup/MFPT_phi.eps>
 (epstopdf)                    size: 5982 bytes
 (epstopdf)             Command: <repstopdf --outfile=./MFPT_phi-eps-converted-t
 o.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_phi.eps>
-(epstopdf)             \includegraphics on input line 446.
+(epstopdf)             \includegraphics on input line 463.
 Package epstopdf Info: Output file is already uptodate.
 
 <./MFPT_phi-eps-converted-to.pdf, id=70, 381.425pt x 303.1325pt>
 File: ./MFPT_phi-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./MFPT_phi-eps-converted-to.pdf>
-Package pdftex.def Info: ./MFPT_phi-eps-converted-to.pdf used on input line 446
+Package pdftex.def Info: ./MFPT_phi-eps-converted-to.pdf used on input line 463
 .
 (pdftex.def)             Requested size: 212.16154pt x 168.61057pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
@@ -807,14 +815,14 @@ writeup/MFPT_nu.eps>
 (epstopdf)                    size: 5737 bytes
 (epstopdf)             Command: <repstopdf --outfile=./MFPT_nu-eps-converted-to
 .pdf /home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_nu.eps>
-(epstopdf)             \includegraphics on input line 454.
+(epstopdf)             \includegraphics on input line 471.
 Package epstopdf Info: Output file is already uptodate.
 
 <./MFPT_nu-eps-converted-to.pdf, id=71, 381.425pt x 306.14375pt>
 File: ./MFPT_nu-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./MFPT_nu-eps-converted-to.pdf>
-Package pdftex.def Info: ./MFPT_nu-eps-converted-to.pdf used on input line 454.
+Package pdftex.def Info: ./MFPT_nu-eps-converted-to.pdf used on input line 471.
 
 (pdftex.def)             Requested size: 212.16154pt x 170.28549pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
@@ -826,7 +834,7 @@ writeup/MFPT_omega1.eps>
 (epstopdf)                    size: 6699 bytes
 (epstopdf)             Command: <repstopdf --outfile=./MFPT_omega1-eps-converte
 d-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_omega1.eps>
-(epstopdf)             \includegraphics on input line 463.
+(epstopdf)             \includegraphics on input line 480.
 Package epstopdf Info: Output file is already uptodate.
 
 <./MFPT_omega1-eps-converted-to.pdf, id=72, 538.01pt x 432.61626pt>
@@ -834,7 +842,7 @@ File: ./MFPT_omega1-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./MFPT_omega1-eps-converted-to.pdf>
 Package pdftex.def Info: ./MFPT_omega1-eps-converted-to.pdf used on input line 
-463.
+480.
 (pdftex.def)             Requested size: 212.16154pt x 170.601pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/MFPT_omega2.eps>
@@ -845,7 +853,7 @@ writeup/MFPT_omega2.eps>
 (epstopdf)                    size: 5894 bytes
 (epstopdf)             Command: <repstopdf --outfile=./MFPT_omega2-eps-converte
 d-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_omega2.eps>
-(epstopdf)             \includegraphics on input line 472.
+(epstopdf)             \includegraphics on input line 489.
 Package epstopdf Info: Output file is already uptodate.
 
 <./MFPT_omega2-eps-converted-to.pdf, id=73, 538.01pt x 414.54875pt>
@@ -853,7 +861,7 @@ File: ./MFPT_omega2-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./MFPT_omega2-eps-converted-to.pdf>
 Package pdftex.def Info: ./MFPT_omega2-eps-converted-to.pdf used on input line 
-472.
+489.
 (pdftex.def)             Requested size: 212.16154pt x 163.47612pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/MFPT_lambda.eps>
@@ -864,7 +872,7 @@ writeup/MFPT_lambda.eps>
 (epstopdf)                    size: 5620 bytes
 (epstopdf)             Command: <repstopdf --outfile=./MFPT_lambda-eps-converte
 d-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_lambda.eps>
-(epstopdf)             \includegraphics on input line 480.
+(epstopdf)             \includegraphics on input line 497.
 Package epstopdf Info: Output file is already uptodate.
 
 <./MFPT_lambda-eps-converted-to.pdf, id=74, 538.01pt x 412.54124pt>
@@ -872,7 +880,7 @@ File: ./MFPT_lambda-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./MFPT_lambda-eps-converted-to.pdf>
 Package pdftex.def Info: ./MFPT_lambda-eps-converted-to.pdf used on input line 
-480.
+497.
 (pdftex.def)             Requested size: 212.16154pt x 162.68446pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Q_distn_phi.eps>
@@ -883,7 +891,7 @@ writeup/Q_distn_phi.eps>
 (epstopdf)                    size: 6855 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Q_distn_phi-eps-converte
 d-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_phi.eps>
-(epstopdf)             \includegraphics on input line 496.
+(epstopdf)             \includegraphics on input line 513.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Q_distn_phi-eps-converted-to.pdf, id=75, 516.93124pt x 409.53pt>
@@ -891,7 +899,7 @@ File: ./Q_distn_phi-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Q_distn_phi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Q_distn_phi-eps-converted-to.pdf used on input line 
-496.
+513.
 (pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Q_distn_nu.eps>
@@ -902,7 +910,7 @@ writeup/Q_distn_nu.eps>
 (epstopdf)                    size: 6897 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Q_distn_nu-eps-converted
 -to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_nu.eps>
-(epstopdf)             \includegraphics on input line 504.
+(epstopdf)             \includegraphics on input line 521.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Q_distn_nu-eps-converted-to.pdf, id=76, 516.93124pt x 409.53pt>
@@ -910,7 +918,7 @@ File: ./Q_distn_nu-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Q_distn_nu-eps-converted-to.pdf>
 Package pdftex.def Info: ./Q_distn_nu-eps-converted-to.pdf used on input line 5
-04.
+21.
 (pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Q_distn_omega1.eps>
@@ -922,7 +930,7 @@ writeup/Q_distn_omega1.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Q_distn_omega1-eps-conve
 rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega1.ep
 s>
-(epstopdf)             \includegraphics on input line 512.
+(epstopdf)             \includegraphics on input line 529.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Q_distn_omega1-eps-converted-to.pdf, id=77, 516.93124pt x 409.53pt>
@@ -930,7 +938,7 @@ File: ./Q_distn_omega1-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Q_distn_omega1-eps-converted-to.pdf>
 Package pdftex.def Info: ./Q_distn_omega1-eps-converted-to.pdf used on input li
-ne 512.
+ne 529.
 (pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Q_distn_omega2.eps>
@@ -942,7 +950,7 @@ writeup/Q_distn_omega2.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Q_distn_omega2-eps-conve
 rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega2.ep
 s>
-(epstopdf)             \includegraphics on input line 520.
+(epstopdf)             \includegraphics on input line 537.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Q_distn_omega2-eps-converted-to.pdf, id=78, 516.93124pt x 409.53pt>
@@ -950,7 +958,7 @@ File: ./Q_distn_omega2-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Q_distn_omega2-eps-converted-to.pdf>
 Package pdftex.def Info: ./Q_distn_omega2-eps-converted-to.pdf used on input li
-ne 520.
+ne 537.
 (pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Q_distn_lambda.eps>
@@ -962,7 +970,7 @@ writeup/Q_distn_lambda.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Q_distn_lambda-eps-conve
 rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_lambda.ep
 s>
-(epstopdf)             \includegraphics on input line 528.
+(epstopdf)             \includegraphics on input line 545.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Q_distn_lambda-eps-converted-to.pdf, id=79, 516.93124pt x 409.53pt>
@@ -970,7 +978,7 @@ File: ./Q_distn_lambda-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Q_distn_lambda-eps-converted-to.pdf>
 Package pdftex.def Info: ./Q_distn_lambda-eps-converted-to.pdf used on input li
-ne 528.
+ne 545.
 (pdftex.def)             Requested size: 212.16154pt x 168.08334pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -984,7 +992,7 @@ File: /home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_200
 <use /home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_2000
 _RS_from_matlab_v2.png>
 Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Hist
-_of_posterior_N_2000_RS_from_matlab_v2.png used on input line 562.
+_of_posterior_N_2000_RS_from_matlab_v2.png used on input line 579.
 (pdftex.def)             Requested size: 339.4524pt x 183.17055pt.
 
 </home/harrison/Documents/mRNA/Figures_for_writeup/Pairwise_parameter_heatmap_N
@@ -995,19 +1003,24 @@ map_N2000_RS.png Graphic file (type png)
 <use /home/harrison/Documents/mRNA/Figures_for_writeup/Pairwise_parameter_heatm
 ap_N2000_RS.png>
 Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Pair
-wise_parameter_heatmap_N2000_RS.png used on input line 570.
+wise_parameter_heatmap_N2000_RS.png used on input line 587.
 (pdftex.def)             Requested size: 339.4524pt x 183.17055pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 589.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 605.
  [7 </home/harrison/Documents/mRNA/Figures_for_writeup/mcherry_stages.pdf>] [8 
 <./MFPT_phi-eps-converted-to.pdf> <./MFPT_nu-eps-converted-to.pdf> <./MFPT_omeg
 a1-eps-converted-to.pdf> <./MFPT_omega2-eps-converted-to.pdf> <./MFPT_lambda-ep
 s-converted-to.pdf>] [9 <./Q_distn_phi-eps-converted-to.pdf> <./Q_distn_nu-eps-
 converted-to.pdf> <./Q_distn_omega1-eps-converted-to.pdf> <./Q_distn_omega2-eps
 -converted-to.pdf> <./Q_distn_lambda-eps-converted-to.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 </home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_200
+0_RS_from_matlab_v2.png (PNG copy)> </home/harrison/Documents/mRNA/Figures_for_
+writeup/Pairwise_parameter_heatmap_N2000_RS.png (PNG copy)>]
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Spatial_distn_gamma_008.eps>
 (epstopdf)                    date: 2015-06-25 15:01:56
@@ -1019,22 +1032,17 @@ writeup/Spatial_distn_gamma_008.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Spatial_distn_gamma_008-
 eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Spatial_
 distn_gamma_008.eps>
-(epstopdf)             \includegraphics on input line 611.
+(epstopdf)             \includegraphics on input line 628.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Spatial_distn_gamma_008-eps-converted-to.pdf, id=240, 1444.39626pt x 736.752
+<./Spatial_distn_gamma_008-eps-converted-to.pdf, id=244, 1444.39626pt x 736.752
 5pt>
 File: ./Spatial_distn_gamma_008-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Spatial_distn_gamma_008-eps-converted-to.pdf>
 Package pdftex.def Info: ./Spatial_distn_gamma_008-eps-converted-to.pdf used on
- input line 611.
+ input line 628.
 (pdftex.def)             Requested size: 449.27701pt x 229.16661pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [10 </home/harrison/Documents/mRNA/Figures_for_writeup/Hist_of_posterior_N_200
-0_RS_from_matlab_v2.png (PNG copy)> </home/harrison/Documents/mRNA/Figures_for_
-writeup/Pairwise_parameter_heatmap_N2000_RS.png (PNG copy)>]
 </home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data.jpg, id=245, 874.26
 625pt x 649.42625pt>
 File: /home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data.jpg Graphic fi
@@ -1042,7 +1050,7 @@ le (type jpg)
 
 <use /home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data.jpg>
 Package pdftex.def Info: /home/harrison/Documents/mRNA/Figures_for_writeup/Raw_
-data.jpg used on input line 620.
+data.jpg used on input line 637.
 (pdftex.def)             Requested size: 182.8547pt x 135.8286pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Processed_data.eps>
@@ -1054,7 +1062,7 @@ writeup/Processed_data.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Processed_data-eps-conve
 rted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Processed_data.ep
 s>
-(epstopdf)             \includegraphics on input line 629.
+(epstopdf)             \includegraphics on input line 646.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Processed_data-eps-converted-to.pdf, id=246, 561.09625pt x 421.575pt>
@@ -1062,8 +1070,11 @@ File: ./Processed_data-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Processed_data-eps-converted-to.pdf>
 Package pdftex.def Info: ./Processed_data-eps-converted-to.pdf used on input li
-ne 629.
+ne 646.
 (pdftex.def)             Requested size: 206.91617pt x 155.45924pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Auto_hist_w_production2.eps>
 (epstopdf)                    date: 2015-06-26 15:45:02
@@ -1075,7 +1086,7 @@ writeup/Auto_hist_w_production2.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Auto_hist_w_production2-
 eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Auto_his
 t_w_production2.eps>
-(epstopdf)             \includegraphics on input line 658.
+(epstopdf)             \includegraphics on input line 675.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Auto_hist_w_production2-eps-converted-to.pdf, id=247, 1444.39626pt x 729.726
@@ -1083,7 +1094,7 @@ Package epstopdf Info: Output file is already uptodate.
 File: ./Auto_hist_w_production2-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Auto_hist_w_production2-eps-converted-to.pdf>
 Package pdftex.def Info: ./Auto_hist_w_production2-eps-converted-to.pdf used on
- input line 658.
+ input line 675.
 (pdftex.def)             Requested size: 329.47386pt x 166.4528pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Auto_heatmap_w_production2.eps>
@@ -1096,7 +1107,7 @@ writeup/Auto_heatmap_w_production2.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Auto_heatmap_w_productio
 n2-eps-converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Auto_
 heatmap_w_production2.eps>
-(epstopdf)             \includegraphics on input line 667.
+(epstopdf)             \includegraphics on input line 684.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Auto_heatmap_w_production2-eps-converted-to.pdf, id=248, 1444.39626pt x 729.
@@ -1105,22 +1116,20 @@ File: ./Auto_heatmap_w_production2-eps-converted-to.pdf Graphic file (type pdf)
 
  <use ./Auto_heatmap_w_production2-eps-converted-to.pdf>
 Package pdftex.def Info: ./Auto_heatmap_w_production2-eps-converted-to.pdf used
- on input line 667.
+ on input line 684.
 (pdftex.def)             Requested size: 379.38931pt x 191.67293pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 2735) in paragraph at lines 667--693
+[]\OT1/ptm/m/n/10 Applying infer-ence with ABC to these data using a
+ []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11 <./Spatial_distn_gamma_008-eps-converted-to.pdf>]
+ [11 </home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data.jpg> <./Proces
+sed_data-eps-converted-to.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [12 <./Auto_hist_w_production2-eps-converted-to.pdf> <./Auto_heatmap_w_product
-ion2-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Two_sum_stats_phi.eps>
 (epstopdf)                    date: 2015-07-01 14:14:22
@@ -1131,15 +1140,15 @@ writeup/Two_sum_stats_phi.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Two_sum_stats_phi-eps-co
 nverted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Two_sum_stats_
 phi.eps>
-(epstopdf)             \includegraphics on input line 720.
+(epstopdf)             \includegraphics on input line 737.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Two_sum_stats_phi-eps-converted-to.pdf, id=280, 529.98pt x 443.6575pt>
+<./Two_sum_stats_phi-eps-converted-to.pdf, id=258, 529.98pt x 443.6575pt>
 File: ./Two_sum_stats_phi-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Two_sum_stats_phi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Two_sum_stats_phi-eps-converted-to.pdf used on input
- line 720.
+ line 737.
 (pdftex.def)             Requested size: 212.16154pt x 177.602pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Two_sum_stats_nu.eps>
@@ -1151,15 +1160,15 @@ writeup/Two_sum_stats_nu.eps>
 (epstopdf)             Command: <repstopdf --outfile=./Two_sum_stats_nu-eps-con
 verted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Two_sum_stats_n
 u.eps>
-(epstopdf)             \includegraphics on input line 728.
+(epstopdf)             \includegraphics on input line 745.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Two_sum_stats_nu-eps-converted-to.pdf, id=281, 534.99875pt x 449.68pt>
+<./Two_sum_stats_nu-eps-converted-to.pdf, id=259, 534.99875pt x 449.68pt>
 File: ./Two_sum_stats_nu-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Two_sum_stats_nu-eps-converted-to.pdf>
 Package pdftex.def Info: ./Two_sum_stats_nu-eps-converted-to.pdf used on input 
-line 728.
+line 745.
 (pdftex.def)             Requested size: 212.16154pt x 178.32495pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Two_sum_stats_omega1.eps>
@@ -1172,15 +1181,15 @@ f>
 (epstopdf)             Command: <repstopdf --outfile=./Two_sum_stats_omega1-eps
 -converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Two_sum_sta
 ts_omega1.eps>
-(epstopdf)             \includegraphics on input line 736.
+(epstopdf)             \includegraphics on input line 753.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Two_sum_stats_omega1-eps-converted-to.pdf, id=282, 538.01pt x 449.68pt>
+<./Two_sum_stats_omega1-eps-converted-to.pdf, id=260, 538.01pt x 449.68pt>
 File: ./Two_sum_stats_omega1-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Two_sum_stats_omega1-eps-converted-to.pdf>
 Package pdftex.def Info: ./Two_sum_stats_omega1-eps-converted-to.pdf used on in
-put line 736.
+put line 753.
 (pdftex.def)             Requested size: 212.16154pt x 177.33003pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Two_sum_stats_omega2.eps>
@@ -1193,15 +1202,15 @@ f>
 (epstopdf)             Command: <repstopdf --outfile=./Two_sum_stats_omega2-eps
 -converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Two_sum_sta
 ts_omega2.eps>
-(epstopdf)             \includegraphics on input line 745.
+(epstopdf)             \includegraphics on input line 762.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Two_sum_stats_omega2-eps-converted-to.pdf, id=283, 519.9425pt x 449.68pt>
+<./Two_sum_stats_omega2-eps-converted-to.pdf, id=261, 519.9425pt x 449.68pt>
 File: ./Two_sum_stats_omega2-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Two_sum_stats_omega2-eps-converted-to.pdf>
 Package pdftex.def Info: ./Two_sum_stats_omega2-eps-converted-to.pdf used on in
-put line 745.
+put line 762.
 (pdftex.def)             Requested size: 212.16154pt x 183.4917pt.
 Package epstopdf Info: Source file: </home/harrison/Documents/mRNA/Figures_for_
 writeup/Two_sum_stats_lambda.eps>
@@ -1214,21 +1223,31 @@ f>
 (epstopdf)             Command: <repstopdf --outfile=./Two_sum_stats_lambda-eps
 -converted-to.pdf /home/harrison/Documents/mRNA/Figures_for_writeup/Two_sum_sta
 ts_lambda.eps>
-(epstopdf)             \includegraphics on input line 753.
+(epstopdf)             \includegraphics on input line 770.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Two_sum_stats_lambda-eps-converted-to.pdf, id=284, 538.01pt x 443.6575pt>
+<./Two_sum_stats_lambda-eps-converted-to.pdf, id=262, 538.01pt x 443.6575pt>
 File: ./Two_sum_stats_lambda-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Two_sum_stats_lambda-eps-converted-to.pdf>
 Package pdftex.def Info: ./Two_sum_stats_lambda-eps-converted-to.pdf used on in
-put line 753.
+put line 770.
 (pdftex.def)             Requested size: 212.16154pt x 174.95508pt.
- [13 </home/harrison/Documents/mRNA/Figures_for_writeup/Raw_data.jpg> <./Proces
-sed_data-eps-converted-to.pdf>] [14 <./Two_sum_stats_phi-eps-converted-to.pdf> 
-<./Two_sum_stats_nu-eps-converted-to.pdf> <./Two_sum_stats_omega1-eps-converted
--to.pdf> <./Two_sum_stats_omega2-eps-converted-to.pdf> <./Two_sum_stats_lambda-
-eps-converted-to.pdf>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12 <./Spatial_distn_gamma_008-eps-converted-to.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13 <./Auto_hist_w_production2-eps-converted-to.pdf> <./Auto_heatmap_w_product
+ion2-eps-converted-to.pdf>] [14 <./Two_sum_stats_phi-eps-converted-to.pdf> <./T
+wo_sum_stats_nu-eps-converted-to.pdf> <./Two_sum_stats_omega1-eps-converted-to.
+pdf> <./Two_sum_stats_omega2-eps-converted-to.pdf> <./Two_sum_stats_lambda-eps-
+converted-to.pdf>]
+Underfull \hbox (badness 4634) in paragraph at lines 840--842
+[]\OT1/ptm/m/n/10 By sim-i-lar argu-ments, expres-sions for higher spa-tial
+ []
+
 (./Modelling_writeup.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1252,13 +1271,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6334 strings out of 493304
- 100248 string characters out of 6139871
- 176578 words of memory out of 5000000
- 9587 multiletter control sequences out of 15000+600000
+ 6337 strings out of 493304
+ 100285 string characters out of 6139871
+ 176586 words of memory out of 5000000
+ 9590 multiletter control sequences out of 15000+600000
  43834 words of font info for 107 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 49i,11n,47p,1123b,504s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 49i,11n,47p,1123b,497s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
@@ -1277,7 +1296,7 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist
 c/uhvro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Modelling_writeup.pdf (17 pages, 1948170 bytes).
+Output written on Modelling_writeup.pdf (17 pages, 1949234 bytes).
 PDF statistics:
  426 PDF objects out of 1000 (max. 8388607)
  294 compressed objects within 3 object streams
