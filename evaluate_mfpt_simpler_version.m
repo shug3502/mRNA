@@ -20,9 +20,9 @@ params.Ly = 37; %in y direction
 params.nuc_radius = 10; %radius of nucleus
 params.theta_0 = 0; %initial angle is 0
 
-param_vec = [1.16/2,1.16]; %[0.1,0.5,1,5,10];%0.4:0.05:0.75; 0.5:0.02:0.8;
+param_vec =  [0.1,0.5,1,5,10]; %0.4:0.05:0.75; 0.5:0.02:0.8; [1.16/2,1.16];
 my_length = length(param_vec);
-t_max = 200;
+t_max = 20;
 %my_length = 1;
 mean_anchor_storage = zeros(my_length,1);
 sd_anchor_storage = zeros(my_length,1);
@@ -37,7 +37,7 @@ num_particles = 1000;
 for k=1:my_length
     
     params.nu1 = param_vec(k);
-    %params.nu2 = param_vec(k)/2;
+    params.nu2 = param_vec(k)/2;
     %parfor? perhaps if it took longer might be needed
     anchored = zeros(num_particles,1);
     anchor_times = zeros(num_particles,1);
@@ -69,32 +69,38 @@ mean_anchor_storage
 sd_anchor_storage
 if plot_option
     figure;
-    subplot(3,1,1)
+    %subplot(3,1,1)
     errorbar((param_vec),mean_anchor_storage,sd_anchor_storage,'linewidth',3)
     set(gca, 'fontsize',24);
     xlabel('\nu_1');
     ylabel('MFPT');
     grid on
-    axis([0.5,1.2, 0,5000]);
+    axis([0,12, 0,5000]);
     %axis([-1.5,1.5, 0,100000]);
-
-    %figure;
-    subplot(3,1,2)
+    fname = 'Figures_for_writeup/MFPT_nu';
+    print(fname,'-depsc');
+    
+    figure;
+    %subplot(3,1,2)
+    subplot(2,1,1)
     errorbar((param_vec),mean_jumps_storage,sd_jumps_storage,'linewidth',3)
     set(gca, 'fontsize',24);
     xlabel('\nu_1');
     ylabel('Number of Jumps');
     grid on
-    axis([0.5,1.2, 0,6000]);
+    axis([0,12, 0,100000]);
     %axis([-1.5,1.5, 0,200000]);
     
     %figure;
-    subplot(3,1,3)
+    %subplot(3,1,3)
+    subplot(2,1,2)
     errorbar((param_vec),mean_distances_storage,sd_distances_storage,'linewidth',3)
     set(gca, 'fontsize',24);
     xlabel('\nu_1');
     ylabel('Jump Distance');
     grid on
+    fname = 'Figures_for_writeup/Two_sum_stats_nu';
+    print(fname,'-depsc');
 
 end
 toc(total)
