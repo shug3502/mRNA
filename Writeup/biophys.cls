@@ -721,8 +721,8 @@
 \def\@catchline{\@journalname\quad Volume:\ \@vol\quad\@pmonth\ \@pyear\ \@fpage--\@lpage}
 \def\catchline#1{\gdef\@catchline{#1}}
 \def\@catchlinerunfoot{\@journalname\ \@vol(\@iss)\ \@fpage--\@lpage}
-\def\copyinfoa{$\copyright$\ 2013\ The Authors}
-\def\copyinfob{0006-3495/08/09/2624/12\quad \$2.00}
+\def\copyinfoa{$\copyright$\ 2015\ The Authors}
+\def\copyinfob{0006-3495/08/09/2624/12\quad}
 \def\@tmpgridframe{Y}
 \def\@tmpcropmark{Y}
 \long\def\ack#1{\fontsize{8}{10}\selectfont{#1}}

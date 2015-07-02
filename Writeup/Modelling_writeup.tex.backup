@@ -74,6 +74,7 @@
 \usepackage{amsfonts}
 \usepackage{dsfont}
 \usepackage{gensymb}
+\usepackage{caption}
 \usepackage{epstopdf}
 \usepackage{mathtools}
 
@@ -167,8 +168,8 @@ The MS2-MCP system has been used successfully in the visualisation of \textit{no
 Although there are limitations to these technologies dependent on cell type, they have permitted an improvement of our understanding of intracellular motility.
 What has become clear is that a variety of different mechanisms are used to ensure localization of mRNAs.
 
-What is not yet well understood are the molecular mechanisms used in the mRNA localization process and why such a variety of transport methods are present.
-It is likely that this aids regulation and the movement of different mRNAs in parallel.
+%What is not yet well understood are the molecular mechanisms used in the mRNA localization process and why such a variety of transport methods are present.
+%It is likely that this aids regulation and the movement of different mRNAs in parallel.
 
 \subsection{Motivation}
 After transcription and transport out of the nucleus, many mRNAs are localized and translated in the distinct cytoplasmic domains where they function \citep{jansen2001mrna, parton2014subcellular}.
@@ -193,9 +194,10 @@ By simulating from our model, assuming we have knowledge of the current state of
 This could be used to inform the linkage step to identify particles between frames and may allow larger timesteps $\Delta t$ to be taken between imaging frames, although a hidden Markov model (HMM) framework may be necessary to update the current state of the particle.
 An HMM approach has previously been applied to tracking in the context of bacteria \citep{rosser2013novel} and for single-molecule diffusive protein data \citep{persson2013extracting}.
 
-Through mathematical modelling of mRNA transport in the \textit{Drosophila} nurse cell, we aim to better understand the limiting factors in mRNA localization.
-This will improve our understanding of which parts of the process are important biologically for its function and should give insight into the molecular mechanisms used by informing future experimental design.
-In addition, we see the potential for this modelling framework to be applied using an HMM framework to improve tracking of RNP complexes over longer time periods in three-dimensional data.
+Through mathematical modelling of mRNA transport in the \textit{Drosophila} nurse cell, we aim to identify the limiting factors in mRNA localization.
+This will improve our understanding of which parts of the process are important biologically for its function.
+It should give insight into the molecular mechanisms used and targets for regulation by the cell, through informing future experimental design.
+In addition, we see the potential for this modelling framework to be applied using an HMM to improve tracking of RNP complexes over longer time periods in three-dimensional data.
 
 \subsection{Outline of mRNA localization process} \label{Outline}
 
@@ -394,8 +396,7 @@ Assuming there are no internal transitions back to the active transport state, t
 We can also deduce that the rate $\lambda = 0.95-0.84 = 0.11 \text{s}^{-1}$.  
 In addition, we assume the distribution of microtubule orientations in the nurse cells is similar to that in the oocyte, since there is data available for the oocyte \citep{parton20111} but not for the nurse cell. 
 Therefore we take $\phi = 0.58$.
-
-This gives parameter estimates of $\nu_1 = 1.16  \mu \text{ms}^{-1}$, $\nu_2 = 0.80  \mu \text{ms}^{-1}$, $\omega_1 = 0.42 \text{s}^{-1} $, $\omega_2 = 0.84 \text{s}^{-1}$, $\lambda = 0.11 \text{s}^{-1}$, $\phi = 0.58$.
+This gives parameter estimates as shown in Table \ref{Table:Params}.
 \begin{center}
 
  \begin{tabular}{| c | c |}
@@ -408,10 +409,11 @@ This gives parameter estimates of $\nu_1 = 1.16  \mu \text{ms}^{-1}$, $\nu_2 = 0
    $\lambda$ & 0.11 $\text{s}^{-1}$ \\ %\hline
    $\phi$ & 0.58 \\ %\hline
    $\gamma$ & 0.01 $\text{s}^{-1}$ \\
-   \hline
+   \hline 
  \end{tabular}
- 
+
  \end{center}
+ \captionof{table}{Parameter values for the velocity jump process model.} \label{Table:Params}
 
 \subsection{Timescales of the model}
 Here, we evaluate the timescales of the transport phase of the localization process.
@@ -618,7 +620,7 @@ Upon export of a particle in our model, it is placed randomly on the circumferen
 We begin at time $t=0$ with a single particle that has just been exported, and note that since the production rate is constant 
 
 By introducing the extra parameter, $\gamma$, into our model, there is now an extra parameter to estimate. 
-To estimate this directly, we note that rate of production of mRNA is limited by its rate of transcription in the nucleus.
+To estimate this directly, we note that the rate of production of mRNA is limited by its rate of transcription in the nucleus.
 Since the rate of transcription for Drosophila at $22 \degree \text{C}$ is 25 nt/s (BNID 111484) \citep{milo2010bionumbers}, and the length of the \textit{grk} gene is 295 nt \cite{marygold2013flybase}, we can obtain an estimate for the production rate of \textit{grk} mRNA of $\gamma = 0.08 \text{s}^{-1}$.
 Simulation from the extended model with production at rate $\gamma=0.08 \text{s}^{-1}$ suggests that a spatial steady state is reached after a short initial transient, with a constant rate of absorption at the posterior ring canal.
 Results are shown in Figure \ref{FIG:Production_sim} and exhibit spatial profiles similar to those seen in experimental data exhibited in Figure \ref{FIG:Raw_and_processed_data}.
