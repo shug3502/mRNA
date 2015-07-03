@@ -1,19 +1,19 @@
 #from wikipedia code. Viterbi algorithm. 
 
-states = ('Healthy', 'Fever')
+states = ('AT', 'Diff')
  
-observations = ('normal', 'cold', 'dizzy', 'dizzy', 'normal', 'normal', 'cold', 'cold')
+observations = ('run', 'pause', 'static', 'static', 'pause', 'pause', 'run', 'pause')
  
-start_probability = {'Healthy': 0.6, 'Fever': 0.4}
+start_probability = {'AT': 0.6, 'Diff': 0.4}
  
 transition_probability = {
-   'Healthy' : {'Healthy': 0.7, 'Fever': 0.3},
-   'Fever' : {'Healthy': 0.4, 'Fever': 0.6}
+   'AT' : {'AT': 0.7, 'Diff': 0.3},
+   'Diff' : {'AT': 0.4, 'Diff': 0.6}
    }
  
 emission_probability = {
-   'Healthy' : {'normal': 0.5, 'cold': 0.4, 'dizzy': 0.1},
-   'Fever' : {'normal': 0.1, 'cold': 0.3, 'dizzy': 0.6}
+   'AT' : {'run': 0.5, 'pause': 0.4, 'static': 0.1},
+   'Diff' : {'run': 0.1, 'pause': 0.3, 'static': 0.6}
    }
 
 def viterbi(obs, states, start_p, trans_p, emit_p):

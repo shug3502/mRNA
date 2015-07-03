@@ -1,6 +1,6 @@
 function output_raw_data_in_comparable_form
 
-[q,x,y] = read_in_particle_coords(9,[10,10]);
+[q,x,y] = read_in_particle_coords(14,[10,10]);
 
 figure
 imagesc(1,0:52,log(q)) % plot whole time course
