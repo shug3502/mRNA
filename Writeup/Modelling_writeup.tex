@@ -164,12 +164,12 @@ This method of gene expression is particularly relevant for polarized cells such
 For example, the axes of \textit{Drosophila Melongaster} are established through regulation of gradients in \textit{bicoid} (\textit{bcd}), \textit{gurken} (\textit{grk}), \textit{oskar} (\textit{osk}) and \textit{nanos} (\textit{nos}) mRNA \citep{wolpert1998}.
 mRNA localization has been observed in a variety of species and cell types, including \textit{Drosophila} and \textit{Xenopus} oocytes, neurons, chicken fibroblasts, yeast and bacteria \citep{wilkie2001drosophila, bobola1996asymmetric, mowry1992vegetal, rosbash1993rna, nevo2011translation}, thus demonstrating that this process is ubiquitous and not limited to large cells. 
 \textit{Drosophila} relies heavily on the asymmetric locatization of mRNAs to coordinate early development processes both spatially and temporally.
-This makes Drosophila an ideal model system for the study of mRNA localization.
+This makes \textit{Drosophila} an ideal model system for the study of mRNA localization.
 
 Recent advances in imaging techniques and image analysis technologies \citep{jeffery1983localization, bertrand1998localization, hamilton2010particlestats} have advanced our understanding of the mechanisms of mRNA localization. 
 The use of flourescence \textit{in situ} hybridisation (FISH) enables single molecules of mRNA to be labelled with high levels of sensitivity and specificity. 
 The development of the MS2-MCP system, which consists of a MS2 bacteriophage RNA stem loop bound by MS2 coat protein fusion to a flourescent protein \citep{parton2014subcellular}, has provided great benefits for the imaging of live cells \textit{in vivo}.
-The MS2-MCP system has been used successfully in the visualisation of \textit{nos}, \textit{grk}, \textit{bcd} and \textit{osk} mRNAs in Drosophila \citep{forrest2003live, jaramillo2008dynamics, weil2006localization, zimyanin2008vivo}.
+The MS2-MCP system has been used successfully in the visualisation of \textit{nos}, \textit{grk}, \textit{bcd} and \textit{osk} mRNAs in \textit{Drosophila} \citep{forrest2003live, jaramillo2008dynamics, weil2006localization, zimyanin2008vivo}.
 Although there are limitations to these technologies dependent on cell type, they have permitted an improvement of our understanding of intracellular motility.
 What has become clear is that a variety of different mechanisms are used to ensure localization of mRNAs.
 
@@ -279,10 +279,10 @@ We model a two-dimensional slice through a nurse cell as a rectangular region $[
 The cell nucleus is modelled as a circular region of given radius, $R$, placed centrally in the cell. 
 This is excluding to the RNP complexes in the model which are reflected by it.
 The remainder of the nurse cell is accessible to the particles, which seems reasonable since experimentally particles are observed in all parts of the nurse cell (data not shown).
-Initially, RNP cargoes are placed randomly at time $t=0$ on the circumference of the nucleus to represent their export from nuclear pore complexes.
+Initially, RNP cargoes are placed randomly at time $t=0$ on the circumference of the nucleus to represent their export from NPCs.
 In the model therefore, all mRNAs are produced simultaneously rather than directly modelling continual production and export over time.
 Cargoes move randomly, as described below, until eventually they hit a small target at the posterior end of nurse cell representing the ring canal joining to the oocyte, where they are absorbed and removed from the system.
-Throughout all simulations in this work, we fix $L_x=52 \mu \text{m}$, $L_y=37 \mu \text{m}$, $R=10 \mu \text{m}$ and the size of the ring canal as $2\mu \text{m}$, based on measurements taken of nurse cells in earlystages of oogenesis.
+Throughout all simulations in this work, we fix $L_x=52 \mu \text{m}$, $L_y=37 \mu \text{m}$, $R=10 \mu \text{m}$ and the size of the ring canal as $2\mu \text{m}$, based on measurements taken of nurse cells in the early stages of oogenesis.
 The position of the ring canals between the nurse cells and the ooctye can be clearly seen in Figure \ref{FIG:ring_canals}.
 The geometry of the model system can be seen in Figure \ref{FIG:geometry} and contrasted with a real nurse cell.
 \begin{figure}[h]
@@ -294,7 +294,7 @@ The geometry of the model system can be seen in Figure \ref{FIG:geometry} and co
 
 \begin{figure}[h]
  \centering
- \begin{subfigure}[b]{0.375\textwidth}
+ \begin{subfigure}[b]{0.3\textwidth}
  \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_03.jpg}
     \caption[]%
   {{\small \textit{In vivo}.}}    
@@ -370,7 +370,7 @@ Some more systematic methods for choice of summary statistics have been suggeste
 
 
 \subsection{Imaging}
-We observed \textit{grk}-MS2 mRNA in \textit{Drosophila} nurse cells tagged using MCP-Dendra and mcherry. 
+We observed \textit{grk}-MS2 mRNA in \textit{Drosophila} nurse cells tagged using MCP-Dendra and mCherry. 
 Sqh Utrophin GFP was used to show the position of ring canals.
 Imaging was performed with a wide-field deconvolution system (Delta Vision CORE) from Applied Precision. 
 Image stacks were deconvolved with the SoftWoRx Resolve 3D constrained iterative deconvolution algorithm (Applied Precision). 
@@ -379,9 +379,9 @@ The age of egg-chambers was determined by measuring oocyte size and comparing kn
 
 \section{Results and Discussion} \label{Results}
 
-\subsection{Direct parameter estimation}
+\subsection{Direct parameter estimation} \label{Direct}
 Based on direct measurements from manually tracked grk-GFP mRNA complexes in \textit{Drosophila} nurse cells \citep{neuman1996drosophila}, we are able to make direct preliminary estimates of the parameters of our model.
-All data were obtained from \citet{DavidsonPhD2015}.
+All data in Section \ref{Direct} were obtained from \citet{DavidsonPhD2015}.
 Particles are classed as static, paused or active.
 Paused and active particles will correspond to those in the diffusive and active transport phases of our model respectively. 
 Static particles will be assumed to be either anchored or undergoing anomolous behaviour. 
@@ -459,9 +459,9 @@ The resulting distribution is shown in Figure \ref{FIG:Half_speed_q} and the MFP
 Our model is dependent on six parameters: $\nu_1, \nu_2, \omega_1, \omega_2, \lambda, \phi$. 
 We are able to explore the dependence of our model on these parameters by performing a sensitivity analysis, varying each paramter over several orders of magnitude.
 We show  in Figure \ref{FIG:Sensitivity_analysis} the effect of varying key parameters on the MFPT.
-The results of this sensitivity analysis demonstrate that the turning rate within the diffusive state, $\lambda$, has no noticeable effect on this summary statistics (Panel \ref{fig:3lambda}).
-Decreasing the speed parameters, $v_1$ and $v_2$, or the microtubule bias, $\phi$, leads to a sharp rise in the MFPT (Panels \ref{fig:3nu}, \ref{fig:3phi}). 
-The transition rates $\omega_1$ and $\omega_2$ have opposite effects with an increase in $\omega_1$ increasing the MFPT, and a decrease in $\omega_2$ increasing the MFPT (Panels \ref{fig:3omega1}, \ref{fig:3omega2}). 
+The results of this sensitivity analysis demonstrate that the turning rate within the diffusive state, $\lambda$, has no noticeable effect on this summary statistics (Panel \ref{fig:mfpt_lambda}).
+Decreasing the speed parameters, $v_1$ and $v_2$, or the microtubule bias, $\phi$, leads to a sharp rise in the MFPT (Panels \ref{fig:mfpt_phi}, \ref{fig:mfpt_nu}). 
+The transition rates $\omega_1$ and $\omega_2$ have opposite effects with an increase in $\omega_1$ increasing the MFPT, and a decrease in $\omega_2$ increasing the MFPT (Panels \ref{fig:mfpt_omega1}, \ref{fig:mfpt_omega2}). 
 Similar effects are seen for two other summary statistics: the mean number of jumps on each path up to absorption, and the mean over different particles of the median jump distance on a single path, see Appendix \ref{Sensitivity_analysis_2}.
 
 \begin{figure*}
@@ -471,7 +471,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_phi.eps}
             \caption[]%
             {{\small Microtubule bias, $\phi$.}}    
-            \label{fig:3phi}
+            \label{fig:mfpt_phi}
         \end{subfigure}
         \hspace{1cm}
         \begin{subfigure}[b]{0.425\textwidth}  
@@ -479,7 +479,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_nu.eps}
             \caption[]%
             {{\small Motor speeds, $\nu_1$ and $\nu_2$.}}    
-            \label{fig:3nu}
+            \label{fig:mfpt_nu}
         \end{subfigure}
         \vskip\baselineskip
         \hspace{3mm}
@@ -488,7 +488,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_omega1.eps}
             \caption[]%
             {{\small Switching rate to diffusion, $\omega_1$.}}    
-            \label{fig:3omega1}
+            \label{fig:mfpt_omega1}
         \end{subfigure}
         \hspace{1cm}
         %\quad
@@ -497,7 +497,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_omega2.eps}
             \caption[]%
             {{\small Switching rate to active transport, $\omega_2$.}}    
-            \label{fig:3omega2}
+            \label{fig:mfpt_omega2}
         \end{subfigure}
         \vskip\baselineskip
         \begin{subfigure}[b]{0.425\textwidth}   
@@ -505,7 +505,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_lambda.eps}
             \caption[]%
             {{\small Reorientation rate in diffusion, $\lambda$.}}    
-            \label{fig:3lambda}
+            \label{fig:mfpt_lambda}
         \end{subfigure}
         
         \caption{ \small Dependence of MFPT on the model parameters. Parameters used for simulations were $\phi=0.58$, $\nu_1=1.16 \mu \text{ms}^{-1}$, $\nu_2=0.8 \mu \text{ms}^{-1}$, $\omega_1=0.42 \text{s}^{-1}$, $\omega_2=0.84 \text{s}^{-1}$, $\lambda=0.11 \text{s}^{-1}$. For each of (\subref{fig:3phi}) to (\subref{fig:3lambda}), we vary a parameter in turn. 
@@ -719,7 +719,7 @@ One possible method of representing heterogeneity in the cell would be by use of
 The three-dimensional nature of the environment presents further challenges for tracking, as RNPs move between frames.
 Although some progress has already been made in this area \citep{thompson2010three}, we hope that incorporation of modelling into a tracking framework could enable tracking of particles over longer timescales at increased resolution. 
 Motivated by a Kalman filter type approach \citep{faragher2012understanding}, we hope to investigate further using our model combined with regular inputs of data over time to assist particle tracking algorithms in the linkage step of tracking.
-Therefore in future the model should be extended to enable us to capture behaviour in three dimensions. 
+Therefore, in future, the model should be extended to enable us to capture behaviour in three dimensions. 
 Since the oocyte more than triples in size during the early stages of oogenesis, it may be relevant to include domain growth in our model in future, as the dimensions of the domain effect the timescales of the MFPT of the process.
 
 \indent If further time were available, we would investigate further the parameterization of the full model from experimental data via ABC, which may require use of other ABC algorithms, such as Adaptive Population Monte Carlo ABC \citep{lenormand2013adaptive}, to overcome the inefficiencies of the rejection sampling method.
@@ -793,14 +793,14 @@ Here, we show, in Figure \ref{FIG:Sensitivity_analysis_2}, the sensitivity of th
 %\subsubsection{Analytics}
 For many models, analytical techniques can offer more general insight than simulating from the model with specific parameters.
 We show here what can be achieved with these techniques and give some indicative results.
-First, we must make some simplifying assumptions to ensure the model is analytically tractable. We will consider only one spatial distribution on the interval $[0,L_x]$, parallel to the $x$ axis.
+First, we must make some simplifying assumptions to ensure the model is analytically tractable. We will consider only one spatial dimension, parallel to the $x$ axis, restricted to the interval $[0,L_x]$,.
 Furthermore, we assume $\nu_1 \gg \nu_2$ so that it is reasonabe to ignore the diffusive phase of motion, leaving only reorientations with the active transport phase at rate $\omega_1$.
 
 \indent Suppose we have a velocity jump process with one mode of motion in one dimension where the speed in the $x$ direction varies as $\nu_1 \sin (\theta)$ when the velocity is oriented in direction $\theta$ in two dimensions.
-Let $ p(x,\theta,t | y, \alpha, s)\text{d}t$ be the probability that the particle is at position $x$ moving in direction $\theta$ in the time interval $[t,t+dt)$ having started previously at time $s$ at position $y$ moving in direction $\alpha$.
+Let $ p(x,\theta,t | y, \alpha, s)\text{d}t$ be the probability that the particle is at position $x$ moving in direction $\theta$ in the time interval $[t,t + \text{d}t)$ having started previously at time $s$ at position $y$ moving in direction $\alpha$.
 We will now suppress the conditioning and write only $ p(x,\theta, t) $.
 
-\indent The evolution of the probability is governed \citep{othmer1988models} by :
+\indent The evolution of the probability is governed \citep{othmer1988models} by:
 \begin{equation}\label{Evolution}
  \frac{\partial p}{\partial t} + \nu_1 \sin{\theta } \frac{\partial p}{\partial x} = -\omega_1 p + \omega_1 \int_0^{2\pi} T(\theta) p(x,\theta ', t) \text{d} \theta ',
 \end{equation}
@@ -827,12 +827,12 @@ which becomes via our assumption \eqref{decomposition}:
  \frac{\partial q}{\partial t} + \nu_1 \mean{T(\theta) \sin(\theta)} \frac{\partial q}{\partial x} = 0.
 \end{equation}
 
-\indent From multiplying by $x$ and considering the first spatial moment, we have:
+\indent From multiplying \eqref{Evolution} by $x$ and considering the first spatial moment, we have:
 \begin{align*}
- \frac{\partial}{\partial t} ( \mean{\mean{x p}} & = \nu_1 \mean{\mean{\sin{\theta} p}}, \\
- \frac{\partial}{\partial t} ( \mean{\mean{x T(\theta) q}} & = \nu_1 \mean{\mean{\sin{\theta} T(\theta) q}}, \\
+ \frac{\partial}{\partial t} ( \mean{\mean{x p}} & = \nu_1 \mean{\mean{\sin{(\theta)} p}}, \\
+ \frac{\partial}{\partial t} ( \mean{\mean{x T(\theta) q}} & = \nu_1 \mean{\mean{\sin{(\theta)} T(\theta) q}}, \\
  %\frac{\parequationtial}{\partial t} ( \int_0^L x q \text{d} x ) & = \nu \mean{\sin{\theta} T(\theta) } \int_0^L q \text{d} x, \\
- \frac{\partial}{\partial t} \left( \int_0^L x q \hspace{1mm} \text{d} x \right) & = \nu_1 \mean{\sin{\theta} T(\theta) } \int_0^L q \hspace{1mm} \text{d} x.
+ \frac{\partial}{\partial t} \left( \int_0^L x q \hspace{1mm} \text{d} x \right) & = \nu_1 \mean{\sin{(\theta)} T(\theta) } \int_0^L q \hspace{1mm} \text{d} x.
  \end{align*}
 Suppose we let $\mu^{(1)}(t) = \int_0^L x q(x,t) \text{d} x  $. Then we can write:
 \begin{align}

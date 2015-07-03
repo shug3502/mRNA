@@ -89,6 +89,11 @@
 
 \renewcommand{\bibnumfmt}[1]{#1.}
 
+\newlength\tindent
+\setlength{\tindent}{\parindent}
+\setlength{\parindent}{5mm}
+\renewcommand{\indent}{\hspace*{\tindent}}
+
 \epstopdfsetup{outdir=./}
 \graphicspath{{../}}
 % Examples of special definitions (amsmath package required)
@@ -159,12 +164,12 @@ This method of gene expression is particularly relevant for polarized cells such
 For example, the axes of \textit{Drosophila Melongaster} are established through regulation of gradients in \textit{bicoid} (\textit{bcd}), \textit{gurken} (\textit{grk}), \textit{oskar} (\textit{osk}) and \textit{nanos} (\textit{nos}) mRNA \citep{wolpert1998}.
 mRNA localization has been observed in a variety of species and cell types, including \textit{Drosophila} and \textit{Xenopus} oocytes, neurons, chicken fibroblasts, yeast and bacteria \citep{wilkie2001drosophila, bobola1996asymmetric, mowry1992vegetal, rosbash1993rna, nevo2011translation}, thus demonstrating that this process is ubiquitous and not limited to large cells. 
 \textit{Drosophila} relies heavily on the asymmetric locatization of mRNAs to coordinate early development processes both spatially and temporally.
-This makes Drosophila an ideal model system for the study of mRNA localization.
+This makes \textit{Drosophila} an ideal model system for the study of mRNA localization.
 
 Recent advances in imaging techniques and image analysis technologies \citep{jeffery1983localization, bertrand1998localization, hamilton2010particlestats} have advanced our understanding of the mechanisms of mRNA localization. 
 The use of flourescence \textit{in situ} hybridisation (FISH) enables single molecules of mRNA to be labelled with high levels of sensitivity and specificity. 
 The development of the MS2-MCP system, which consists of a MS2 bacteriophage RNA stem loop bound by MS2 coat protein fusion to a flourescent protein \citep{parton2014subcellular}, has provided great benefits for the imaging of live cells \textit{in vivo}.
-The MS2-MCP system has been used successfully in the visualisation of \textit{nos}, \textit{grk}, \textit{bcd} and \textit{osk} mRNAs in Drosophila \citep{forrest2003live, jaramillo2008dynamics, weil2006localization, zimyanin2008vivo}.
+The MS2-MCP system has been used successfully in the visualisation of \textit{nos}, \textit{grk}, \textit{bcd} and \textit{osk} mRNAs in \textit{Drosophila} \citep{forrest2003live, jaramillo2008dynamics, weil2006localization, zimyanin2008vivo}.
 Although there are limitations to these technologies dependent on cell type, they have permitted an improvement of our understanding of intracellular motility.
 What has become clear is that a variety of different mechanisms are used to ensure localization of mRNAs.
 
@@ -274,10 +279,10 @@ We model a two-dimensional slice through a nurse cell as a rectangular region $[
 The cell nucleus is modelled as a circular region of given radius, $R$, placed centrally in the cell. 
 This is excluding to the RNP complexes in the model which are reflected by it.
 The remainder of the nurse cell is accessible to the particles, which seems reasonable since experimentally particles are observed in all parts of the nurse cell (data not shown).
-Initially, RNP cargoes are placed randomly at time $t=0$ on the circumference of the nucleus to represent their export from nuclear pore complexes.
+Initially, RNP cargoes are placed randomly at time $t=0$ on the circumference of the nucleus to represent their export from NPCs.
 In the model therefore, all mRNAs are produced simultaneously rather than directly modelling continual production and export over time.
 Cargoes move randomly, as described below, until eventually they hit a small target at the posterior end of nurse cell representing the ring canal joining to the oocyte, where they are absorbed and removed from the system.
-Throughout all simulations in this work, we fix $L_x=52 \mu \text{m}$, $L_y=37 \mu \text{m}$, $R=10 \mu \text{m}$ and the size of the ring canal as $2\mu \text{m}$, based on measurements taken of nurse cells in earlystages of oogenesis.
+Throughout all simulations in this work, we fix $L_x=52 \mu \text{m}$, $L_y=37 \mu \text{m}$, $R=10 \mu \text{m}$ and the size of the ring canal as $2\mu \text{m}$, based on measurements taken of nurse cells in the early stages of oogenesis.
 The position of the ring canals between the nurse cells and the ooctye can be clearly seen in Figure \ref{FIG:ring_canals}.
 The geometry of the model system can be seen in Figure \ref{FIG:geometry} and contrasted with a real nurse cell.
 \begin{figure}[h]
@@ -289,8 +294,8 @@ The geometry of the model system can be seen in Figure \ref{FIG:geometry} and co
 
 \begin{figure}[h]
  \centering
- \begin{subfigure}[b]{0.375\textwidth}
- \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_02.jpg}
+ \begin{subfigure}[b]{0.3\textwidth}
+ \includegraphics[width=\columnwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Ring_canals_snap_03.jpg}
     \caption[]%
   {{\small \textit{In vivo}.}}    
   \label{fig:vivo}
@@ -365,7 +370,7 @@ Some more systematic methods for choice of summary statistics have been suggeste
 
 
 \subsection{Imaging}
-We observed \textit{grk}-MS2 mRNA in \textit{Drosophila} nurse cells tagged using MCP-Dendra and mcherry. 
+We observed \textit{grk}-MS2 mRNA in \textit{Drosophila} nurse cells tagged using MCP-Dendra and mCherry. 
 Sqh Utrophin GFP was used to show the position of ring canals.
 Imaging was performed with a wide-field deconvolution system (Delta Vision CORE) from Applied Precision. 
 Image stacks were deconvolved with the SoftWoRx Resolve 3D constrained iterative deconvolution algorithm (Applied Precision). 
@@ -374,9 +379,9 @@ The age of egg-chambers was determined by measuring oocyte size and comparing kn
 
 \section{Results and Discussion} \label{Results}
 
-\subsection{Direct parameter estimation}
+\subsection{Direct parameter estimation} \label{Direct}
 Based on direct measurements from manually tracked grk-GFP mRNA complexes in \textit{Drosophila} nurse cells \citep{neuman1996drosophila}, we are able to make direct preliminary estimates of the parameters of our model.
-All data were obtained from \citet{DavidsonPhD2015}.
+All data in Section \ref{Direct} were obtained from \citet{DavidsonPhD2015}.
 Particles are classed as static, paused or active.
 Paused and active particles will correspond to those in the diffusive and active transport phases of our model respectively. 
 Static particles will be assumed to be either anchored or undergoing anomolous behaviour. 
@@ -427,9 +432,6 @@ We plot the evolution of a typical path in Figure \ref{FIG:Typical_path}.
  The geometry of the domain is as shown previously in Figure \ref{FIG:geometry}.}
  \label{FIG:Typical_path}
 \end{figure}
-Given that stage 5 in \textit{Drosophila} oocytes lasts five hours, this timescale for the MFPT appears to be an order of magnitude shorter than the timescales over which \textit{grk} mRNA transport is observed in oogenesis, suggesting that the limiting step in the transport and localization of the mRNAs is their production from the nucleus rather than the transport step.
-We note that \textit{grk} mRNA complexes can be observed in the nurse cells from the germarium stage up until stage 8, when production of \textit{grk} appears to cease, as illustrated in Figure \ref{FIG:grk_localization}.
-The distribution of particles visible in Figure \ref{FIG:grk_localization} also demonstrates that the difference in timescales is not due to a bottleneck elsewhere in the transport process, for instance at the ring canals, since no notable accumulation is seen there.
 \begin{figure*}
  \centering
  \includegraphics[width=0.9\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/mcherry_stages.pdf}
@@ -437,7 +439,12 @@ The distribution of particles visible in Figure \ref{FIG:grk_localization} also 
  \label{FIG:grk_localization}
 \end{figure*}
 
-Furthermore, we are able to make predictions on what would happen if we halved the speed of the molecular motors via a genetic mutation.
+Given that stage 5 in \textit{Drosophila} oocytes lasts five hours, this timescale for the MFPT appears to be an order of magnitude shorter than the timescales over which \textit{grk} mRNA transport is observed in oogenesis, suggesting that the limiting step in the transport and localization of the mRNAs is their production from the nucleus rather than the transport step.
+We note that \textit{grk} mRNA complexes can be observed in the nurse cells from the germarium stage up until stage 8, when production of \textit{grk} appears to cease, as illustrated in Figure \ref{FIG:grk_localization}.
+The distribution of particles visible in Figure \ref{FIG:grk_localization} also demonstrates that the difference in timescales is not due to a bottleneck elsewhere in the transport process, for instance at the ring canals, since no notable accumulation is seen there.
+
+
+\indent Furthermore, we are able to make predictions on what would happen if we halved the speed of the molecular motors via a genetic mutation.
 We assume that altering the speed of the molecular motor, $\nu_1$, would leave the speed in diffusion, $\nu_2$, unchanged.
 The resulting distribution is shown in Figure \ref{FIG:Half_speed_q} and the MFPT would be $2150\pm1600 \text{s} \approx 36\text{min}$.
 \begin{figure}[h]
@@ -452,9 +459,9 @@ The resulting distribution is shown in Figure \ref{FIG:Half_speed_q} and the MFP
 Our model is dependent on six parameters: $\nu_1, \nu_2, \omega_1, \omega_2, \lambda, \phi$. 
 We are able to explore the dependence of our model on these parameters by performing a sensitivity analysis, varying each paramter over several orders of magnitude.
 We show  in Figure \ref{FIG:Sensitivity_analysis} the effect of varying key parameters on the MFPT.
-The results of this sensitivity analysis demonstrate that the turning rate within the diffusive state, $\lambda$, has no noticeable effect on this summary statistics (Panel \ref{fig:3lambda}).
-Decreasing the speed parameters, $v_1$ and $v_2$, or the microtubule bias, $\phi$, leads to a sharp rise in the MFPT (Panels \ref{fig:3nu}, \ref{fig:3phi}). 
-The transition rates $\omega_1$ and $\omega_2$ have opposite effects with an increase in $\omega_1$ increasing the MFPT, and a decrease in $\omega_2$ increasing the MFPT (Panels \ref{fig:3omega1}, \ref{fig:3omega2}). 
+The results of this sensitivity analysis demonstrate that the turning rate within the diffusive state, $\lambda$, has no noticeable effect on this summary statistics (Panel \ref{fig:mfpt_lambda}).
+Decreasing the speed parameters, $v_1$ and $v_2$, or the microtubule bias, $\phi$, leads to a sharp rise in the MFPT (Panels \ref{fig:mfpt_phi}, \ref{fig:mfpt_nu}). 
+The transition rates $\omega_1$ and $\omega_2$ have opposite effects with an increase in $\omega_1$ increasing the MFPT, and a decrease in $\omega_2$ increasing the MFPT (Panels \ref{fig:mfpt_omega1}, \ref{fig:mfpt_omega2}). 
 Similar effects are seen for two other summary statistics: the mean number of jumps on each path up to absorption, and the mean over different particles of the median jump distance on a single path, see Appendix \ref{Sensitivity_analysis_2}.
 
 \begin{figure*}
@@ -464,7 +471,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_phi.eps}
             \caption[]%
             {{\small Microtubule bias, $\phi$.}}    
-            \label{fig:3phi}
+            \label{fig:mfpt_phi}
         \end{subfigure}
         \hspace{1cm}
         \begin{subfigure}[b]{0.425\textwidth}  
@@ -472,7 +479,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_nu.eps}
             \caption[]%
             {{\small Motor speeds, $\nu_1$ and $\nu_2$.}}    
-            \label{fig:3nu}
+            \label{fig:mfpt_nu}
         \end{subfigure}
         \vskip\baselineskip
         \hspace{3mm}
@@ -481,7 +488,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_omega1.eps}
             \caption[]%
             {{\small Switching rate to diffusion, $\omega_1$.}}    
-            \label{fig:3omega1}
+            \label{fig:mfpt_omega1}
         \end{subfigure}
         \hspace{1cm}
         %\quad
@@ -490,7 +497,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_omega2.eps}
             \caption[]%
             {{\small Switching rate to active transport, $\omega_2$.}}    
-            \label{fig:3omega2}
+            \label{fig:mfpt_omega2}
         \end{subfigure}
         \vskip\baselineskip
         \begin{subfigure}[b]{0.425\textwidth}   
@@ -498,7 +505,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/MFPT_lambda.eps}
             \caption[]%
             {{\small Reorientation rate in diffusion, $\lambda$.}}    
-            \label{fig:3lambda}
+            \label{fig:mfpt_lambda}
         \end{subfigure}
         
         \caption{ \small Dependence of MFPT on the model parameters. Parameters used for simulations were $\phi=0.58$, $\nu_1=1.16 \mu \text{ms}^{-1}$, $\nu_2=0.8 \mu \text{ms}^{-1}$, $\omega_1=0.42 \text{s}^{-1}$, $\omega_2=0.84 \text{s}^{-1}$, $\lambda=0.11 \text{s}^{-1}$. For each of (\subref{fig:3phi}) to (\subref{fig:3lambda}), we vary a parameter in turn. 
@@ -532,7 +539,7 @@ Similar effects are seen for two other summary statistics: the mean number of ju
             {{\small Spatial distribution as a function of $\omega_1$.}}    
             \label{fig:omega1}
         \end{subfigure}
-        \quad
+        \hfill
         \begin{subfigure}[b]{0.425\textwidth}   
             \centering 
             \includegraphics[width=\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Q_distn_omega2.eps}
@@ -554,13 +561,15 @@ Similar effects are seen for two other summary statistics: the mean number of ju
         \label{FIG:Sensitivity_of_Q}
     \end{figure*}
 
-In addition, we exhibit the dependence of the spatial distribution parallel to the anterior-posterior axis of particles simulated from our model, as shown in Figure \ref{FIG:Sensitivity_of_Q}.
+
+\indent In addition, we exhibit the dependence of the spatial distribution parallel to the anterior-posterior axis of particles simulated from our model, as shown in Figure \ref{FIG:Sensitivity_of_Q}.
 For increased motor speeds, $\nu_1$ and $\nu_2$, the particles spread out faster from the nucleus and are directed towards the posterior of the nurse cell.
 By increasing the microtubule bias, $\phi$, the motion of the cargoes becomes much more directed towards the posterior with accumulation near the posterior and absorption upon reaching the ring canal there.
 For high values of the switching rate, $\omega_1$, the distribution of particles is more spread and has not reached the posterior, as little time is spent in the active transport state.
 For low values of $\omega_1$, the particles do not change direction often in the active transport state so greater accumulation is seen for intermediate values of $\omega_1$.
 We note that, for large values of $\omega_2$, there is an accumulation of particles near the posterior, but that these are not quickly absorbed, since they spend little time in the diffusive phase of motion.
 The effect that the turning rate $\lambda$ has on the spatial distribution appears to be unclear.
+Some analytical analysis of the model can be found in Appendix \ref{Analytics}.
 
 \subsection{Evaluation of ABC methods for \textit{in silico} data} \label{In_silico}
 We demonstrate the effectiveness of the ABC inference techniques on \textit{in silico} data, before applying them directly to real datasets. 
@@ -596,7 +605,7 @@ We present first the results of applying ABC methods to our model with a broad p
         \label{FIG:ABC_Posterior}
 \end{figure*}
 
-For each experiment, we simulate a dataset from chosen parameters and evaluate its summary statistic. 
+\indent For each experiment, we simulate a dataset from chosen parameters and evaluate its summary statistic. 
 That summary statistic is compared to summaries of data generated from proposed parameters, as described above.
 We average the results obtained across a number of experiments denoted $n_{repeats}$.
 As summary statistics we take the spatial distribution of the cargoes averaged in the $x$ direction at given times $t_1,...,t_{\kappa}$ and use a symmetric version of the Kullback-Leibler divergence as our distance to compare distributions.
@@ -604,7 +613,7 @@ Broad uniform priors are used for each parameter between biologically realistic 
 In Figure \ref{FIG:ABC_Posterior}, heatmaps of the pairwise parameter distributions are shown, along with histograms for each parameter. 
 %In table (??), we present the results of varying the parameters $N, n_{repeats}, \alpha, p_{acc_{min}}$ on the quality of the posteriors.
 
-We obtain most information from the posterior for the microtubule bias, $\phi$, while the speed parameters, $\nu_1$ and $\nu_2$, are also identifiable. 
+\indent We obtain most information from the posterior for the microtubule bias, $\phi$, while the speed parameters, $\nu_1$ and $\nu_2$, are also identifiable. 
 The remaining rate parameters have posteriors similar to the uniform prior and it is harder to recover the original parameter values used.
 This suggests that the microtubule bias and the speeds have most effect on the summary statistic chosen, which agrees with our earlier sensitivity analysis.
 %Explain the set up.
@@ -617,17 +626,17 @@ Since we have suggested that production is an important part of the mRNA localiz
 We assume a constant rate of production, $\gamma$, modelling the export of RNP complexes from the NPC as discrete events that occur as a Poisson process with rate $\gamma$.
 Although there is some evidence that the production rate varies during oogenesis, we will assume here that is remains constant for simplification.
 Upon export of a particle in our model, it is placed randomly on the circumference of the nucleus and the model evolves as outlined previously.
-We begin at time $t=0$ with a single particle that has just been exported, and note that since the production rate is constant 
+We begin at time $t=0$ with a single particle that has just been exported. 
 
-By introducing the extra parameter, $\gamma$, into our model, there is now an extra parameter to estimate. 
+\indent By introducing the extra parameter, $\gamma$, into our model, there is now an extra parameter to estimate. 
 To estimate this directly, we note that the rate of production of mRNA is limited by its rate of transcription in the nucleus.
-Since the rate of transcription for Drosophila at $22 \degree \text{C}$ is 25 nt/s (BNID 111484) \citep{milo2010bionumbers}, and the length of the \textit{grk} gene is 295 nt \cite{marygold2013flybase}, we can obtain an estimate for the production rate of \textit{grk} mRNA of $\gamma = 0.08 \text{s}^{-1}$.
-Simulation from the extended model with production at rate $\gamma=0.08 \text{s}^{-1}$ suggests that a spatial steady state is reached after a short initial transient, with a constant rate of absorption at the posterior ring canal.
+Since the rate of transcription for Drosophila at $22 \degree \text{C}$ is 25 nt/s (BNID 111484) \citep{milo2010bionumbers}, and the length of the \textit{grk} gene is 2513 nt \cite{marygold2013flybase}, we can obtain an estimate for the production rate of \textit{grk} mRNA of $\gamma = 0.01 \text{s}^{-1}$.
+Simulation from the extended model with production at rate $\gamma=0.01 \text{s}^{-1}$ suggests that a spatial steady state is reached after a short initial transient, with a constant rate of absorption at the posterior ring canal.
 Results are shown in Figure \ref{FIG:Production_sim} and exhibit spatial profiles similar to those seen in experimental data exhibited in Figure \ref{FIG:Raw_and_processed_data}.
 \begin{figure*}
  \centering
- \includegraphics[width = 0.9\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Spatial_distn_gamma_008.eps}
- \caption{\small The spatial distribution evolving over time up to 25 hours from a single simulation of the model with production included and parameters of $\phi=0.58$, $\nu_1=1.16 \mu \text{ms}^{-1}$, $\nu_2=0.8 \mu \text{ms}^{-1}$, $\omega_1=0.42 \text{s}^{-1}$, $\omega_2=0.84 \text{s}^{-1}$, $\lambda=0.11 \text{s}^{-1}$, $\gamma = 0.08 \text{s}^{-1}$. 
+ \includegraphics[width = 0.9\textwidth]{/home/harrison/Documents/mRNA/Figures_for_writeup/Spatial_distn_gamma_001.eps}
+ \caption{\small The spatial distribution evolving over time up to 25 hours from a single simulation of the model with production included and parameters of $\phi=0.58$, $\nu_1=1.16 \mu \text{ms}^{-1}$, $\nu_2=0.8 \mu \text{ms}^{-1}$, $\omega_1=0.42 \text{s}^{-1}$, $\omega_2=0.84 \text{s}^{-1}$, $\lambda=0.11 \text{s}^{-1}$, $\gamma = 0.01 \text{s}^{-1}$. 
  A logarithmic scale for the colourmap is used to emphasise the presence of small numbers of particles in the nurse cell.}
  \label{FIG:Production_sim}
 \end{figure*}
@@ -665,7 +674,7 @@ In particular, these summary statistics would require detailed tracking data of 
 Instead, we use the spatial distribution of particles which is more tractable from a single time point.
 To ensure the timescales of the observed experimental data and simulated data match, we use the model with production of mRNA at rate $\gamma$ and infer this parameter also.
 
-Applying inference with ABC to these data using a Euclidean distance measure and binned spatial histograms in the $x$ direction as summary statistics, we obtain posteriors for the model parameters as shown in Figure \ref{FIG:ABC_real_data}.
+\indent Applying inference with ABC to these data using a Euclidean distance measure and binned spatial histograms in the $x$ direction as summary statistics, we obtain posteriors for the model parameters as shown in Figure \ref{FIG:ABC_real_data}.
 Since simulating from the model with production over longer timescales is more computationally intensive than simulating from the original model, as in Section \ref{In_silico}, we must sample fewer parameter values, taking $N=500$ and $\alpha=0.1$ in the ABC rejection sampling algorithm.
 The results of the ABC inference show a very tight distribution for $\gamma$, despite the low value of $N$ used in these simulations. 
 This suggests that the output of the production model depends most strongly on $\gamma$ when summarised by our chosen summary statistics.
@@ -697,10 +706,10 @@ Through use of a model-based approach for explaining mRNA transport and localiza
 We constructed a velocity jump process with two phases of motion to represent directed movement via active transport on microtubles and random motion in free diffusion.
 Since simulations of this model were accessible but the likelihood was intractable, we employed ABC methods to infer the parameters from our model from data collected via live \textit{in vitro} imaging and compared the results of this with values obtained from direct measurement.
 
-The timescales for MFPTs based on simulations from the model are on the order of tens of minutes, rather than hours, for the inferred parameters, suggesting that the transport step is not the rate-limiting stage of the mRNA localization process.
+\indent The timescales for MFPTs based on simulations from the model are on the order of tens of minutes, rather than hours, for the inferred parameters, suggesting that the transport step is not the rate-limiting stage of the mRNA localization process.
 Based on the modelling work presented here, we postulate that the production of mRNA in the nucleus of the nurse cells is instead the rate-limiting stage.
 
-By incorporating production at a constant rate into our model, we recover transport on timescales of the order of hours seen during oogenesis.
+\indent By incorporating production at a constant rate into our model, we recover transport on timescales of the order of hours seen during oogenesis.
 We are also able to simulate spatial distributions of mRNA particles similar to what is observed experimentally.  
 
 \subsection{Further work}
@@ -710,10 +719,10 @@ One possible method of representing heterogeneity in the cell would be by use of
 The three-dimensional nature of the environment presents further challenges for tracking, as RNPs move between frames.
 Although some progress has already been made in this area \citep{thompson2010three}, we hope that incorporation of modelling into a tracking framework could enable tracking of particles over longer timescales at increased resolution. 
 Motivated by a Kalman filter type approach \citep{faragher2012understanding}, we hope to investigate further using our model combined with regular inputs of data over time to assist particle tracking algorithms in the linkage step of tracking.
-Therefore in future the model should be extended to enable us to capture behaviour in three dimensions. 
+Therefore, in future, the model should be extended to enable us to capture behaviour in three dimensions. 
 Since the oocyte more than triples in size during the early stages of oogenesis, it may be relevant to include domain growth in our model in future, as the dimensions of the domain effect the timescales of the MFPT of the process.
 
-If further time were available, we would investigate further the parameterization of the full model from experimental data via ABC, which may require use of other ABC algorithms, such as Adaptive Population Monte Carlo ABC \citep{lenormand2013adaptive}, to overcome the inefficiencies of the rejection sampling method.
+\indent If further time were available, we would investigate further the parameterization of the full model from experimental data via ABC, which may require use of other ABC algorithms, such as Adaptive Population Monte Carlo ABC \citep{lenormand2013adaptive}, to overcome the inefficiencies of the rejection sampling method.
 We could compare more comprehensively a variety of summary statistics to guide the use of experiments in inference of our model parameters.
 %Furthermore, it would be beneficial to examine quantitatively the agreement between our simulated results using the model with production and experimental data to provide model validation.
 %If further time were available, we would seek to parametrise this full model from experimental data via ABC. 
@@ -780,25 +789,25 @@ Here, we show, in Figure \ref{FIG:Sensitivity_analysis_2}, the sensitivity of th
         \label{FIG:Sensitivity_analysis_2}
     \end{figure*}
 
-    \section{Analytics}
+    \section{Analytics} \label{Analytics}
 %\subsubsection{Analytics}
 For many models, analytical techniques can offer more general insight than simulating from the model with specific parameters.
 We show here what can be achieved with these techniques and give some indicative results.
-First, we must make some simplifying assumptions to ensure the model is analytically tractable. We will consider only one spatial distribution on the interval $[0,L_x]$, parallel to the $x$ axis.
+First, we must make some simplifying assumptions to ensure the model is analytically tractable. We will consider only one spatial dimension, parallel to the $x$ axis, restricted to the interval $[0,L_x]$,.
 Furthermore, we assume $\nu_1 \gg \nu_2$ so that it is reasonabe to ignore the diffusive phase of motion, leaving only reorientations with the active transport phase at rate $\omega_1$.
 
-Suppose we have a velocity jump process with one mode of motion in one dimension where the speed in the $x$ direction varies as $\nu_1 \sin (\theta)$ when the velocity is oriented in direction $\theta$ in two dimensions.
-Let $ p(x,\theta,t | y, \alpha, s)\text{d}t$ be the probability that the particle is at position $x$ moving in direction $\theta$ in the time interval $[t,t+dt)$ having started previously at time $s$ at position $y$ moving in direction $\alpha$.
+\indent Suppose we have a velocity jump process with one mode of motion in one dimension where the speed in the $x$ direction varies as $\nu_1 \sin (\theta)$ when the velocity is oriented in direction $\theta$ in two dimensions.
+Let $ p(x,\theta,t | y, \alpha, s)\text{d}t$ be the probability that the particle is at position $x$ moving in direction $\theta$ in the time interval $[t,t + \text{d}t)$ having started previously at time $s$ at position $y$ moving in direction $\alpha$.
 We will now suppress the conditioning and write only $ p(x,\theta, t) $.
 
-The evolution of the probability is governed \citep{othmer1988models} by :
+\indent The evolution of the probability is governed \citep{othmer1988models} by :
 \begin{equation}\label{Evolution}
  \frac{\partial p}{\partial t} + \nu_1 \sin{\theta } \frac{\partial p}{\partial x} = -\omega_1 p + \omega_1 \int_0^{2\pi} T(\theta) p(x,\theta ', t) \text{d} \theta ',
 \end{equation}
 where the turning kernel $T(\theta)$ gvies the probability of reorienting into a new angle $\theta$ and we assume this does not depend on the previous angle.
 We define $\mean{f(\theta)} = \int_0^{2\pi} f(\theta) \text{d} \theta $ and $\mean{\mean{f(x,\theta)}} =  \int_{0}^{2\pi} \int_0^{2\pi} f(\theta) \text{d} \theta \text{d}  x $.
 
-The orientation of the velocity, $\theta$, is updated via the reorientation kernel $T(\theta)$ after every transition.
+\indent The orientation of the velocity, $\theta$, is updated via the reorientation kernel $T(\theta)$ after every transition.
 It depends only on the initial condition and the kernel $T(\theta)$.
 After a sufficiently long time, the initial condition will have been forgotten and we should be able to decompose the probability $p$ such that:
 \begin{equation}\label{decomposition}
@@ -809,7 +818,7 @@ For a particle to forget the initial condition, it must simply execute at least 
 After a time $t_{\text{min}} = 1/\omega_1 \log (100)$, then $99\%$ of the particles should have executed a jump, since this is the 99th percentile of an exponential distribution with parameter $\omega_1$.
 Assuming a value of $\omega_1 = 0.42 \text{s}^{-1}$, then $t_{\text{min}} = 11 \hspace{0.5mm} \text{s}$ which is much less than our timescales of interest. 
 
-Now integrating \eqref{Evolution} over $\theta$, we obtain:
+\indent Now integrating \eqref{Evolution} over $\theta$, we obtain:
 \begin{equation}
  \frac{\partial}{\partial t} \mean{p} + \frac{\partial}{\partial x} \mean{\nu_1 \sin(\theta) p} = 0,
 \end{equation}
@@ -818,7 +827,7 @@ which becomes via our assumption \eqref{decomposition}:
  \frac{\partial q}{\partial t} + \nu_1 \mean{T(\theta) \sin(\theta)} \frac{\partial q}{\partial x} = 0.
 \end{equation}
 
-From multiplying by $x$ and considering the first spatial moment, we have:
+\indent From multiplying by $x$ and considering the first spatial moment, we have:
 \begin{align*}
  \frac{\partial}{\partial t} ( \mean{\mean{x p}} & = \nu_1 \mean{\mean{\sin{\theta} p}}, \\
  \frac{\partial}{\partial t} ( \mean{\mean{x T(\theta) q}} & = \nu_1 \mean{\mean{\sin{\theta} T(\theta) q}}, \\
@@ -838,7 +847,7 @@ We note that this mean net velocity depends on the microtubule bias.
 For our specified choice of $T(\theta)$, we have $\nu_1 \mean{\sin(\theta) T(\theta)} = \nu_1 (4 \phi -2)/\pi$.
 Using our estimated parameters, $\phi=0.58$ and $\nu_1 = 1.16 \mu \text{ms}^{-1}$, we find an estimate of the mean net velocity of $0.12 \mu \text{ms}^{-1}$.
 
-By similar arguments, expressions for higher spatial moments and angular moments can be obtained.
+\indent By similar arguments, expressions for higher spatial moments and angular moments can be obtained.
 For the $j$th spatial moment, we have
 \begin{equation}
  \frac{\partial \mu^{(j)}}{\partial t} = j \nu_1 \mean{\sin(\theta) T(\theta)} \mu^{(j-1)}, 
