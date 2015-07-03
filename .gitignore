@@ -8,3 +8,5 @@ run_and_calculate_mean_position.m~
 simple_numerical_fwd_euler.m~
 solve_mfpt_pde.m~
 C_code/
+ABC_APMC_output*.txt
+.Rhistory
