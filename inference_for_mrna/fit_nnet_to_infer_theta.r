@@ -1,8 +1,8 @@
 
 # import data from csv file
-x <- read.csv('train2.csv',header=FALSE)
-train <- x[1:800,]
-test <- x[801:1000,]
+x <- read.csv('train.csv',header=FALSE)
+train <- x[1:8000,]
+test <- x[8001:10000,]
 sz1 <- 53
 sz2 <- 21
 sz <- sz1*sz2 # 1113 size of summary statistics
