@@ -18,7 +18,7 @@ if option_a_summary_statistic %choose which type of summary statistic to use
         params.Lx = 52; %length of cell in x direction
         params.Ly = 37; %in y direction
         params.nuc_radius = 10; %radius of nucleus
-        params.theta_0 = par_params(8); %initial angle is 0
+        %params.theta_0 = par_params(8); %initial angle is 0
         
     else
         params = par_params;
@@ -71,7 +71,7 @@ else %else use the spatial distribution and kl divergence
         params.Lx = 52; %length of cell in x direction
         params.Ly = 37; %in y direction
         params.nuc_radius = 10; %radius of nucleus
-        params.theta_0 = par_params(8); %initial angle is 0
+        %params.theta_0 = par_params(8); %initial angle is 0
         
     else
         params = par_params;
@@ -79,7 +79,7 @@ else %else use the spatial distribution and kl divergence
     
     N=num_particles;
     L=params.Lx;
-    time_vec = (0.15:0.05:0.15)*0.5;
+    time_vec = (0:0.05:1);
     t=time_vec*60^2;
     l_t = length(time_vec);
     jumps = zeros(N,10^3);

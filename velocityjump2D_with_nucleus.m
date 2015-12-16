@@ -16,11 +16,11 @@ function [is_anchored, anchoring_time, final_position_x, final_position_y, pathx
 %num_modes is for the number of modes of motion ie only AT or with
 %diffusion also
 if nargin ~= 5
-    fprintf('default parameters used\n')
+    %fprintf('default parameters used\n')
     input_time = 1;
     with_anchoring = 1;
     num_modes = 2;
-    with_plot = 1;
+    with_plot = 0;
     %Now with data on nurse cells from Alex Davidson
     params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
     params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
