@@ -1,6 +1,6 @@
 
 # import data from csv file
-x <- read.csv('train.csv',header=FALSE)
+x <- read.csv('train2.csv',header=FALSE)
 train <- x[1:800,]
 test <- x[801:1000,]
 sz1 <- 53

@@ -4,11 +4,11 @@
 
 %setup
 addpath ../
-num_samples = 10^5;
+num_samples = 10^4;
 
 %defaults for calculating summary stat:
 % for par_params expect a vector of params of length 7
-num_particles=10; %only one repeat of data needed in calculating summary stat for a given theta?
+num_particles=1; %only one repeat of data needed in calculating summary stat for a given theta?
 is_parallel=1;
 option_a_summary_statistic=0; %use distribution at various times as summary stat
 
@@ -34,4 +34,4 @@ for j=1:num_samples
     M(j,(1+length(p_indices):end)) = reshape(q_estimate,1,[]);
 end
 
-csvwrite('train.csv',M);
+csvwrite('train2.csv',M);
