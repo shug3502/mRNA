@@ -10,16 +10,16 @@ id = [1,4];
 seed = 197; randn('seed',seed), rand('seed',seed)
 
 
-data = csvread('train.csv');
-prop = 0.8;
-ntr = size(data,1)*prop; nte = size(data,1)*(1-prop);                        % number of training and test points
+data = csvread('train2.csv');
+prop = 0.16;
+ntr = size(data,1)*prop; nte = size(data,1)*0.04;                        % number of training and test points
 for response_ind = 1:7
 
 xtr = data(1:ntr,8:end);
 sn = 0.2;
 ytr = data(1:ntr,response_ind);
-xte = data((1+ntr):end,8:end);
-yte = data((1+ntr):end,response_ind);
+xte = data((1+ntr):(ntr+nte),8:end);
+yte = data((1+ntr):(ntr+nte),response_ind);
 
 cov = {@covSEiso}; sf = 1; ell = 0.4;                             % setup the GP
 hyp0.cov  = log([ell;sf]);
@@ -71,5 +71,6 @@ figure, hold on
 %plot(xtr,ytr,'k+'), plot(xtr,ytr,'ko'), legend(leg)
 
 plot(ymu{1},ymu{2},'bo'),xlabel('y actual'),ylabel('y predicted');
+plot(ymu{1},ymu{1},'k--');
 print(sprintf('gpregress%d',response_ind),'-dpng');
 end
