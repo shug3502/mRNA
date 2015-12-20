@@ -18,18 +18,18 @@ varnames <- paste("V", 8:(sz+7), sep='')
 
 for (y in responsenames){
   print(y)
-  form <- formula(paste(y, "~", varnames))  # varnames))
+  form <- formula(paste(y, "~ .")) #, varnames))  # varnames))
   models[[y]] <- lm(form, data=train) 
   }
 
-#lm.fit <- lm(V1 ~ ., data=x)
+z <- test
 for (j in 1:7){
-lm.predict <- predict(models[[responsenames[j]]],train)
+lm.predict <- predict(models[[responsenames[j]]],z)
  
 # mean squared error: 21.89483
-print(mean((lm.predict - train[,j])^2)) 
+print(mean((lm.predict - z[,j])^2)) 
  
-plot(train[,j], lm.predict,
+plot(z[,j], lm.predict,
     main="Linear regression predictions vs actual",
     xlab="Actual")
 }

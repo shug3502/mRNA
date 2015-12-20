@@ -10,3 +10,4 @@ solve_mfpt_pde.m~
 C_code/
 ABC_APMC_output*.txt
 .Rhistory
+inference_for_mrna/*.csv

@@ -4,7 +4,7 @@
 
 %setup
 addpath ../
-num_samples = 10^4;
+num_samples = 10^5;
 
 %defaults for calculating summary stat:
 % for par_params expect a vector of params of length 7
@@ -22,8 +22,11 @@ par_params = prior_params(p_indices);
 sz1=53; %from size of q_estimate
 sz2=21; %from size of q_estimate
 M = zeros(num_samples,sz1*sz2+length(p_indices));
-
+fprintf('Calculating summary statistics ...\n');
 for j=1:num_samples
+	if mod(j,100)==0
+		fprintf('%f percent done \n',j/num_samples*100);
+	end
     %sample theta from the prior
     rr = rand(1,length(p_indices));
     par_params(p_indices) = prior_params(p_indices)+prior_sigma(p_indices).*(rr-0.5);
@@ -33,5 +36,6 @@ for j=1:num_samples
     M(j,1:length(p_indices)) = par_params(p_indices);
     M(j,(1+length(p_indices):end)) = reshape(q_estimate,1,[]);
 end
-
+fprintf('All done!\n');
 csvwrite('train2.csv',M);
+
