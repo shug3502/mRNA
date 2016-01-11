@@ -17,7 +17,7 @@ function [is_anchored, anchoring_time, final_position_x, final_position_y, pathx
 %diffusion also
 if nargin ~= 5
     %fprintf('default parameters used\n')
-    input_time = 1;
+    input_time = 10;
     with_anchoring = 1;
     num_modes = 2;
     with_plot = 0;
