@@ -1,0 +1,2 @@
+size_theta, size_ss, prop, ntree, priormax, layers, filename, lossfilename 
+3,1113,0.990000,40,2.000000,40,../train3Dcopy.csv

@@ -93,32 +93,34 @@ while time<endtime && ~is_anchored
     time = time+tau;
     %jumps
     xpos = xpos + delx*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)]; %delx times unit vec in spherical polars
-
-%if xpos'*A*xpos>1
-%        fprintf('At t=%f, immediately after moving  rAr=%f>1 \n ', time, xpos'*A*xpos);
-%end
     
-        if xpos(1)>=params.Lx/2 && abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position, but effect small if speed smallish
-            anchoring_time = (params.Lx/2-(xpos(1)-delx*cos(theta)*sin(phi)))/(v*cos(theta)*sin(phi)) + time;
-            xpos(1) = (params.Lx/2)*(params.with_anchoring>0.5);
-            is_anchored = params.with_anchoring; %absorb at right hand boundary or reflect depending on whether we have anchoring
-		break; %otherwise may still be reflected
-        end
+    %if xpos'*A*xpos>1
+    %        fprintf('At t=%f, immediately after moving  rAr=%f>1 \n ', time, xpos'*A*xpos);
+    %end
+    
+    %check if absorbed at ring canal
+    if xpos(1)>=params.Lx/2 && abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position, but effect small if speed smallish
+        anchoring_time = (params.Lx/2-(xpos(1)-delx*cos(theta)*sin(phi)))/(v*cos(theta)*sin(phi)) + time;
+        xpos(1) = (params.Lx/2)*(params.with_anchoring>0.5);
+        is_anchored = params.with_anchoring; %absorb at right hand boundary or reflect depending on whether we have anchoring
+        break; %otherwise may still be reflected
+    end
+    %check if interacted with boundary
     if params.ellipsoid_boundary==1
         %reflect from an ellipsoid
         A = diag([1/(params.Lx/2)^2,1/(params.Ly/2)^2,1/(params.Lz/2)^2]);
         if xpos'*A*xpos >1
             %then has interacted with boundary and needs reflecting
             prev_pos = xpos - delx*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
-		in_or_out = xpos'*A*xpos;
-		%fprintf('before %f, after %f \n', prev_pos'*A*prev_pos, in_or_out);
-    		xpos = reflect_from_outer_boundary(prev_pos,xpos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],A);
+            %in_or_out = xpos'*A*xpos;
+            %fprintf('before %f, after %f \n', prev_pos'*A*prev_pos, in_or_out);
+            xpos = reflect_from_outer_boundary(prev_pos,xpos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],A);
         end
     else
         %assume rectangular/cuboid boundary
         for ii=1:3
             Li = params.Lx*(ii==1) + params.Ly*(ii==2) + params.Lz*(ii==3); %length for x, y and z respectively
-            if xpos(ii) >= Li/2 && ii~=1   %rectangle
+            if xpos(ii) >= Li/2   %rectangle
                 xpos(ii) = Li - xpos(ii);   %reflect at boundary
             elseif xpos(ii) < -Li/2    %(rectangle)
                 xpos(ii) = -Li-xpos(ii);  %reflect at boundary
@@ -135,8 +137,8 @@ while time<endtime && ~is_anchored
         %bb = ((prev_pos(1)*cos(theta)+prev_pos(2)*sin(theta))*sin(phi)+prev_pos(3)*cos(phi));
         %t_intersect = [-bb+sqrt(bb^2-sum(prev_pos.^2)+params.nuc_radius^2); -bb-sqrt(bb^2-sum(prev_pos.^2)+params.nuc_radius^2)]  %scaled
         t_intersect = solve_ellipsoid_intersection(prev_pos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],1/params.nuc_radius^2*eye(3));
-        t_intersect = 1/v*min(t_intersect); %want the first point it intersects
-        pos_intersect = prev_pos + t_intersect*v*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
+        t_intersect = min(t_intersect); %want the first point it intersects
+        pos_intersect = prev_pos + t_intersect*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
         %unit_normal = -pos_intersect/params.nuc_radius;
         unit_normal = params.nuc_radius*ones(1,3)*pos_intersect;
         unit_normal = unit_normal./norm(unit_normal);
@@ -162,39 +164,38 @@ while time<endtime && ~is_anchored
         %        hold on
         %        plot(xpos,ypos,'go','MarkerSize',12); % green is x_2'
         %        error('enough now');
-
-%should check again now for interaction with boundary
-    if params.ellipsoid_boundary==1
-        %reflect from an ellipsoid
-
-if xpos'*A*xpos>1
-%        fprintf('At t=%f, after nuc reflection rAr=%f>1 \n', time, xpos'*A*xpos);
-%  	fprintf('So reflect again \n');
-	prev_pos = pos_intersect;
-	direction = (xpos-pos_intersect)./norm(xpos-pos_intersect);
-	xpos = reflect_from_outer_boundary(prev_pos,xpos,direction,A);
-end
-    else
-        %assume rectangular/cuboid boundary
-        for ii=1:3
-            Li = params.Lx*(ii==1) + params.Ly*(ii==2) + params.Lz*(ii==3); %length for x, y and z respectively
-            if xpos(ii) >= Li/2 && ii~=1   %rectangle
-                xpos(ii) = Li - xpos(ii);   %reflect at boundary
-            elseif xpos(ii) < -Li/2    %(rectangle)
-                xpos(ii) = -Li-xpos(ii);  %reflect at boundary
+        
+        %should check again now for interaction with boundary
+        if params.ellipsoid_boundary==1
+            %reflect from an ellipsoid            
+            if xpos'*A*xpos>1
+                %        fprintf('At t=%f, after nuc reflection rAr=%f>1 \n', time, xpos'*A*xpos);
+                %  	fprintf('So reflect again \n');
+                prev_pos = pos_intersect;
+                direction = (xpos-pos_intersect)./norm(xpos-pos_intersect);
+                xpos = reflect_from_outer_boundary(prev_pos,xpos,direction,A);
+            end
+        else
+            %assume rectangular/cuboid boundary
+            for ii=1:3
+                Li = params.Lx*(ii==1) + params.Ly*(ii==2) + params.Lz*(ii==3); %length for x, y and z respectively
+                if xpos(ii) >= Li/2   %rectangle
+                    xpos(ii) = Li - xpos(ii);   %reflect at boundary
+                elseif xpos(ii) < -Li/2    %(rectangle)
+                    xpos(ii) = -Li-xpos(ii);  %reflect at boundary
+                end
             end
         end
-    end
-
-%also check if reflections have resulted in being absorbed
-        if xpos(1) >= params.Lx/2 & abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position$
+        
+        %also check if reflections have resulted in being absorbed
+        if xpos(1) >= params.Lx/2 && abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position$
             anchoring_time = (params.Lx/2-(xpos(1)-delx*cos(theta)*sin(phi)))/(v*cos(theta)*sin(phi)) + time;
             xpos(1) = (params.Lx/2)*(params.with_anchoring>0.5);
             is_anchored = params.with_anchoring; %absorb at right hand boundary or reflect depending on whether we h$
             break;
         end
-
-end
+        
+    end
     
     if rr(4)<params.lambda_2*(1-is_attached)/alpha
         %takes a normal step and changes direction. This has been taken out
@@ -232,10 +233,10 @@ end
         %oops
         error('something is wrong')
     end
-
-%if xpos'*A*xpos>1
-%	fprintf('At t=%f, We have rAr=%f>1, which shouldnt be at this point \n',time, xpos'*A*xpos);
-%end    
+    
+    %if xpos'*A*xpos>1
+    %	fprintf('At t=%f, We have rAr=%f>1, which shouldnt be at this point \n',time, xpos'*A*xpos);
+    %end
     n_jump = n_jump+1;
     path(n_jump,:) = xpos;
     jump_times(n_jump) = time;
