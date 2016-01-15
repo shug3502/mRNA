@@ -1,6 +1,6 @@
 function [is_anchored, anchoring_time, final_position, path, jump_times] = velocityjump3D_with_nucleus(params)
 %Created 4 Jan 2016
-%Last edit 4 Jan 2016
+%Last edit 14 Jan 2016
 %3D velocity jump model for transport of an RNP along a MT by molecular motors
 %based on 2D version
 %Assumes: 1 mode of motion, diffusion is neglected
@@ -16,6 +16,8 @@ function [is_anchored, anchoring_time, final_position, path, jump_times] = veloc
 %my_seed is the random seed to be used
 %num_modes is for the number of modes of motion ie only AT or with
 %diffusion also
+
+%13/1/16 - bug in situations where there are double reflections eg. reflection from nucleus results in particle outside of cell, so another reflection needed. Fixed 14/1/16
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -70,6 +72,8 @@ n_jump = 1;
 
 endtime=3600*params.input_time; %one hour.
 %loop through time
+A = diag([1/(params.Lx/2)^2,1/(params.Ly/2)^2,1/(params.Lz/2)^2]);
+%fprintf('starting time loop rAr: %f \n',xpos'*A*xpos);
 while time<endtime && ~is_anchored
     alpha = params.lambda_1 + params.lambda_2*(1-is_attached) + params.omega_1 + params.omega_2;
     %find next jump
@@ -89,39 +93,26 @@ while time<endtime && ~is_anchored
     time = time+tau;
     %jumps
     xpos = xpos + delx*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)]; %delx times unit vec in spherical polars
+
+%if xpos'*A*xpos>1
+%        fprintf('At t=%f, immediately after moving  rAr=%f>1 \n ', time, xpos'*A*xpos);
+%end
     
-    if xpos(1) >=params.Lx/2
-        if abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position, but effect small if speed smallish
+        if xpos(1)>=params.Lx/2 && abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position, but effect small if speed smallish
             anchoring_time = (params.Lx/2-(xpos(1)-delx*cos(theta)*sin(phi)))/(v*cos(theta)*sin(phi)) + time;
-            xpos(1) = (params.Lx - xpos(1))*(params.with_anchoring<0.5)+(params.Lx/2)*(params.with_anchoring>0.5);
+            xpos(1) = (params.Lx/2)*(params.with_anchoring>0.5);
             is_anchored = params.with_anchoring; %absorb at right hand boundary or reflect depending on whether we have anchoring
-        else
-            xpos(1) = params.Lx - xpos(1);
-            if xpos(1)<-params.Lx/2
-                xpos(1) = -params.Lx-xpos(1);
-            end
+		break; %otherwise may still be reflected
         end
-    end
     if params.ellipsoid_boundary==1
         %reflect from an ellipsoid
         A = diag([1/(params.Lx/2)^2,1/(params.Ly/2)^2,1/(params.Lz/2)^2]);
         if xpos'*A*xpos >1
             %then has interacted with boundary and needs reflecting
             prev_pos = xpos - delx*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
-            t_intersect = solve_ellipsoid_intersection(prev_pos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],A);
-            if isnan(t_intersect)
-                error('t is nan');
-            end
-            t_intersect = 1/v*max(t_intersect); %want the first point it intersects
-            pos_intersect = prev_pos + t_intersect*v*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
-            unit_normal = -diag(A)'*pos_intersect; %inward pointing normal?
-            unit_normal = unit_normal./norm(unit_normal); %normalise
-            
-            Lstar = 2*pos_intersect - xpos;
-            xpos = 2*(unit_normal'*Lstar)*unit_normal - Lstar; %new reflected position
-            if xpos'*A*xpos -1 > 10^-6 %some tolerance
-                xpos = pos_intersect; %take position as intersection pt. NB Not treated properly for second reflection
-            end
+		in_or_out = xpos'*A*xpos;
+		%fprintf('before %f, after %f \n', prev_pos'*A*prev_pos, in_or_out);
+    		xpos = reflect_from_outer_boundary(prev_pos,xpos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],A);
         end
     else
         %assume rectangular/cuboid boundary
@@ -171,7 +162,39 @@ while time<endtime && ~is_anchored
         %        hold on
         %        plot(xpos,ypos,'go','MarkerSize',12); % green is x_2'
         %        error('enough now');
+
+%should check again now for interaction with boundary
+    if params.ellipsoid_boundary==1
+        %reflect from an ellipsoid
+
+if xpos'*A*xpos>1
+%        fprintf('At t=%f, after nuc reflection rAr=%f>1 \n', time, xpos'*A*xpos);
+%  	fprintf('So reflect again \n');
+	prev_pos = pos_intersect;
+	direction = (xpos-pos_intersect)./norm(xpos-pos_intersect);
+	xpos = reflect_from_outer_boundary(prev_pos,xpos,direction,A);
+end
+    else
+        %assume rectangular/cuboid boundary
+        for ii=1:3
+            Li = params.Lx*(ii==1) + params.Ly*(ii==2) + params.Lz*(ii==3); %length for x, y and z respectively
+            if xpos(ii) >= Li/2 && ii~=1   %rectangle
+                xpos(ii) = Li - xpos(ii);   %reflect at boundary
+            elseif xpos(ii) < -Li/2    %(rectangle)
+                xpos(ii) = -Li-xpos(ii);  %reflect at boundary
+            end
+        end
     end
+
+%also check if reflections have resulted in being absorbed
+        if xpos(1) >= params.Lx/2 & abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position$
+            anchoring_time = (params.Lx/2-(xpos(1)-delx*cos(theta)*sin(phi)))/(v*cos(theta)*sin(phi)) + time;
+            xpos(1) = (params.Lx/2)*(params.with_anchoring>0.5);
+            is_anchored = params.with_anchoring; %absorb at right hand boundary or reflect depending on whether we h$
+            break;
+        end
+
+end
     
     if rr(4)<params.lambda_2*(1-is_attached)/alpha
         %takes a normal step and changes direction. This has been taken out
@@ -209,7 +232,10 @@ while time<endtime && ~is_anchored
         %oops
         error('something is wrong')
     end
-    
+
+%if xpos'*A*xpos>1
+%	fprintf('At t=%f, We have rAr=%f>1, which shouldnt be at this point \n',time, xpos'*A*xpos);
+%end    
     n_jump = n_jump+1;
     path(n_jump,:) = xpos;
     jump_times(n_jump) = time;
@@ -336,6 +362,4 @@ end
 
 %toc
 end
-
-
 

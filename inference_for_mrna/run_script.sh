@@ -2,4 +2,4 @@
 #$ -cwd
 matlab -singleCompThread -nosplash -nojvm -nodisplay -r $1
 
-Rscript $2
+#Rscript $2

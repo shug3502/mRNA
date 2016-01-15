@@ -12,6 +12,8 @@ alpha1 = diag(A)'*vec.^2;
 alpha2 = prev_pos'*A*vec;
 alpha3 = diag(A)'*prev_pos.^2 - 1;
 
+%fprintf('det: %f \n',alpha2^2-alpha1*alpha3);
+
 t = [(-alpha2+sqrt(alpha2^2-alpha1*alpha3))/alpha1;
     (-alpha2-sqrt(alpha2^2-alpha1*alpha3))/alpha1];
 

@@ -1,10 +1,10 @@
 %generate stats for 3D VJump model
-N=1000;
+N=100;
 
 %default parameters
 params.input_time = 40;
 params.with_anchoring = 1;
-params.num_modes = 1;
+params.num_modes = 2;
 params.with_plot = 0;
 params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
 params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
@@ -27,7 +27,9 @@ tic; cube_anch_times = zeros(N,1);
 for j=1:N 
     [is_anchored, anchoring_time, final_position, path, jump_times] = velocityjump3D_with_nucleus(params); 
     cube_anch_times(j) = anchoring_time/60^2; 
+	anchoring_time - jump_times(end)
 end 
+cube_anch_times
 toc
 fprintf('For cuboid boundary we have: mean %f, median %f ,sd %f \n',mean(cube_anch_times),median(cube_anch_times),std(cube_anch_times));
 figure; 
@@ -38,6 +40,12 @@ ylabel('Frequency');
 
 % now with an ellipsoid boundary
 params.ellipsoid_boundary=1;
+
+s = (3/(pi*4))^(1/3); %scaling factor so that volumes of domains are equal
+params.Lx = 54*s;
+params.Ly = 37*s;
+params.Lz = 37*s;
+
 tic; ellipse_anch_times = zeros(N,1); 
 for j=1:N
     [is_anchored, anchoring_time, final_position, path, jump_times] = velocityjump3D_with_nucleus(params); 
