@@ -1,6 +1,6 @@
 function [is_anchored, anchoring_time, final_position, path, jump_times] = velocityjump3D_with_nucleus(params)
 %Created 4 Jan 2016
-%Last edit 14 Jan 2016
+%Last edit 4 Feb 2016
 %3D velocity jump model for transport of an RNP along a MT by molecular motors
 %based on 2D version
 %Assumes: 1 mode of motion, diffusion is neglected
@@ -148,7 +148,8 @@ while time<endtime && ~is_anchored
         
         rad_check = sum(pos_intersect.^2) - params.nuc_radius^2;
         if abs(rad_check)>10^(-6)
-            error('interacted with nucleus incorrectly');
+            warning('interacted with nucleus incorrectly'); %no longer an error, as for abc wierd parameter sets can cause bad behaviour, but hopefully these parameters should be discounted
+		break; %try to exit time loop to prevent long unphysical simulations
         end
         
         %        hold on

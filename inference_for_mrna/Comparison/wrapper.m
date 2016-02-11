@@ -10,18 +10,18 @@ function wrapper(inf_method)
 %define parameters and write these to a file so they can be read in matlab or R
 params.size_theta = 3; %number of parameters theta to infer
 params.size_ss = 1113; %size of summary statistics
-params.prop = 0.99; %percentage of data to use for training vs testing
-params.filename = '../train3Dcopy.csv';
+params.prop = 0.80; %percentage of data to use for training vs testing
+params.filename = '../train3D100particles.csv';     %'../train3D.csv';
 params.k = 200; %num of nearest neighbours to use in ABC-knn
 params.ntree = 40; %number of trees in random forest
 params.priormax = 2; %maximum of prior parameters for logistic regression
-params.layers = 40; %size of hidden layers in neural network
+params.layers = 4; %size of hidden layers in neural network
 params.lossfilename = 'loss3D.csv'; %name of file to output loss info into
 
 %write params to a file for use by R
 f1=fopen('params.csv','w');
 fprintf(f1,'%s, %s, %s, %s, %s, %s, %s, %s \n', 'size_theta', 'size_ss', 'prop', 'ntree', 'priormax', 'layers', 'filename', 'lossfilename');
-fprintf(f1,'%d,%d,%f,%d,%f,%d,%s\n', params.size_theta, params.size_ss, params.prop, params.ntree, params.priormax, params.layers, params.filename);
+fprintf(f1,'%d,%d,%f,%d,%f,%d,%s,%s\n', params.size_theta, params.size_ss, params.prop, params.ntree, params.priormax, params.layers, params.filename, params.lossfilename);
 fclose('all');
 
 seed = 197; randn('seed',seed), rand('seed',seed);

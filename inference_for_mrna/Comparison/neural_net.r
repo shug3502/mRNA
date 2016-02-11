@@ -22,7 +22,7 @@ varnames <- paste("V", (m+1):(sz+m), sep='')
 
 for (y in responsenames){
   form <- formula(paste(y, "~ .")) #, varnames))  # varnames))
-  models[[y]] <- nnet(form, data=train, size=ll, maxit = 1000, linout=T) 
+  models[[y]] <- nnet(form, data=train, size=ll, maxit = 1000, rang=0.5, decay=5e-4, MaxNWts = 5000, linout=T) 
   }
 
 z <- test

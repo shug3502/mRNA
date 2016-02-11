@@ -19,6 +19,9 @@ figure;
 plot3(ytr(:,1),ytr(:,2),ytr(:,3),'o');
 size(ytr)
 check = knnsearch(ytr,[1.16,1.26,0.58],'K',10,'distance','euclidean');
+
+
+
 mean(ytr(check,:),1)
 
 %X and Y have observations as rows and variables as columns
@@ -37,7 +40,7 @@ my_loss = mean((ypred./yte - 1).^2)'
 %Test for default parameters
 default_params = [1.16, 0, 0, 0.42, 0, 0.58, 0];
 addpath ../../
-nsamples=10;
+nsamples=1;
 M = zeros(nsamples,1113);
 for j=1:nsamples
 q = reshape(summary_statistic_calculator_3D(default_params,5,1,0),1,[]);
@@ -48,4 +51,9 @@ for j=1:nsamples
     temp2 = ytr(idx2(j,:),:);
 z(j,:) = mean(temp2,1);
 end
-mean(z)
+mean(z,1)
+figure;
+for j=1:3
+subplot(3,1,j);
+hist(temp2(:,j))
+end
