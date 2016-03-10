@@ -1,4 +1,4 @@
-function posterior_contour_plot(posterior)
+function posterior_contour_plot(posterior, save_name)
 %created 11/12/16
 %last edit 11/2/16
 
@@ -21,7 +21,12 @@ for i=1:3
     % plot the data and the density estimate
     subplot(3,1,i);
     contour3(X,Y,density,50), hold on
-    plot(data(:,1),data(:,2),'r.','MarkerSize',5)    
+    %plot(data(:,1),data(:,2),'r.','MarkerSize',5)    
     xlabel(labels{indices(i,1)});
     ylabel(labels{indices(i,2)});
+    view(2);
+    colorbar;
+end
+if nargin>1
+	print(save_name,'-depsc');
 end

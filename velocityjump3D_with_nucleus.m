@@ -75,10 +75,10 @@ endtime=3600*params.input_time; %one hour.
 A = diag([1/(params.Lx/2)^2,1/(params.Ly/2)^2,1/(params.Lz/2)^2]);
 %fprintf('starting time loop rAr: %f \n',xpos'*A*xpos);
 while time<endtime && ~is_anchored
-    alpha = params.lambda_1 + params.lambda_2*(1-is_attached) + params.omega_1 + params.omega_2;
+    alpha_rate = params.lambda_1 + params.lambda_2*(1-is_attached) + params.omega_1 + params.omega_2;
     %find next jump
     rr=rand(5,1);
-    tau = 1/alpha*log(1/rr(1));
+    tau = 1/alpha_rate*log(1/rr(1));
     delx = tau*v;
     phi = acos(2*rr(5)-1);  %cos(phi) must be uniform on [-1,1]
     theta = ((rr(2)<=params.phi)*(rr(2)<=params.phi/2)*rr(3)*pi/2 + ...
@@ -198,13 +198,13 @@ while time<endtime && ~is_anchored
         
     end
     
-    if rr(4)<params.lambda_2*(1-is_attached)/alpha
+    if rr(4)<params.lambda_2*(1-is_attached)/alpha_rate
         %takes a normal step and changes direction. This has been taken out
         %of the if statement
-    elseif rr(4)<(params.lambda_2*(1-is_attached)+params.lambda_1)/alpha
+    elseif rr(4)<(params.lambda_2*(1-is_attached)+params.lambda_1)/alpha_rate
         error('should still have \lambda_1 as 0. Something is up.');
         
-    elseif rr(4)<(params.lambda_2*(1-is_attached)+params.lambda_1+params.omega_1)/alpha
+    elseif rr(4)<(params.lambda_2*(1-is_attached)+params.lambda_1+params.omega_1)/alpha_rate
         if (params.num_modes>1)
             %two modes
             %rates switch as RNP falls off/reattaches onto microtubule
@@ -217,7 +217,7 @@ while time<endtime && ~is_anchored
             %only one mode
             %take a normal step and change direction. NB outside of if
         end
-    elseif rr(4)<(params.lambda_2*(1-is_attached)+params.lambda_1+params.omega_1+params.omega_2)/alpha
+    elseif rr(4)<(params.lambda_2*(1-is_attached)+params.lambda_1+params.omega_1+params.omega_2)/alpha_rate
         if (params.num_modes>1)
             %two modes
             %rates switch as RNP falls off/reattaches onto microtubule
@@ -254,6 +254,7 @@ path = path(1:n_jump,:);
 jump_times = jump_times(1:n_jump);
 if params.with_plot
     close all
+    
     %some plots
     
     transitions = transitions(1:n_transition,:);
@@ -263,23 +264,29 @@ if params.with_plot
     else
         plot_col = 'g'; %green otherwise
     end
-    %     figure(1);
-    %     plot3(jump_times, path(:,1), path(:,2), plot_col,'linewidth',3)
-    %     set(gca,'fontsize',14)
-    %     xlabel('t');
-    %     ylabel('x position');
-    %     zlabel('y position');
-    %     grid on
-    %     hold all
-    %     if ~isempty(transitions)
-    %         plot3(transitions(:,3),transitions(:,1),transitions(:,2),'bo')
-    %     end
-    %     plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
-    %     plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
-    %     %plot3(transitions(:,3),transitions(:,1),b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
-    %     %plot3(transitions(:,3),transitions(:,1),-b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
-    %     %     plot3(0:3600/(params.Lx*2):3600,0:0.5:L,b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
-    %     %     plot3(0:3600/(L*2):3600,0:0.5:L,-b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
+         figure(1);
+         [ex,ey,ez] = ellipsoid(0,0,0,params.Lx,params.Ly,params.Lz,30);
+         sp=surf(ex,ey,ez);         
+         alpha(sp,.1);
+         hold all
+
+         %plot3(jump_times, path(:,1), path(:,2), plot_col,'linewidth',3)
+         set(gca,'fontsize',14)
+         xlabel('x position');
+         ylabel('y position');
+         zlabel('z position');
+         grid on
+         if ~isempty(transitions)
+             plot3(transitions(:,1),transitions(:,2),transitions(:,3),'b','linewidth',3)
+         end
+         
+         %plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
+         %plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
+         %plot3(transitions(:,3),transitions(:,1),b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
+         %plot3(transitions(:,3),transitions(:,1),-b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
+         %     plot3(0:3600/(params.Lx*2):3600,0:0.5:L,b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
+         %     plot3(0:3600/(L*2):3600,0:0.5:L,-b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
+    print('Figures_for_writeup/Typical_pathfull3D','-depsc');
     
     figure(3)
     subplot(2,1,1)
@@ -322,24 +329,24 @@ if params.with_plot
     %axis equal
     
     print('Figures_for_writeup/Typical_path3D','-depsc');
-    %geometry only
-    figure(4);
-    set(gca,'fontsize',18)
-    xlabel('x position');
-    ylabel('y position');
-    %grid on
-    hold on
-    nuc_vec = linspace(-params.nuc_radius,params.nuc_radius,2000);
-    fill(nuc_vec, sqrt(params.nuc_radius^2-(nuc_vec).^2),'k', nuc_vec, -sqrt(params.nuc_radius^2-(nuc_vec).^2),'k');
-    hold on
-    plot((params.Lx/2)*ones(50,1),linspace(-rc_width,rc_width,50),'c','linewidth',5)
-    rectangle('Position',[-params.Lx/2,-params.Ly/2,params.Lx,params.Ly],...
-        'LineWidth',2,...
-        'LineStyle','--')
-    axis equal
-    axis([-60, 60, -20, 20]);
-    %axis equal
-    print('Figures_for_writeup/Domain_geometry3D','-depsc');
+%     %geometry only
+%     figure(4);
+%     set(gca,'fontsize',18)
+%     xlabel('x position');
+%     ylabel('y position');
+%     %grid on
+%     hold on
+%     nuc_vec = linspace(-params.nuc_radius,params.nuc_radius,2000);
+%     fill(nuc_vec, sqrt(params.nuc_radius^2-(nuc_vec).^2),'k', nuc_vec, -sqrt(params.nuc_radius^2-(nuc_vec).^2),'k');
+%     hold on
+%     plot((params.Lx/2)*ones(50,1),linspace(-rc_width,rc_width,50),'c','linewidth',5)
+%     rectangle('Position',[-params.Lx/2,-params.Ly/2,params.Lx,params.Ly],...
+%         'LineWidth',2,...
+%         'LineStyle','--')
+%     axis equal
+%     axis([-60, 60, -20, 20]);
+%     %axis equal
+%     print('Figures_for_writeup/Domain_geometry3D','-depsc');
     
     
     %code to make a movie
