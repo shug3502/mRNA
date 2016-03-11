@@ -1,0 +1,55 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+%opening
+\title{Lazy ABC preliminary results}
+\author{Jonathan Harrison}
+
+\begin{document}
+
+\maketitle
+
+\section{Preliminary results - Comparison of posteriors for different summary statistics}
+
+Prior - uniform on log of parameters.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[height=3in]{Prior_lazyv3.eps}
+\caption{Prior}
+\label{prior}
+\end{figure}
+
+
+Based on summary statistics that use individual properties of each path. These are the mean jump speed, the mean switching rate, and the mean number of jumps moving towards the posterior (which is an estimate of the microtubule bias).
+
+From these we obtain the following posterior, based on $10^5$ samples from the model, retaining the closest $1\%$ to synthetic data, created with parameters  $\nu = 1.16$, $\lambda = 0.42$, $\phi = 0.58$.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[height=3in]{Posterior_lazyv3.eps}
+\caption{Posterior - individual summary statistics}
+\label{prior}
+\end{figure}
+
+Since these summary statistics rely on properties of the path, they are hard to collect when tracking of particles is difficult.
+Instead we can examine population level summary staistics to inform us of the population level behaviour of particles.
+We use estimates of the distribution of particles spatially at several time points as a summary statistic. 
+As it is expensive to simulate from the model, we construct this spatial distribution based on only a very small number of particles ($n=2$), which may well lead to inaccuracies.
+
+From these summary statistics we obtain the following posterior, using the same parameters as above.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[height=3in]{Posterior_lazyv4.eps}
+\caption{Posterior - population summary statistics}
+\label{prior}
+\end{figure}
+
+
+
+
+\end{document}
