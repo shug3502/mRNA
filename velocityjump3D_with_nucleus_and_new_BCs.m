@@ -1,8 +1,10 @@
-function [is_anchored, anchoring_time, final_position, path, jump_times] = velocityjump3D_with_nucleus(params)
+function [is_anchored, anchoring_time, final_position, path, jump_times] = velocityjump3D_with_nucleus_and_new_BCs(params)
 %Created 4 Jan 2016
-%Last edit 4 Feb 2016
+%Last edit 11 Mar 2016
 %3D velocity jump model for transport of an RNP along a MT by molecular motors
 %based on 2D version
+%edited boundary condition so that particles fall off microtubules, rather
+%than reflecting
 %Assumes: 1 mode of motion, diffusion is neglected
 %Now try to use biologically motivated parameters
 
@@ -40,7 +42,7 @@ if nargin ~= 1
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
     params.rc_width = 1;
-    params.ellipsoid_boundary = 1;
+    params.ellipsoid_boundary = 0;
 end
 if params.with_plot
     rng(493); % set random seed
@@ -83,18 +85,10 @@ while time<endtime && ~is_anchored
         (rr(2)<=params.phi)*(rr(2)>params.phi/2)*(3/2*pi+rr(3)*pi/2) + (rr(2)>params.phi)*(pi/2+pi*rr(3)))*is_attached ...
         + (1-is_attached)*(rr(3))*2*pi;
     
-    %     if time == 0
-    %         theta = params.theta_0; %set an initial angle. Get rid of this to have T(theta) initially
-    %     end
-    
     %update time
     time = time+tau;
     %jumps
     xpos = xpos + delx*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)]; %delx times unit vec in spherical polars
-    
-    %if xpos'*A*xpos>1
-    %        fprintf('At t=%f, immediately after moving  rAr=%f>1 \n ', time, xpos'*A*xpos);
-    %end
     
     %check if absorbed at ring canal
     if xpos(1)>=params.Lx/2 && abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position, but effect small if speed smallish
@@ -108,23 +102,38 @@ while time<endtime && ~is_anchored
         %reflect from an ellipsoid
         A = diag([1/(params.Lx/2)^2,1/(params.Ly/2)^2,1/(params.Lz/2)^2]);
         if xpos'*A*xpos >1
-            %then has interacted with boundary and needs reflecting
+            %then has interacted with boundary and should fall off MT
             prev_pos = xpos - delx*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
             %in_or_out = xpos'*A*xpos;
             %fprintf('before %f, after %f \n', prev_pos'*A*prev_pos, in_or_out);
-            xpos = reflect_from_outer_boundary(prev_pos,xpos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],A);
+            [xpos,t_intersect] = stop_at_boundary_intersection(prev_pos,xpos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],A);
+            time = time - tau + t_intersect/v;
+            t_intersect
+            tau
         end
     else
         %assume rectangular/cuboid boundary
         for ii=1:3
             Li = params.Lx*(ii==1) + params.Ly*(ii==2) + params.Lz*(ii==3); %length for x, y and z respectively
             if xpos(ii) >= Li/2   %rectangle
-                xpos(ii) = Li - xpos(ii);   %reflect at boundary
+                direction=[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
+                t_extra = (xpos(ii)-Li/2)/direction(ii);
+                time = time - t_extra/v;
+                xpos(ii) = Li/2;   %at boundary
+                t_extra
+                tau
+                t_extra/tau/v
             elseif xpos(ii) < -Li/2    %(rectangle)
-                xpos(ii) = -Li-xpos(ii);  %reflect at boundary
+                direction=[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
+                t_extra = (xpos(ii)+Li/2)/direction(ii);
+                time = time - t_extra/v;
+                xpos(ii) = -Li/2;  %at boundary
+                t_extra
+                tau
             end
         end
     end
+    
     %test for interaction with nucleus
     rad = sum(xpos.^2); %euclidean distance from centre of nucleus squared
     if rad<nuc_rad
@@ -132,66 +141,16 @@ while time<endtime && ~is_anchored
         
         prev_pos = xpos - delx*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
         %solve for intersection time
-        %bb = ((prev_pos(1)*cos(theta)+prev_pos(2)*sin(theta))*sin(phi)+prev_pos(3)*cos(phi));
-        %t_intersect = [-bb+sqrt(bb^2-sum(prev_pos.^2)+params.nuc_radius^2); -bb-sqrt(bb^2-sum(prev_pos.^2)+params.nuc_radius^2)]  %scaled
         t_intersect = solve_ellipsoid_intersection(prev_pos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],1/params.nuc_radius^2*eye(3));
         t_intersect = min(t_intersect); %want the first point it intersects
         pos_intersect = prev_pos + t_intersect*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
-        %unit_normal = -pos_intersect/params.nuc_radius;
-        unit_normal = params.nuc_radius*ones(1,3)*pos_intersect;
-        unit_normal = unit_normal./norm(unit_normal);
-        
-        Lstar = 2*pos_intersect - xpos;
-        xpos = 2*(unit_normal'*Lstar)*unit_normal - Lstar; %new reflected position
+        xpos = pos_intersect;
+        time = time - tau + t_intersect/v;
         
         rad_check = sum(pos_intersect.^2) - params.nuc_radius^2;
         if abs(rad_check)>10^(-6)
             warning('interacted with nucleus incorrectly'); %no longer an error, as for abc wierd parameter sets can cause bad behaviour, but hopefully these parameters should be discounted
-		break; %try to exit time loop to prevent long unphysical simulations
-        end
-        
-        %        hold on
-        %        grid on
-        %        plot(linspace(-params.nuc_radius,params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k');
-        %        plot(linspace(-params.nuc_radius,+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k');
-        %        axis([0,params.Lx,-params.Ly/2,params.Ly/2]);
-        %        set(gca,'fontsize',14);
-        %        xlabel('x')
-        %        ylabel('y')
-        %        plot(xpos,ypos,'ro','MarkerSize',12); %red in x_2
-        %        plot(x_intersection,y_intersection,'bo','MarkerSize',12); %blue is intersection x*
-        %        hold on
-        %        plot(xpos,ypos,'go','MarkerSize',12); % green is x_2'
-        %        error('enough now');
-        
-        %should check again now for interaction with boundary
-        if params.ellipsoid_boundary==1
-            %reflect from an ellipsoid            
-            if xpos'*A*xpos>1
-                %        fprintf('At t=%f, after nuc reflection rAr=%f>1 \n', time, xpos'*A*xpos);
-                %  	fprintf('So reflect again \n');
-                prev_pos = pos_intersect;
-                direction = (xpos-pos_intersect)./norm(xpos-pos_intersect);
-                xpos = reflect_from_outer_boundary(prev_pos,xpos,direction,A);
-            end
-        else
-            %assume rectangular/cuboid boundary
-            for ii=1:3
-                Li = params.Lx*(ii==1) + params.Ly*(ii==2) + params.Lz*(ii==3); %length for x, y and z respectively
-                if xpos(ii) >= Li/2   %rectangle
-                    xpos(ii) = Li - xpos(ii);   %reflect at boundary
-                elseif xpos(ii) < -Li/2    %(rectangle)
-                    xpos(ii) = -Li-xpos(ii);  %reflect at boundary
-                end
-            end
-        end
-        
-        %also check if reflections have resulted in being absorbed
-        if xpos(1) >= params.Lx/2 && abs(xpos(2))<rc_width && abs(xpos(3))<rc_width %should probably use crossing position, not final position$
-            anchoring_time = (params.Lx/2-(xpos(1)-delx*cos(theta)*sin(phi)))/(v*cos(theta)*sin(phi)) + time;
-            xpos(1) = (params.Lx/2)*(params.with_anchoring>0.5);
-            is_anchored = params.with_anchoring; %absorb at right hand boundary or reflect depending on whether we h$
-            break;
+            break; %try to exit time loop to prevent long unphysical simulations
         end
         
     end
@@ -262,28 +221,28 @@ if params.with_plot
     else
         plot_col = 'g'; %green otherwise
     end
-         figure(1);
-         [ex,ey,ez] = ellipsoid(0,0,0,params.Lx,params.Ly,params.Lz,30);
-         sp=surf(ex,ey,ez);         
-         alpha(sp,.1);
-         hold all
-
-         %plot3(jump_times, path(:,1), path(:,2), plot_col,'linewidth',3)
-         set(gca,'fontsize',14)
-         xlabel('x position');
-         ylabel('y position');
-         zlabel('z position');
-         grid on
-         if ~isempty(transitions)
-             plot3(transitions(:,1),transitions(:,2),transitions(:,3),'b','linewidth',3)
-         end
-         
-         %plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
-         %plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
-         %plot3(transitions(:,3),transitions(:,1),b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
-         %plot3(transitions(:,3),transitions(:,1),-b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
-         %     plot3(0:3600/(params.Lx*2):3600,0:0.5:L,b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
-         %     plot3(0:3600/(L*2):3600,0:0.5:L,-b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
+    figure(1);
+    [ex,ey,ez] = ellipsoid(0,0,0,params.Lx,params.Ly,params.Lz,30);
+    sp=surf(ex,ey,ez);
+    alpha(sp,.1);
+    hold all
+    
+    %plot3(jump_times, path(:,1), path(:,2), plot_col,'linewidth',3)
+    set(gca,'fontsize',14)
+    xlabel('x position');
+    ylabel('y position');
+    zlabel('z position');
+    grid on
+    if ~isempty(transitions)
+        plot3(transitions(:,1),transitions(:,2),transitions(:,3),'b','linewidth',3)
+    end
+    
+    %plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
+    %plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
+    %plot3(transitions(:,3),transitions(:,1),b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
+    %plot3(transitions(:,3),transitions(:,1),-b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
+    %     plot3(0:3600/(params.Lx*2):3600,0:0.5:L,b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
+    %     plot3(0:3600/(L*2):3600,0:0.5:L,-b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
     print('Figures_for_writeup/Typical_pathfull3D','-depsc');
     
     figure(3)
@@ -327,24 +286,24 @@ if params.with_plot
     %axis equal
     
     print('Figures_for_writeup/Typical_path3D','-depsc');
-%     %geometry only
-%     figure(4);
-%     set(gca,'fontsize',18)
-%     xlabel('x position');
-%     ylabel('y position');
-%     %grid on
-%     hold on
-%     nuc_vec = linspace(-params.nuc_radius,params.nuc_radius,2000);
-%     fill(nuc_vec, sqrt(params.nuc_radius^2-(nuc_vec).^2),'k', nuc_vec, -sqrt(params.nuc_radius^2-(nuc_vec).^2),'k');
-%     hold on
-%     plot((params.Lx/2)*ones(50,1),linspace(-rc_width,rc_width,50),'c','linewidth',5)
-%     rectangle('Position',[-params.Lx/2,-params.Ly/2,params.Lx,params.Ly],...
-%         'LineWidth',2,...
-%         'LineStyle','--')
-%     axis equal
-%     axis([-60, 60, -20, 20]);
-%     %axis equal
-%     print('Figures_for_writeup/Domain_geometry3D','-depsc');
+    %     %geometry only
+    %     figure(4);
+    %     set(gca,'fontsize',18)
+    %     xlabel('x position');
+    %     ylabel('y position');
+    %     %grid on
+    %     hold on
+    %     nuc_vec = linspace(-params.nuc_radius,params.nuc_radius,2000);
+    %     fill(nuc_vec, sqrt(params.nuc_radius^2-(nuc_vec).^2),'k', nuc_vec, -sqrt(params.nuc_radius^2-(nuc_vec).^2),'k');
+    %     hold on
+    %     plot((params.Lx/2)*ones(50,1),linspace(-rc_width,rc_width,50),'c','linewidth',5)
+    %     rectangle('Position',[-params.Lx/2,-params.Ly/2,params.Lx,params.Ly],...
+    %         'LineWidth',2,...
+    %         'LineStyle','--')
+    %     axis equal
+    %     axis([-60, 60, -20, 20]);
+    %     %axis equal
+    %     print('Figures_for_writeup/Domain_geometry3D','-depsc');
     
     
     %code to make a movie
