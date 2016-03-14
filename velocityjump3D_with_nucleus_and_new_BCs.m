@@ -42,7 +42,7 @@ if nargin ~= 1
     params.nuc_radius = 10; %radius of nucleus
     params.theta_0 = 0; %initial angle is 0
     params.rc_width = 1;
-    params.ellipsoid_boundary = 0;
+    params.ellipsoid_boundary = 1;
 end
 if params.with_plot
     rng(493); % set random seed
@@ -108,8 +108,6 @@ while time<endtime && ~is_anchored
             %fprintf('before %f, after %f \n', prev_pos'*A*prev_pos, in_or_out);
             [xpos,t_intersect] = stop_at_boundary_intersection(prev_pos,xpos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],A);
             time = time - tau + t_intersect/v;
-            t_intersect
-            tau
         end
     else
         %assume rectangular/cuboid boundary
@@ -119,17 +117,14 @@ while time<endtime && ~is_anchored
                 direction=[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
                 t_extra = (xpos(ii)-Li/2)/direction(ii);
                 time = time - t_extra/v;
-                xpos(ii) = Li/2;   %at boundary
-                t_extra
-                tau
-                t_extra/tau/v
+                xpos = xpos - direction*v*t_extra;
+%                xpos(ii) = Li/2;   %at boundary
             elseif xpos(ii) < -Li/2    %(rectangle)
                 direction=[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
                 t_extra = (xpos(ii)+Li/2)/direction(ii);
                 time = time - t_extra/v;
-                xpos(ii) = -Li/2;  %at boundary
-                t_extra
-                tau
+                xpos = xpos - direction*t_extra;
+%                xpos(ii) = -Li/2;  %at boundary
             end
         end
     end
@@ -137,22 +132,19 @@ while time<endtime && ~is_anchored
     %test for interaction with nucleus
     rad = sum(xpos.^2); %euclidean distance from centre of nucleus squared
     if rad<nuc_rad
-        %particle has gone inside nucleus so reflect
-        
+        %particle has gone inside nucleus so reflect        
         prev_pos = xpos - delx*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
         %solve for intersection time
         t_intersect = solve_ellipsoid_intersection(prev_pos,[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)],1/params.nuc_radius^2*eye(3));
         t_intersect = min(t_intersect); %want the first point it intersects
         pos_intersect = prev_pos + t_intersect*[cos(theta)*sin(phi); sin(theta)*sin(phi); cos(phi)];
         xpos = pos_intersect;
-        time = time - tau + t_intersect/v;
-        
+        time = time - tau + t_intersect/v;        
         rad_check = sum(pos_intersect.^2) - params.nuc_radius^2;
         if abs(rad_check)>10^(-6)
             warning('interacted with nucleus incorrectly'); %no longer an error, as for abc wierd parameter sets can cause bad behaviour, but hopefully these parameters should be discounted
             break; %try to exit time loop to prevent long unphysical simulations
-        end
-        
+        end        
     end
     
     if rr(4)<params.lambda_2*(1-is_attached)/alpha_rate
@@ -210,10 +202,8 @@ end
 path = path(1:n_jump,:);
 jump_times = jump_times(1:n_jump);
 if params.with_plot
-    close all
-    
-    %some plots
-    
+    close all    
+    %some plots    
     transitions = transitions(1:n_transition,:);
     
     if is_anchored == 1
@@ -236,13 +226,6 @@ if params.with_plot
     if ~isempty(transitions)
         plot3(transitions(:,1),transitions(:,2),transitions(:,3),'b','linewidth',3)
     end
-    
-    %plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
-    %plot3(linspace(0,0,50),linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(params.Lx/2-params.nuc_radius,params.Lx/2+params.nuc_radius,50)-params.Lx/2).^2),'k-')
-    %plot3(transitions(:,3),transitions(:,1),b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
-    %plot3(transitions(:,3),transitions(:,1),-b*sqrt(1-((transitions(:,1)-domain_size/2)/a).^2),'g')
-    %     plot3(0:3600/(params.Lx*2):3600,0:0.5:L,b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
-    %     plot3(0:3600/(L*2):3600,0:0.5:L,-b*sqrt(1-(((0:0.5:L)-L/2)/a).^2),'k-')
     print('Figures_for_writeup/Typical_pathfull3D','-depsc');
     
     figure(3)
