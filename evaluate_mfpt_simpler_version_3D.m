@@ -42,7 +42,8 @@ num_particles = 100;
 
 for k=1:my_length
     
-    params.omega_1 = param_vec(k);
+    %params.phi = param_vec(k);
+    params.nu1 = param_vec(k);
     %params.nu2 = param_vec(k)/2;
     anchored = zeros(num_particles,1);
     anchor_times = zeros(num_particles,1);
@@ -50,7 +51,7 @@ for k=1:my_length
     jump_distances = zeros(num_particles,1);
     
     parfor j=1:num_particles
-	[anchored(j), anchor_times(j), ~, path, ~] = velocityjump3D_with_nucleus(params);
+	[anchored(j), anchor_times(j), ~, path, ~] = velocityjump3D_with_nucleus_and_new_BCs(params);
         num_jumps(j) = length(path(:,1));
         jump_distances(j) = median(sqrt(diff(path(:,1)).^2+diff(path(:,2)).^2+diff(path(:,3)).^2));
     end
@@ -77,12 +78,12 @@ if plot_option
     %subplot(3,1,1)
     errorbar(log10(param_vec),mean_anchor_storage,sd_anchor_storage,'linewidth',3)
     set(gca, 'fontsize',24);
-    xlabel('log(\lambda)');
+    xlabel('log(\nu)');
     ylabel('MFPT');
     grid on
     %axis([0,12, 0,5000]);
     %axis([-1.5,1.5, 0,100000]);
-    fname = 'Figures_for_writeup/MFPT_lambda_3D';
+    fname = 'Figures_for_writeup/MFPT_nu_3D_BC2';
     print(fname,'-depsc');
     
     figure;
@@ -90,7 +91,7 @@ if plot_option
     subplot(2,1,1)
     errorbar(log10(param_vec),mean_jumps_storage,sd_jumps_storage,'linewidth',3)
     set(gca, 'fontsize',24);
-    xlabel('log(\lambda)');
+    xlabel('log(\nu)');
     ylabel('Number of Jumps');
     grid on
     %axis([0.4,1, -2000,20000]);
@@ -101,10 +102,10 @@ if plot_option
     subplot(2,1,2)
     errorbar(log10(param_vec),mean_distances_storage,sd_distances_storage,'linewidth',3)
     set(gca, 'fontsize',24);
-    xlabel('log(\lambda)');
+    xlabel('log(\nu)');
     ylabel('Jump Distance');
     grid on
-    fname = 'Figures_for_writeup/Two_sum_stats_lambda_3D';
+    fname = 'Figures_for_writeup/Two_sum_stats_nu_3D_BC2';
     print(fname,'-depsc');
 
 end
