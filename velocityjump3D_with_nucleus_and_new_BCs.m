@@ -26,7 +26,7 @@ if nargin ~= 1
     params.input_time = 10;
     params.with_anchoring = 1;
     params.num_modes = 2;
-    params.with_plot = 0;
+    params.with_plot = 1;
     %Now with data on nurse cells from Alex Davidson
     params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
     params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
@@ -290,23 +290,35 @@ if params.with_plot
     
     
     %code to make a movie
-    %     nframe=min(200,length(path));
-    %     mov(1:nframe)=struct('cdata',[],'colormap',[]);
-    %     figure;
-    %     hold on
-    %     grid on
-    %     plot(linspace(-params.nuc_radius,params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(-params.nuc_radius,params.nuc_radius,50)).^2),'k');
-    %     plot(linspace(-params.nuc_radius,params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(-params.nuc_radius,params.nuc_radius,50)).^2),'k');
-    %     axis([0,params.Lx,-params.Ly/2,params.Ly/2]);
-    %     set(gca,'fontsize',14);
-    %     xlabel('x')
-    %     ylabel('y')
-    %     for i=1:nframe
-    %         frame_num = i;
-    %         plot(pathx(frame_num),pathy(frame_num),'ro','MarkerSize',12);
-    %         mov(frame_num)=getframe(gcf);
-    %     end
-    %     movie2avi(mov, 'VJ_With_Nucleus.avi', 'compression', 'None');
+        nframe=min(200,length(path));
+        mov(1:nframe)=struct('cdata',[],'colormap',[]);
+        figure;
+        hold on
+        grid on
+        %drawCube([0,0,0],[params.Lx,params.Ly,params.Lz]);
+        %[x,y,z] = sphere;
+        %surf(params.nuc_radius*x,params.nuc_radius*y,params.nuc_radius*z,ones(size(x)));
+        %plot(linspace(-params.nuc_radius,params.nuc_radius,50),sqrt(params.nuc_radius^2-(linspace(-params.nuc_radius,params.nuc_radius,50)).^2),'k');
+        %plot(linspace(-params.nuc_radius,params.nuc_radius,50),-sqrt(params.nuc_radius^2-(linspace(-params.nuc_radius,params.nuc_radius,50)).^2),'k');
+        %axis([-params.Lx/2,params.Lx/2,-params.Ly/2,params.Ly/2]);
+        
+        for i=1:nframe
+            frame_num = i;
+            fill(nuc_vec, sqrt(params.nuc_radius^2-(nuc_vec).^2),'k', nuc_vec, -sqrt(params.nuc_radius^2-(nuc_vec).^2),'k');
+hold on
+        plot((params.Lx/2)*ones(50,1),linspace(-rc_width,rc_width,50),'c','linewidth',5)
+        rectangle('Position',[-params.Lx/2,-params.Ly/2,params.Lx,params.Ly],...
+            'LineWidth',2,...
+            'LineStyle','--')      
+            plot(path(frame_num,1),path(frame_num,2),'g.','MarkerSize',36);
+            axis equal        
+        set(gca,'fontsize',20);
+        xlabel('x position')
+        ylabel('y position')
+            mov(frame_num)=getframe(gcf);
+            hold off
+        end
+        movie2avi(mov, 'VJ3D.avi', 'compression', 'None');
 end
 
 %toc
