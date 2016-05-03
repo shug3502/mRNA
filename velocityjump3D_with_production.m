@@ -1,6 +1,6 @@
 function [q_raw,q_distn] = velocityjump3D_with_production(params)
 %Created 18/3/16
-%Last edit 18/3/16
+%Last edit 29/3/16
 %Based on 2D version
 %Uses the new boundary conditions
 %3D velocity jump model for transport of an RNP along a MT by molecular motors
@@ -38,7 +38,7 @@ if nargin ~= 1
     params.theta_0 = 0; %initial angle is 0
     params.rc_width = 1;
     params.ellipsoid_boundary = 1;
-    params.gamma=0.6;
+    params.gamma=0.1;
 end
 
 tic
