@@ -31,7 +31,7 @@ function [q_estimate, mfpt] = summary_statistic_calculator_combined_3Dv2(par_par
     
     N=num_particles;
     L=params.Lx;
-    time_vec = 0:0.05:1;
+    time_vec = 0:0.05:params.input_time;
     params.input_time = max(time_vec);
     t=time_vec*60^2;
     l_t = length(time_vec);
@@ -46,7 +46,7 @@ function [q_estimate, mfpt] = summary_statistic_calculator_combined_3Dv2(par_par
     mt_bias = zeros(num_particles,1);
 
     for j=1:N
-        [~, a_time, ~, xpos_temp, jump_temp] = velocityjump3D_with_nucleus(params);
+        [~, a_time, ~, xpos_temp, jump_temp] = velocityjump3D_with_nucleus_and_new_BCs(params);
 	anchor_times(j) = a_time;
 	path = xpos_temp;
 	jump_times = jump_temp;

@@ -26,7 +26,7 @@ if nargin ~= 1
     params.input_time = 10;
     params.with_anchoring = 1;
     params.num_modes = 2;
-    params.with_plot = 1;
+    params.with_plot = 0;
     %Now with data on nurse cells from Alex Davidson
     params.nu1 = 1.16; %speed of RNP complex under active transport [zimyanin et al 2008]
     params.nu2 = 0.80; %ratio between speed for active transport vs diffusion [zimyanin et al 2008]
@@ -187,9 +187,11 @@ while time<endtime && ~is_anchored
     %if xpos'*A*xpos>1
     %	fprintf('At t=%f, We have rAr=%f>1, which shouldnt be at this point \n',time, xpos'*A*xpos);
     %end
+    if time > jump_times(n_jump) %if we have taken some kind of successful step
     n_jump = n_jump+1;
     path(n_jump,:) = xpos;
     jump_times(n_jump) = time;
+    end
 end
 %final outputs for statistics
 if is_anchored
