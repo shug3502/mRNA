@@ -39,7 +39,7 @@ for i=1:size(distn,1)
     figure(i);
     set(gca,'XTickLabel','');
     set(gca,'YTickLabel','');
-    title(sprintf('Nurse cells at t=%2.1f ',params.dt*(i-1)));
+    title(sprintf('Nurse cells at t=%2.1f ',params.dt*params.thin_results*(i-1)));
     hold on;
     if omit_oocyte;
         M(NCs_map(1,1),NCs_map(1,2))=0; %remove oocyte for plotting
