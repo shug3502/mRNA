@@ -1,6 +1,6 @@
 function [q_raw,q_distn] = velocityjump3D_with_production(params)
 %Created 18/3/16
-%Last edit 29/3/16
+%Last edit 4/5/16
 %Based on 2D version
 %Uses the new boundary conditions
 %3D velocity jump model for transport of an RNP along a MT by molecular motors
@@ -48,7 +48,7 @@ N=ceil(4*t_end*60^2*params.gamma); %guess for number of particles (guess larger 
 l_n = 5000; %storage for the jumps and paths
 delx=1;
 L=params.Lx;
-time_vec = (0:0.5:(t_end-1));
+time_vec = (0:0.5:t_end);
 t=time_vec*60^2;
 l_t = length(time_vec);
 jumps = zeros(N,l_n);
