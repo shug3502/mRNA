@@ -11,3 +11,8 @@ C_code/
 ABC_APMC_output*.txt
 .Rhistory
 inference_for_mrna/*.csv
+inference_for_mrna/*.mat
+inference_for_mrna/*.log
+inference_for_mrna/*.out
+Model_comparison/*.mat
+
