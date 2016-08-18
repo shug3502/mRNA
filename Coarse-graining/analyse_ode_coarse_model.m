@@ -1,18 +1,18 @@
 %% analyse_ode_coarse_model
 %% Created 11/8/16 JH
-%% last edit 11/8/16
+%% last edit 16/8/16
 %% analyse and integrate coarse grained model using odes
 
 %variables to change: initial condition, final time of simulation, a/b
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-g0 = ones(16,1); %initially no/some grk mRNA present
-params.a = 0.01;
-params.b = 1;
+g0 = zeros(16,1); g0(4)=1; %initially no/some grk mRNA present
+params.a = 0;
+params.b = 10;
 params.d = 0;
 opts=[]; %odeset('NonNegative',1);
-[t,g]=ode45(@ode_coarse_mRNA,[0,10],g0,opts,params);
+[t,g]=ode45(@ode_coarse_mRNA,[0,100],g0,opts,params);
 
 %find eigenvalues for general solution
 A = ones(16,1); A(1)=0;
@@ -36,11 +36,11 @@ my_soln-g;
 
 close all;
 figure;
-plot(t,g(:,1),'linewidth',3);
+plot(t/params.b,g(:,1),'linewidth',3);
 hold all
-plot(t,my_soln(:,1),'linewidth',3);
+plot(t/params.b,my_soln(:,1),'linewidth',3);
 %plot(t,k(2)*ones(size(t)),'k--','linewidth',3);
-plot(t,dgdt(:,1),'linewidth',3);
+plot(t/params.b,dgdt(:,1),'linewidth',3);
 box on
 set(gca,'fontsize',20);
 xlabel('t');
