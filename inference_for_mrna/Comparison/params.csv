@@ -1,2 +1,0 @@
-size_theta, size_ss, prop, ntree, priormax, layers, filename, lossfilename 
-3,1113,0.800000,40,2.000000,4,../train3D100particles.csv,loss3D.csv
